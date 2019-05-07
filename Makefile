@@ -45,8 +45,12 @@ CFLAGS += -O0
 # Para valgrind o debug
 CFLAGS += -ggdb -DDEBUG -fno-inline
 
+# Para Box2D
+CFLAGS = -IBox2D
+LDFLAGS = Box2D/Build/bin/x86_64/Debug/libBox2D.a
+
 # Opciones del enlazador.
-#LDFLAGS =
+#LDFLAGS +=
 
 # Estandar de C a usar
 CSTD = c99
@@ -132,7 +136,7 @@ endif
 # REGLAS
 #########
 
-.PHONY: all clean
+.PHONY: all clean box2Dlib
 
 all: client server
 
@@ -149,7 +153,7 @@ client: $(o_common_files) $(o_client_files)
 	fi >&2
 	$(LD) $(o_common_files) $(o_client_files) -o client $(LDFLAGS)
 
-server: $(o_common_files) $(o_server_files)
+server: $(o_common_files) $(o_server_files) box2Dlib
 	@if [ -z "$(o_server_files)" ]; \
 	then \
 		echo "No hay archivos de entrada en el directorio actual para el servidor. Recuerde que los archivos deben respetar la forma 'server*.$(extension)' y que no se aceptan directorios anidados."; \
@@ -161,4 +165,8 @@ server: $(o_common_files) $(o_server_files)
 clean:
 	$(RM) -f $(o_common_files) $(o_client_files) $(o_server_files) client server
 
+Box2D:
+	git clone --depth 1 git@github.com:erincatto/Box2D.git Box2D
 
+box2Dlib: Box2D
+	cd Box2D && premake gmake && make -C Build Box2D

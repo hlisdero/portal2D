@@ -27,9 +27,14 @@
 *.lib
 
 # Executables
+client
+server
 *.exe
 *.out
 *.app
+
+# Box2D
+Box2D/
 
 # Enunciado
 2019.01.ejercicio.final.portal.pdf
