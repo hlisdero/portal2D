@@ -3,6 +3,7 @@
 
 #include <stdexcept>
 #include <string>
+#include <cstdint>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
@@ -19,6 +20,9 @@ public:
     Renderer& operator=(Renderer&& other) = delete;
 
     Texture createTextureFromSurface(Surface& surface) const;
+
+    void setRenderDrawColor(uint8_t red, uint8_t green,
+                            uint8_t blue, uint8_t alpha);
 
     void clear();
 

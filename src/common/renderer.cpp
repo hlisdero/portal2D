@@ -8,8 +8,8 @@ Renderer::Renderer(SDL_Window* window) {
         throw std::runtime_error(error_message);
     }
 
-    // Seteamos el color del renderer a negro
-    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    // Seteamos el color a negro
+    setRenderDrawColor(0xFF, 0xFF, 0xFF, 0xFF);
 }
 
 Renderer::~Renderer() {
@@ -26,8 +26,18 @@ Texture Renderer::createTextureFromSurface(Surface& surface) const {
     return std::move(Texture(texture));
 }
 
+void Renderer::setRenderDrawColor(uint8_t red, uint8_t green,
+                                  uint8_t blue, uint8_t alpha) {
+    int ret_code = SDL_SetRenderDrawColor(renderer, red, green, blue, alpha);
+    if (ret_code) {
+        std::string error_message("Error al setear el color del renderizador: ");
+        error_message += std::string(SDL_GetError());
+        throw std::runtime_error(error_message);
+    }
+}
+
 void Renderer::clear() {
-    int ret_code = SDL_RenderClear(renderer) != 0;
+    int ret_code = SDL_RenderClear(renderer);
     if (ret_code) {
         std::string error_message("Error al limpiar el renderer: ");
         error_message += std::string(SDL_GetError());
