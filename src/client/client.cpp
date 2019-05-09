@@ -8,6 +8,11 @@ Client::Client(const std::string& hostname,
 }
 
 void Client::run() {
+    greetServer();
+    runWindow();
+}
+
+void Client::greetServer() {
     std::string message("Hola servidor!");
     skt_ << (uint32_t) 0;
     skt_ << (uint32_t) message.length();
@@ -19,4 +24,27 @@ void Client::run() {
     skt_.receive(response, length);
 
     std::cout << response << std::endl;
+}
+
+void Client::runWindow() {
+    bool quit = false;
+    SDL_Event e;
+
+    Window window;
+    TextureCreator textureCreator = window.getTextureCreator();
+    Texture texture = textureCreator("../data/texture.png");
+
+    while (!quit) {
+        //Handle events on queue
+        while( SDL_PollEvent( &e ) != 0 ) {
+            //User requests quit
+            if( e.type == SDL_QUIT ) {
+                quit = true;
+            }
+        }
+
+        window.clearRenderer();
+        window.render(texture);
+        window.update();
+    }
 }
