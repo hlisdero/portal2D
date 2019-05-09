@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 #include "active_socket.h"
-#include "window.h"
+#include "screen.h"
 #include "texture_creator.h"
 
 class Client {

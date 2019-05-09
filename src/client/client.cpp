@@ -30,8 +30,8 @@ void Client::runWindow() {
     bool quit = false;
     SDL_Event e;
 
-    Window window;
-    TextureCreator textureCreator = window.getTextureCreator();
+    Screen screen;
+    const TextureCreator& textureCreator = screen.getTextureCreator();
     Texture texture = textureCreator("../data/texture.png");
 
     while (!quit) {
@@ -43,8 +43,8 @@ void Client::runWindow() {
             }
         }
 
-        window.clearRenderer();
-        window.render(texture);
-        window.update();
+        screen.clear();
+        screen.render(texture);
+        screen.update();
     }
 }

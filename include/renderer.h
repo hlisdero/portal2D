@@ -11,14 +11,12 @@
 
 class Renderer {
 public:
-    explicit Renderer() = default;
     explicit Renderer(SDL_Window* window);
 
     Renderer(const Renderer&) = delete;
     Renderer& operator=(const Renderer&) = delete;
-
-    Renderer(Renderer&& other);
-    Renderer& operator=(Renderer&& other);
+    Renderer(Renderer&& other) = delete;
+    Renderer& operator=(Renderer&& other) = delete;
 
     Texture createTextureFromSurface(Surface& surface) const;
 

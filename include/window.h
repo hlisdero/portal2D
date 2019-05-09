@@ -4,36 +4,23 @@
 #include <stdexcept>
 #include <string>
 #include <SDL2/SDL.h>
-
-#include "renderer.h"
-#include "texture_creator.h"
+#include <SDL2/SDL_image.h>
 
 class Window {
 public:
-    explicit Window(size_t width = DEFAULT_SCREEN_WIDTH,
-                    size_t height = DEFAULT_SCREEN_HEIGHT);
+    explicit Window(size_t width, size_t height);
 
     Window(const Window&) = delete;
     Window& operator=(const Window&) = delete;
     Window(Window&& other) = delete;
     Window& operator=(Window&& other) = delete;
 
-    TextureCreator getTextureCreator() const;
-
-    void clearRenderer();
-
-    void render(Texture& texture);
-
-    void update();
-
     ~Window();
 
-private:
-    static const int DEFAULT_SCREEN_WIDTH = 640;
-    static const int DEFAULT_SCREEN_HEIGHT = 480;
+    SDL_Window* get() const;
 
+private:
     SDL_Window* window = nullptr;
-    Renderer renderer;
 };
 
 #endif  // WINDOW_H

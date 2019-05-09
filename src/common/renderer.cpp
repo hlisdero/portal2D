@@ -10,32 +10,10 @@ Renderer::Renderer(SDL_Window* window) {
 
     // Seteamos el color del renderer a negro
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF );
-
-    // Inicializamos el sistema para cargar imágenes PNG
-    int imgFlags = IMG_INIT_PNG;
-    if (!(IMG_Init(imgFlags) & imgFlags)) {
-        std::string error_message("Error al crear al inicializar SDL_image: ");
-        error_message += std::string(SDL_GetError());
-        throw std::runtime_error(error_message);
-    }
-}
-
-Renderer::Renderer(Renderer&& other) {
-    renderer = other.renderer;
-    other.renderer = nullptr;
-}
-
-Renderer& Renderer::operator=(Renderer&& other) {
-    renderer = other.renderer;
-    other.renderer = nullptr;
-    return *this;
 }
 
 Renderer::~Renderer() {
-    if (renderer) {
-        SDL_DestroyRenderer(renderer);
-        IMG_Quit();
-    }
+    SDL_DestroyRenderer(renderer);
 }
 
 Texture Renderer::createTextureFromSurface(Surface& surface) const {
