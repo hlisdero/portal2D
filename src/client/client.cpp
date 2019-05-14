@@ -9,7 +9,8 @@ Client::Client(const std::string& hostname,
 
 void Client::run() {
     // greetServer();
-    runWindow();
+    runWindow1();
+    runWindow2();
 }
 
 void Client::greetServer() {
@@ -26,7 +27,7 @@ void Client::greetServer() {
     std::cout << response << std::endl;
 }
 
-void Client::runWindow() {
+void Client::runWindow1() {
     bool quit = false;
     SDL_Event e;
 
@@ -63,6 +64,45 @@ void Client::runWindow() {
         for (size_t i = 0; i < height; i += 4 ) {
             screen.drawPoint(width / 2, i);
         }
+
+        screen.update();
+    }
+}
+
+void Client::runWindow2() {
+    bool quit = false;
+    SDL_Event e;
+
+    Screen screen;
+    const TextureCreator& textureCreator = screen.getTextureCreator();
+    Texture texture = textureCreator("../data/viewport.png");
+
+    while (!quit) {
+        //Handle events on queue
+        while( SDL_PollEvent( &e ) != 0 ) {
+            //User requests quit
+            if( e.type == SDL_QUIT ) {
+                quit = true;
+            }
+        }
+
+        size_t width = screen.getWidth();
+        size_t height = screen.getHeight();
+
+        screen.clear();
+
+        // Top left corner viewport
+        screen.setViewport(0, 0, width / 2, height / 2);
+        screen.render(texture);
+
+        // Top right viewport
+        screen.setViewport(width / 2, 0, width / 2, height / 2);
+        screen.render(texture);
+
+
+        // Bottom viewport
+        screen.setViewport(0, height / 2, width, height / 2);
+        screen.render(texture);
 
         screen.update();
     }

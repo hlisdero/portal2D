@@ -23,7 +23,8 @@ private:
     ActiveSocket skt_;
 
     void greetServer();
-    void runWindow();
+    void runWindow1();
+    void runWindow2();
 };
 
 #endif  // CLIENT_H

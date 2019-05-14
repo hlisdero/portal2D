@@ -44,6 +44,15 @@ void Screen::drawRect(int start_width, int start_height,
     renderer.drawRect(start_width, start_height, end_width, end_height);
 }
 
+void Screen::setViewport(int start_width, int start_height,
+                         int end_width, int end_height) {
+    renderer.setViewport(start_width, start_height, end_width, end_height);
+}
+
+void Screen::resetViewport() {
+    renderer.setViewport(0, 0, window.width, window.height);
+}
+
 void Screen::update() {
     renderer.renderPresent();
 }

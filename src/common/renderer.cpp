@@ -50,7 +50,7 @@ void Renderer::drawLine(int start_width, int start_height,
     int ret_code = SDL_RenderDrawLine(renderer, start_width, start_height,
                                                 end_width, end_height);
     if (ret_code) {
-        std::string error_message("Error al dibujar un punto: ");
+        std::string error_message("Error al dibujar una línea: ");
         error_message += std::string(SDL_GetError());
         throw std::runtime_error(error_message);
     }
@@ -73,6 +73,17 @@ void Renderer::drawRect(int start_width, int start_height,
     int ret_code = SDL_RenderDrawRect(renderer, &outlineRect);
     if (ret_code) {
         std::string error_message("Error al dibujar un rectángulo: ");
+        error_message += std::string(SDL_GetError());
+        throw std::runtime_error(error_message);
+    }
+}
+
+void Renderer::setViewport(int start_width, int start_height,
+                           int end_width, int end_height) {
+    SDL_Rect viewport = { start_width, start_height, end_width, end_height };
+    int ret_code = SDL_RenderSetViewport(renderer, &viewport);
+    if (ret_code) {
+        std::string error_message("Error al setear el viewport: ");
         error_message += std::string(SDL_GetError());
         throw std::runtime_error(error_message);
     }

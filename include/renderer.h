@@ -35,6 +35,9 @@ public:
     void drawRect(int start_width, int start_height,
                   int end_width, int end_height);
 
+    void setViewport(int start_width, int start_height,
+                     int end_width, int end_height);
+
     void clear();
 
     void renderCopy(Texture& Texture);
