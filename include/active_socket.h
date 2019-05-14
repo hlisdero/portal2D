@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <arpa/inet.h>
 #include <string>
-#include "common_socket.h"
+#include "socket.h"
 
 class ActiveSocket : public Socket {
 public:

@@ -27,21 +27,13 @@ public:
 
     ~Socket();
 
-    void shutdown(int how = SHUT_RDWR) {
-        ::shutdown(fd_, how);
-    }
+    void shutdown(int how = SHUT_RDWR);
 
-    void shutdown_read() {
-        shutdown(SHUT_RD);
-    }
+    void shutdown_read();
 
-    void shutdown_write() {
-        shutdown(SHUT_WR);
-    }
+    void shutdown_write();
 
-    bool isValid() {
-        return (fd_ != -1);
-    }
+    bool isValid();
 
 protected:
     int fd_ = -1;

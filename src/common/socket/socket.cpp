@@ -1,5 +1,5 @@
 #define _POSIX_C_SOURCE 200112L
-#include "common_socket.h"
+#include "socket.h"
 #include <string>
 
 Socket::Socket(const char* hostname, const char* port,
@@ -33,6 +33,22 @@ Socket& Socket::operator=(Socket&& other) {
     this->addrinfo_ = other.addrinfo_;
     other.addrinfo_ = nullptr;
     return *this;
+}
+
+void Socket::shutdown(int how) {
+    ::shutdown(fd_, how);
+}
+
+void Socket::shutdown_read() {
+    shutdown(SHUT_RD);
+}
+
+void Socket::shutdown_write() {
+    shutdown(SHUT_WR);
+}
+
+bool Socket::isValid() {
+    return (fd_ != -1);
 }
 
 Socket::~Socket() {

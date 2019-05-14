@@ -27,11 +27,12 @@
 *.lib
 
 # Executables
-client
-server
 *.exe
 *.out
 *.app
+
+# Build dir
+build/
 
 # Box2D
 Box2D/

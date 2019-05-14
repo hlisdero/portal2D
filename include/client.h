@@ -3,7 +3,9 @@
 
 #include <string>
 #include <iostream>
-#include "common_active_socket.h"
+#include "active_socket.h"
+#include "screen.h"
+#include "texture_creator.h"
 
 class Client {
 public:
@@ -19,6 +21,9 @@ public:
 
 private:
     ActiveSocket skt_;
+
+    void greetServer();
+    void runWindow();
 };
 
 #endif  // CLIENT_H

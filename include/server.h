@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "common_passive_socket.h"
+#include "passive_socket.h"
 
 class Server {
 public:
