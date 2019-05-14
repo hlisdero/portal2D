@@ -4,11 +4,11 @@
 Client::Client(const std::string& hostname,
                const std::string& port) :
     skt_(hostname, port) {
-    skt_.connect();
+    // skt_.connect();
 }
 
 void Client::run() {
-    greetServer();
+    // greetServer();
     runWindow();
 }
 

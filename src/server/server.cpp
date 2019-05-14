@@ -23,6 +23,4 @@ void Server::run() {
     std::string response("Hola cliente!");
     client_skt << (uint32_t) response.length();
     client_skt << response;
-
 }
-

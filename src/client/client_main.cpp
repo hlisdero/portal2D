@@ -2,15 +2,10 @@
 #include <stdexcept>
 #include "client.h"
 
-int main(int argc, char *argv[]) {
-    if (argc != 3) {
-        std::cout << "Error: argumentos invalidos."
-                  << std::endl;
-        return 0;
-    }
-
+int main() {
     try {
-        Client client(argv[1], argv[2]);
+        // Hardcodeamos los parámetros para facilitar pruebas
+        Client client("localhost", "2000");
         client.run();
         return 0;
     } catch(std::runtime_error err) {
