@@ -6,6 +6,7 @@
 #include "active_socket.h"
 #include "screen.h"
 #include "texture_creator.h"
+#include "color.h"
 
 class Client {
 public:
@@ -23,7 +24,9 @@ private:
     ActiveSocket skt_;
 
     void greetServer();
-    void runWindow();
+    void runWindow1();
+    void runWindow2();
+    void runWindow3();
 };
 
 #endif  // CLIENT_H

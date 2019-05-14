@@ -9,6 +9,7 @@
 
 #include "texture.h"
 #include "surface.h"
+#include "color.h"
 
 class Renderer {
 public:
@@ -21,12 +22,27 @@ public:
 
     Texture createTextureFromSurface(Surface& surface) const;
 
-    void setRenderDrawColor(uint8_t red, uint8_t green,
-                            uint8_t blue, uint8_t alpha);
+    void setDrawColor(const Color& color);
+    void setDrawColor(uint8_t red, uint8_t green,
+                      uint8_t blue, uint8_t alpha);
+
+    void drawPoint(int width, int height);
+
+    void drawLine(int start_width, int start_height,
+                  int end_width, int end_height);
+
+    void drawFillRect(int start_width, int start_height,
+                      int end_width, int end_height);
+
+    void drawRect(int start_width, int start_height,
+                  int end_width, int end_height);
+
+    void setViewport(int start_width, int start_height,
+                     int end_width, int end_height);
 
     void clear();
 
-    void renderCopy(Texture& Texture);
+    void renderCopy(Texture& Texture, int x, int y);
 
     void renderPresent();
 

@@ -7,7 +7,7 @@
 
 class Texture {
 public:
-    explicit Texture(SDL_Texture* texture);
+    explicit Texture(SDL_Texture* texture, int width, int height);
 
     Texture(const Texture&) = delete;
     Texture& operator=(const Texture&) = delete;
@@ -18,9 +18,13 @@ public:
     ~Texture();
 
     SDL_Texture* get() const;
+    int getWidth() const;
+    int getHeight() const;
 
 private:
     SDL_Texture* texture = nullptr;
+    int width;
+    int height;
 };
 
 #endif  // TEXTURE_H

@@ -6,12 +6,15 @@
 
 #include "texture.h"
 #include "renderer.h"
+#include "color.h"
 
 class TextureCreator {
 public:
     explicit TextureCreator(const Renderer& renderer);
 
     Texture operator()(const std::string& path) const;
+
+    Texture operator()(const std::string& path, const Color& color_key) const;
 
 private:
     const Renderer& renderer;
