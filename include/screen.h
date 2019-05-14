@@ -22,6 +22,7 @@ public:
     void clear();
 
     void render(Texture& texture);
+    void render(Texture& texture, int x, int y);
 
     void setRenderDrawColor(uint8_t red, uint8_t green,
                             uint8_t blue, uint8_t alpha);

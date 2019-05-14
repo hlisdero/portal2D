@@ -17,7 +17,11 @@ void Screen::clear() {
 }
 
 void Screen::render(Texture& texture) {
-    renderer.renderCopy(texture);
+    renderer.renderCopy(texture, 0, 0);
+}
+
+void Screen::render(Texture& texture, int x, int y) {
+    renderer.renderCopy(texture, x, y);
 }
 
 void Screen::setRenderDrawColor(uint8_t red, uint8_t green,

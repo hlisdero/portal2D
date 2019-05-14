@@ -11,6 +11,7 @@ void Client::run() {
     // greetServer();
     runWindow1();
     runWindow2();
+    runWindow3();
 }
 
 void Client::greetServer() {
@@ -104,6 +105,31 @@ void Client::runWindow2() {
         screen.setViewport(0, height / 2, width, height / 2);
         screen.render(texture);
 
+        screen.update();
+    }
+}
+
+void Client::runWindow3() {
+    bool quit = false;
+    SDL_Event e;
+
+    Screen screen;
+    const TextureCreator& textureCreator = screen.getTextureCreator();
+    Texture background = textureCreator("../data/background.png");
+    Texture character = textureCreator("../data/foo.png", Color("cyan"));
+
+    while (!quit) {
+        //Handle events on queue
+        while( SDL_PollEvent( &e ) != 0 ) {
+            //User requests quit
+            if( e.type == SDL_QUIT ) {
+                quit = true;
+            }
+        }
+
+        screen.clear();
+        screen.render(background);
+        screen.render(character, 240, 190);
         screen.update();
     }
 }

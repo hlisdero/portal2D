@@ -23,7 +23,11 @@ Texture Renderer::createTextureFromSurface(Surface& surface) const {
         error_message += std::string(SDL_GetError());
         throw std::runtime_error(error_message);
     }
-    return std::move(Texture(texture));
+    return std::move(Texture(texture, surface.getWidth(), surface.getHeight()));
+}
+
+void Renderer::setDrawColor(const Color& color) {
+    setDrawColor(color.r, color.g, color.b, color.a);
 }
 
 void Renderer::setDrawColor(uint8_t red, uint8_t green,
@@ -98,9 +102,9 @@ void Renderer::clear() {
     }
 }
 
-void Renderer::renderCopy(Texture& texture) {
-    // Renderiza la textura completa
-    int ret_code = SDL_RenderCopy(renderer, texture.get(), NULL, NULL);
+void Renderer::renderCopy(Texture& texture, int x, int y) {
+    SDL_Rect dest = {x, y, texture.getWidth(), texture.getHeight()};
+    int ret_code = SDL_RenderCopy(renderer, texture.get(), NULL, &dest);
     if (ret_code) {
         std::string error_message("Error al renderizar la textura: ");
         error_message += std::string(SDL_GetError());

@@ -8,3 +8,10 @@ Texture TextureCreator::operator()(const std::string& path) const {
     Texture texture = renderer.createTextureFromSurface(surface);
     return std::move(texture);
 }
+
+Texture TextureCreator::operator()(const std::string& path,
+                                   const Color& color_key) const {
+    Surface surface(path, color_key);
+    Texture texture = renderer.createTextureFromSurface(surface);
+    return std::move(texture);
+}
