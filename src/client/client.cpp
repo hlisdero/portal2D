@@ -43,8 +43,27 @@ void Client::runWindow() {
             }
         }
 
+        size_t width = screen.getWidth();
+        size_t height = screen.getHeight();
+
         screen.clear();
         screen.render(texture);
+
+        // Render red filled quad
+        screen.setRenderDrawColor(0xFF, 0x00, 0x00, 0xFF);
+        screen.drawFillRect(width / 4, height / 4, width / 2, width / 2);
+        // Render green outlined quad
+        screen.setRenderDrawColor(0x00, 0xFF, 0x00, 0xFF);
+        screen.drawRect(width / 6, height / 6, width * 2 / 3, height * 2 / 3);
+        // Draw blue horizontal line
+        screen.setRenderDrawColor(0x00, 0x00, 0xFF, 0xFF);
+        screen.drawLine(0, height / 2, width, height / 2);
+        // Draw vertical line of yellow dots
+        screen.setRenderDrawColor(0xFF, 0xFF, 0x00, 0xFF);
+        for (size_t i = 0; i < height; i += 4 ) {
+            screen.drawPoint(width / 2, i);
+        }
+
         screen.update();
     }
 }

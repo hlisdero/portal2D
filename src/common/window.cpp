@@ -1,7 +1,7 @@
 #include "window.h"
 #include <string>
 
-Window::Window(size_t width, size_t height) {
+Window::Window(size_t width, size_t height) : width(width), height(height) {    
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         std::string error_message("Error al inicializar SDL: ");
         error_message += std::string(SDL_GetError());

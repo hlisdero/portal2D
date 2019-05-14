@@ -19,6 +19,9 @@ public:
 
     SDL_Window* get() const;
 
+    const size_t width;
+    const size_t height;
+
 private:
     SDL_Window* window = nullptr;
 };
