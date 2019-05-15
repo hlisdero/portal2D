@@ -1,10 +1,13 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+#include <string>
 #include "window.h"
 #include "renderer.h"
 #include "texture.h"
+#include "sprite.h"
 #include "texture_creator.h"
+#include "color.h"
 
 class Screen {
 public:
@@ -23,7 +26,9 @@ public:
 
     void render(Texture& texture);
     void render(Texture& texture, int x, int y);
+    void render(Sprite& sprite, int x, int y);
 
+    void setRenderDrawColor(const std::string& color_name);
     void setRenderDrawColor(uint8_t red, uint8_t green,
                             uint8_t blue, uint8_t alpha);
 
