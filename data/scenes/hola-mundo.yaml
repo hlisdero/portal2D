@@ -1,0 +1,87 @@
+name: 'Hola Mundo'
+min-players: 4
+elements:
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 4
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
+    -
+        type: 1
+        x: 45
+        y: 18
+        width: 100
+        height: 100
