@@ -1,15 +1,15 @@
-#ifndef STATIC_SCENE_HPP
-#define STATIC_SCENE_HPP
+#ifndef STATIC_SCENE_H
+#define STATIC_SCENE_H
 
 #include <string>
 #include <vector>
 
-#include "static_element.hpp"
+#include "static_element.h"
 
 class StaticScene {
 public:
 	StaticScene(const char * filename);
-	
+
 	void save(const char * filename);
 
 private:
@@ -18,4 +18,4 @@ private:
 	std::vector<StaticElement> elements;
 };
 
-#endif  // STATIC_SCENE_HPP
+#endif  // STATIC_SCENE_H

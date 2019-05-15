@@ -1,7 +1,9 @@
-#ifndef STATIC_ELEMENT_HPP
-#define STATIC_ELEMENT_HPP
+#ifndef STATIC_ELEMENT_H
+#define STATIC_ELEMENT_H
 
 #include <string>
+#include "yaml-cpp/yaml.h"
+#include "Box2D/Box2D.h"
 
 enum StaticElementType {
 	// Static
@@ -30,4 +32,4 @@ private:
 	int y;
 };
 
-#endif  // STATIC_ELEMENT_HPP
+#endif  // STATIC_ELEMENT_H

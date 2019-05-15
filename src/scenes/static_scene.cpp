@@ -1,4 +1,4 @@
-#include "static_scene.hpp"
+#include "static_scene.h"
 #include "yaml-cpp/yaml.h"
 
 StaticScene::StaticScene(const char * filename) {

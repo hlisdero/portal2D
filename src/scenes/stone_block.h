@@ -1,6 +1,8 @@
-#ifndef STONE_BLOCK_HPP
-#define STONE_BLOCK_HPP
+#ifndef STONE_BLOCK_H
+#define STONE_BLOCK_H
 
+#include "static_element.h"
+#include "yaml-cpp/yaml.h"
 
 class StoneBlock : StaticElement {
 public:
@@ -13,4 +15,4 @@ private:
 	int height;
 };
 
-#endif  // STONE_BLOCK_HPP
+#endif  // STONE_BLOCK_H

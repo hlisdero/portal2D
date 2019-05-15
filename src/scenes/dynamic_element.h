@@ -1,7 +1,8 @@
-#ifndef DYNAMIC_ELEMENT_HPP
-#define DYNAMIC_ELEMENT_HPP
+#ifndef DYNAMIC_ELEMENT_H
+#define DYNAMIC_ELEMENT_H
 
 #include <string>
+#include "Box2D/Box2D.h"
 
 enum DynamicElementType {
 	// Dynamic
@@ -22,4 +23,4 @@ private:
 	int originY;
 };
 
-#endif  // DYNAMIC_ELEMENT_HPP
+#endif  // DYNAMIC_ELEMENT_H
