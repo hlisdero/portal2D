@@ -1,5 +1,7 @@
-#ifndef DIAGONAL_METAL_BLOCK_HPP
-#define DIAGONAL_METAL_BLOCK_HPP
+#ifndef DIAGONAL_METAL_BLOCK_H
+#define DIAGONAL_METAL_BLOCK_H
+
+#include "static_element.h"
 
 enum Orientation {
 	TOP_LEFT,
@@ -15,4 +17,4 @@ private:
 	Orientation orientation;
 };
 
-#endif  // DIAGONAL_METAL_BLOCK_HPP
+#endif  // DIAGONAL_METAL_BLOCK_H

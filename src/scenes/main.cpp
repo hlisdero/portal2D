@@ -1,5 +1,5 @@
-
-#include "static_scene.hpp"
+#include "static_scene.h"
+#include "yaml-cpp/yaml.h"
 
 int main() {
 	StaticScene scene("data/scenes/hola-mundo.yaml");
