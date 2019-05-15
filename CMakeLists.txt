@@ -4,6 +4,7 @@ project(portal2d)
 
 # Sources
 file(GLOB_RECURSE client_sources ${PROJECT_SOURCE_DIR}/src/client/*)
+file(GLOB_RECURSE view_sources ${PROJECT_SOURCE_DIR}/src/client/view/*)
 file(GLOB_RECURSE server_sources ${PROJECT_SOURCE_DIR}/src/server/*)
 file(GLOB_RECURSE common_sources ${PROJECT_SOURCE_DIR}/src/common/*)
 file(GLOB_RECURSE game_sources ${PROJECT_SOURCE_DIR}/src/game/*)
@@ -39,9 +40,9 @@ target_include_directories(game PRIVATE ${PROJECT_SOURCE_DIR}/include/)
 target_compile_options(game PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
 target_link_libraries(game ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${BOX2D_LIBRARIES})
 
-# Tests
-add_executable(tests ${test_sources} ${common_sources})
-target_include_directories(tests PRIVATE ${PROJECT_SOURCE_DIR}/include/)
-target_include_directories(tests PRIVATE ${PROJECT_SOURCE_DIR}/lib/Catch2)
-target_compile_options(tests PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors)
-target_link_libraries(tests ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
+# View Test
+add_executable(view-test ${test_sources} ${view_sources})
+target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/include/)
+target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/lib/Catch2)
+target_compile_options(view-test PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors)
+target_link_libraries(view-test ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
