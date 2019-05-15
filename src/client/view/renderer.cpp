@@ -104,14 +104,23 @@ void Renderer::clear() {
 
 void Renderer::renderCopy(Texture& texture, int x, int y) {
     SDL_Rect dest = {x, y, texture.getWidth(), texture.getHeight()};
-    int ret_code = SDL_RenderCopy(renderer, texture.get(), NULL, &dest);
+    render(texture.get(), NULL, &dest);
+}
+
+void Renderer::renderCopy(Sprite& sprite, int x, int y) {
+    SDL_Rect dest = {x, y, sprite.getWidth(), sprite.getHeight()};
+    render(sprite.getTexture(), &sprite.getClip(), &dest);
+}
+
+void Renderer::renderPresent() {
+    SDL_RenderPresent(renderer);
+}
+
+void Renderer::render(SDL_Texture* texture, SDL_Rect* srcrect, SDL_Rect * dstrect) {
+    int ret_code = SDL_RenderCopy(renderer, texture, srcrect, dstrect);
     if (ret_code) {
         std::string error_message("Error al renderizar la textura: ");
         error_message += std::string(SDL_GetError());
         throw std::runtime_error(error_message);
     }
-}
-
-void Renderer::renderPresent() {
-    SDL_RenderPresent(renderer);
 }

@@ -34,7 +34,11 @@ void Client::runWindow1() {
 
     Screen screen;
     const TextureCreator& textureCreator = screen.getTextureCreator();
-    Texture texture = textureCreator("../data/texture.png");
+    Sprite dots(textureCreator("../data/dots.png", Color("cyan")));
+    dots.addClip(0, 0, 100, 100);
+    dots.addClip(100, 0, 100, 100);
+    dots.addClip(0, 100, 100, 100);
+    dots.addClip(100, 100, 100, 100);
 
     while (!quit) {
         //Handle events on queue
@@ -48,23 +52,13 @@ void Client::runWindow1() {
         size_t width = screen.getWidth();
         size_t height = screen.getHeight();
 
+        screen.setRenderDrawColor("white");
         screen.clear();
-        screen.render(texture);
 
-        // Render red filled quad
-        screen.setRenderDrawColor(0xFF, 0x00, 0x00, 0xFF);
-        screen.drawFillRect(width / 4, height / 4, width / 2, width / 2);
-        // Render green outlined quad
-        screen.setRenderDrawColor(0x00, 0xFF, 0x00, 0xFF);
-        screen.drawRect(width / 6, height / 6, width * 2 / 3, height * 2 / 3);
-        // Draw blue horizontal line
-        screen.setRenderDrawColor(0x00, 0x00, 0xFF, 0xFF);
-        screen.drawLine(0, height / 2, width, height / 2);
-        // Draw vertical line of yellow dots
-        screen.setRenderDrawColor(0xFF, 0xFF, 0x00, 0xFF);
-        for (size_t i = 0; i < height; i += 4 ) {
-            screen.drawPoint(width / 2, i);
-        }
+        screen.render(dots, 0, 0);
+        screen.render(dots, width - dots.getWidth(), 0);
+        screen.render(dots, 0, height - dots.getHeight());
+        screen.render(dots, width - dots.getWidth(), height - dots.getHeight());
 
         screen.update();
     }

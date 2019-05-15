@@ -24,6 +24,14 @@ void Screen::render(Texture& texture, int x, int y) {
     renderer.renderCopy(texture, x, y);
 }
 
+void Screen::render(Sprite& sprite, int x, int y) {
+    renderer.renderCopy(sprite, x, y);
+}
+
+void Screen::setRenderDrawColor(const std::string& color_name) {
+    renderer.setDrawColor(Color(color_name));
+}
+
 void Screen::setRenderDrawColor(uint8_t red, uint8_t green,
                                 uint8_t blue, uint8_t alpha) {
     renderer.setDrawColor(red, green, blue, alpha);

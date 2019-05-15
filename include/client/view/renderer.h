@@ -8,6 +8,7 @@
 #include <SDL2/SDL_image.h>
 
 #include "texture.h"
+#include "sprite.h"
 #include "surface.h"
 #include "color.h"
 
@@ -43,6 +44,7 @@ public:
     void clear();
 
     void renderCopy(Texture& Texture, int x, int y);
+    void renderCopy(Sprite& sprite, int x, int y);
 
     void renderPresent();
 
@@ -50,6 +52,8 @@ public:
 
 private:
     SDL_Renderer* renderer = nullptr;
+
+    void render(SDL_Texture* texture, SDL_Rect* srcrect, SDL_Rect * dstrect);
 };
 
 #endif  // RENDERER_H
