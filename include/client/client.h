@@ -8,6 +8,8 @@
 #include "event_handler.h"
 #include "texture_creator.h"
 #include "color.h"
+#include "sprite.h"
+#include "animation.h"
 
 class Client {
 public:

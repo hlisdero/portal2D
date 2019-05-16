@@ -55,9 +55,13 @@ void Client::runWindow1() {
         screen.setRenderDrawColor("white");
         screen.clear();
 
+        dots.setClip(0);
         screen.render(dots, 0, 0);
+        dots.setClip(1);
         screen.render(dots, width - dots.getWidth(), 0);
+        dots.setClip(2);
         screen.render(dots, 0, height - dots.getHeight());
+        dots.setClip(3);
         screen.render(dots, width - dots.getWidth(), height - dots.getHeight());
 
         screen.update();
@@ -72,7 +76,7 @@ void Client::runWindow2() {
     const TextureCreator& textureCreator = screen.getTextureCreator();
     Texture background = textureCreator("../data/background.png");
     Texture character = textureCreator("../data/foo.png", Color("cyan"));
-    Sprite dots(textureCreator("../data/animation.png", Color("cyan")));
+    Animation dots(textureCreator("../data/animation.png", Color("cyan")));
     dots.addClip(0, 0, 64, 205);
     dots.addClip(64, 0, 64, 205);
     dots.addClip(128, 0, 64, 205);

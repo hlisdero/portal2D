@@ -1,6 +1,6 @@
 #include "sprite.h"
 
-Sprite::Sprite(Texture texture) : texture(std::move(texture)) {}
+Sprite::Sprite(Texture texture) : texture(std::move(texture)), current(0) {}
 
 void Sprite::addClip(int x, int y, int w, int h,
     double angle, SDL_RendererFlip flip) {
@@ -12,11 +12,22 @@ void Sprite::addClip(int x, int y, int w, int h,
 
 SDL_Rect& Sprite::getClip() {
     checkValidClip();
-    SDL_Rect& clip = clips[current++];
-    if (current >= clips.size()) {
-        current = 0;
+    return clips[current];
+}
+
+size_t Sprite::getClipNumber() const {
+    return current;
+}
+
+size_t Sprite::size() const {
+    return clips.size();
+}
+
+void Sprite::setClip(size_t index) {
+    if (index >= clips.size()) {
+        throw std::runtime_error("Error: Número de clip inválido");
     }
-    return clip;
+    current = index;
 }
 
 double Sprite::getRotation() const {
