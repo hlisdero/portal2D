@@ -1,7 +1,8 @@
 #include "renderer.h"
 
 Renderer::Renderer(SDL_Window* window) {
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(window, -1,
+        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (!renderer) {
         std::string error_message("Error al crear el renderer: ");
         error_message += std::string(SDL_GetError());

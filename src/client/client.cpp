@@ -70,7 +70,11 @@ void Client::runWindow2() {
 
     Screen screen;
     const TextureCreator& textureCreator = screen.getTextureCreator();
-    Texture texture = textureCreator("../data/viewport.png");
+    Sprite dots(textureCreator("../data/animation.png", Color("cyan")));
+    dots.addClip(0, 0, 64, 205);
+    dots.addClip(64, 0, 64, 205);
+    dots.addClip(128, 0, 64, 205);
+    dots.addClip(196, 0, 64, 205);
 
     while (!quit) {
         //Handle events on queue
@@ -84,22 +88,17 @@ void Client::runWindow2() {
         size_t width = screen.getWidth();
         size_t height = screen.getHeight();
 
-        screen.clear();
+        int frame = 0;
+        if (frame++ % 64*8*8 == 0) {
+            screen.setRenderDrawColor("white");
+            screen.clear();
+            screen.render(dots, width/2, height/2);
+            screen.update();
+        }
+        if (frame == 64*8*8*4) {
+            frame = 0;
+        }
 
-        // Top left corner viewport
-        screen.setViewport(0, 0, width / 2, height / 2);
-        screen.render(texture);
-
-        // Top right viewport
-        screen.setViewport(width / 2, 0, width / 2, height / 2);
-        screen.render(texture);
-
-
-        // Bottom viewport
-        screen.setViewport(0, height / 2, width, height / 2);
-        screen.render(texture);
-
-        screen.update();
     }
 }
 
