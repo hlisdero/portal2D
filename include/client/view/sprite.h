@@ -18,16 +18,22 @@ public:
 
     ~Sprite() = default;
 
-    void addClip(int x, int y, int w, int h);
+    void addClip(int x, int y, int w, int h,
+        double angle = 0.0, SDL_RendererFlip flip = SDL_FLIP_NONE);
     SDL_Rect& getClip();
+    double getRotation() const;
+    SDL_RendererFlip getFlipState() const;
 
     SDL_Texture* getTexture() const;
     int getWidth() const;
     int getHeight() const;
 
+
 private:
     Texture texture;
     std::vector<SDL_Rect> clips;
+    std::vector<double> rotations;
+    std::vector<SDL_RendererFlip> flip_states;
     size_t current = 0;
 
     void checkValidClip() const;

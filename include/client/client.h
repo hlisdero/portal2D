@@ -5,6 +5,7 @@
 #include <iostream>
 #include "active_socket.h"
 #include "screen.h"
+#include "event_handler.h"
 #include "texture_creator.h"
 #include "color.h"
 

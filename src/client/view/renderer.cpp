@@ -1,7 +1,8 @@
 #include "renderer.h"
 
 Renderer::Renderer(SDL_Window* window) {
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(window, -1,
+        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (!renderer) {
         std::string error_message("Error al crear el renderer: ");
         error_message += std::string(SDL_GetError());
@@ -104,20 +105,22 @@ void Renderer::clear() {
 
 void Renderer::renderCopy(Texture& texture, int x, int y) {
     SDL_Rect dest = {x, y, texture.getWidth(), texture.getHeight()};
-    render(texture.get(), NULL, &dest);
+    render(texture.get(), NULL, &dest, texture.getRotation(), texture.getFlipState());
 }
 
 void Renderer::renderCopy(Sprite& sprite, int x, int y) {
     SDL_Rect dest = {x, y, sprite.getWidth(), sprite.getHeight()};
-    render(sprite.getTexture(), &sprite.getClip(), &dest);
+    render(sprite.getTexture(), &sprite.getClip(), &dest, sprite.getRotation(), sprite.getFlipState());
 }
 
 void Renderer::renderPresent() {
     SDL_RenderPresent(renderer);
 }
 
-void Renderer::render(SDL_Texture* texture, SDL_Rect* srcrect, SDL_Rect * dstrect) {
-    int ret_code = SDL_RenderCopy(renderer, texture, srcrect, dstrect);
+void Renderer::render(SDL_Texture* texture, SDL_Rect* srcrect,
+    SDL_Rect* dstrect, double angle, SDL_RendererFlip flip) {
+    int ret_code = SDL_RenderCopyEx(renderer, texture,
+                    srcrect, dstrect, angle, NULL, flip);
     if (ret_code) {
         std::string error_message("Error al renderizar la textura: ");
         error_message += std::string(SDL_GetError());

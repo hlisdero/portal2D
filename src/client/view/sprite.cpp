@@ -2,9 +2,12 @@
 
 Sprite::Sprite(Texture texture) : texture(std::move(texture)) {}
 
-void Sprite::addClip(int x, int y, int w, int h) {
+void Sprite::addClip(int x, int y, int w, int h,
+    double angle, SDL_RendererFlip flip) {
     SDL_Rect clip = {x, y, w, h};
     clips.push_back(clip);
+    rotations.push_back(angle);
+    flip_states.push_back(flip);
 }
 
 SDL_Rect& Sprite::getClip() {
@@ -14,6 +17,16 @@ SDL_Rect& Sprite::getClip() {
         current = 0;
     }
     return clip;
+}
+
+double Sprite::getRotation() const {
+    checkValidClip();
+    return rotations[current];
+}
+
+SDL_RendererFlip Sprite::getFlipState() const {
+    checkValidClip();
+    return flip_states[current];
 }
 
 SDL_Texture* Sprite::getTexture() const {

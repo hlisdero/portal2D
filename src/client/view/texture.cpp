@@ -39,3 +39,19 @@ int Texture::getWidth() const {
 int Texture::getHeight() const {
     return height;
 }
+
+double Texture::getRotation() const {
+    return rotation;
+}
+
+SDL_RendererFlip Texture::getFlipState() const {
+    return flip_state;
+}
+
+void Texture::rotate(double degrees) {
+    rotation += degrees;
+}
+
+void Texture::flip(SDL_RendererFlip new_flip_state) {
+    flip_state = new_flip_state;
+}
