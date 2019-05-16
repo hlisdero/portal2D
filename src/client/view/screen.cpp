@@ -28,6 +28,10 @@ void Screen::render(Sprite& sprite, int x, int y) {
     renderer.renderCopy(sprite, x, y);
 }
 
+void Screen::render(Button& button) {
+    renderer.renderCopy(button.get(), button.getX(), button.getY());
+}
+
 void Screen::setRenderDrawColor(const std::string& color_name) {
     renderer.setDrawColor(Color(color_name));
 }

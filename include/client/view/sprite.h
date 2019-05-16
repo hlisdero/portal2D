@@ -13,21 +13,26 @@ public:
 
     Sprite(const Sprite&) = delete;
     Sprite& operator=(const Sprite&) = delete;
-    Sprite(Sprite&& other) = delete;
-    Sprite& operator=(Sprite&& other) = delete;
+
+    Sprite(Sprite&& other);
+    Sprite& operator=(Sprite&& other);
 
     ~Sprite() = default;
 
     void addClip(int x, int y, int w, int h,
         double angle = 0.0, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    SDL_Rect& getClip();
+    virtual SDL_Rect& getClip();
+
+    size_t getClipNumber() const;
+    size_t size() const;
+    void setClip(size_t index);
+
     double getRotation() const;
     SDL_RendererFlip getFlipState() const;
 
     SDL_Texture* getTexture() const;
     int getWidth() const;
     int getHeight() const;
-
 
 private:
     Texture texture;

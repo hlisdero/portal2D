@@ -2,11 +2,16 @@
 #define EVENT_HANDLER_H
 
 #include <SDL2/SDL.h>
-#include "texture.h"
+#include <vector>
+#include "mouse_event.h"
+#include "keyboard_event.h"
+#include "keyboard_handler.h"
+#include "mouse_handler.h"
+#include "button.h"
 
 class EventHandler {
 public:
-    EventHandler(Texture& texture);
+    explicit EventHandler() = default;
 
     EventHandler(const EventHandler&) = delete;
     EventHandler& operator=(const EventHandler&) = delete;
@@ -16,13 +21,19 @@ public:
     operator bool() const;
     operator int() const = delete;
 
+    void add(KeyboardHandler* keyboard_handler);
+    void add(MouseHandler* mouse_handler);
+
     void poll();
 
 private:
     bool quit = false;
     SDL_Event event;
+    std::vector<KeyboardHandler*> keyboard_handlers;
+    std::vector<MouseHandler*> mouse_handlers;
 
-    Texture& texture;
+    void broadcast(KeyboardEvent event) const;
+    void broadcast(MouseEvent event) const;
 };
 
 #endif  // EVENT_HANDLER_H

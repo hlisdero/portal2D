@@ -8,6 +8,9 @@
 #include "event_handler.h"
 #include "texture_creator.h"
 #include "color.h"
+#include "sprite.h"
+#include "animation.h"
+#include "button.h"
 
 class Client {
 public:
@@ -25,9 +28,7 @@ private:
     ActiveSocket skt_;
 
     void greetServer();
-    void runWindow1();
-    void runWindow2();
-    void runWindow3();
+    void runWindow();
 };
 
 #endif  // CLIENT_H
