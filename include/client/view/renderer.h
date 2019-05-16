@@ -53,7 +53,8 @@ public:
 private:
     SDL_Renderer* renderer = nullptr;
 
-    void render(SDL_Texture* texture, SDL_Rect* srcrect, SDL_Rect * dstrect);
+    void render(SDL_Texture* texture, SDL_Rect* srcrect, SDL_Rect* dstrect,
+                double angle, SDL_RendererFlip flip);
 };
 
 #endif  // RENDERER_H

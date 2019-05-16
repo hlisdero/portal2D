@@ -40,6 +40,9 @@ void Client::runWindow1() {
     dots.addClip(0, 100, 100, 100);
     dots.addClip(100, 100, 100, 100);
 
+    size_t width = screen.getWidth();
+    size_t height = screen.getHeight();
+
     while (!quit) {
         //Handle events on queue
         while( SDL_PollEvent( &e ) != 0 ) {
@@ -48,9 +51,6 @@ void Client::runWindow1() {
                 quit = true;
             }
         }
-
-        size_t width = screen.getWidth();
-        size_t height = screen.getHeight();
 
         screen.setRenderDrawColor("white");
         screen.clear();
@@ -70,11 +70,16 @@ void Client::runWindow2() {
 
     Screen screen;
     const TextureCreator& textureCreator = screen.getTextureCreator();
+    Texture background = textureCreator("../data/background.png");
+    Texture character = textureCreator("../data/foo.png", Color("cyan"));
     Sprite dots(textureCreator("../data/animation.png", Color("cyan")));
     dots.addClip(0, 0, 64, 205);
     dots.addClip(64, 0, 64, 205);
     dots.addClip(128, 0, 64, 205);
     dots.addClip(196, 0, 64, 205);
+
+    size_t width = screen.getWidth();
+    size_t height = screen.getHeight();
 
     while (!quit) {
         //Handle events on queue
@@ -85,14 +90,14 @@ void Client::runWindow2() {
             }
         }
 
-        size_t width = screen.getWidth();
-        size_t height = screen.getHeight();
-
         int frame = 0;
         if (frame++ % 64*8*8 == 0) {
             screen.setRenderDrawColor("white");
             screen.clear();
-            screen.render(dots, width/2, height/2);
+            screen.render(background);
+            screen.render(character, 240, 190);
+            screen.render(dots, (width - dots.getWidth()) / 2,
+                                (height - dots.getHeight()) / 2);
             screen.update();
         }
         if (frame == 64*8*8*4) {
@@ -103,26 +108,21 @@ void Client::runWindow2() {
 }
 
 void Client::runWindow3() {
-    bool quit = false;
-    SDL_Event e;
-
     Screen screen;
     const TextureCreator& textureCreator = screen.getTextureCreator();
-    Texture background = textureCreator("../data/background.png");
-    Texture character = textureCreator("../data/foo.png", Color("cyan"));
+    Texture arrow = textureCreator("../data/arrow.png");
+    EventHandler event_handler(arrow);
 
-    while (!quit) {
-        //Handle events on queue
-        while( SDL_PollEvent( &e ) != 0 ) {
-            //User requests quit
-            if( e.type == SDL_QUIT ) {
-                quit = true;
-            }
-        }
+    size_t width = screen.getWidth();
+    size_t height = screen.getHeight();
 
+    while(event_handler) {
+        event_handler.poll();
+
+        screen.setRenderDrawColor("white");
         screen.clear();
-        screen.render(background);
-        screen.render(character, 240, 190);
+        screen.render(arrow, (width - arrow.getWidth()) / 2,
+                             (height - arrow.getHeight()) / 2);
         screen.update();
     }
 }

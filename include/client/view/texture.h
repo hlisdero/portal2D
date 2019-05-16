@@ -20,11 +20,18 @@ public:
     SDL_Texture* get() const;
     int getWidth() const;
     int getHeight() const;
+    double getRotation() const;
+    SDL_RendererFlip getFlipState() const;
+
+    void rotate(double degrees);
+    void flip(SDL_RendererFlip new_flip_state);
 
 private:
     SDL_Texture* texture = nullptr;
     int width;
     int height;
+    double rotation = 0.0;
+    SDL_RendererFlip flip_state = SDL_FLIP_NONE;
 };
 
 #endif  // TEXTURE_H
