@@ -2,6 +2,22 @@
 
 Sprite::Sprite(Texture texture) : texture(std::move(texture)), current(0) {}
 
+Sprite::Sprite(Sprite&& other) : texture(std::move(other.texture)) {
+    clips = std::move(other.clips);
+    rotations = std::move(other.rotations);
+    flip_states = std::move(other.flip_states);
+    current = current;
+}
+
+Sprite& Sprite::operator=(Sprite&& other) {
+    texture = std::move(other.texture);
+    clips = std::move(other.clips);
+    rotations = std::move(other.rotations);
+    flip_states = std::move(other.flip_states);
+    current = current;
+    return *this;
+}
+
 void Sprite::addClip(int x, int y, int w, int h,
     double angle, SDL_RendererFlip flip) {
     SDL_Rect clip = {x, y, w, h};

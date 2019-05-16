@@ -13,8 +13,9 @@ public:
 
     Sprite(const Sprite&) = delete;
     Sprite& operator=(const Sprite&) = delete;
-    Sprite(Sprite&& other) = delete;
-    Sprite& operator=(Sprite&& other) = delete;
+
+    Sprite(Sprite&& other);
+    Sprite& operator=(Sprite&& other);
 
     ~Sprite() = default;
 

@@ -9,9 +9,7 @@ Client::Client(const std::string& hostname,
 
 void Client::run() {
     // greetServer();
-    runWindow1();
-    runWindow2();
-    runWindow3();
+    runWindow();
 }
 
 void Client::greetServer() {
@@ -28,105 +26,57 @@ void Client::greetServer() {
     std::cout << response << std::endl;
 }
 
-void Client::runWindow1() {
-    bool quit = false;
-    SDL_Event e;
-
+void Client::runWindow() {
     Screen screen;
-    const TextureCreator& textureCreator = screen.getTextureCreator();
-    Sprite dots(textureCreator("../data/dots.png", Color("cyan")));
-    dots.addClip(0, 0, 100, 100);
-    dots.addClip(100, 0, 100, 100);
-    dots.addClip(0, 100, 100, 100);
-    dots.addClip(100, 100, 100, 100);
-
     size_t width = screen.getWidth();
     size_t height = screen.getHeight();
 
-    while (!quit) {
-        //Handle events on queue
-        while( SDL_PollEvent( &e ) != 0 ) {
-            //User requests quit
-            if( e.type == SDL_QUIT ) {
-                quit = true;
-            }
-        }
-
-        screen.setRenderDrawColor("white");
-        screen.clear();
-
-        dots.setClip(0);
-        screen.render(dots, 0, 0);
-        dots.setClip(1);
-        screen.render(dots, width - dots.getWidth(), 0);
-        dots.setClip(2);
-        screen.render(dots, 0, height - dots.getHeight());
-        dots.setClip(3);
-        screen.render(dots, width - dots.getWidth(), height - dots.getHeight());
-
-        screen.update();
-    }
-}
-
-void Client::runWindow2() {
-    bool quit = false;
-    SDL_Event e;
-
-    Screen screen;
+    size_t b_width = 300;
+    size_t b_height = 200;
     const TextureCreator& textureCreator = screen.getTextureCreator();
-    Texture background = textureCreator("../data/background.png");
-    Texture character = textureCreator("../data/foo.png", Color("cyan"));
-    Animation dots(textureCreator("../data/animation.png", Color("cyan")));
-    dots.addClip(0, 0, 64, 205);
-    dots.addClip(64, 0, 64, 205);
-    dots.addClip(128, 0, 64, 205);
-    dots.addClip(196, 0, 64, 205);
+    Sprite sprite1(textureCreator("../data/button.png"));
+    sprite1.addClip(0, 0, 300, 200);
+    sprite1.addClip(0, 200, 300, 200);
+    sprite1.addClip(0, 400, 300, 200);
+    sprite1.addClip(0, 600, 300, 200);
+    Button button1(std::move(sprite1), 0, 0);
 
-    size_t width = screen.getWidth();
-    size_t height = screen.getHeight();
+    Sprite sprite2(textureCreator("../data/button.png"));
+    sprite2.addClip(0, 0, 300, 200);
+    sprite2.addClip(0, 200, 300, 200);
+    sprite2.addClip(0, 400, 300, 200);
+    sprite2.addClip(0, 600, 300, 200);
+    Button button2(std::move(sprite2), width - b_width, 0);
 
-    while (!quit) {
-        //Handle events on queue
-        while( SDL_PollEvent( &e ) != 0 ) {
-            //User requests quit
-            if( e.type == SDL_QUIT ) {
-                quit = true;
-            }
-        }
+    Sprite sprite3(textureCreator("../data/button.png"));
+    sprite3.addClip(0, 0, 300, 200);
+    sprite3.addClip(0, 200, 300, 200);
+    sprite3.addClip(0, 400, 300, 200);
+    sprite3.addClip(0, 600, 300, 200);
+    Button button3(std::move(sprite3), 0, height - b_height);
 
-        int frame = 0;
-        if (frame++ % 64*8*8 == 0) {
-            screen.setRenderDrawColor("white");
-            screen.clear();
-            screen.render(background);
-            screen.render(character, 240, 190);
-            screen.render(dots, (width - dots.getWidth()) / 2,
-                                (height - dots.getHeight()) / 2);
-            screen.update();
-        }
-        if (frame == 64*8*8*4) {
-            frame = 0;
-        }
+    Sprite sprite4(textureCreator("../data/button.png"));
+    sprite4.addClip(0, 0, 300, 200);
+    sprite4.addClip(0, 200, 300, 200);
+    sprite4.addClip(0, 400, 300, 200);
+    sprite4.addClip(0, 600, 300, 200);
+    Button button4(std::move(sprite4), width - b_width, height - b_height);
 
-    }
-}
+    EventHandler event_handler;
+    event_handler.add(&button1);
+    event_handler.add(&button2);
+    event_handler.add(&button3);
+    event_handler.add(&button4);
 
-void Client::runWindow3() {
-    Screen screen;
-    const TextureCreator& textureCreator = screen.getTextureCreator();
-    Texture arrow = textureCreator("../data/arrow.png");
-    EventHandler event_handler(arrow);
-
-    size_t width = screen.getWidth();
-    size_t height = screen.getHeight();
-
-    while(event_handler) {
+    while (event_handler) {
         event_handler.poll();
 
         screen.setRenderDrawColor("white");
         screen.clear();
-        screen.render(arrow, (width - arrow.getWidth()) / 2,
-                             (height - arrow.getHeight()) / 2);
+        screen.render(button1);
+        screen.render(button2);
+        screen.render(button3);
+        screen.render(button4);
         screen.update();
     }
 }

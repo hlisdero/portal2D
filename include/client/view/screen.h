@@ -8,6 +8,7 @@
 #include "sprite.h"
 #include "texture_creator.h"
 #include "color.h"
+#include "button.h"
 
 class Screen {
 public:
@@ -27,6 +28,7 @@ public:
     void render(Texture& texture);
     void render(Texture& texture, int x, int y);
     void render(Sprite& sprite, int x, int y);
+    void render(Button& button);
 
     void setRenderDrawColor(const std::string& color_name);
     void setRenderDrawColor(uint8_t red, uint8_t green,

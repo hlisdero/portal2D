@@ -1,9 +1,15 @@
 #include "event_handler.h"
 
-EventHandler::EventHandler(Texture& texture) : texture(texture) {}
-
 EventHandler::operator bool() const {
     return !quit;
+}
+
+void EventHandler::add(KeyboardHandler* keyboard_handler) {
+    keyboard_handlers.push_back(keyboard_handler);
+}
+
+void EventHandler::add(MouseHandler* mouse_handler) {
+    mouse_handlers.push_back(mouse_handler);
 }
 
 void EventHandler::poll() {
@@ -12,23 +18,26 @@ void EventHandler::poll() {
             quit = true;
         }
         if (event.type == SDL_KEYDOWN) {
-            switch (event.key.keysym.sym) {
-                case SDLK_a:
-                    texture.rotate(-60);
-                    break;
-                case SDLK_d:
-                    texture.rotate(60);
-                    break;
-                case SDLK_q:
-                    texture.flip(SDL_FLIP_HORIZONTAL);
-                    break;
-                case SDLK_w:
-                    texture.flip(SDL_FLIP_NONE);
-                    break;
-                case SDLK_e:
-                    texture.flip(SDL_FLIP_VERTICAL);
-                    break;
-            }
+            KeyboardEvent keyboard_event(event);
+            broadcast(keyboard_event);
         }
+        if (event.type == SDL_MOUSEMOTION ||
+            event.type == SDL_MOUSEBUTTONDOWN ||
+            event.type == SDL_MOUSEBUTTONUP) {
+            MouseEvent mouse_event(event);
+            broadcast(mouse_event);
+        }
+    }
+}
+
+void EventHandler::broadcast(KeyboardEvent event) const {
+    for (auto &handler : keyboard_handlers) {
+        handler->handle(event);
+    }
+}
+
+void EventHandler::broadcast(MouseEvent event) const {
+    for (auto &handler : mouse_handlers) {
+        handler->handle(event);
     }
 }
