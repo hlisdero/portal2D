@@ -4,14 +4,6 @@
 #include <string>
 #include <iostream>
 #include "active_socket.h"
-#include "screen.h"
-#include "event_handler.h"
-#include "texture_creator.h"
-#include "color.h"
-#include "sprite.h"
-#include "animation.h"
-#include "button.h"
-#include "keyboard_test.h"
 
 class Client {
 public:
