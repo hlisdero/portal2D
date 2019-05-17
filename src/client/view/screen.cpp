@@ -16,10 +16,6 @@ void Screen::clear() {
     renderer.clear();
 }
 
-void Screen::render(Texture& texture) {
-    renderer.renderCopy(texture, 0, 0);
-}
-
 void Screen::render(Texture& texture, int x, int y) {
     renderer.renderCopy(texture, x, y);
 }
@@ -28,8 +24,8 @@ void Screen::render(Sprite& sprite, int x, int y) {
     renderer.renderCopy(sprite, x, y);
 }
 
-void Screen::render(Button& button) {
-    renderer.renderCopy(button.get(), button.getX(), button.getY());
+void Screen::render(Entity& entity) {
+    renderer.renderCopy(entity.getSprite(), entity.getX(), entity.getY());
 }
 
 void Screen::setRenderDrawColor(const std::string& color_name) {

@@ -34,6 +34,9 @@ private:
 
     void broadcast(KeyboardEvent event) const;
     void broadcast(MouseEvent event) const;
+
+    bool isKeyboardEvent(SDL_Event event) const;
+    bool isMouseEvent(SDL_Event event) const;
 };
 
 #endif  // EVENT_HANDLER_H

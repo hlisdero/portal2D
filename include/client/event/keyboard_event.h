@@ -8,6 +8,8 @@ public:
     KeyboardEvent(const SDL_Event& event);
 
     char key = '\0';
+    bool pressed = false;
+    bool repeat = false;
 };
 
 #endif  // KEYBOARD_EVENT_H
