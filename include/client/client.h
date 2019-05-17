@@ -11,6 +11,7 @@
 #include "sprite.h"
 #include "animation.h"
 #include "button.h"
+#include "keyboard_test.h"
 
 class Client {
 public:
@@ -28,7 +29,8 @@ private:
     ActiveSocket skt_;
 
     void greetServer();
-    void runWindow();
+    void runWindow1();
+    void runWindow2();
 };
 
 #endif  // CLIENT_H

@@ -5,16 +5,18 @@
 
 class Entity {
 public:
-    Entity(Sprite sprite, int x, int y);
+    Entity(int x, int y);
 
-    Sprite& getSprite();
+    virtual Sprite& getSprite() = 0;
+    virtual int getWidth() const = 0;
+    virtual int getHeight() const = 0;
+
     int getX() const;
     int getY() const;
-    int getWidth() const;
-    int getHeight() const;
+    void setX(int nex_x);
+    void setY(int new_y);
 
 private:
-    Sprite sprite;
     int x;
     int y;
 };

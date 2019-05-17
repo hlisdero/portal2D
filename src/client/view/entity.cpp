@@ -1,11 +1,6 @@
 #include "entity.h"
 
-Entity::Entity(Sprite sprite, int x, int y) :
-    sprite(std::move(sprite)), x(x), y(y) {}
-
-Sprite& Entity::getSprite() {
-    return sprite;
-}
+Entity::Entity(int x, int y) : x(x), y(y) {}
 
 int Entity::getX() const {
     return x;
@@ -15,10 +10,10 @@ int Entity::getY() const {
     return y;
 }
 
-int Entity::getWidth() const {
-    return sprite.getWidth();
+void Entity::setX(int new_x) {
+    x = new_x;
 }
 
-int Entity::getHeight() const {
-    return sprite.getHeight();
+void Entity::setY(int new_y) {
+    y = new_y;
 }

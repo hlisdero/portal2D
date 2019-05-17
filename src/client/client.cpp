@@ -9,7 +9,8 @@ Client::Client(const std::string& hostname,
 
 void Client::run() {
     // greetServer();
-    runWindow();
+    runWindow1();
+    runWindow2();
 }
 
 void Client::greetServer() {
@@ -26,7 +27,7 @@ void Client::greetServer() {
     std::cout << response << std::endl;
 }
 
-void Client::runWindow() {
+void Client::runWindow1() {
     Screen screen;
     size_t width = screen.getWidth();
     size_t height = screen.getHeight();
@@ -77,6 +78,38 @@ void Client::runWindow() {
         screen.render(button2);
         screen.render(button3);
         screen.render(button4);
+        screen.update();
+    }
+}
+
+void Client::runWindow2() {
+    Screen screen;
+    size_t width = screen.getWidth();
+    size_t height = screen.getHeight();
+
+    const TextureCreator& textureCreator = screen.getTextureCreator();
+    Sprite sprite1(textureCreator("../data/press.png"));
+    Sprite sprite2(textureCreator("../data/up.png"));
+    Sprite sprite3(textureCreator("../data/left.png"));
+    Sprite sprite4(textureCreator("../data/down.png"));
+    Sprite sprite5(textureCreator("../data/right.png"));
+    std::vector<Sprite*> sprites = {
+        &sprite1, &sprite2, &sprite3, &sprite4, &sprite5,
+    };
+    for (auto &sprite : sprites) {
+        sprite->addClip(0,0, width, height);
+    }
+    KeyboardTest keyboard_test(0, 0, sprites);
+
+    EventHandler event_handler;
+    event_handler.add(&keyboard_test);
+
+    while (event_handler) {
+        event_handler.poll();
+
+        screen.setRenderDrawColor("white");
+        screen.clear();
+        screen.render(keyboard_test);
         screen.update();
     }
 }
