@@ -1,22 +1,21 @@
-#include "keyboard_test.h"
+#include "key_detector.h"
 
-
-KeyboardTest::KeyboardTest(int x, int y, std::vector<Sprite*> sprites) :
+KeyDetector::KeyDetector(int x, int y, std::vector<Sprite*> sprites) :
     Entity(x, y), sprites(sprites) {}
 
-Sprite& KeyboardTest::getSprite() {
+Sprite& KeyDetector::getSprite() {
     return *sprites[current];
 }
 
-int KeyboardTest::getWidth() const {
+int KeyDetector::getWidth() const {
     return sprites[current]->getWidth();
 }
 
-int KeyboardTest::getHeight() const {
+int KeyDetector::getHeight() const {
     return sprites[current]->getHeight();
 }
 
-void KeyboardTest::handle(const KeyboardEvent& event) {
+void KeyDetector::handle(const KeyboardEvent& event) {
     if (event.pressed) {
         if (event.key == 'w') {
             current = 1;

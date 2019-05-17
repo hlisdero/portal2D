@@ -1,14 +1,14 @@
-#ifndef KEYBOARD_TEST_H
-#define KEYBOARD_TEST_H
+#ifndef KEY_DETECTOR_H
+#define KEY_DETECTOR_H
 
 #include "entity.h"
 #include "sprite.h"
 #include "keyboard_handler.h"
 #include "mouse_handler.h"
 
-class KeyboardTest : public Entity, public KeyboardHandler {
+class KeyDetector : public Entity, public KeyboardHandler {
 public:
-    KeyboardTest(int x, int y, std::vector<Sprite*> sprites);
+    KeyDetector(int x, int y, std::vector<Sprite*> sprites);
 
     virtual Sprite& getSprite() override;
     int getWidth() const override;
@@ -21,4 +21,4 @@ private:
     size_t current = 0;
 };
 
-#endif  // KEYBOARD_TEST
+#endif  // KEY_DETECTOR
