@@ -1,11 +1,11 @@
 #include "button.h"
 
 Button::Button(Sprite sprite, int x, int y) :
-    sprite(std::move(sprite)), x(x), y(y) {}
-
+    Entity(std::move(sprite), x, y) {}
 
 void Button::handle(const MouseEvent& event) {
-	bool inside = event.isInside(x, y, sprite.getWidth(), sprite.getHeight());
+	bool inside = event.isInside(getX(), getY(), getWidth(), getHeight());
+    Sprite& sprite = getSprite();
 	if (!inside) {
         sprite.setClip(0);
         return;
@@ -17,24 +17,4 @@ void Button::handle(const MouseEvent& event) {
     } else {
         sprite.setClip(3);
     }
-}
-
-Sprite& Button::get() {
-    return sprite;
-}
-
-int Button::getX() const {
-    return x;
-}
-
-int Button::getY() const {
-    return y;
-}
-
-int Button::getWidth() const {
-    return sprite.getWidth();
-}
-
-int Button::getHeight() const {
-    return sprite.getHeight();
 }

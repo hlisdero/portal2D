@@ -25,10 +25,9 @@ public:
 
     void clear();
 
-    void render(Texture& texture);
     void render(Texture& texture, int x, int y);
     void render(Sprite& sprite, int x, int y);
-    void render(Button& button);
+    void render(Entity& entity);
 
     void setRenderDrawColor(const std::string& color_name);
     void setRenderDrawColor(uint8_t red, uint8_t green,
