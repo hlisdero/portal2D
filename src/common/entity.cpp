@@ -10,3 +10,15 @@ float Entity::getX() {
 float Entity::getY() {
     return this->y;
 }
+
+void Entity::setX(float x) {
+    this->x = x;
+}
+
+void Entity::setY(float y) {
+	this->y = y;
+}
+
+EntityType Entity::getType() {
+    return this->type;
+}

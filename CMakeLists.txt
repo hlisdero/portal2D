@@ -4,6 +4,7 @@ project(portal2d)
 
 # Sources
 file(GLOB_RECURSE client_sources ${PROJECT_SOURCE_DIR}/src/client/*)
+file(GLOB_RECURSE client2_sources ${PROJECT_SOURCE_DIR}/src/client2/*)
 file(GLOB_RECURSE view_sources ${PROJECT_SOURCE_DIR}/src/client/view/*)
 file(GLOB_RECURSE event_sources ${PROJECT_SOURCE_DIR}/src/client/event/*)
 file(GLOB_RECURSE entities_sources ${PROJECT_SOURCE_DIR}/src/client/entities/*)
@@ -35,7 +36,7 @@ target_compile_options(client PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic
 target_link_libraries(client ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
 
 # Game
-add_executable(game ${game_sources} ${common_sources} ${server_sources})
+add_executable(game ${game_sources} ${common_sources} ${server_sources} ${client2_sources})
 target_include_directories(game PRIVATE ${PROJECT_SOURCE_DIR}/include/)
 target_compile_options(game PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
 target_link_libraries(game ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${BOX2D_LIBRARIES})

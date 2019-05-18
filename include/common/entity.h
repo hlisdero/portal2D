@@ -1,6 +1,8 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#define KINEMATIC_ENTITY_START 20
+
 enum EntityType {
 	// Static
 	StoneBlock,
@@ -21,8 +23,8 @@ enum EntityType {
 	Player,
 
 	// Kinematic
-	EnergyBall,
-	PortalCreationLaser // TODO check: optional but can be cool
+	EnergyBall = KINEMATIC_ENTITY_START,
+	PortalCreationLaser  // TODO check: optional but can be cool
 };
 
 class Entity {
@@ -31,6 +33,10 @@ public:
 
 	float getX();
 	float getY();
+	EntityType getType();
+
+	void setX(float x);
+	void setY(float y);
 private:
 	EntityType type;
 	float x;

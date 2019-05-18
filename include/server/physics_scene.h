@@ -1,28 +1,27 @@
-#ifndef SCENE_H
-#define SCENE_H
+#ifndef PHYSICS_SCENE_H
+#define PHYSICS_SCENE_H
 
-#include <vector>
-#include <map>
 #include "Box2D/Box2D.h"
 
+#include "common/scene.h"
 #include "common/entity.h"
 
-class Scene {
+class PhysicsScene : Scene {
 public:
-	Scene();
+	PhysicsScene();
 
     void addPlayer();
     void updatePhysics();
 
+	std::vector<Entity> getStaticEntities();
+	std::vector<Entity> getDynamicEntities();
 private:
 	b2World world;
-	std::vector<Entity> staticEntities;
-	std::map<int, Entity> dynamicEntities;
 
 	void createStaticEntities(b2Body * groundBody);
 	void createStaticEntity(b2Body * groundBody, Entity entity);
 	void createDynamicEntities();
-	void createDynamicEntity();
+	void createDynamicEntity(Entity entity);
 };
 
-#endif  // SCENE_H
+#endif  // PHYSICS_SCENE_H
