@@ -31,12 +31,12 @@ class Entity {
 public:
 	Entity(EntityType type, float x, float y);
 
-	float getX();
-	float getY();
-	EntityType getType();
+	float getX() const;
+	float getY() const;
+	EntityType getType() const;
 
-	void setX(float x);
-	void setY(float y);
+	void setX(const float x);
+	void setY(const float y);
 private:
 	EntityType type;
 	float x;

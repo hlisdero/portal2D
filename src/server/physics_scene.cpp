@@ -38,7 +38,7 @@ b2Body * PhysicsScene::createDynamicEntity(Entity entity) {
 	return body;
 }
 
-void PhysicsScene::createStaticEntity(b2Body * groundBody, Entity entity) {
+void PhysicsScene::createStaticEntity(b2Body * groundBody, const Entity entity) {
 	b2PolygonShape shape;
 
 	shape.SetAsBox(1.0f, 1.0f, b2Vec2(entity.getX(), entity.getY()), 0.0f);
@@ -61,12 +61,12 @@ void PhysicsScene::updatePhysics() {
 	this->world.Step(timeStep, velocityIterations, positionIterations);
 }
 
-std::vector<Entity> PhysicsScene::getStaticEntities() {
+std::vector<Entity> PhysicsScene::getStaticEntities() const {
 	return this->staticEntities;
 }
 
-std::vector<Entity> PhysicsScene::getDynamicEntities() {
-	b2Body * body = this->world.GetBodyList();
+std::vector<Entity> PhysicsScene::getDynamicEntities() const {
+	const b2Body * body = this->world.GetBodyList();
 
 	std::vector<Entity> entities;
 

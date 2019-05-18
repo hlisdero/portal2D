@@ -1,13 +1,13 @@
 #include "server/player_entity.h"
 
-PlayerEntity::PlayerEntity(float x, float y) :
+PlayerEntity::PlayerEntity(const float x, const float y) :
 	Entity(Player, x, y) {}
 
 void PlayerEntity::setBody(b2Body * body) {
 	this->body = body;
 }
 
-void PlayerEntity::move(MoveDirection direction) {
+void PlayerEntity::move(const MoveDirection direction) {
 	float vx = 0.0f;
 	float vy = 0.0f;
 

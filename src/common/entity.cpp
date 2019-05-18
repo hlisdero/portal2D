@@ -3,22 +3,22 @@
 Entity::Entity(EntityType type, float x, float y) : 
 	type(type), x(x), y(y) {}
 
-float Entity::getX() {
+float Entity::getX() const {
     return this->x;
 }
 
-float Entity::getY() {
+float Entity::getY() const {
     return this->y;
 }
 
-void Entity::setX(float x) {
+EntityType Entity::getType() const {
+    return this->type;
+}
+
+void Entity::setX(const float x) {
     this->x = x;
 }
 
-void Entity::setY(float y) {
+void Entity::setY(const float y) {
 	this->y = y;
-}
-
-EntityType Entity::getType() {
-    return this->type;
 }

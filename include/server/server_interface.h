@@ -17,8 +17,8 @@ public:
 
 	void updatePhysics();
 
-	std::vector<Entity> getStaticEntities();
-	std::vector<Entity> getDynamicEntities();
+	std::vector<Entity> getStaticEntities() const;
+	std::vector<Entity> getDynamicEntities() const;
 
 	void movePlayer(MoveDirection direction);
 

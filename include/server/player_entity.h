@@ -8,11 +8,11 @@
 
 class PlayerEntity : public Entity {
 public:
-	PlayerEntity(float x, float y);
+	PlayerEntity(const float x, const float y);
 
 	void setBody(b2Body * body);
 
-	void move(MoveDirection direction);
+	void move(const MoveDirection direction);
 private:
 	b2Body * body;
 };
