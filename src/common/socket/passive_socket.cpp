@@ -1,5 +1,5 @@
 #define _POSIX_C_SOURCE 200112L
-#include "passive_socket.h"
+#include "common/socket/passive_socket.h"
 #include <string>
 
 PassiveSocket::PassiveSocket(const std::string& port) :
