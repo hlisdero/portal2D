@@ -7,7 +7,6 @@
 #include "keyboard_event.h"
 #include "keyboard_handler.h"
 #include "mouse_handler.h"
-#include "button.h"
 
 class EventHandler {
 public:

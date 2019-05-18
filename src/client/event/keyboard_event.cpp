@@ -16,6 +16,24 @@ KeyboardEvent::KeyboardEvent(const SDL_Event& event) {
         case SDLK_d:
             key = 'd';
             break;
+        case SDLK_1:
+            key = '1';
+            break;
+        case SDLK_2:
+            key = '2';
+            break;
+        case SDLK_3:
+            key = '3';
+            break;
+        case SDLK_4:
+            key = '4';
+            break;
+        case SDLK_9:
+            key = '9';
+            break;
+        case SDLK_0:
+            key = '0';
+            break;
         default:
             key = 0;
             break;
