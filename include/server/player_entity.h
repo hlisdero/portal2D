@@ -12,9 +12,20 @@ public:
 
 	void setBody(b2Body * body);
 
-	void move(const MoveDirection direction);
+	void keyDown(const MoveDirection direction);
+	void keyUp(const MoveDirection direction);
+
+	void setOnTheFloor(const bool isOnTheFloor);
+
+	void applyMovement();
 private:
 	b2Body * body;
+	bool isOnTheFloor = false;
+	// This allow for better gameplay experience
+	bool hasMovedInTheAir = false;
+	bool moveDirection = NONE;
+
+	void applyImpulseToCenter(float vx, float vy);
 };
 
 #endif  // PLAYER_ENTITY_H

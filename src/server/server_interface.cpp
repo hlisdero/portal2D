@@ -1,6 +1,6 @@
 #include "server/server_interface.h"
 
-ServerInterface::ServerInterface() : scene(), player(1.0f, 0.0f) {
+ServerInterface::ServerInterface() : scene(), player(0.0f, 5.0f) {
 	this->scene.createPlayer(this->player);
 }
 

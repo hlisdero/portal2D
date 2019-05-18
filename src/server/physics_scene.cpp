@@ -12,16 +12,16 @@ PhysicsScene::PhysicsScene() : Scene(),
 
 void PhysicsScene::createStaticEntities(b2Body * groundBody) {
 	// TODO load from file
-	createStaticEntity(groundBody, Entity(MetalBlock, 0.0f, -2.0f));
-	createStaticEntity(groundBody, Entity(MetalBlock, 0.0f, 0.0f));
+	createStaticEntity(groundBody, Entity(MetalBlock, -1.0f, 0.0f));
+	createStaticEntity(groundBody, Entity(MetalBlock, 1.0f, 0.0f));
 }
 
 void PhysicsScene::createDynamicEntities() {
 	// TODO load from file
-	createDynamicEntity(Entity(Rock, 1.0f, -1.0f));
+	createDynamicEntity(Entity(Rock, 1.0f, 10.0f));
 }
 
-b2Body * PhysicsScene::createDynamicEntity(Entity entity) {
+void PhysicsScene::createDynamicEntity(Entity entity) {
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(entity.getX(), entity.getY());
 
@@ -34,8 +34,6 @@ b2Body * PhysicsScene::createDynamicEntity(Entity entity) {
 
 	body->CreateFixture(&shape, 1.0f);
 	body->SetUserData(&entity);
-
-	return body;
 }
 
 void PhysicsScene::createStaticEntity(b2Body * groundBody, const Entity entity) {
@@ -49,10 +47,29 @@ void PhysicsScene::createStaticEntity(b2Body * groundBody, const Entity entity) 
 }
 
 void PhysicsScene::createPlayer(PlayerEntity & player) {
-	player.setBody(createDynamicEntity(player));
+	b2BodyDef bodyDef;
+	bodyDef.position.Set(player.getX(), player.getY());
+	bodyDef.fixedRotation = true;
+	bodyDef.type = b2_dynamicBody;
+
+	b2Body * body = this->world.CreateBody(&bodyDef);
+
+	b2PolygonShape shape;
+	shape.SetAsBox(0.5f, 1.0f);
+
+	body->CreateFixture(&shape, 1.0f);
+	body->SetUserData(&player);
+
+	player.setBody(body);
+
+	players.push_back(player);
 }
 
 void PhysicsScene::updatePhysics() {
+	for(uint i = 0; i < players.size(); i++) {
+		players[i]->applyMovement();
+	}
+
 	// TODO change to constantes
 	float32 timeStep = 1.0f / 60.0f;
 	int32 velocityIterations = 6;

@@ -2,8 +2,8 @@
 #define MOVE_DIRECTION_H
 
 enum MoveDirection {
+	NONE,
 	UP,
-	DOWN,
 	LEFT,
 	RIGHT
 };
