@@ -7,11 +7,11 @@
 #include "common/clock_loop.h"
 
 int main() {
+	// ServerInterface: 
+	// - create the scene
+	// - create a player
 	ServerInterface server;
 	ClientInterface client;
-
-	// create personnage
-	server.addPlayer(); // TODO server-side: link client and player
 
 	// create snapshot world with statics objects
 	auto staticEntities = server.getStaticEntities();

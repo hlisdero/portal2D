@@ -1,9 +1,11 @@
 #include "server/server_interface.h"
 
-ServerInterface::ServerInterface() : scene() {}
+ServerInterface::ServerInterface() : scene(), player(1.0f, 0.0f) {
+	this->scene.createPlayer(this->player);
+}
 
-void ServerInterface::addPlayer() {
-	this->scene.addPlayer();
+void ServerInterface::movePlayer(MoveDirection direction) {
+	this->player.move(direction);
 }
 
 void ServerInterface::updatePhysics() {

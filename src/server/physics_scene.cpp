@@ -21,7 +21,7 @@ void PhysicsScene::createDynamicEntities() {
 	createDynamicEntity(Entity(Rock, 1.0f, -1.0f));
 }
 
-void PhysicsScene::createDynamicEntity(Entity entity) {
+b2Body * PhysicsScene::createDynamicEntity(Entity entity) {
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(entity.getX(), entity.getY());
 
@@ -34,6 +34,8 @@ void PhysicsScene::createDynamicEntity(Entity entity) {
 
 	body->CreateFixture(&shape, 1.0f);
 	body->SetUserData(&entity);
+
+	return body;
 }
 
 void PhysicsScene::createStaticEntity(b2Body * groundBody, Entity entity) {
@@ -46,8 +48,8 @@ void PhysicsScene::createStaticEntity(b2Body * groundBody, Entity entity) {
 	this->staticEntities.push_back(entity);
 }
 
-void PhysicsScene::addPlayer() {
-	createDynamicEntity(Entity(Player, 1.0f, 0.0f));
+void PhysicsScene::createPlayer(PlayerEntity & player) {
+	player.setBody(createDynamicEntity(player));
 }
 
 void PhysicsScene::updatePhysics() {
@@ -73,8 +75,8 @@ std::vector<Entity> PhysicsScene::getDynamicEntities() {
 
 		if(entityPtr != nullptr) {
 			const b2Vec2 position = body->GetPosition();
-			(*entityPtr).setX(position.x);
-			(*entityPtr).setY(position.y);
+			entityPtr->setX(position.x);
+			entityPtr->setY(position.y);
 
 			entities.push_back(*entityPtr);
 		}
