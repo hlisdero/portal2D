@@ -1,15 +1,14 @@
 #include <iostream>
 #include <chrono>
 
-#include "server_scene.hpp"
-#include "clock_loop.hpp"
+#include "server/server_interface.h"
+#include "common/clock_loop.h"
 
 int main() {
-	ServerScene serverScene;
+	ServerInterface server;
 
-	// Create a map con box2d
-	serverScene.create();
 	// TODO create personnage
+	server.addPlayer();
 
 	// TODO create snapshot world with statics objects
 
@@ -23,7 +22,7 @@ int main() {
 		// TODO listen input
 
 		// TODO apply input to physic world
-		serverScene.updatePhysics();
+		server.updatePhysics();
 
 		// TODO get change to snapshot world
 		// ... = serverScene.getChanges();
