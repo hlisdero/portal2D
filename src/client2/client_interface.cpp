@@ -2,10 +2,10 @@
 
 ClientInterface::ClientInterface() {}
 
-void ClientInterface::setEntities(const std::vector<Entity> staticEntities, const std::vector<Entity> dynamicEntities) {
+void ClientInterface::setEntities(const std::vector<MEntity> staticEntities, const std::vector<MEntity> dynamicEntities) {
 	this->scene.setEntities(staticEntities, dynamicEntities);
 }
 
-void ClientInterface::setDynamicEntities(const std::vector<Entity> dynamicEntities) {
+void ClientInterface::setDynamicEntities(const std::vector<MEntity> dynamicEntities) {
 	this->scene.setDynamicEntities(dynamicEntities);
 }

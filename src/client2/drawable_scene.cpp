@@ -2,11 +2,11 @@
 
 DrawableScene::DrawableScene() : Scene() {}
 
-void DrawableScene::setEntities(const std::vector<Entity> staticEntities, const std::vector<Entity> dynamicEntities) {
+void DrawableScene::setEntities(const std::vector<MEntity> staticEntities, const std::vector<MEntity> dynamicEntities) {
 	this->staticEntities = staticEntities;
 	this->dynamicEntities = dynamicEntities; 
 }
 
-void DrawableScene::setDynamicEntities(const std::vector<Entity> dynamicEntities) {
+void DrawableScene::setDynamicEntities(const std::vector<MEntity> dynamicEntities) {
 	this->dynamicEntities = dynamicEntities; 
 }

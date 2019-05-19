@@ -31,14 +31,15 @@ void PlayerEntity::keyUp(const MoveDirection direction) {
 	}
 }
 
-void PlayerEntity::setOnTheFloor(const isOnTheFloor) {
+void PlayerEntity::setOnTheFloor(const bool isOnTheFloor) {
 	this->isOnTheFloor = isOnTheFloor;
 }
 
 void PlayerEntity::applyImpulseToCenter(const float vx, const float vy) {
-	this->body->ApplyLinearImpulse(
-		b2Vec2(vx, vy)*this->body->GetMass(), 
-		this->body->GetWorldCenter(), true);
+	b2Vec2 vector(vx, vy);
+	vector *= this->body->GetMass();
+
+	this->body->ApplyLinearImpulse(vector, this->body->GetWorldCenter(), true);
 }
 
 void PlayerEntity::applyMovement() {
@@ -52,7 +53,7 @@ void PlayerEntity::applyMovement() {
 	// 		- can move one time in one of the two direction
 	//		- after, the player will continue his movement
 	//			(no resistance in the air)
-	if(!this->onTheFloor) {
+	if(!this->isOnTheFloor) {
 		if(this->hasMovedInTheAir) {
 			return;
 		} else {
@@ -74,6 +75,6 @@ void PlayerEntity::applyMovement() {
 			break;
 	}
 
-	velocityX = (targetVelocity - velocity.x);
+	float velocityX = (targetVelocity - velocity.x);
 	this->applyImpulseToCenter(velocityX, 0.0f);
 }

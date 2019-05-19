@@ -4,7 +4,7 @@
 #include "Box2D/Box2D.h"
 
 #include "common/scene.h"
-#include "common/entity.h"
+#include "common/entities/m_entity.h"
 #include "server/player_entity.h"
 
 /*
@@ -22,16 +22,16 @@ public:
     void createPlayer(PlayerEntity & player);
     void updatePhysics();
 
-	std::vector<Entity> getStaticEntities() const;
-	std::vector<Entity> getDynamicEntities() const;
+	std::vector<MEntity> getStaticEntities() const;
+	std::vector<MEntity> getDynamicEntities() const;
 private:
 	b2World world;
 	std::vector<PlayerEntity*> players;
 
 	void createStaticEntities(b2Body * groundBody);
-	void createStaticEntity(b2Body * groundBody, const Entity entity);
+	void createStaticEntity(b2Body * groundBody, const MEntity entity);
 	void createDynamicEntities();
-	void createDynamicEntity(Entity entity);
+	void createDynamicEntity(MEntity entity);
 };
 
 #endif  // PHYSICS_SCENE_H

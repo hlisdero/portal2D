@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "server/physics_scene.h"
-#include "common/entity.h"
+#include "common/entities/m_entity.h"
 #include "common/move_direction.h"
 #include "server/player_entity.h"
 
@@ -17,8 +17,8 @@ public:
 
 	void updatePhysics();
 
-	std::vector<Entity> getStaticEntities() const;
-	std::vector<Entity> getDynamicEntities() const;
+	std::vector<MEntity> getStaticEntities() const;
+	std::vector<MEntity> getDynamicEntities() const;
 
 	void movePlayer(MoveDirection direction);
 

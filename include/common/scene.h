@@ -3,14 +3,14 @@
 
 #include <vector>
 
-#include "common/entity.h"
+#include "common/entities/m_entity.h"
 
 class Scene {
 public:
 	Scene();
 
 protected:
-	std::vector<Entity> staticEntities;
+	std::vector<MEntity> staticEntities;
 };
 
 #endif  // SCENE_H

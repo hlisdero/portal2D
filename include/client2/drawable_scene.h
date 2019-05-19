@@ -5,16 +5,16 @@
 #include "Box2D/Box2D.h"
 
 #include "common/scene.h"
-#include "common/entity.h"
+#include "common/entities/m_entity.h"
 
 class DrawableScene : Scene {
 public:
 	DrawableScene();
 
-	void setEntities(const std::vector<Entity> staticEntities, const std::vector<Entity> dynamicEntities);
-	void setDynamicEntities(const std::vector<Entity> dynamicEntities);
+	void setEntities(const std::vector<MEntity> staticEntities, const std::vector<MEntity> dynamicEntities);
+	void setDynamicEntities(const std::vector<MEntity> dynamicEntities);
 private:
-	std::vector<Entity> dynamicEntities;
+	std::vector<MEntity> dynamicEntities;
 
 };
 

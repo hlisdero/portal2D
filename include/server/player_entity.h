@@ -3,10 +3,10 @@
 
 #include "Box2D/Box2D.h"
 
-#include "common/entity.h"
+#include "common/entities/m_entity.h"
 #include "common/move_direction.h"
 
-class PlayerEntity : public Entity {
+class PlayerEntity : public MEntity {
 public:
 	PlayerEntity(const float x, const float y);
 
@@ -23,7 +23,7 @@ private:
 	bool isOnTheFloor = false;
 	// This allow for better gameplay experience
 	bool hasMovedInTheAir = false;
-	bool moveDirection = NONE;
+	MoveDirection moveDirection = NONE;
 
 	void applyImpulseToCenter(float vx, float vy);
 };

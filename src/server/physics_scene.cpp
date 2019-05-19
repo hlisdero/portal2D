@@ -12,16 +12,16 @@ PhysicsScene::PhysicsScene() : Scene(),
 
 void PhysicsScene::createStaticEntities(b2Body * groundBody) {
 	// TODO load from file
-	createStaticEntity(groundBody, Entity(MetalBlock, -1.0f, 0.0f));
-	createStaticEntity(groundBody, Entity(MetalBlock, 1.0f, 0.0f));
+	createStaticEntity(groundBody, MEntity(MetalBlock, -1.0f, 0.0f));
+	createStaticEntity(groundBody, MEntity(MetalBlock, 1.0f, 0.0f));
 }
 
 void PhysicsScene::createDynamicEntities() {
 	// TODO load from file
-	createDynamicEntity(Entity(Rock, 1.0f, 10.0f));
+	createDynamicEntity(MEntity(Rock, 1.0f, 10.0f));
 }
 
-void PhysicsScene::createDynamicEntity(Entity entity) {
+void PhysicsScene::createDynamicEntity(MEntity entity) {
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(entity.getX(), entity.getY());
 
@@ -36,7 +36,7 @@ void PhysicsScene::createDynamicEntity(Entity entity) {
 	body->SetUserData(&entity);
 }
 
-void PhysicsScene::createStaticEntity(b2Body * groundBody, const Entity entity) {
+void PhysicsScene::createStaticEntity(b2Body * groundBody, const MEntity entity) {
 	b2PolygonShape shape;
 
 	shape.SetAsBox(1.0f, 1.0f, b2Vec2(entity.getX(), entity.getY()), 0.0f);
@@ -62,7 +62,7 @@ void PhysicsScene::createPlayer(PlayerEntity & player) {
 
 	player.setBody(body);
 
-	players.push_back(player);
+	players.push_back(&player);
 }
 
 void PhysicsScene::updatePhysics() {
@@ -78,17 +78,17 @@ void PhysicsScene::updatePhysics() {
 	this->world.Step(timeStep, velocityIterations, positionIterations);
 }
 
-std::vector<Entity> PhysicsScene::getStaticEntities() const {
+std::vector<MEntity> PhysicsScene::getStaticEntities() const {
 	return this->staticEntities;
 }
 
-std::vector<Entity> PhysicsScene::getDynamicEntities() const {
+std::vector<MEntity> PhysicsScene::getDynamicEntities() const {
 	const b2Body * body = this->world.GetBodyList();
 
-	std::vector<Entity> entities;
+	std::vector<MEntity> entities;
 
 	while(body != nullptr) {
-		Entity * entityPtr = (Entity *) body->GetUserData();
+		MEntity * entityPtr = (MEntity *) body->GetUserData();
 
 		if(entityPtr != nullptr) {
 			const b2Vec2 position = body->GetPosition();

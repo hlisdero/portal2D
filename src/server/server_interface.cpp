@@ -5,17 +5,17 @@ ServerInterface::ServerInterface() : scene(), player(0.0f, 5.0f) {
 }
 
 void ServerInterface::movePlayer(const MoveDirection direction) {
-	this->player.move(direction);
+	this->player.keyDown(direction);
 }
 
 void ServerInterface::updatePhysics() {
 	this->scene.updatePhysics();
 }
 
-std::vector<Entity> ServerInterface::getStaticEntities() const {
+std::vector<MEntity> ServerInterface::getStaticEntities() const {
 	return this->scene.getStaticEntities();
 }
 
-std::vector<Entity> ServerInterface::getDynamicEntities() const {
+std::vector<MEntity> ServerInterface::getDynamicEntities() const {
 	return this->scene.getDynamicEntities();
 }

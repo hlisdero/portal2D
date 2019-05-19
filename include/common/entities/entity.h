@@ -27,20 +27,34 @@ enum EntityType {
 	PortalCreationLaser  // TODO check: optional but can be cool
 };
 
-class Entity {
+
+template <class T> class Entity {
 public:
-	Entity(EntityType type, float x, float y);
+	Entity(EntityType type, T x, T y) : 
+	type(type), x(x), y(y) {}
 
-	float getX() const;
-	float getY() const;
-	EntityType getType() const;
+	T getX() const {
+	    return this->x;
+	}
 
-	void setX(const float x);
-	void setY(const float y);
+	T getY() const {
+		return this->y;
+	}
+
+	void setX(const T x) {
+		this->x = x;
+	}
+	void setY(const T y) {
+		this->y = y;
+	}
+
+	EntityType getType() const {
+		return this->type;
+	}
 private:
 	EntityType type;
-	float x;
-	float y;
+	T x;
+	T y;
 };
 
 #endif  // ENTITY_H

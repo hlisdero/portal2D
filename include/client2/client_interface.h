@@ -4,15 +4,15 @@
 #include <vector>
 
 #include "client2/drawable_scene.h"
-#include "common/entity.h"
+#include "common/entities/m_entity.h"
 
 // Temporary class to simulate the separation between client y server.
 class ClientInterface {
 public:
 	ClientInterface();
 
-	void setEntities(const std::vector<Entity> staticEntities, const std::vector<Entity> dynamicEntities);
-	void setDynamicEntities(const std::vector<Entity> dynamicEntities);
+	void setEntities(const std::vector<MEntity> staticEntities, const std::vector<MEntity> dynamicEntities);
+	void setDynamicEntities(const std::vector<MEntity> dynamicEntities);
 private:
 	DrawableScene scene;
 };
