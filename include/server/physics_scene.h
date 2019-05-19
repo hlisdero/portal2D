@@ -6,6 +6,7 @@
 #include "common/scene.h"
 #include "common/entities/m_entity.h"
 #include "server/player_entity.h"
+#include "server/contact_listener.h"
 
 /*
 	y
@@ -26,8 +27,12 @@ public:
 	std::vector<MEntity> getDynamicEntities() const;
 private:
 	b2World world;
+	MEntity groundEntity = MEntity(StoneBlock,0.0f,0.0f);
+
 	std::vector<MEntity> staticEntities;
 	std::vector<PlayerEntity*> players;
+
+	ContactListener contactListener;
 
 	void createStaticEntities(b2Body * groundBody);
 	void createStaticEntity(b2Body * groundBody, const MEntity entity);

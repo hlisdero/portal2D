@@ -5,15 +5,18 @@
 
 enum EntityType {
 	// Static
+	// - Ground
+	Ground,
 	StoneBlock,
 	MetalBlock,
 	MetalDiagBlock,
+	// - Not Ground
 	Acid,
 	Door,
 	EnergyBar,
 	EnergyEmittor,
 	EnergyReceiver,
-	PlayerSpawn,
+	PlayerSpawn, // TODO check: depend of the implementation
 	EndCake,
 	Button,
 	Portal,

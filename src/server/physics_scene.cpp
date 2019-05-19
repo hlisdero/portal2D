@@ -5,9 +5,12 @@ PhysicsScene::PhysicsScene() : Scene(),
 	world(b2Vec2(0.0f, -10.0f)) {
 	b2BodyDef groundBodyDef;
 	b2Body * groundBody = this->world.CreateBody(&groundBodyDef);
+	groundBody->SetUserData(&this->groundEntity);
 
 	createStaticEntities(groundBody);
 	createDynamicEntities();
+
+	this->world.SetContactListener(&this->contactListener);
 }
 
 void PhysicsScene::createStaticEntities(b2Body * groundBody) {
