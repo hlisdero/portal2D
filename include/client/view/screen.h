@@ -4,11 +4,12 @@
 #include <string>
 #include "window.h"
 #include "renderer.h"
+#include "texture_creator.h"
 #include "texture.h"
 #include "sprite.h"
-#include "texture_creator.h"
+#include "entity.h"
 #include "color.h"
-#include "button.h"
+
 
 class Screen {
 public:
