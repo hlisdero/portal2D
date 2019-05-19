@@ -8,9 +8,6 @@
 class Scene {
 public:
 	Scene();
-
-protected:
-	std::vector<MEntity> staticEntities;
 };
 
 #endif  // SCENE_H
