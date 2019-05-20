@@ -1,4 +1,4 @@
-#include "sprite.h"
+#include "client/view/sprite.h"
 
 Sprite::Sprite(Texture texture) : texture(std::move(texture)), current(0) {}
 

@@ -1,4 +1,4 @@
-#include "event_handler.h"
+#include "client/event/event_handler.h"
 
 EventHandler::operator bool() const {
     return !quit;

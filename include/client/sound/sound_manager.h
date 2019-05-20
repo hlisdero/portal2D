@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 #include <SDL2/SDL.h>
-#include "sound_effect.h"
-#include "music.h"
-#include "keyboard_handler.h"
+#include "client/sound/sound_effect.h"
+#include "client/sound/music.h"
+#include "client/event/keyboard_handler.h"
 
 class SoundManager : public KeyboardHandler {
 public:

@@ -2,14 +2,13 @@
 #define SCREEN_H
 
 #include <string>
-#include "window.h"
-#include "renderer.h"
-#include "texture_creator.h"
-#include "texture.h"
-#include "sprite.h"
-#include "entity.h"
-#include "color.h"
-
+#include "client/view/window.h"
+#include "client/view/renderer.h"
+#include "client/view/texture_creator.h"
+#include "client/view/texture.h"
+#include "client/view/sprite.h"
+#include "common/entities/p_entity.h"
+#include "client/view/color.h"
 
 class Screen {
 public:

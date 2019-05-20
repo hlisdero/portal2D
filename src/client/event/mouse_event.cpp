@@ -1,4 +1,4 @@
-#include "mouse_event.h"
+#include "client/event/mouse_event.h"
 
 MouseEvent::MouseEvent(const SDL_Event& event) {
     SDL_GetMouseState(&x, &y);

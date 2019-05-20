@@ -1,4 +1,4 @@
-#include "sound_manager.h"
+#include "client/sound/sound_manager.h"
 
 SoundManager::SoundManager() {
     if (SDL_InitSubSystem(SDL_INIT_AUDIO) != 0) {
