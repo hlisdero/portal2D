@@ -20,10 +20,13 @@ public:
     operator bool() const;
     operator int() const = delete;
 
+    bool doQuit() const;
+
     void add(KeyboardHandler* keyboard_handler);
     void add(MouseHandler* mouse_handler);
 
     void poll();
+
 
 private:
     bool quit = false;

@@ -1,6 +1,6 @@
 #include "client2/client_interface.h"
 
-ClientInterface::ClientInterface() : scene(640,480,40,20) {}
+ClientInterface::ClientInterface() : scene(800,600,10,6) {}
 
 void ClientInterface::setEntities(const std::vector<MEntity> staticEntities, const std::vector<MEntity> dynamicEntities) {
 	this->scene.setEntities(staticEntities, dynamicEntities);
@@ -8,4 +8,20 @@ void ClientInterface::setEntities(const std::vector<MEntity> staticEntities, con
 
 void ClientInterface::setDynamicEntities(const std::vector<MEntity> dynamicEntities) {
 	this->scene.setDynamicEntities(dynamicEntities);
+}
+
+bool ClientInterface::doQuit() {
+	return this->scene.doQuit();
+}
+
+void ClientInterface::poolEvent() {
+	this->scene.poolEvent();
+}
+
+void ClientInterface::updateScreen() {
+	this->scene.updateScreen();
+}
+
+void ClientInterface::renderScreen() {
+	this->scene.render();
 }

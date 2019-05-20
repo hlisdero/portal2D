@@ -15,8 +15,8 @@ PhysicsScene::PhysicsScene() : Scene(),
 
 void PhysicsScene::createStaticEntities(b2Body * groundBody) {
 	// TODO load from file
-	createStaticEntity(groundBody, MEntity(MetalBlock, -1.0f, 0.0f));
 	createStaticEntity(groundBody, MEntity(MetalBlock, 1.0f, 0.0f));
+	createStaticEntity(groundBody, MEntity(MetalBlock, 3.0f, 0.0f));
 }
 
 void PhysicsScene::createDynamicEntities() {

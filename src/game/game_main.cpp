@@ -7,32 +7,31 @@
 #include "common/clock_loop.h"
 
 int main() {
-	// ServerInterface: 
-	// - create the scene
-	// - create a player
 	ServerInterface server;
 	ClientInterface client;
 
-	// create snapshot world with statics objects
+	// create drawable world with statics objects
 	auto staticEntities = server.getStaticEntities();
 	auto initialDynamicEntities = server.getDynamicEntities();
 	client.setEntities(staticEntities, initialDynamicEntities);
 
 	ClockLoop<60> clock;
-	// while(...)
-	for(uint i = 0; i < 1*60; i++) { // TODO replace by while
+	while(!client.doQuit()) {
+		// get keyboard/mouse input
+		client.poolEvent();
+		// TODO client - send input keyUp, keyDown; mouseClicks
+		// TODO server - receive/apply input to physic world
 
-		// TODO draw
-		// TODO listen input
 
-		// TODO apply input to physic world
 		server.updatePhysics();
 
-		// TODO get change to snapshot world
-		// ... = serverScene.getChanges();
-		// clientScene.setChanges(...)
+		// update drawable world
 		auto dynamicEntities = server.getDynamicEntities();
 		client.setDynamicEntities(dynamicEntities);
+
+		// draw screen
+		client.renderScreen();
+		client.updateScreen();
 
 		// wait t1
 		clock.waitNextLoop();

@@ -17,9 +17,33 @@ void DrawableScene::setDynamicEntities(const std::vector<MEntity> dynamicEntitie
 
 PEntity DrawableScene::transfromToPEntity(const MEntity mEntity) {
 	int pixelX = mEntity.getX() * this->scaleFactorX;
-	int pixelY = mEntity.getY() * this->scaleFactorY;
+	int pixelY = this->height - mEntity.getY() * this->scaleFactorY;
 	// TODO use something to load all the texture before
 	return PEntity(mEntity.getType(), pixelX, pixelY, this->screen.getTextureCreator());
+}
+
+void DrawableScene::poolEvent() {
+	this->eventHandler.poll();
+}
+
+bool DrawableScene::doQuit() {
+	return this->eventHandler.doQuit();
+}
+
+void DrawableScene::render() {
+	this->screen.setRenderDrawColor("white");
+	this->screen.clear();
+
+	for(uint i = 0; i < this->staticEntities.size(); i++) {
+		this->screen.render(this->staticEntities[i]);
+	}
+	for(uint i = 0; i < this->dynamicEntities.size(); i++) {
+		this->screen.render(this->dynamicEntities[i]);
+	}
+}
+
+void DrawableScene::updateScreen() {	
+	this->screen.update();
 }
 
 std::vector<PEntity> DrawableScene::transformToPEntities(const std::vector<MEntity> & mEntities) {

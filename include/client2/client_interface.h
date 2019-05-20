@@ -15,6 +15,12 @@ public:
 	void setEntities(const std::vector<MEntity> staticEntities, const std::vector<MEntity> dynamicEntities);
 	void setDynamicEntities(const std::vector<MEntity> dynamicEntities);
 	
+	void renderScreen();
+	void updateScreen();
+
+	void poolEvent();
+
+	bool doQuit();
 private:
 	DrawableScene scene;
 
