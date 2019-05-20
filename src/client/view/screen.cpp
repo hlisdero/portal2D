@@ -24,7 +24,7 @@ void Screen::render(Sprite& sprite, int x, int y) {
     renderer.renderCopy(sprite, x, y);
 }
 
-void Screen::render(Entity& entity) {
+void Screen::render(PEntity& entity) {
     renderer.renderCopy(entity.getSprite(), entity.getX(), entity.getY());
 }
 

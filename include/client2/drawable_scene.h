@@ -7,6 +7,7 @@
 #include "common/scene.h"
 #include "common/entities/m_entity.h"
 #include "common/entities/p_entity.h"
+#include "client/view/screen.h"
 
 class DrawableScene : Scene {
 public:
@@ -16,6 +17,7 @@ public:
 	void setEntities(const std::vector<MEntity> staticEntities, const std::vector<MEntity> dynamicEntities);
 	void setDynamicEntities(const std::vector<MEntity> dynamicEntities);
 private:
+	Screen screen;
 	int width;
 	int height;
 	float scaleFactorX;

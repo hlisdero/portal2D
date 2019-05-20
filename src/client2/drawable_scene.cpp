@@ -2,6 +2,7 @@
 
 DrawableScene::DrawableScene(int pixelWidth, int pixelHeight, 
 	int meterWidth, int meterHeight) : Scene(), 
+	screen(pixelWidth, pixelHeight),
 	width(pixelWidth), height(pixelHeight),
 	scaleFactorX(pixelWidth/meterWidth), scaleFactorY(pixelHeight/meterHeight) {}
 
@@ -17,7 +18,8 @@ void DrawableScene::setDynamicEntities(const std::vector<MEntity> dynamicEntitie
 PEntity DrawableScene::transfromToPEntity(const MEntity mEntity) {
 	int pixelX = mEntity.getX() * this->scaleFactorX;
 	int pixelY = mEntity.getY() * this->scaleFactorY;
-	return PEntity(mEntity.getType(), pixelX, pixelY);
+	// TODO use something to load all the texture before
+	return PEntity(mEntity.getType(), pixelX, pixelY, this->screen.getTextureCreator());
 }
 
 std::vector<PEntity> DrawableScene::transformToPEntities(const std::vector<MEntity> & mEntities) {

@@ -41,10 +41,10 @@ target_compile_options(client PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic
 target_link_libraries(client ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES})
 
 # Game
-add_executable(game ${game_sources} ${common_sources} ${server_sources} ${client2_sources})
+add_executable(game ${game_sources} ${common_sources} ${server_sources} ${client2_sources} ${client_sources})
 target_include_directories(game PRIVATE ${PROJECT_SOURCE_DIR}/include/)
 target_compile_options(game PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
-target_link_libraries(game ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${BOX2D_LIBRARIES})
+target_link_libraries(game ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} ${BOX2D_LIBRARIES})
 
 # View Test
 add_executable(view-test ${test_sources} ${event_sources} ${entities_sources} ${sound_sources} ${view_sources})

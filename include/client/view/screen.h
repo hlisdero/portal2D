@@ -27,7 +27,7 @@ public:
 
     void render(Texture& texture, int x, int y);
     void render(Sprite& sprite, int x, int y);
-    void render(Entity& entity);
+    void render(PEntity & entity);
 
     void setRenderDrawColor(const std::string& color_name);
     void setRenderDrawColor(uint8_t red, uint8_t green,
