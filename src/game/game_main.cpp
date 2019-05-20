@@ -3,12 +3,16 @@
 
 #include "server/server_interface.h"
 #include "client2/client_interface.h"
+#include "client2/player_movement_handler.h"
 
 #include "common/clock_loop.h"
 
 int main() {
 	ServerInterface server;
 	ClientInterface client;
+
+	PlayerMovementHandler moveHandler(server);
+	client.addHandler(&moveHandler);
 
 	// create drawable world with statics objects
 	auto staticEntities = server.getStaticEntities();

@@ -6,6 +6,10 @@ DrawableScene::DrawableScene(int pixelWidth, int pixelHeight,
 	width(pixelWidth), height(pixelHeight),
 	scaleFactorX(pixelWidth/meterWidth), scaleFactorY(pixelHeight/meterHeight) {}
 
+void DrawableScene::addHandler(KeyboardHandler * handler) {
+	this->eventHandler.add(handler);
+}
+
 void DrawableScene::setEntities(const std::vector<MEntity> staticEntities, const std::vector<MEntity> dynamicEntities) {
 	this->staticEntities = transformToPEntities(staticEntities);
 	this->dynamicEntities = transformToPEntities(dynamicEntities); 

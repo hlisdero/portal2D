@@ -1,11 +1,15 @@
 #include "server/server_interface.h"
 
-ServerInterface::ServerInterface() : scene(), player(5.0f, 5.0f) {
+ServerInterface::ServerInterface() : scene(), player(1.0f, 5.0f) {
 	this->scene.createPlayer(this->player);
 }
 
-void ServerInterface::movePlayer(const MoveDirection direction) {
-	this->player.keyDown(direction);
+void ServerInterface::movePlayer(const MoveDirection direction, const bool pressed) {
+	if(pressed) {
+		this->player.keyDown(direction);
+	} else {
+		this->player.keyUp(direction);
+	}
 }
 
 void ServerInterface::updatePhysics() {

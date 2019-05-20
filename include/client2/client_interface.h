@@ -6,11 +6,14 @@
 #include "client2/drawable_scene.h"
 #include "common/entities/m_entity.h"
 #include "common/entities/p_entity.h"
+#include "client/event/keyboard_handler.h"
 
 // Temporary class to simulate the separation between client y server.
 class ClientInterface {
 public:
 	ClientInterface();
+
+	void addHandler(KeyboardHandler * handler);
 
 	void setEntities(const std::vector<MEntity> staticEntities, const std::vector<MEntity> dynamicEntities);
 	void setDynamicEntities(const std::vector<MEntity> dynamicEntities);

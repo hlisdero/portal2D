@@ -21,7 +21,7 @@ void PhysicsScene::createStaticEntities(b2Body * groundBody) {
 
 void PhysicsScene::createDynamicEntities() {
 	// TODO load from file
-	createDynamicEntity(MEntity(Rock, 1.0f, 10.0f));
+	createDynamicEntity(MEntity(Rock, 2.0f, 10.0f));
 }
 
 void PhysicsScene::createDynamicEntity(MEntity entity) {

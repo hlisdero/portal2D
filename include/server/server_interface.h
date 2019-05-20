@@ -20,7 +20,7 @@ public:
 	std::vector<MEntity> getStaticEntities() const;
 	std::vector<MEntity> getDynamicEntities() const;
 
-	void movePlayer(MoveDirection direction);
+	void movePlayer(const MoveDirection direction, const bool pressed);
 
 private:
 	PhysicsScene scene;

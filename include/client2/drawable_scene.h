@@ -9,11 +9,14 @@
 #include "common/entities/p_entity.h"
 #include "client/view/screen.h"
 #include "client/event/event_handler.h"
+#include "client/event/keyboard_handler.h"
 
 class DrawableScene : Scene {
 public:
 	DrawableScene(int pixelWidth, int pixelHeight, 
 		int meterWidth, int meterHeight);
+
+	void addHandler(KeyboardHandler * handler);
 
 	void setEntities(const std::vector<MEntity> staticEntities, const std::vector<MEntity> dynamicEntities);
 	void setDynamicEntities(const std::vector<MEntity> dynamicEntities);
