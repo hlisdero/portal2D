@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 #include "active_socket.h"
+#include "world.h"
+#include <cstdio>
 
 class Client {
 public:
