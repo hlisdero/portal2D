@@ -5,7 +5,7 @@
 
 bool isPlayerWithVNormal(MEntity * entity, b2Vec2 & localNormal, float hy) {
 	return (entity != nullptr) 
-		&& (entity->getType() == Player) 
+		&& (entity->getType() == TYPE_PLAYER) 
 		&& (localNormal == b2Vec2(0.0f, hy));
 }
 

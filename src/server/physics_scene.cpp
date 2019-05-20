@@ -5,7 +5,6 @@ PhysicsScene::PhysicsScene() : Scene(),
 	world(b2Vec2(0.0f, -10.0f)) {
 	b2BodyDef groundBodyDef;
 	b2Body * groundBody = this->world.CreateBody(&groundBodyDef);
-	groundBody->SetUserData(&this->groundEntity);
 
 	createStaticEntities(groundBody);
 	createDynamicEntities();
@@ -15,20 +14,21 @@ PhysicsScene::PhysicsScene() : Scene(),
 
 void PhysicsScene::createStaticEntities(b2Body * groundBody) {
 	// TODO load from file
-	createStaticEntity(groundBody, MEntity(MetalBlock, 1.0f, 0.0f));
-	createStaticEntity(groundBody, MEntity(MetalBlock, 3.0f, 0.0f));
+
+	createStaticEntity(groundBody, MEntity(TYPE_METAL_BLOCK, 1.0f, 0.0f));
+	createStaticEntity(groundBody, MEntity(TYPE_METAL_BLOCK, 3.0f, 0.0f));
 }
 
 void PhysicsScene::createDynamicEntities() {
 	// TODO load from file
-	createDynamicEntity(MEntity(Rock, 2.0f, 10.0f));
+	createDynamicEntity(MEntity(TYPE_ROCK, 2.0f, 10.0f));
 }
 
 void PhysicsScene::createDynamicEntity(MEntity entity) {
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(entity.getX(), entity.getY());
 
-	bodyDef.type = (entity.getType() >= KINEMATIC_ENTITY_START) ? b2_kinematicBody : b2_dynamicBody;
+	bodyDef.type = b2_dynamicBody;
 
 	b2Body * body = this->world.CreateBody(&bodyDef);
 

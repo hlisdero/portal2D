@@ -1,33 +1,30 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#define KINEMATIC_ENTITY_START 20
-
 enum EntityType {
 	// Static
 	// - Ground
-	Ground,
-	StoneBlock,
-	MetalBlock,
-	MetalDiagBlock,
+	TYPE_STONE_BLOCK = 0,
+	TYPE_METAL_BLOCK,
+	TYPE_METAL_DIAG_BLOCK,
 	// - Not Ground
-	Acid,
-	Door,
-	EnergyBar,
-	EnergyEmittor,
-	EnergyReceiver,
-	PlayerSpawn, // TODO check: depend of the implementation
-	EndCake,
-	Button,
-	Portal,
+	TYPE_ACID,
+	TYPE_DOOR,
+	TYPE_ENERGY_BAR,
+	TYPE_ENERGY_EMITTOR,
+	TYPE_ENERGY_RECEIVER,
+	TYPE_ENDCAKE,
+	TYPE_BUTTON,
+	TYPE_PORTAL,
 
 	// Dynamic
-	Rock,
-	Player,
+	TYPE_ROCK,
+	TYPE_PLAYER,
 
 	// Kinematic
-	EnergyBall = KINEMATIC_ENTITY_START,
-	PortalCreationLaser  // TODO check: optional but can be cool
+	TYPE_ENERGY_BALL,
+	
+	ENTITY_TYPES_LENGTH
 };
 
 
