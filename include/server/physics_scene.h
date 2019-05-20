@@ -27,8 +27,7 @@ public:
 	std::vector<MEntity> getDynamicEntities() const;
 private:
 	b2World world;
-	MEntity groundEntity = MEntity(StoneBlock,0.0f,0.0f);
-
+	
 	std::vector<MEntity> staticEntities;
 	std::vector<PlayerEntity*> players;
 

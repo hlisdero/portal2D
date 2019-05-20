@@ -1,7 +1,7 @@
 #include "server/player_entity.h"
 
 PlayerEntity::PlayerEntity(const float x, const float y) :
-	Entity(Player, x, y) {}
+	Entity(TYPE_PLAYER, x, y) {}
 
 void PlayerEntity::setBody(b2Body * body) {
 	this->body = body;
