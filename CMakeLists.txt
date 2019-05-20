@@ -34,9 +34,10 @@ target_include_directories(client PRIVATE ${PROJECT_SOURCE_DIR}/include/client/e
 target_include_directories(client PRIVATE ${PROJECT_SOURCE_DIR}/include/client/event)
 target_include_directories(client PRIVATE ${PROJECT_SOURCE_DIR}/include/client/sound)
 target_include_directories(client PRIVATE ${PROJECT_SOURCE_DIR}/include/client/view)
+target_include_directories(client PRIVATE ${PROJECT_SOURCE_DIR}/include/common/)
 target_include_directories(client PRIVATE ${PROJECT_SOURCE_DIR}/include/common/socket)
 target_compile_options(client PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
-target_link_libraries(client ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES})
+target_link_libraries(client ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} ${BOX2D_LIBRARIES})
 
 # Server
 add_executable(server ${server_sources} ${common_sources})

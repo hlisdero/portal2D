@@ -9,6 +9,17 @@ Client::Client(const std::string& hostname,
 
 void Client::run() {
     // greetServer();
+    World world(15, 15);
+    CollisionBox& box = world.createCollisionBox(1, 1);
+
+    for (int32 i = 0; i < 60; ++i) {
+        world.update();
+
+        b2Vec2 position = box.getPosition();
+        float32 angle = box.getAngle();
+
+        std::printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
+    }
 }
 
 void Client::greetServer() {
