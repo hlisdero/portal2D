@@ -3,6 +3,6 @@
 
 #include <Box2D/Box2D.h>
 
-typedef Position b2Vec2;
+typedef b2Vec2 Position;
 
 #endif // POSITION_H

@@ -5,6 +5,7 @@
 #include "client/event/keyboard_handler.h"
 #include "client/view/sprite.h"
 #include "common/position.h"
+#include "common/move_direction.h"
 
 class Player : public Drawable, public KeyboardHandler {
 public:
