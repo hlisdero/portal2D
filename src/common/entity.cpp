@@ -11,21 +11,22 @@ float32 Entity::getY() const {
     return y;
 }
 
-float Entity::getAngle() const {
-    return angle;
-}
-
 void Entity::setX(float32 x) {
     this->x = x;
 }
+
 void Entity::setY(float32 y) {
     this->y = y;
 }
 
-EntityType Entity::getType() const {
-    return type;
+float Entity::getAngle() const {
+    return angle;
 }
 
 void Entity::setAngle(float angle) {
     this->angle = angle;
+}
+
+EntityType Entity::getType() const {
+    return type;
 }

@@ -3,16 +3,16 @@
 
 #include "Box2D/Box2D.h"
 
-#include "server/entities/m_entity.h"
+#include "common/entities/entity.h"
 #include "server/entities/body_linked_entity.h"
 #include "common/move_direction.h"
 
-class PlayerEntity : public MEntity, public BodyLinkedEntity {
+class PlayerEntity : public Entity, public BodyLinkedEntity {
 public:
 	PlayerEntity(const float x, const float y);
 
-	virtual void beginContactWith(MEntity * other, b2Contact * contact) override;
-	virtual void endContactWith(MEntity * other, b2Contact * contact) override;
+	virtual void beginContactWith(Entity * other, b2Contact * contact) override;
+	virtual void endContactWith(Entity * other, b2Contact * contact) override;
 
 	void keyDown(const MoveDirection direction);
 	void keyUp(const MoveDirection direction);

@@ -3,7 +3,7 @@
 #include "server/entities/rock.h"
 
 // Initialize the world with the gravity vector
-PhysicsScene::PhysicsScene() : Scene(), 
+PhysicsScene::PhysicsScene() : 
 	world(b2Vec2(0.0f, -10.0f)), entityFactory(world) {
 	this->world.SetContactListener(&this->contactListener);
 

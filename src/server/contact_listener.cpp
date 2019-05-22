@@ -3,8 +3,8 @@
 #include "server/entities/m_entity.h"
 
 void ContactListener::BeginContact(b2Contact * contact) {
-	MEntity * userDataA = (MEntity*) contact->GetFixtureA()->GetBody()->GetUserData();
-	MEntity * userDataB = (MEntity*) contact->GetFixtureB()->GetBody()->GetUserData();
+	Entity * userDataA = (Entity*) contact->GetFixtureA()->GetBody()->GetUserData();
+	Entity * userDataB = (Entity*) contact->GetFixtureB()->GetBody()->GetUserData();
 
 	if(userDataA != nullptr) {
 		userDataA->beginContactWith(userDataB, contact);
@@ -15,8 +15,8 @@ void ContactListener::BeginContact(b2Contact * contact) {
 }
 
 void ContactListener::EndContact(b2Contact * contact) {
-	MEntity * userDataA = (MEntity*) contact->GetFixtureA()->GetBody()->GetUserData();
-	MEntity * userDataB = (MEntity*) contact->GetFixtureB()->GetBody()->GetUserData();
+	Entity * userDataA = (Entity*) contact->GetFixtureA()->GetBody()->GetUserData();
+	Entity * userDataB = (Entity*) contact->GetFixtureB()->GetBody()->GetUserData();
 
 	if(userDataA != nullptr) {
 		userDataA->endContactWith(userDataB, contact);

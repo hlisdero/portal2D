@@ -36,32 +36,15 @@ public:
 	Entity(EntityType type, float32 x, float32 y, float32 angle = 0.0f) :
 	type(type), x(x), y(y), angle(angle) {}
 
-	float32 getX() const {
-	    return x;
-	}
+	float32 getX() const;
+	float32 getY() const;
+    void setX(float32 x);
+    void setY(float32 y);
 
-	float32 getY() const {
-		return y;
-	}
+	float getAngle() const;
+    void setAngle(float angle);
 
-	float getAngle() const {
-		return angle;
-	}
-
-	void setX(float32 x) {
-		this->x = x;
-	}
-	void setY(float32 y) {
-		this->y = y;
-	}
-
-	EntityType getType() const {
-		return type;
-	}
-
-	void setAngle(float angle) {
-		this->angle = angle;
-	}
+	EntityType getType() const;
 
 private:
 	EntityType type;

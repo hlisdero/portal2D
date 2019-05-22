@@ -1,7 +1,7 @@
 #include "server/entities/player.h"
 
 PlayerEntity::PlayerEntity(const float x, const float y) :
-	MEntity(TYPE_PLAYER, x, y, 0) {}
+	Entity(TYPE_PLAYER, x, y, 0) {}
 
 void PlayerEntity::handleFloorContact(b2Contact * contact, bool isBegin) {
 	float direction = (contact->GetFixtureA()->GetBody()->GetUserData() == this) ? -1.0f : 1.0f;
@@ -11,11 +11,11 @@ void PlayerEntity::handleFloorContact(b2Contact * contact, bool isBegin) {
 	}
 }
 
-void PlayerEntity::beginContactWith(MEntity *, b2Contact * contact) {
+void PlayerEntity::beginContactWith(Entity *, b2Contact * contact) {
 	this->handleFloorContact(contact, true);
 }
 
-void PlayerEntity::endContactWith(MEntity *, b2Contact * contact) {
+void PlayerEntity::endContactWith(Entity *, b2Contact * contact) {
 	this->handleFloorContact(contact, false);
 }
 
@@ -75,7 +75,7 @@ void PlayerEntity::applyMovement() {
 		case RIGHT:
 			targetVelocity = 5.0f;
 			break;
-		case LEFT: 
+		case LEFT:
 			targetVelocity = -5.0f;
 			break;
 		default:

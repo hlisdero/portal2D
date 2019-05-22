@@ -1,8 +1,8 @@
 #include "server/entities/state_entity.h"
 
 StateEntity::StateEntity(const EntityType type, const float x, const float y, const float angle, const State state) :
-	MEntity(type, x, y, angle), state(state) {}
-	
+	Entity(type, x, y, angle), state(state) {}
+
 bool StateEntity::getState() const {
 	return this->state;
 }
