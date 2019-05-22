@@ -1,12 +1,7 @@
 #include "client/event/event_handler.h"
 
-// TODO remove: can be misleading 
-EventHandler::operator bool() const {
-    return !quit;
-}
-
-bool EventHandler::doQuit() const {
-    return quit;
+bool EventHandler::quit() const {
+    return quit_flag;
 }
 
 void EventHandler::add(KeyboardHandler* keyboard_handler) {

@@ -17,19 +17,15 @@ public:
     EventHandler(EventHandler&& other) = delete;
     EventHandler& operator=(EventHandler&& other) = delete;
 
-    operator bool() const;
-    operator int() const = delete;
-
-    bool doQuit() const;
+    bool quit() const;
 
     void add(KeyboardHandler* keyboard_handler);
     void add(MouseHandler* mouse_handler);
 
     void poll();
 
-
 private:
-    bool quit = false;
+    bool quit_flag = false;
     SDL_Event event;
     std::vector<KeyboardHandler*> keyboard_handlers;
     std::vector<MouseHandler*> mouse_handlers;
