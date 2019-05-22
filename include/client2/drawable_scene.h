@@ -10,6 +10,7 @@
 #include "client/view/screen.h"
 #include "client/event/event_handler.h"
 #include "client/event/keyboard_handler.h"
+#include "client/view/texture_database.h"
 
 class DrawableScene : Scene {
 public:
@@ -32,12 +33,14 @@ private:
 	float scaleFactorX;
 	float scaleFactorY;
 	EventHandler eventHandler;
+	SpriteDatabase spriteDatabase;
 
 	std::vector<PEntity> staticEntities;
 	std::vector<PEntity> dynamicEntities;
 
 	std::vector<PEntity> transformToPEntities(const std::vector<MEntity> & mEntities);
 	PEntity transfromToPEntity(const MEntity mEntity);
+	Texture getTexture(EntityType type);
 
 };
 

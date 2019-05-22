@@ -4,7 +4,7 @@ DrawableScene::DrawableScene(int pixelWidth, int pixelHeight,
 	int meterWidth, int meterHeight) : Scene(), 
 	screen(pixelWidth, pixelHeight),
 	width(pixelWidth), height(pixelHeight),
-	scaleFactorX(pixelWidth/meterWidth), scaleFactorY(pixelHeight/meterHeight) {}
+	scaleFactorX(pixelWidth/meterWidth), scaleFactorY(pixelHeight/meterHeight), spriteDatabase(screen.getTextureCreator()) {}
 
 void DrawableScene::addHandler(KeyboardHandler * handler) {
 	this->eventHandler.add(handler);
@@ -23,7 +23,7 @@ PEntity DrawableScene::transfromToPEntity(const MEntity mEntity) {
 	int pixelX = mEntity.getX() * this->scaleFactorX;
 	int pixelY = this->height - mEntity.getY() * this->scaleFactorY;
 	// TODO use something to load all the texture before
-	return PEntity(mEntity.getType(), pixelX, pixelY, this->screen.getTextureCreator());
+	return PEntity(mEntity.getType(), pixelX, pixelY, spriteDatabase.getSprite(mEntity.getType()));
 }
 
 void DrawableScene::poolEvent() {

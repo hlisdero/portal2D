@@ -27,7 +27,7 @@ public:
 	std::vector<MEntity> getDynamicEntities() const;
 private:
 	b2World world;
-	
+
 	std::vector<MEntity> staticEntities;
 	std::vector<PlayerEntity*> players;
 

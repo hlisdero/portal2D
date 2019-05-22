@@ -8,13 +8,13 @@
 // PixelsEntity
 class PEntity : public Entity<int> {
 public:
-	PEntity(EntityType type, int x, int y, const TextureCreator & textureCreator);
+	PEntity(EntityType type, int x, int y, Sprite & sprite);
 
     Sprite & getSprite();
     // virtual int getWidth() const = 0;
 	// virtual int getHeight() const = 0;
 private:
-	Sprite sprite;
+	Sprite & sprite;
 };
 
 #endif
