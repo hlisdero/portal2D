@@ -1,6 +1,8 @@
 #ifndef PHYSICS_SCENE_H
 #define PHYSICS_SCENE_H
 
+#include <vector>
+
 #include "Box2D/Box2D.h"
 
 #include "common/scene.h"
@@ -21,7 +23,7 @@ class PhysicsScene : Scene {
 public:
 	PhysicsScene();
 
-    void createPlayer(PlayerEntity & player);
+    void createPlayer(PlayerEntity * player);
     void updatePhysics();
 
 	std::vector<MEntity> getStaticEntities() const;

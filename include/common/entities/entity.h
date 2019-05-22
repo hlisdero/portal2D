@@ -32,7 +32,7 @@ constexpr EntityType DYNAMIC_ENTITY_START = TYPE_ROCK;
 template <class T> class Entity {
 public:
 	Entity(EntityType type, T x, T y, float angle) : 
-	type(type), x(x), y(y) {}
+	type(type), x(x), y(y), angle(angle) {}
 
 	T getX() const {
 	    return this->x;
@@ -40,6 +40,10 @@ public:
 
 	T getY() const {
 		return this->y;
+	}
+
+	float getAngle() const {
+		return this->angle;
 	}
 
 	void setX(const T x) {
@@ -52,10 +56,15 @@ public:
 	EntityType getType() const {
 		return this->type;
 	}
+
+	void setAngle(const float angle) {
+		this->angle = angle;
+	}
 private:
 	EntityType type;
 	T x;
 	T y;
+	float angle;
 };
 
 #endif  // ENTITY_H

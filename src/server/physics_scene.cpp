@@ -1,19 +1,21 @@
 #include "server/physics_scene.h"
 
+#include "server/entities/rock.h"
+
 // Initialize the world with the gravity vector
 PhysicsScene::PhysicsScene() : Scene(), 
 	world(b2Vec2(0.0f, -10.0f)), entityFactory(world) {
 	this->world.SetContactListener(&this->contactListener);
 
-	this->staticEntities->push_back(new MEntity(TYPE_METAL_BLOCK, 1.0f, 1.0f, 0.0f));
-	this->staticEntities->push_back(new MEntity(TYPE_METAL_BLOCK, 2.0f, 1.0f, 0.0f));
-	this->staticEntities->push_back(new MEntity(TYPE_METAL_BLOCK, 3.0f, 1.0f, 0.0f));
+	this->staticEntities.push_back(new MEntity(TYPE_METAL_BLOCK, 1.0f, 1.0f, 0.0f));
+	this->staticEntities.push_back(new MEntity(TYPE_METAL_BLOCK, 2.0f, 1.0f, 0.0f));
+	this->staticEntities.push_back(new MEntity(TYPE_METAL_BLOCK, 3.0f, 1.0f, 0.0f));
 
-	for(int i = 0; i < this->staticEntities.size(); i++) {
+	for(uint i = 0; i < this->staticEntities.size(); i++) {
 		this->entityFactory.createBody(this->staticEntities[i]);
 	}
 
-	this->entityFactory.createBody(new Rock(1.0f, 5.0f, 1));
+	this->entityFactory.createBody(new RockEntity(1.0f, 5.0f));
 }
 
 void PhysicsScene::createPlayer(PlayerEntity * player) {
@@ -37,8 +39,8 @@ void PhysicsScene::updatePhysics() {
 std::vector<MEntity> PhysicsScene::getStaticEntities() const {
 	std::vector<MEntity> entities;
 
-	for(int i = 0; i < this->staticEntities.size(); i++) {
-		entities.push_back(*this->staticEntities[i])
+	for(uint i = 0; i < this->staticEntities.size(); i++) {
+		entities.push_back(*this->staticEntities[i]);
 	}
 
 	return entities;

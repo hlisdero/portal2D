@@ -2,12 +2,15 @@
 
 #include <map>
 
+#include "server/entities/body_linked_entity.h"
+#include "server/entities/energy_ball.h"
+
 #define X_OFFSET 0
 #define Y_OFFSET 1
 #define HALF_WIDTH 2
 #define HALF_HEIGHT 3
 
-static const float entitiesSettings[4][ENTITY_TYPES_LENGTH] = {
+static const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
 	// {x_offset, y_offset, half-width, half-height}
 
 	{0.0f, 0.0f, 0.5f, 0.5f}, // TYPE_STONE_BLOCK
@@ -30,7 +33,7 @@ static const float entitiesSettings[4][ENTITY_TYPES_LENGTH] = {
 EntityFactory::EntityFactory(b2World & world) : world(world) {}
 
 void EntityFactory::createBody(MEntity * entity) {
-	float & entitySettings = entitiesSettings[entity->getType()];
+	const float (&entitySettings)[4] = entitiesSettings[entity->getType()];
 
 	b2BodyDef bodyDef;
 	bodyDef.angle = entity->getAngle();

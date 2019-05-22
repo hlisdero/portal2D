@@ -2,6 +2,7 @@
 #define PORTAL_ENTITY_H
 
 #include "server/entities/state_entity.h"
+#include "server/entities/body_linked_entity.h"
 
 class PortalEntity : public StateEntity, public BodyLinkedEntity {
 public:

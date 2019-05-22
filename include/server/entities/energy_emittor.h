@@ -12,7 +12,7 @@ public:
 	void setNoBall();
 	EnergyBallEntity * emit();
 private:
-	bool hasABall;
+	bool hasABall_;
 };
 
 #endif  // ENERGY_EMITTOR_ENTITY_H
