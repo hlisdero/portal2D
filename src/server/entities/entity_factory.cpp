@@ -1,9 +1,5 @@
 #include "server/entities/entity_factory.h"
 
-#include <map>
-
-#include "server/entities/body_linked_entity.h"
-#include "server/entities/energy_ball.h"
 
 #define X_OFFSET 0
 #define Y_OFFSET 1
@@ -32,20 +28,20 @@ static const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
 
 EntityFactory::EntityFactory(b2World & world) : world(world) {}
 
-void EntityFactory::createBody(MEntity * entity) {
+void EntityFactory::createBody(Entity * entity) {
 	const float (&entitySettings)[4] = entitiesSettings[entity->getType()];
 
 	b2BodyDef bodyDef;
 	bodyDef.angle = entity->getAngle();
 	bodyDef.position.Set(entity->getX(), entity->getY());
 
-	if(entity->getType() == TYPE_PLAYER 
+	if(entity->getType() == TYPE_PLAYER
 		|| entity->getType() == TYPE_ROCK) {
 		bodyDef.type = b2_dynamicBody;
 		bodyDef.fixedRotation = true;
 	} else if(entity->getType() == TYPE_ENERGY_BALL) {
 		bodyDef.type = b2_kinematicBody;
-	} else { 
+	} else {
 		bodyDef.type = b2_staticBody;
 	}
 
@@ -56,12 +52,12 @@ void EntityFactory::createBody(MEntity * entity) {
 	}
 
 	b2PolygonShape shape;
-	shape.SetAsBox(entitySettings[HALF_WIDTH], 
+	shape.SetAsBox(entitySettings[HALF_WIDTH],
 		entitySettings[HALF_HEIGHT],
 		b2Vec2(entitySettings[X_OFFSET], entitySettings[Y_OFFSET]),
 		0.0f);
 
-	body->CreateFixture(&shape, 
+	body->CreateFixture(&shape,
 		(bodyDef.type == b2_staticBody) ? 0.0f : 1.0f);
 
 	body->SetUserData(entity);

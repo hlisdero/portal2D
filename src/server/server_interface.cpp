@@ -16,10 +16,10 @@ void ServerInterface::updatePhysics() {
 	this->scene.updatePhysics();
 }
 
-std::vector<MEntity> ServerInterface::getStaticEntities() const {
+std::vector<Entity> ServerInterface::getStaticEntities() const {
 	return this->scene.getStaticEntities();
 }
 
-std::vector<MEntity> ServerInterface::getDynamicEntities() const {
+std::vector<Entity> ServerInterface::getDynamicEntities() const {
 	return this->scene.getDynamicEntities();
 }

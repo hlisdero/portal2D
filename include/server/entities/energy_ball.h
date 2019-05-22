@@ -7,7 +7,7 @@
 // TODO load from file
 #define ENERGY_BALL_SPEED 5.0f
 
-class EnergyBallEntity : public MEntity, public BodyLinkedEntity {
+class EnergyBallEntity : public Entity, public BodyLinkedEntity {
 public:
 	EnergyBallEntity(const float intialX, const float intialY, const float angle);
 };
