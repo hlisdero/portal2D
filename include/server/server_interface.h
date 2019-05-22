@@ -4,9 +4,9 @@
 #include <vector>
 
 #include "server/physics_scene.h"
-#include "common/entities/m_entity.h"
+#include "server/entities/m_entity.h"
 #include "common/move_direction.h"
-#include "server/player_entity.h"
+#include "server/entities/player.h"
 
 // Temporary class to simulate the separation between client y server.
 class ServerInterface {
