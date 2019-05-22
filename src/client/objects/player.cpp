@@ -1,7 +1,7 @@
 #include "client/objects/player.h"
 
 Player::Player(Sprite sprite, const Position initial, const World& world) :
-    sprite(std::move(sprite)), position(initial), world(world), entity(entity) {}
+    sprite(std::move(sprite)), position(initial) {}
 
 Sprite& Player::getSprite() {
     return sprite;
