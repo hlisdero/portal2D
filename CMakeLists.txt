@@ -38,10 +38,6 @@ target_link_libraries(game ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_
 # View Test
 add_executable(view-test ${test_sources} ${event_sources} ${entities_sources} ${sound_sources} ${view_sources})
 target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/include/)
-target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/include/client/entities)
-target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/include/client/event)
-target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/include/client/sound)
-target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/include/client/view)
 target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/test/include)
 target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/lib/Catch2)
 target_compile_options(view-test PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors)

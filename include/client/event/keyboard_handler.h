@@ -1,7 +1,7 @@
 #ifndef KEYBOARD_HANDLER_H
 #define KEYBOARD_HANDLER_H
 
-#include "keyboard_event.h"
+#include "client/event/keyboard_event.h"
 
 class KeyboardHandler {
 public:

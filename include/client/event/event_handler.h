@@ -3,10 +3,10 @@
 
 #include <SDL2/SDL.h>
 #include <vector>
-#include "mouse_event.h"
-#include "keyboard_event.h"
-#include "keyboard_handler.h"
-#include "mouse_handler.h"
+#include "client/event/mouse_event.h"
+#include "client/event/keyboard_event.h"
+#include "client/event/keyboard_handler.h"
+#include "client/event/mouse_handler.h"
 
 class EventHandler {
 public:

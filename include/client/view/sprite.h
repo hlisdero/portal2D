@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include <SDL2/SDL.h>
-#include "texture.h"
+#include "client/view/texture.h"
 
 class Sprite {
 public:
