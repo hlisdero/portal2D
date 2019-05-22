@@ -23,7 +23,7 @@ enum EntityType {
 
 	// Kinematic
 	TYPE_ENERGY_BALL,
-	
+
 	ENTITY_TYPES_LENGTH
 };
 
@@ -31,7 +31,7 @@ constexpr EntityType DYNAMIC_ENTITY_START = TYPE_ROCK;
 
 template <class T> class Entity {
 public:
-	Entity(EntityType type, T x, T y, float angle) : 
+	Entity(EntityType type, T x, T y, float angle) :
 	type(type), x(x), y(y), angle(angle) {}
 
 	T getX() const {

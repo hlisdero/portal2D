@@ -1,7 +1,7 @@
 #include "catch.hpp"
-#include "screen.h"
-#include "sprite.h"
-#include "event_handler.h"
+#include "client/view/screen.h"
+#include "client/view/sprite.h"
+#include "client/event/event_handler.h"
 #include "button.h"
 
 TEST_CASE("Mouse Integration Test", "[integration]") {
@@ -46,7 +46,7 @@ TEST_CASE("Mouse Integration Test", "[integration]") {
     event_handler.add(&button3);
     event_handler.add(&button4);
 
-    while (event_handler) {
+    while (!event_handler.quit()) {
         event_handler.poll();
 
         screen.setRenderDrawColor("white");

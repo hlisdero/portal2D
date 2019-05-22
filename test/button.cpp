@@ -1,10 +1,18 @@
 #include "button.h"
 
 Button::Button(Sprite sprite, int x, int y) :
-    Entity(x, y), sprite(std::move(sprite)) {}
+    sprite(std::move(sprite)), x(x), y(y) {}
 
 Sprite& Button::getSprite() {
     return sprite;
+}
+
+int Button::getX() const {
+    return x;
+}
+
+int Button::getY() const {
+    return y;
 }
 
 int Button::getWidth() const {

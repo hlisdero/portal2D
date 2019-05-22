@@ -15,7 +15,7 @@ void EventHandler::add(MouseHandler* mouse_handler) {
 void EventHandler::poll() {
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
-            quit = true;
+            quit_flag = true;
         }
         if (isKeyboardEvent(event)) {
             KeyboardEvent keyboard_event(event);
