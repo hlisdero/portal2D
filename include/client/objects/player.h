@@ -5,11 +5,11 @@
 #include "client/event/keyboard_handler.h"
 #include "client/view/sprite.h"
 #include "common/position.h"
-#include "server/world.h"
+#include "common/move_direction.h"
 
 class Player : public Drawable, public KeyboardHandler {
 public:
-    Player(Sprite sprite, const Position initial, const World& world, const Entity& entity);
+    Player(Sprite sprite, const Position initial);
 
     virtual Sprite& getSprite() override;
     virtual int getX() const override;
@@ -24,8 +24,6 @@ public:
 private:
     Sprite sprite;
     Position position;
-    const World& world;
-    const Entity& entity;
 };
 
 #endif  // PLAYER_H

@@ -1,7 +1,7 @@
 #include "client/objects/player.h"
 
-Player::Player(Sprite sprite, const Position initial, const World& world) :
-    sprite(std::move(sprite)), position(initial), world(world), entity(entity) {}
+Player::Player(Sprite sprite, const Position initial) :
+    sprite(std::move(sprite)), position(initial) {}
 
 Sprite& Player::getSprite() {
     return sprite;
@@ -38,6 +38,6 @@ void Player::handle(const KeyboardEvent& event) {
     }
 
     if (direction != NONE) {
-        world.move(this);
+        // world.move(this);
     }
 }
