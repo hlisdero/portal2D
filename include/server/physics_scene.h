@@ -5,7 +5,6 @@
 
 #include "Box2D/Box2D.h"
 
-#include "common/scene.h"
 #include "common/entities/entity.h"
 #include "server/entities/player.h"
 #include "server/entities/entity_factory.h"

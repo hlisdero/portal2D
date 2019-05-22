@@ -33,8 +33,7 @@ constexpr EntityType DYNAMIC_ENTITY_START = TYPE_ROCK;
 
 class Entity {
 public:
-	Entity(EntityType type, float32 x, float32 y, float32 angle = 0.0f) :
-	type(type), x(x), y(y), angle(angle) {}
+	Entity(EntityType type, float32 x, float32 y, float32 angle = 0.0f);
 
 	float32 getX() const;
 	float32 getY() const;

@@ -1,4 +1,4 @@
-#include "common/entity.h"
+#include "common/entities/entity.h"
 
 Entity::Entity(EntityType type, float32 x, float32 y, float32 angle) :
     type(type), x(x), y(y), angle(angle) {}

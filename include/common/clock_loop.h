@@ -4,11 +4,11 @@
 #include <chrono>
 #include <thread>
 
-typedef std::chrono::duration<long,std::ratio<1, LOOP_PER_SECOND>> duration_t;
-typedef std::chrono::time_point<std::chrono::system_clock, duration_t> time_point_t;
-
 template <int LOOP_PER_SECOND> class ClockLoop {
 public:
+    typedef std::chrono::duration<long,std::ratio<1, LOOP_PER_SECOND>> duration_t;
+    typedef std::chrono::time_point<std::chrono::system_clock, duration_t> time_point_t;
+
     ClockLoop() {}
 
     void waitNextLoop() {

@@ -11,8 +11,8 @@ class PlayerEntity : public Entity, public BodyLinkedEntity {
 public:
 	PlayerEntity(const float x, const float y);
 
-	virtual void beginContactWith(Entity * other, b2Contact * contact) override;
-	virtual void endContactWith(Entity * other, b2Contact * contact) override;
+	virtual void beginContactWith(Entity * other, b2Contact * contact);
+	virtual void endContactWith(Entity * other, b2Contact * contact);
 
 	void keyDown(const MoveDirection direction);
 	void keyUp(const MoveDirection direction);
