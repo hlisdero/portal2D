@@ -27,10 +27,11 @@ enum EntityType {
 	ENTITY_TYPES_LENGTH
 };
 
+constexpr EntityType DYNAMIC_ENTITY_START = TYPE_ROCK;
 
 template <class T> class Entity {
 public:
-	Entity(EntityType type, T x, T y) : 
+	Entity(EntityType type, T x, T y, float angle) : 
 	type(type), x(x), y(y) {}
 
 	T getX() const {

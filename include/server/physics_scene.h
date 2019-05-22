@@ -4,8 +4,9 @@
 #include "Box2D/Box2D.h"
 
 #include "common/scene.h"
-#include "common/entities/m_entity.h"
-#include "server/player_entity.h"
+#include "server/entities/m_entity.h"
+#include "server/entities/player.h"
+#include "server/entities/entity_factory.h"
 #include "server/contact_listener.h"
 
 /*
@@ -27,16 +28,17 @@ public:
 	std::vector<MEntity> getDynamicEntities() const;
 private:
 	b2World world;
+	EntityFactory entityFactory;
 	
-	std::vector<MEntity> staticEntities;
+	std::vector<MEntity*> staticEntities;
 	std::vector<PlayerEntity*> players;
 
 	ContactListener contactListener;
 
 	void createStaticEntities(b2Body * groundBody);
-	void createStaticEntity(b2Body * groundBody, const MEntity entity);
+	void createStaticEntity(b2Body * groundBody, const MEntity & entity);
 	void createDynamicEntities();
-	void createDynamicEntity(MEntity entity);
+	void createDynamicEntity(MEntity & entity);
 };
 
 #endif  // PHYSICS_SCENE_H

@@ -7,7 +7,7 @@
 #include "client/view/texture_creator.h"
 #include "client/view/texture.h"
 #include "client/view/sprite.h"
-#include "common/entities/p_entity.h"
+#include "client2/p_entity.h"
 #include "client/view/color.h"
 
 class Screen {

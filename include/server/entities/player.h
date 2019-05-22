@@ -3,23 +3,25 @@
 
 #include "Box2D/Box2D.h"
 
-#include "common/entities/m_entity.h"
+#include "server/entities/m_entity.h"
+#include "server/entities/body_linked_entity.h"
 #include "common/move_direction.h"
 
-class PlayerEntity : public MEntity {
+class PlayerEntity : public MEntity, public BodyLinkedEntity {
 public:
 	PlayerEntity(const float x, const float y);
 
-	void setBody(b2Body * body);
+	virtual void beginContactWith(MEntity * other, b2Contact * contact) override;
+	virtual void endContactWith(MEntity * other, b2Contact * contact) override;
 
 	void keyDown(const MoveDirection direction);
 	void keyUp(const MoveDirection direction);
 
-	void setOnTheFloor(const bool isOnTheFloor);
-
 	void applyMovement();
+
+	void handleFloorContact(b2Contact * contact, bool isBegin);
+
 private:
-	b2Body * body;
 	bool isOnTheFloor = false;
 	// This allow for better gameplay experience
 	bool hasMovedInTheAir = false;

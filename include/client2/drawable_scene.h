@@ -5,8 +5,8 @@
 #include "Box2D/Box2D.h"
 
 #include "common/scene.h"
-#include "common/entities/m_entity.h"
-#include "common/entities/p_entity.h"
+#include "server/entities/m_entity.h"
+#include "client2/p_entity.h"
 #include "client/view/screen.h"
 #include "client/event/event_handler.h"
 #include "client/event/keyboard_handler.h"

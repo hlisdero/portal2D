@@ -1,10 +1,22 @@
-#include "server/player_entity.h"
+#include "server/entities/player.h"
 
 PlayerEntity::PlayerEntity(const float x, const float y) :
-	Entity(TYPE_PLAYER, x, y) {}
+	MEntity(TYPE_PLAYER, x, y, 0) {}
 
-void PlayerEntity::setBody(b2Body * body) {
-	this->body = body;
+void PlayerEntity::handleFloorContact(b2Contact * contact, bool isBegin) {
+	float direction = (contact->GetFixtureA()->GetBody()->GetUserData() == this) ? -1.0f : 1.0f;
+
+	if(contact->GetManifold()->localNormal == b2Vec2(0.0f, direction)) {
+		this->isOnTheFloor = isBegin;
+	}
+}
+
+void PlayerEntity::beginContactWith(MEntity *, b2Contact * contact) {
+	this->handleFloorContact(contact, true);
+}
+
+void PlayerEntity::endContactWith(MEntity *, b2Contact * contact) {
+	this->handleFloorContact(contact, false);
 }
 
 void PlayerEntity::keyDown(const MoveDirection direction) {
@@ -31,19 +43,15 @@ void PlayerEntity::keyUp(const MoveDirection direction) {
 	}
 }
 
-void PlayerEntity::setOnTheFloor(const bool isOnTheFloor) {
-	this->isOnTheFloor = isOnTheFloor;
-}
-
 void PlayerEntity::applyImpulseToCenter(const float vx, const float vy) {
 	b2Vec2 vector(vx, vy);
-	vector *= this->body->GetMass();
+	vector *= this->getBody()->GetMass();
 
-	this->body->ApplyLinearImpulse(vector, this->body->GetWorldCenter(), true);
+	this->getBody()->ApplyLinearImpulse(vector, this->getBody()->GetWorldCenter(), true);
 }
 
 void PlayerEntity::applyMovement() {
-	b2Vec2 velocity = this->body->GetLinearVelocity();
+	b2Vec2 velocity = this->getBody()->GetLinearVelocity();
 
 	// - If on the floor
 	// 		- allowed to move in both direction,
