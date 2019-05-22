@@ -1,6 +1,8 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include <Box2D/Box2D.h>
+
 enum EntityType {
 	// Static
 	// - Ground
@@ -23,48 +25,49 @@ enum EntityType {
 
 	// Kinematic
 	TYPE_ENERGY_BALL,
-	
+
 	ENTITY_TYPES_LENGTH
 };
 
 constexpr EntityType DYNAMIC_ENTITY_START = TYPE_ROCK;
 
-template <class T> class Entity {
+class Entity {
 public:
-	Entity(EntityType type, T x, T y, float angle) : 
+	Entity(EntityType type, float32 x, float32 y, float32 angle = 0.0f) :
 	type(type), x(x), y(y), angle(angle) {}
 
-	T getX() const {
-	    return this->x;
+	float32 getX() const {
+	    return x;
 	}
 
-	T getY() const {
-		return this->y;
+	float32 getY() const {
+		return y;
 	}
 
 	float getAngle() const {
-		return this->angle;
+		return angle;
 	}
 
-	void setX(const T x) {
+	void setX(float32 x) {
 		this->x = x;
 	}
-	void setY(const T y) {
+	void setY(float32 y) {
 		this->y = y;
 	}
 
 	EntityType getType() const {
-		return this->type;
+		return type;
 	}
 
-	void setAngle(const float angle) {
+	void setAngle(float angle) {
 		this->angle = angle;
 	}
+
 private:
 	EntityType type;
-	T x;
-	T y;
-	float angle;
+	float32 x;
+	float32 y;
+	float32 angle;
 };
 
 #endif  // ENTITY_H

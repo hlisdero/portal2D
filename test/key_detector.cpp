@@ -1,10 +1,18 @@
 #include "key_detector.h"
 
 KeyDetector::KeyDetector(int x, int y, std::vector<Sprite*> sprites) :
-    Entity(x, y), sprites(sprites) {}
+    x(x), y(y), sprites(sprites) {}
 
 Sprite& KeyDetector::getSprite() {
     return *sprites[current];
+}
+
+int KeyDetector::getX() const {
+    return x;
+}
+
+int KeyDetector::getY() const {
+    return y;
 }
 
 int KeyDetector::getWidth() const {

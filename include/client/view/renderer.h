@@ -7,10 +7,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "texture.h"
-#include "sprite.h"
-#include "surface.h"
-#include "color.h"
+#include "client/view/texture.h"
+#include "client/view/sprite.h"
+#include "client/view/surface.h"
+#include "client/view/color.h"
 
 class Renderer {
 public:

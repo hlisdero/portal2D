@@ -1,7 +1,7 @@
 #include "catch.hpp"
-#include "screen.h"
-#include "sprite.h"
-#include "event_handler.h"
+#include "client/view/screen.h"
+#include "client/view/sprite.h"
+#include "client/event/event_handler.h"
 #include "key_detector.h"
 
 TEST_CASE("Keyboard Integration Test", "[integration]") {
@@ -26,7 +26,7 @@ TEST_CASE("Keyboard Integration Test", "[integration]") {
     EventHandler event_handler;
     event_handler.add(&key_detector);
 
-    while (event_handler) {
+    while (!event_handler.quit()) {
         event_handler.poll();
 
         screen.setRenderDrawColor("white");

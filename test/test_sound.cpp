@@ -1,7 +1,7 @@
 #include "catch.hpp"
-#include "screen.h"
-#include "event_handler.h"
-#include "sound_manager.h"
+#include "client/view/screen.h"
+#include "client/event/event_handler.h"
+#include "client/sound/sound_manager.h"
 
 TEST_CASE("Sound Integration Test", "[integration]") {
     Screen screen;
@@ -17,7 +17,7 @@ TEST_CASE("Sound Integration Test", "[integration]") {
     EventHandler event_handler;
     event_handler.add(&sound_manager);
 
-    while (event_handler) {
+    while (!event_handler.quit()) {
         event_handler.poll();
 
         screen.setRenderDrawColor("white");

@@ -2,8 +2,8 @@
 #define PASSIVE_SOCKET_H
 
 #include <string>
-#include "socket.h"
-#include "active_socket.h"
+#include "common/socket/socket.h"
+#include "common/socket/active_socket.h"
 
 class PassiveSocket : public Socket {
 public:

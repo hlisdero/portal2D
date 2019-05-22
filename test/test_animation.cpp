@@ -1,7 +1,7 @@
 #include "catch.hpp"
-#include "SDL2/SDL.h"
-#include "screen.h"
-#include "animation.h"
+#include <SDL2/SDL.h>
+#include "client/view/screen.h"
+#include "client/view/animation.h"
 
 TEST_CASE("Animation Test", "[integration]") {
     Screen screen;

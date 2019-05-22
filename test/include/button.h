@@ -1,16 +1,18 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "entity.h"
-#include "sprite.h"
-#include "mouse_handler.h"
-#include "mouse_event.h"
+#include "client/objects/drawable.h"
+#include "client/view/sprite.h"
+#include "client/event/mouse_handler.h"
+#include "client/event/mouse_event.h"
 
-class Button : public MouseHandler, public Entity {
+class Button : public MouseHandler, public Drawable {
 public:
     Button(Sprite sprite, int x, int y);
 
     virtual Sprite& getSprite() override;
+    int getX() const override;
+    int getY() const override;
     int getWidth() const override;
     int getHeight() const override;
 
@@ -18,6 +20,8 @@ public:
 
 private:
     Sprite sprite;
+    int x;
+    int y;
 };
 
 #endif  // BUTTON_H
