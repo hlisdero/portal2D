@@ -1,4 +1,4 @@
-#include "sound_effect.h"
+#include "client/sound/sound_effect.h"
 
 SoundEffect::SoundEffect(const std::string& path) {
     sound_effect = Mix_LoadWAV(path.c_str());

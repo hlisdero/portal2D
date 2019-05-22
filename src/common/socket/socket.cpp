@@ -1,5 +1,5 @@
 #define _POSIX_C_SOURCE 200112L
-#include "socket.h"
+#include "common/socket/socket.h"
 #include <string>
 
 Socket::Socket(const char* hostname, const char* port,

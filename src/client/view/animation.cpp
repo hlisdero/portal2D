@@ -1,4 +1,4 @@
-#include "animation.h"
+#include "client/view/animation.h"
 
 Animation::Animation(Texture texture) : Sprite(std::move(texture)) {}
 

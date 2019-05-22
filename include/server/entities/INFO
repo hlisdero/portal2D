@@ -1,0 +1,86 @@
+Entity (type, x, y, rot)
+	s StoneBlock()
+		(x,y,1,1)
+	s MetalBlock()
+		(x,y,1,1)
+	s EnergyBar ()
+		(x, y+0.5, 1, 0.1)
+	s MetalDiagBlock ()
+		(x, y, 1, 1)
+	s Acid ()
+		(x,y,1,0.5)
+
+	StateEntity
+		ok EnergyReceiver (on, off) + collide
+			(x,y,1,1)
+
+		ok Button (on, off) + collide + door update
+			(x,y,1, 0.5)
+
+		ok Portal (color, twin*) + move => b2BODY (to move)
+			(x,y,0.1,1)
+
+		ok Door (open, closed) + logic updateState => Fixture
+			(x,y,1,2)
+
+	ok EnergyEmisor () + emit ?
+		(x,y,1,1)
+
+	ok Rock (type) + respawn => BODY (to respawn=to move)
+		(x,y,0.5,0.5): dyn
+
+	ok Player (..) + collide => b2BODY (to move)
+		(x, y, 0.5, 0.8)
+
+	ok BolasEnergy ()  + collide => b2BODY (to delete)
+		(x+0.5, y+0.5, 0.5, 0.5)
+		init : speed = constant
+
+===== LATER ======
+Entity
+	init collision
+
+EndCake (??)
+	(x, y, 1, 1)
+
+======= CREATION BODY ==========
+(entity)
+
+entity.type => angle
+	 => (shape:) width, height, localX, localY
+	 => type: dynamic, static, kinematic
+
+entity.x : bodyposition
+entity.y
+
+userData => entity
+
+if(entity.type = bolas) => entity.speed
+
+======= COLLISION ===========
+default: collide
+
+Player - Door: depend
+Player - EnergyBar : no collide
+
+======= CONTACT ======
+Player -> Acid
+Player -> Portal
+Player <-> Rock (a voir)
+Player -> EnergyBall
+
+Player -> EnergyBar*
+Rock -> EnergyBar*
+
+Rock -> Acid
+
+EnergyReceiver -> EnergyBall
+
+Button -> Player
+Button -> Rock
+
+maybe:
+Player -> MapBorder
+Rock -> MapBorder
+EnergyBall -> MapBorder
+EnergyBall -> EnergyReceiver

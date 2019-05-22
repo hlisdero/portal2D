@@ -1,44 +1,45 @@
 #include <iostream>
 #include <chrono>
 
-#include "server_scene.hpp"
-#include "clock_loop.hpp"
+#include "server/server_interface.h"
+#include "client2/client_interface.h"
+#include "client2/player_movement_handler.h"
+
+#include "common/clock_loop.h"
 
 int main() {
-	ServerScene serverScene;
+	ServerInterface server;
+	ClientInterface client;
 
-	// Create a map con box2d
-	serverScene.create();
-	// TODO create personnage
+	PlayerMovementHandler moveHandler(server);
+	client.addHandler(&moveHandler);
 
-	// TODO create snapshot world with statics objects
-
-
-	auto start = std::chrono::system_clock::now(); // TODO remove
+	// create drawable world with statics objects
+	auto staticEntities = server.getStaticEntities();
+	auto initialDynamicEntities = server.getDynamicEntities();
+	client.setEntities(staticEntities, initialDynamicEntities);
 
 	ClockLoop<60> clock;
-	// while(...)
-	for(uint i = 0; i < 60*60; i++) { // TODO replace by while
+	while(!client.doQuit()) {
+		// get keyboard/mouse input
+		client.poolEvent();
+		// TODO client - send input keyUp, keyDown; mouseClicks
+		// TODO server - receive/apply input to physic world
 
-		// TODO draw
-		// TODO listen input
 
-		// TODO apply input to physic world
-		serverScene.updatePhysics();
+		server.updatePhysics();
 
-		// TODO get change to snapshot world
-		// ... = serverScene.getChanges();
-		// clientScene.setChanges(...)
+		// update drawable world
+		auto dynamicEntities = server.getDynamicEntities();
+		client.setDynamicEntities(dynamicEntities);
+
+		// draw screen
+		client.renderScreen();
+		client.updateScreen();
 
 		// wait t1
 		clock.waitNextLoop();
 	}
-
-    // TODO remove clock accuracy test
-    auto end = std::chrono::system_clock::now();
-    std::chrono::duration<double> elapsed_seconds = end-start;
-    std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
-    // end clock accuracy test
 
 	return 0;
 }

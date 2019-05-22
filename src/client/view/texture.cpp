@@ -1,4 +1,4 @@
-#include "texture.h"
+#include "client/view/texture.h"
 
 Texture::Texture(SDL_Texture* texture, int width, int height) :
     texture(texture), width(width), height(height){}

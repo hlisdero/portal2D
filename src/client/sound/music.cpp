@@ -1,4 +1,4 @@
-#include "music.h"
+#include "client/sound/music.h"
 
 Music::Music(const std::string& path) {
     music = Mix_LoadMUS(path.c_str());
