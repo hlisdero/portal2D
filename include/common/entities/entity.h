@@ -44,6 +44,8 @@ public:
     void setAngle(float angle);
 
 	EntityType getType() const;
+    void beginContactWith(Entity *, b2Contact *);
+    void endContactWith(Entity *, b2Contact *);
 
 private:
 	EntityType type;
