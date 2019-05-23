@@ -1,22 +1,6 @@
 #include "client/view/sprite.h"
 
-Sprite::Sprite(Texture texture) : texture(std::move(texture)), current(0) {}
-
-Sprite::Sprite(Sprite&& other) : texture(std::move(other.texture)) {
-    clips = std::move(other.clips);
-    rotations = std::move(other.rotations);
-    flip_states = std::move(other.flip_states);
-    current = current;
-}
-
-Sprite& Sprite::operator=(Sprite&& other) {
-    texture = std::move(other.texture);
-    clips = std::move(other.clips);
-    rotations = std::move(other.rotations);
-    flip_states = std::move(other.flip_states);
-    current = current;
-    return *this;
-}
+Sprite::Sprite(Texture& texture) : texture(texture), current(0) {}
 
 void Sprite::addClip(int x, int y, int w, int h,
     double angle, SDL_RendererFlip flip) {
@@ -26,9 +10,9 @@ void Sprite::addClip(int x, int y, int w, int h,
     flip_states.push_back(flip);
 }
 
-SDL_Rect& Sprite::getClip() {
+SDL_Rect* Sprite::getClip() {
     checkValidClip();
-    return clips[current];
+    return &clips[current];
 }
 
 size_t Sprite::getClipNumber() const {
@@ -56,8 +40,8 @@ SDL_RendererFlip Sprite::getFlipState() const {
     return flip_states[current];
 }
 
-SDL_Texture* Sprite::getTexture() const {
-    return texture.get();
+Texture& Sprite::getTexture() const {
+    return texture;
 }
 
 int Sprite::getWidth() const {

@@ -16,29 +16,31 @@ void Screen::clear() {
     renderer.clear();
 }
 
-void Screen::render(Texture& texture, int x, int y) {
-    SDL_Rect rect = {x, y, texture.getWidth(), texture.getHeight()};
-    renderer.renderCopy(texture, nullptr, &rect);
-}
-
-void Screen::render(Texture& texture, const SDL_Rect* srcrect, const SDL_Rect* dstrect) {
-    renderer.renderCopy(texture, srcrect, dstrect);
-}
-
-void Screen::render(Sprite& sprite, int x, int y) {
-    renderer.renderCopy(sprite, x, y);
+void Screen::render(Texture& texture, int x, int y, double scale_factor) {
+    // Puede perder precisión debido al casteo
+    int w = texture.width * scale_factor;
+    int h = texture.height * scale_factor;
+    SDL_Rect rect = {x, y, w, h};
+    renderer.render(texture.get(), nullptr, &rect);
 }
 
 void Screen::render(Drawable& drawable) {
-    renderer.renderCopy(drawable.getSprite(), drawable.getX(), drawable.getY());
+    SDL_Rect dst = {drawable.getX(), drawable.getY(), drawable.getWidth(), drawable.getHeight()};
+    SDL_Rect* src = drawable.getClip();
+    Texture& texture = drawable.getTexture();
+    renderer.render(texture.get(), src, &dst, drawable.getRotation(), drawable.getFlipState());
 }
 
 void Screen::render(DrawableBox2D& drawable) {
     // Transformo el sistema de coordenadas de Box2D al de SDL
     // La posición se mide desde el medio del objeto
-    int y = window.height - (drawable.getY() + drawable.getHeight()/2);
     int x = drawable.getX() - drawable.getWidth()/2;
-    renderer.renderCopy(drawable.getSprite(), x, y);
+    int y = window.height - (drawable.getY() + drawable.getHeight()/2);
+
+    SDL_Rect dst = {x, y, drawable.getWidth(), drawable.getHeight()};
+    SDL_Rect* src = drawable.getClip();
+    Texture& texture = drawable.getTexture();
+    renderer.render(texture.get(), src, &dst, drawable.getRotation(), drawable.getFlipState());
 }
 
 void Screen::setRenderDrawColor(const std::string& color_name) {

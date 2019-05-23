@@ -9,11 +9,12 @@
 
 class Block : public DrawableBox2D {
 public:
-    Block(const Position& initial, Ratio& ratio, const TextureCreator& textureCreator);
+    Block(const Position& initial, Ratio& ratio, Texture& texture);
 
-    virtual Sprite& getSprite() override;
+    virtual Texture& getTexture() override;
     virtual int getWidth() const override;
     virtual int getHeight() const override;
+    virtual SDL_Rect* getClip() override;
 
 private:
     Sprite sprite;
