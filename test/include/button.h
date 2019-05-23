@@ -8,13 +8,15 @@
 
 class Button : public MouseHandler, public Drawable {
 public:
-    Button(Sprite sprite, int x, int y);
+    Button(Texture& texture, int x, int y);
 
-    virtual Sprite& getSprite() override;
+    virtual Texture& getTexture() override;
     int getX() const override;
     int getY() const override;
     int getWidth() const override;
     int getHeight() const override;
+
+    virtual SDL_Rect* getClip() override;
 
     virtual void handle(const MouseEvent& event);
 

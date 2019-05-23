@@ -3,7 +3,9 @@
 WorldView::WorldView(float32 width, float32 height) :
     meter_to_pixel(1024/width, 768/height),
     screen(1024, 768),
-    background(screen.getTextureCreator()("../data/sprites/background.png")) {}
+    background_texture(screen.getTextureCreator()("../data/sprites/background.png")),
+    player_texture(screen.getTextureCreator()("../data/sprites/character.png")),
+    block_texture(screen.getTextureCreator()("../data/sprites/blocks.png")) {}
 
 WorldView::~WorldView() {
     for (const auto& object : view_objects) {
@@ -12,13 +14,13 @@ WorldView::~WorldView() {
 }
 
 size_t WorldView::createPlayer(const Position& initial) {
-    Player* player = new Player(initial, meter_to_pixel, screen.getTextureCreator());
+    Player* player = new Player(initial, meter_to_pixel, player_texture);
     view_objects.push_back(player);
     return view_objects.size() - 1;
 }
 
 size_t WorldView::createBlock(const Position& initial) {
-    Block* block = new Block(initial, meter_to_pixel, screen.getTextureCreator());
+    Block* block = new Block(initial, meter_to_pixel, block_texture);
     view_objects.push_back(block);
     return view_objects.size() - 1;
 }
@@ -42,8 +44,8 @@ void WorldView::clearScreen() {
 }
 
 void WorldView::renderBackground() {
-    SDL_Rect srcrect = {0, 415, 252, 750 - 415};
-    screen.render(background, &srcrect, nullptr);
+    //SDL_Rect srcrect = {0, 415, 252, 750 - 415};
+    //screen.render(background, &srcrect, nullptr);
 }
 
 void WorldView::renderObjects() {

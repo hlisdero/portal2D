@@ -8,7 +8,6 @@
 #include "client/view/renderer.h"
 #include "client/view/texture_creator.h"
 #include "client/view/texture.h"
-#include "client/view/sprite.h"
 #include "client/view/color.h"
 
 class Screen {
@@ -26,9 +25,7 @@ public:
 
     void clear();
 
-    void render(Texture& texture, int x, int y);
-    void render(Texture& texture, const SDL_Rect* srcrect, const SDL_Rect* dstrect);
-    void render(Sprite& sprite, int x, int y);
+    void render(Texture& texture, int x, int y, double scale_factor = 1);
     void render(Drawable& drawable);
     void render(DrawableBox2D& drawable);
 

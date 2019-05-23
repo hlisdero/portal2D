@@ -103,20 +103,6 @@ void Renderer::clear() {
     }
 }
 
-void Renderer::renderCopy(Texture& texture, const SDL_Rect* srcrect,
-                                            const SDL_Rect* dstrect) {
-    render(texture.get(), srcrect, dstrect, texture.getRotation(), texture.getFlipState());
-}
-
-void Renderer::renderCopy(Sprite& sprite, int x, int y) {
-    SDL_Rect dest = {x, y, sprite.getWidth(), sprite.getHeight()};
-    render(sprite.getTexture(), &sprite.getClip(), &dest, sprite.getRotation(), sprite.getFlipState());
-}
-
-void Renderer::renderPresent() {
-    SDL_RenderPresent(renderer);
-}
-
 void Renderer::render(SDL_Texture* texture, const SDL_Rect* srcrect,
     const SDL_Rect* dstrect, double angle, SDL_RendererFlip flip) {
     int ret_code = SDL_RenderCopyEx(renderer, texture,
@@ -126,4 +112,8 @@ void Renderer::render(SDL_Texture* texture, const SDL_Rect* srcrect,
         error_message += std::string(SDL_GetError());
         throw std::runtime_error(error_message);
     }
+}
+
+void Renderer::renderPresent() {
+    SDL_RenderPresent(renderer);
 }

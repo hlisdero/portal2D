@@ -5,11 +5,11 @@
 #include "common/position.h"
 #include "common/ratio.h"
 
-class DrawableBox2D : Drawable {
+class DrawableBox2D : public Drawable {
 public:
     explicit DrawableBox2D(const Position& initial, Ratio& ratio);
 
-    virtual Sprite& getSprite() = 0;
+    virtual Texture& getTexture() = 0;
     virtual int getWidth() const = 0;
     virtual int getHeight() const = 0;
 

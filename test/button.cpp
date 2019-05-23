@@ -1,10 +1,15 @@
 #include "button.h"
 
-Button::Button(Sprite sprite, int x, int y) :
-    sprite(std::move(sprite)), x(x), y(y) {}
+Button::Button(Texture& texture, int x, int y) :
+    sprite(texture), x(x), y(y) {
+    sprite.addClip(0, 0, 300, 200);
+    sprite.addClip(0, 200, 300, 200);
+    sprite.addClip(0, 400, 300, 200);
+    sprite.addClip(0, 600, 300, 200);
+}
 
-Sprite& Button::getSprite() {
-    return sprite;
+Texture& Button::getTexture() {
+    return sprite.getTexture();
 }
 
 int Button::getX() const {
@@ -23,9 +28,12 @@ int Button::getHeight() const {
     return sprite.getHeight();
 }
 
+SDL_Rect* Button::getClip() {
+    return sprite.getClip();
+}
+
 void Button::handle(const MouseEvent& event) {
 	bool inside = event.isInside(getX(), getY(), getWidth(), getHeight());
-    Sprite& sprite = getSprite();
 	if (!inside) {
         sprite.setClip(0);
         return;

@@ -1,7 +1,7 @@
 #include "client/objects/player.h"
 
-Player::Player(const Position& initial, Ratio& ratio, const TextureCreator& textureCreator) :
-    DrawableBox2D(initial, ratio), idle(textureCreator("../data/sprites/character.png")) {
+Player::Player(const Position& initial, Ratio& ratio, Texture& texture) :
+    DrawableBox2D(initial, ratio), idle(texture) {
     idle.addClip(1, 2073, 104, 215);
     idle.addClip(106, 2073, 104, 215);
     idle.addClip(211, 2073, 104, 215);
@@ -11,8 +11,8 @@ Player::Player(const Position& initial, Ratio& ratio, const TextureCreator& text
     idle.addClip(631, 2073, 104, 215);
 }
 
-Sprite& Player::getSprite() {
-    return idle;
+Texture& Player::getTexture() {
+    return idle.getTexture();
 }
 
 int Player::getWidth() const {
@@ -21,6 +21,10 @@ int Player::getWidth() const {
 
 int Player::getHeight() const {
     return idle.getHeight();
+}
+
+SDL_Rect* Player::getClip() {
+    return idle.getClip();
 }
 
 void Player::handle(const KeyboardEvent& event) {

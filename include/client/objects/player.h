@@ -11,11 +11,12 @@
 
 class Player : public DrawableBox2D, public KeyboardHandler {
 public:
-    Player(const Position& initial, Ratio& ratio, const TextureCreator& textureCreator);
+    Player(const Position& initial, Ratio& ratio, Texture& texture);
 
-    virtual Sprite& getSprite() override;
+    virtual Texture& getTexture() override;
     virtual int getWidth() const override;
     virtual int getHeight() const override;
+    virtual SDL_Rect* getClip() override;
 
     virtual void handle(const KeyboardEvent& event) override;
 

@@ -8,7 +8,6 @@
 #include <SDL2/SDL_image.h>
 
 #include "client/view/texture.h"
-#include "client/view/sprite.h"
 #include "client/view/surface.h"
 #include "client/view/color.h"
 
@@ -43,9 +42,8 @@ public:
 
     void clear();
 
-    void renderCopy(Texture& texture, const SDL_Rect* srcrect = nullptr,
-                                      const SDL_Rect* dstrect = nullptr);
-    void renderCopy(Sprite& sprite, int x, int y);
+    void render(SDL_Texture* texture, const SDL_Rect* srcrect, const SDL_Rect* dstrect,
+                double angle = 0.0, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
     void renderPresent();
 
@@ -53,9 +51,6 @@ public:
 
 private:
     SDL_Renderer* renderer = nullptr;
-
-    void render(SDL_Texture* texture, const SDL_Rect* srcrect, const SDL_Rect* dstrect,
-                double angle, SDL_RendererFlip flip);
 };
 
 #endif  // RENDERER_H

@@ -9,7 +9,7 @@ class KeyDetector : public Drawable, public KeyboardHandler {
 public:
     KeyDetector(int x, int y, std::vector<Sprite*> sprites);
 
-    virtual Sprite& getSprite() override;
+    virtual Texture& getTexture() override;
     int getX() const override;
     int getY() const override;
     int getWidth() const override;

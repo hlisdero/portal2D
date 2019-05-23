@@ -29,7 +29,9 @@ public:
 private:
     Ratio meter_to_pixel;
     Screen screen;
-    Texture background;
+    Texture background_texture;
+    Texture player_texture;
+    Texture block_texture;
     std::vector<DrawableBox2D*> view_objects;
 
     void clearScreen();

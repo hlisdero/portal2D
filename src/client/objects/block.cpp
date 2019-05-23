@@ -1,12 +1,12 @@
 #include "client/objects/block.h"
 
-Block::Block(const Position& initial, Ratio& ratio, const TextureCreator& textureCreator) :
-    DrawableBox2D(initial, ratio), sprite(textureCreator("../data/sprites/blocks.png")) {
+Block::Block(const Position& initial, Ratio& ratio, Texture& texture) :
+    DrawableBox2D(initial, ratio), sprite(texture) {
     sprite.addClip(1, 600, 193, 192);
 }
 
-Sprite& Block::getSprite() {
-    return sprite;
+Texture& Block::getTexture() {
+    return sprite.getTexture();
 }
 
 int Block::getWidth() const {
@@ -15,4 +15,8 @@ int Block::getWidth() const {
 
 int Block::getHeight() const {
     return sprite.getHeight();
+}
+
+SDL_Rect* Block::getClip() {
+    return sprite.getClip();
 }
