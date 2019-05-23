@@ -26,7 +26,33 @@ enum EntityType {
 	// Kinematic
 	TYPE_ENERGY_BALL,
 
-	ENTITY_TYPES_LENGTH
+	ENTITY_TYPES_LENGTH,
+};
+
+enum EntitySetting {
+    X_OFFSET = 0,
+    Y_OFFSET = 1,
+    HALF_WIDTH = 2,
+    HALF_HEIGHT = 3,
+};
+
+const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
+	// {x_offset, y_offset, half-width, half-height}
+
+	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_STONE_BLOCK
+	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_METAL_BLOCK
+	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_METAL_DIAG_BLOCK
+	{0.0f, -0.25f, 0.5f, 0.25f},   // TYPE_ACID
+	{0.0f, 0.0f, 0.5f, 1.0f},      // TYPE_DOOR
+	{0.0f, 0.5f, 0.5f, 0.05f},     // TYPE_ENERGY_BAR
+	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENERGY_EMITTOR
+	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENERGY_RECEIVER
+	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENDCAKE
+	{0.0f, -0.25f, 0.5f, 0.25f},   // TYPE_BUTTON
+	{-0.5f, 0.0f, 0.05f, 0.5f},    // TYPE_PORTAL
+	{0.0f, 0.0f, 0.25f, 0.25f},    // TYPE_ROCK
+	{0.0f, -0.1f, 0.25f, 0.4f},    // TYPE_PLAYER
+	{0.0f, 0.0f, 0.25f, 0.25f},    // TYPE_ENERGY_BALL
 };
 
 constexpr EntityType DYNAMIC_ENTITY_START = TYPE_ROCK;
