@@ -43,7 +43,8 @@ public:
 
     void clear();
 
-    void renderCopy(Texture& Texture, int x, int y);
+    void renderCopy(Texture& texture, const SDL_Rect* srcrect = nullptr,
+                                      const SDL_Rect* dstrect = nullptr);
     void renderCopy(Sprite& sprite, int x, int y);
 
     void renderPresent();
@@ -53,7 +54,7 @@ public:
 private:
     SDL_Renderer* renderer = nullptr;
 
-    void render(SDL_Texture* texture, SDL_Rect* srcrect, SDL_Rect* dstrect,
+    void render(SDL_Texture* texture, const SDL_Rect* srcrect, const SDL_Rect* dstrect,
                 double angle, SDL_RendererFlip flip);
 };
 

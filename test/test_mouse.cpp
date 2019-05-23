@@ -4,7 +4,7 @@
 #include "client/event/event_handler.h"
 #include "button.h"
 
-TEST_CASE("Mouse Integration Test", "[integration]") {
+TEST_CASE("Mouse Integration Test", "[modules]") {
     Screen screen;
     size_t width = screen.getWidth();
     size_t height = screen.getHeight();

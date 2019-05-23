@@ -17,7 +17,12 @@ void Screen::clear() {
 }
 
 void Screen::render(Texture& texture, int x, int y) {
-    renderer.renderCopy(texture, x, y);
+    SDL_Rect rect = {x, y, texture.getWidth(), texture.getHeight()};
+    renderer.renderCopy(texture, nullptr, &rect);
+}
+
+void Screen::render(Texture& texture, const SDL_Rect* srcrect, const SDL_Rect* dstrect) {
+    renderer.renderCopy(texture, srcrect, dstrect);
 }
 
 void Screen::render(Sprite& sprite, int x, int y) {
@@ -26,6 +31,12 @@ void Screen::render(Sprite& sprite, int x, int y) {
 
 void Screen::render(Drawable& drawable) {
     renderer.renderCopy(drawable.getSprite(), drawable.getX(), drawable.getY());
+}
+
+void Screen::render(DrawableBox2D& drawable) {
+    // Transformo el sistema de coordenadas de Box2D al de SDL
+    int y = window.height - (drawable.getY() + drawable.getHeight());
+    renderer.renderCopy(drawable.getSprite(), drawable.getX(), y);
 }
 
 void Screen::setRenderDrawColor(const std::string& color_name) {

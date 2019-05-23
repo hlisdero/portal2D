@@ -25,13 +25,13 @@ int KeyDetector::getHeight() const {
 
 void KeyDetector::handle(const KeyboardEvent& event) {
     if (event.pressed) {
-        if (event.key == 'w') {
+        if (event.key == SDLK_w) {
             current = 1;
-        } else if (event.key == 'a') {
+        } else if (event.key == SDLK_a) {
             current = 2;
-        } else if (event.key == 's') {
+        } else if (event.key == SDLK_s) {
             current = 3;
-        } else if (event.key == 'd') {
+        } else if (event.key == SDLK_d) {
             current = 4;
         } else {
             current = 0;

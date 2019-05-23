@@ -4,7 +4,7 @@
 #include "client/event/event_handler.h"
 #include "key_detector.h"
 
-TEST_CASE("Keyboard Integration Test", "[integration]") {
+TEST_CASE("Keyboard Integration Test", "[modules]") {
     Screen screen;
     size_t width = screen.getWidth();
     size_t height = screen.getHeight();

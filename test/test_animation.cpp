@@ -3,7 +3,7 @@
 #include "client/view/screen.h"
 #include "client/view/animation.h"
 
-TEST_CASE("Animation Test", "[integration]") {
+TEST_CASE("Animation Test", "[modules]") {
     Screen screen;
     size_t width = screen.getWidth();
     size_t height = screen.getHeight();

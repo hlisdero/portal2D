@@ -4,7 +4,6 @@
 #include "client/objects/drawable.h"
 #include "client/view/sprite.h"
 #include "client/event/keyboard_handler.h"
-#include "client/event/mouse_handler.h"
 
 class KeyDetector : public Drawable, public KeyboardHandler {
 public:

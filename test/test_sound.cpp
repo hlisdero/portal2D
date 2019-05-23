@@ -3,7 +3,7 @@
 #include "client/event/event_handler.h"
 #include "client/sound/sound_manager.h"
 
-TEST_CASE("Sound Integration Test", "[integration]") {
+TEST_CASE("Sound Integration Test", "[modules]") {
     Screen screen;
     const TextureCreator& textureCreator = screen.getTextureCreator();
     Texture prompt = textureCreator("../test/data/prompt.png");
