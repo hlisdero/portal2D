@@ -3,6 +3,7 @@
 
 #include <string>
 #include "client/objects/drawable.h"
+#include "client/objects/drawable_box2D.h"
 #include "client/view/window.h"
 #include "client/view/renderer.h"
 #include "client/view/texture_creator.h"
@@ -26,8 +27,10 @@ public:
     void clear();
 
     void render(Texture& texture, int x, int y);
+    void render(Texture& texture, const SDL_Rect* srcrect, const SDL_Rect* dstrect);
     void render(Sprite& sprite, int x, int y);
     void render(Drawable& drawable);
+    void render(DrawableBox2D& drawable);
 
     void setRenderDrawColor(const std::string& color_name);
     void setRenderDrawColor(uint8_t red, uint8_t green,
