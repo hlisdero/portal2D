@@ -23,6 +23,11 @@ size_t WorldView::createBlock(const Position& initial) {
     return view_objects.size() - 1;
 }
 
+void WorldView::updatePosition(size_t index, const Position& position) {
+    checkValidIndex(index);
+    view_objects[index]->updatePosition(position);
+}
+
 void WorldView::update() {
     clearScreen();
     renderBackground();
@@ -44,5 +49,11 @@ void WorldView::renderBackground() {
 void WorldView::renderObjects() {
     for (const auto& object : view_objects) {
         screen.render(*object);
+    }
+}
+
+void WorldView::checkValidIndex(size_t index) {
+    if (index >= view_objects.size()) {
+        throw std::runtime_error("Error: Índice de objeto en la vista inválido");
     }
 }

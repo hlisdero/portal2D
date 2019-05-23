@@ -22,6 +22,8 @@ public:
     size_t createPlayer(const Position& initial);
     size_t createBlock(const Position& initial);
 
+    void updatePosition(size_t index, const Position& position);
+
     void update();
 
 private:
@@ -33,6 +35,8 @@ private:
     void clearScreen();
     void renderBackground();
     void renderObjects();
+
+    void checkValidIndex(size_t index);
 };
 
 #endif  // WORLD_VIEW_H
