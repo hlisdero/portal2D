@@ -35,8 +35,10 @@ void Screen::render(Drawable& drawable) {
 
 void Screen::render(DrawableBox2D& drawable) {
     // Transformo el sistema de coordenadas de Box2D al de SDL
-    int y = window.height - (drawable.getY() + drawable.getHeight());
-    renderer.renderCopy(drawable.getSprite(), drawable.getX(), y);
+    // La posición se mide desde el medio del objeto
+    int y = window.height - (drawable.getY() + drawable.getHeight()/2);
+    int x = drawable.getX() - drawable.getWidth()/2;
+    renderer.renderCopy(drawable.getSprite(), x, y);
 }
 
 void Screen::setRenderDrawColor(const std::string& color_name) {
