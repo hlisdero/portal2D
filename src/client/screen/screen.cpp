@@ -1,4 +1,4 @@
-#include "client/view/screen.h"
+#include "client/screen/screen.h"
 
 Screen::Screen(size_t width, size_t height) :
     window(width, height), renderer(window.get()),

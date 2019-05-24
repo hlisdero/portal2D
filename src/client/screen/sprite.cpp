@@ -1,4 +1,4 @@
-#include "client/view/sprite.h"
+#include "client/screen/sprite.h"
 
 Sprite::Sprite(const Texture& texture) : texture(texture), current(0) {}
 

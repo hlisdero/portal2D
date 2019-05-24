@@ -1,4 +1,4 @@
-#include "client/view/surface.h"
+#include "client/screen/surface.h"
 
 Surface::Surface(const std::string& path) {
     surface = IMG_Load(path.c_str());

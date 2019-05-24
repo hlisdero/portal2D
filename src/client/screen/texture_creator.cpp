@@ -1,4 +1,4 @@
-#include "client/view/texture_creator.h"
+#include "client/screen/texture_creator.h"
 
 TextureCreator::TextureCreator(const Renderer& renderer) :
     renderer(renderer) {}

@@ -4,11 +4,11 @@
 #include <string>
 #include "client/objects/drawable.h"
 #include "client/objects/drawable_box2D.h"
-#include "client/view/window.h"
-#include "client/view/renderer.h"
-#include "client/view/texture_creator.h"
-#include "client/view/texture.h"
-#include "client/view/color.h"
+#include "client/screen/window.h"
+#include "client/screen/renderer.h"
+#include "client/screen/texture_creator.h"
+#include "client/screen/texture.h"
+#include "client/screen/color.h"
 
 class Screen {
 public:

@@ -1,4 +1,4 @@
-#include "client/view/texture_loader.h"
+#include "client/screen/texture_loader.h"
 
 TextureLoader::TextureLoader(const TextureCreator& textureCreator) {
     texture_map.emplace("Background", textureCreator("../data/sprites/background.png"));

@@ -1,4 +1,4 @@
-#include "client/view/animation.h"
+#include "client/screen/animation.h"
 
 Animation::Animation(const Texture& texture) : Sprite(texture) {}
 

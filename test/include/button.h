@@ -2,7 +2,7 @@
 #define BUTTON_H
 
 #include "client/objects/drawable.h"
-#include "client/view/sprite.h"
+#include "client/screen/sprite.h"
 #include "client/event/mouse_handler.h"
 #include "client/event/mouse_event.h"
 

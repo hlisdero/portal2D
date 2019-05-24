@@ -1,4 +1,4 @@
-#include "client/view/window.h"
+#include "client/screen/window.h"
 #include <string>
 
 Window::Window(size_t width, size_t height) : width(width), height(height) {

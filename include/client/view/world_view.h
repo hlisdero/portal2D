@@ -2,8 +2,8 @@
 #define WORLD_VIEW_H
 
 #include <vector>
-#include "client/view/screen.h"
-#include "client/view/texture_loader.h"
+#include "client/screen/screen.h"
+#include "client/screen/texture_loader.h"
 #include "client/objects/drawable_box2D.h"
 #include "client/objects/player.h"
 #include "client/objects/block.h"
