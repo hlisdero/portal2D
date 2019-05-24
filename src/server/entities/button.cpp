@@ -1,18 +1,12 @@
 #include "server/entities/button.h"
 
 ButtonEntity::ButtonEntity(const float x, const float y) :
-	StateEntity(TYPE_BUTTON, x, y, 0, STATE_DISABLED) {}
+	Entity(TYPE_BUTTON, x, y, 0), WithState(STATE_DISABLED) {}
 
-void ButtonEntity::beginContactWith(Entity * other, b2Contact *) {
+void ButtonEntity::handleContactWith(Entity * other, b2Contact *, bool inContact) {
 	if(other->getType() == TYPE_PLAYER || other->getType() == TYPE_ROCK) {
 		// TODO enhance the detection
-		this->setState(STATE_ENABLED);
-	}
-}
-
-void ButtonEntity::endContactWith(Entity * other, b2Contact *) {
-	if(other->getType() == TYPE_PLAYER || other->getType() == TYPE_ROCK) {
-		this->setState(STATE_DISABLED);
+		this->setState(inContact ? STATE_ENABLED : STATE_DISABLED);
 	}
 }
 

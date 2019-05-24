@@ -1,13 +1,13 @@
 #ifndef ENERGY_BALL_ENTITY_H
 #define ENERGY_BALL_ENTITY_H
 
-#include "server/entities/state_entity.h"
-#include "server/entities/body_linked_entity.h"
+#include "common/entities/entity.h"
+#include "server/entities/body_linked.h"
 
 // TODO load from file
 #define ENERGY_BALL_SPEED 5.0f
 
-class EnergyBallEntity : public Entity, public BodyLinkedEntity {
+class EnergyBallEntity :  public Entity, public BodyLinked {
 public:
 	EnergyBallEntity(const float intialX, const float intialY, const float angle);
 };

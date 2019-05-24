@@ -3,20 +3,16 @@
 PlayerEntity::PlayerEntity(const float x, const float y) :
 	Entity(TYPE_PLAYER, x, y, 0) {}
 
-void PlayerEntity::handleFloorContact(b2Contact * contact, bool isBegin) {
+void PlayerEntity::handleFloorContact(b2Contact * contact, bool inContact) {
 	float direction = (contact->GetFixtureA()->GetBody()->GetUserData() == this) ? -1.0f : 1.0f;
 
 	if(contact->GetManifold()->localNormal == b2Vec2(0.0f, direction)) {
-		this->isOnTheFloor = isBegin;
+		this->isOnTheFloor = inContact;
 	}
 }
 
-void PlayerEntity::beginContactWith(Entity *, b2Contact * contact) {
-	this->handleFloorContact(contact, true);
-}
-
-void PlayerEntity::endContactWith(Entity *, b2Contact * contact) {
-	this->handleFloorContact(contact, false);
+void PlayerEntity::handleContactWith(Entity *, b2Contact * contact, bool inContact) {
+	this->handleFloorContact(contact, inContact);
 }
 
 void PlayerEntity::keyDown(const MoveDirection direction) {

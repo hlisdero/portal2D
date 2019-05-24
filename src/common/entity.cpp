@@ -30,11 +30,3 @@ void Entity::setAngle(float angle) {
 EntityType Entity::getType() const {
     return type;
 }
-
-void Entity::beginContactWith(Entity *, b2Contact *) {
-
-}
-
-void Entity::endContactWith(Entity *, b2Contact *) {
-
-}

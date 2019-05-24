@@ -1,4 +1,8 @@
 #include "server/entities/entity_factory.h"
+#include "server/entities/player.h"
+#include "server/entities/rock.h"
+#include "server/entities/portal.h"
+#include "server/entities/energy_ball.h"
 
 EntityFactory::EntityFactory(b2World & world) : world(world) {}
 
@@ -36,10 +40,21 @@ void EntityFactory::createBody(Entity * entity) {
 
 	body->SetUserData(entity);
 
-	if(entity->getType() == TYPE_PORTAL
-		|| entity->getType() == TYPE_PLAYER
-		|| entity->getType() == TYPE_ENERGY_BALL
-		|| entity->getType() == TYPE_ROCK) {
-		((BodyLinkedEntity*) entity)->attachBody(body);
+	// TODO find a better way?
+	switch(entity->getType()) {
+		case TYPE_PLAYER:
+			static_cast<PlayerEntity*>(entity)->attachBody(body);
+			break;
+		case TYPE_ROCK:
+			static_cast<RockEntity*>(entity)->attachBody(body);
+			break;
+		case TYPE_PORTAL:
+			static_cast<PortalEntity*>(entity)->attachBody(body);
+			break;
+		case TYPE_ENERGY_BALL:
+			static_cast<EnergyBallEntity*>(entity)->attachBody(body);
+			break;
+		default:
+			break;
 	}
 }

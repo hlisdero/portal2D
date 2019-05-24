@@ -9,6 +9,9 @@ class ContactListener : public b2ContactListener {
 private:
     void BeginContact(b2Contact* contact) override;
     void EndContact(b2Contact* contact) override;
+    void handleContact(b2Contact * contact, bool inContact);
+    void broadcastContact(Entity * entityA, Entity * entityB, 
+    	b2Contact * contact, bool inContact);
 };
 
 #endif

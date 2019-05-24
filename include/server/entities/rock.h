@@ -2,10 +2,9 @@
 #define ROCK_ENTITY_H
 
 #include "common/entities/entity.h"
-#include "server/entities/state_entity.h"
-#include "server/entities/body_linked_entity.h"
+#include "server/entities/body_linked.h"
 
-class RockEntity : public Entity, public BodyLinkedEntity {
+class RockEntity :  public Entity, public BodyLinked {
 public:
 	// TODO add rock type
 	RockEntity(const float intialX, const float intialY);

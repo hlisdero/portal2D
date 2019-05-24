@@ -3,13 +3,15 @@
 
 #include "Box2D/Box2D.h"
 
-#include "server/entities/state_entity.h"
+#include "common/entities/entity.h"
+#include "server/entities/with_state.h"
+#include "server/entities/handle_contact.h"
 
-class EnergyReceiverEntity : public StateEntity {
+class EnergyReceiverEntity : public Entity, public WithState, public HandleContact {
 public:
 	EnergyReceiverEntity(const float x, const float y);
 
-	virtual void beginContactWith(Entity * other, b2Contact * contact);
+	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 };
 
 #endif  // ENERGY_RECEIVER_ENTITY_H

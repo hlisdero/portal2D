@@ -4,8 +4,6 @@
 #include "Box2D/Box2D.h"
 
 #include "common/entities/entity.h"
-#include "server/entities/body_linked_entity.h"
-#include "server/entities/energy_ball.h"
 
 class EntityFactory {
 public:

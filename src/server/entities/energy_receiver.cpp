@@ -1,9 +1,9 @@
 #include "server/entities/energy_receiver.h"
 
 EnergyReceiverEntity::EnergyReceiverEntity(const float x, const float y) :
-	StateEntity(TYPE_ENERGY_RECEIVER, x, y, 0, STATE_DISABLED) {}
+	Entity(TYPE_ENERGY_RECEIVER, x, y, 0), WithState(STATE_DISABLED) {}
 
-void EnergyReceiverEntity::beginContactWith(Entity * other, b2Contact *) {
+void EnergyReceiverEntity::handleContactWith(Entity * other, b2Contact *, bool) {
 	if(other->getType() == TYPE_ENERGY_BALL) {
 		this->setState(STATE_ENABLED);
 	}

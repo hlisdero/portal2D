@@ -1,7 +1,5 @@
-#ifndef STATE_ENTITY_H
-#define STATE_ENTITY_H
-
-#include "common/entities/entity.h"
+#ifndef WITH_STATE_H
+#define WITH_STATE_H
 
 enum State {
 	// EnergyReceiver, Button
@@ -17,9 +15,9 @@ enum State {
 	STATE_CLOSED
 };
 
-class StateEntity : public Entity {
+class WithState {
 public:
-	StateEntity(const EntityType type, const float x, const float y, const float angle, const State state);
+	WithState(const State state);
 
 	bool getState() const;
 	void setState(const State state);
@@ -28,4 +26,4 @@ private:
 	bool state;
 };
 
-#endif  // PLAYER_ENTITY_H
+#endif  // WITH_STATE_H

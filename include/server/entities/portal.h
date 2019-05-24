@@ -1,10 +1,11 @@
 #ifndef PORTAL_ENTITY_H
 #define PORTAL_ENTITY_H
 
-#include "server/entities/state_entity.h"
-#include "server/entities/body_linked_entity.h"
+#include "common/entities/entity.h"
+#include "server/entities/with_state.h"
+#include "server/entities/body_linked.h"
 
-class PortalEntity : public StateEntity, public BodyLinkedEntity {
+class PortalEntity :  public Entity, public WithState, public BodyLinked {
 public:
 	PortalEntity(const float x, const float y, const State color);
 

@@ -1,7 +1,7 @@
 #ifndef ENERGY_EMITTOR_ENTITY_H
 #define ENERGY_EMITTOR_ENTITY_H
 
-#include "server/entities/state_entity.h"
+#include "common/entities/entity.h"
 #include "server/entities/energy_ball.h"
 
 class EnergyEmittorEntity : public Entity {

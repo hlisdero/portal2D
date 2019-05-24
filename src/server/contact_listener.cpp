@@ -1,32 +1,45 @@
 #include "server/contact_listener.h"
 
-void ContactListener::BeginContact(b2Contact * contact) {
-    if (!contact) {
-        return;
-    }
-	Entity * userDataA = (Entity*) contact->GetFixtureA()->GetBody()->GetUserData();
-	Entity * userDataB = (Entity*) contact->GetFixtureB()->GetBody()->GetUserData();
+#include "server/entities/player.h"
+#include "server/entities/rock.h"
+#include "server/entities/energy_receiver.h"
+#include "server/entities/button.h"
 
-	if(userDataA != nullptr) {
-		userDataA->beginContactWith(userDataB, contact);
-	}
-	if(userDataB != nullptr) {
-		userDataB->beginContactWith(userDataA, contact);
-	}
+void ContactListener::BeginContact(b2Contact * contact) {
+	handleContact(contact, true);
 }
 
 void ContactListener::EndContact(b2Contact * contact) {
-    if (!contact) {
-        return;
-    }
-	Entity * userDataA = (Entity*) contact->GetFixtureA()->GetBody()->GetUserData();
-	Entity * userDataB = (Entity*) contact->GetFixtureB()->GetBody()->GetUserData();
+	handleContact(contact, false);
+}
 
-	if(userDataA != nullptr) {
-		userDataA->endContactWith(userDataB, contact);
-	}
+void ContactListener::handleContact(b2Contact * contact, bool inContact) {
+	Entity * userDataA = static_cast<Entity*>(
+		contact->GetFixtureA()->GetBody()->GetUserData());
+	Entity * userDataB = static_cast<Entity*>(
+		contact->GetFixtureB()->GetBody()->GetUserData());
 
-	if(userDataB != nullptr) {
-		userDataB->endContactWith(userDataA, contact);
+	broadcastContact(userDataA, userDataB, contact, inContact);
+	broadcastContact(userDataB, userDataA, contact, inContact);
+}
+
+void ContactListener::broadcastContact(Entity * entityA, Entity * entityB, b2Contact * contact, bool inContact) {
+	switch(entityA->getType()) {
+		case TYPE_PLAYER:
+			static_cast<PlayerEntity*>(entityA)->handleContactWith(entityB, contact, inContact);
+			break;
+		// case TYPE_ROCK:		
+		// 	static_cast<RockEntity*>(entityA)->handleContactWith(entityB, contact, inContact);
+		// 	break;
+		case TYPE_ENERGY_RECEIVER:
+			static_cast<EnergyReceiverEntity*>(entityA)->handleContactWith(entityB, contact, inContact);
+			break;
+		case TYPE_BUTTON:
+			static_cast<ButtonEntity*>(entityA)->handleContactWith(entityB, contact, inContact);
+			break;
+		// case TYPE_ENERGY_BALL:
+		// 	break;
+		default:
+			break;
 	}
 }

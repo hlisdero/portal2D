@@ -3,13 +3,14 @@
 
 #include "Box2D/Box2D.h"
 
-#include "server/entities/state_entity.h"
+#include "common/entities/entity.h"
+#include "server/entities/with_state.h"
 
 class DoorEntity;
 
 #include "server/door_logica.h"
 
-class DoorEntity : public StateEntity {
+class DoorEntity : public Entity, public WithState {
 public:
 	DoorEntity(const float x, const float y, const float angle, DoorLogica & logica);
 
