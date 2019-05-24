@@ -6,8 +6,8 @@
 // MetersEntity
 class BodyLinkedEntity {
 public:
-	void attachBody(b2Body * body);
-	b2Body * getBody();
+	virtual void attachBody(b2Body * body);
+	virtual b2Body * getBody();
 
 private:
 	b2Body * body;
