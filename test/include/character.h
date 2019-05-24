@@ -7,9 +7,9 @@
 
 class Character : public Drawable {
 public:
-    Character(int x, int y, Texture& texture);
+    Character(int x, int y, const Texture& texture);
 
-    virtual Texture& getTexture() override;
+    virtual const Texture& getTexture() override;
     virtual int getX() const override;
     virtual int getY() const override;
     virtual int getWidth() const override;

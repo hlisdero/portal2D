@@ -3,9 +3,11 @@
 
 #include <vector>
 #include "client/view/screen.h"
+#include "client/view/texture_loader.h"
 #include "client/objects/drawable_box2D.h"
 #include "client/objects/player.h"
 #include "client/objects/block.h"
+#include "client/objects/background.h"
 #include "common/ratio.h"
 
 class WorldView {
@@ -29,15 +31,11 @@ public:
 private:
     Ratio meter_to_pixel;
     Screen screen;
-    Texture background_texture;
-    Texture player_texture;
-    Texture block_texture;
+    TextureLoader textures;
+    Background background;
     std::vector<DrawableBox2D*> view_objects;
 
-    void clearScreen();
-    void renderBackground();
     void renderObjects();
-
     void checkValidIndex(size_t index);
 };
 

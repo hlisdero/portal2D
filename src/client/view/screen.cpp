@@ -16,7 +16,7 @@ void Screen::clear() {
     renderer.clear();
 }
 
-void Screen::render(Texture& texture, int x, int y, double scale_factor) {
+void Screen::render(const Texture& texture, int x, int y, double scale_factor) {
     // Puede perder precisión debido al casteo
     int w = texture.width * scale_factor;
     int h = texture.height * scale_factor;
@@ -27,7 +27,7 @@ void Screen::render(Texture& texture, int x, int y, double scale_factor) {
 void Screen::render(Drawable& drawable) {
     SDL_Rect dst = {drawable.getX(), drawable.getY(), drawable.getWidth(), drawable.getHeight()};
     SDL_Rect* src = drawable.getClip();
-    Texture& texture = drawable.getTexture();
+    const Texture& texture = drawable.getTexture();
     renderer.render(texture.get(), src, &dst, drawable.getRotation(), drawable.getFlipState());
 }
 
@@ -39,7 +39,7 @@ void Screen::render(DrawableBox2D& drawable) {
 
     SDL_Rect dst = {x, y, drawable.getWidth(), drawable.getHeight()};
     SDL_Rect* src = drawable.getClip();
-    Texture& texture = drawable.getTexture();
+    const Texture& texture = drawable.getTexture();
     renderer.render(texture.get(), src, &dst, drawable.getRotation(), drawable.getFlipState());
 }
 

@@ -1,6 +1,6 @@
 #include "client/view/sprite.h"
 
-Sprite::Sprite(Texture& texture) : texture(texture), current(0) {}
+Sprite::Sprite(const Texture& texture) : texture(texture), current(0) {}
 
 void Sprite::addClip(int x, int y, int w, int h,
     double angle, SDL_RendererFlip flip) {
@@ -40,7 +40,7 @@ SDL_RendererFlip Sprite::getFlipState() const {
     return flip_states[current];
 }
 
-Texture& Sprite::getTexture() const {
+const Texture& Sprite::getTexture() const {
     return texture;
 }
 

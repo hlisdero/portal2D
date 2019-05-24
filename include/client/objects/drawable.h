@@ -5,7 +5,7 @@
 
 class Drawable {
 public:
-    virtual Texture& getTexture() = 0;
+    virtual const Texture& getTexture() = 0;
     virtual int getX() const = 0;
     virtual int getY() const = 0;
     virtual int getWidth() const = 0;

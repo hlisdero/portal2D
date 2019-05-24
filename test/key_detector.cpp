@@ -3,7 +3,7 @@
 KeyDetector::KeyDetector(int x, int y, std::vector<Sprite*> sprites) :
     x(x), y(y), sprites(sprites) {}
 
-Texture& KeyDetector::getTexture() {
+const Texture& KeyDetector::getTexture() {
     return sprites[current]->getTexture();
 }
 

@@ -8,9 +8,9 @@
 
 class Button : public MouseHandler, public Drawable {
 public:
-    Button(Texture& texture, int x, int y);
+    Button(const Texture& texture, int x, int y);
 
-    virtual Texture& getTexture() override;
+    virtual const Texture& getTexture() override;
     int getX() const override;
     int getY() const override;
     int getWidth() const override;

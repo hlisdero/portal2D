@@ -25,7 +25,7 @@ public:
 
     void clear();
 
-    void render(Texture& texture, int x, int y, double scale_factor = 1);
+    void render(const Texture& texture, int x, int y, double scale_factor = 1);
     void render(Drawable& drawable);
     void render(DrawableBox2D& drawable);
 
