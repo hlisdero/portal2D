@@ -7,7 +7,7 @@
 
 class Texture {
 public:
-    explicit Texture(SDL_Texture* texture, int width, int height);
+    explicit Texture(SDL_Texture* texture, size_t width, size_t height);
 
     Texture(const Texture&) = delete;
     Texture& operator=(const Texture&) = delete;
@@ -18,20 +18,12 @@ public:
     ~Texture();
 
     SDL_Texture* get() const;
-    int getWidth() const;
-    int getHeight() const;
-    double getRotation() const;
-    SDL_RendererFlip getFlipState() const;
 
-    void rotate(double degrees);
-    void flip(SDL_RendererFlip new_flip_state);
+    size_t width;
+    size_t height;
 
 private:
     SDL_Texture* texture = nullptr;
-    int width;
-    int height;
-    double rotation = 0.0;
-    SDL_RendererFlip flip_state = SDL_FLIP_NONE;
 };
 
 #endif  // TEXTURE_H

@@ -1,7 +1,7 @@
 #ifndef MOUSE_HANDLER_H
 #define MOUSE_HANDLER_H
 
-#include "mouse_event.h"
+#include "client/event/mouse_event.h"
 
 class MouseHandler {
 public:

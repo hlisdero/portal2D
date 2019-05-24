@@ -2,12 +2,12 @@
 #define SCREEN_H
 
 #include <string>
+#include "client/objects/drawable.h"
+#include "client/objects/drawable_box2D.h"
 #include "client/view/window.h"
 #include "client/view/renderer.h"
 #include "client/view/texture_creator.h"
 #include "client/view/texture.h"
-#include "client/view/sprite.h"
-#include "client2/p_entity.h"
 #include "client/view/color.h"
 
 class Screen {
@@ -25,9 +25,9 @@ public:
 
     void clear();
 
-    void render(Texture& texture, int x, int y);
-    void render(Sprite& sprite, int x, int y);
-    void render(PEntity & entity);
+    void render(Texture& texture, int x, int y, double scale_factor = 1);
+    void render(Drawable& drawable);
+    void render(DrawableBox2D& drawable);
 
     void setRenderDrawColor(const std::string& color_name);
     void setRenderDrawColor(uint8_t red, uint8_t green,

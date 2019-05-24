@@ -3,13 +3,13 @@
 #include "server/entities/rock.h"
 
 // Initialize the world with the gravity vector
-PhysicsScene::PhysicsScene() : Scene(), 
+PhysicsScene::PhysicsScene() :
 	world(b2Vec2(0.0f, -10.0f)), entityFactory(world) {
 	this->world.SetContactListener(&this->contactListener);
 
-	this->staticEntities.push_back(new MEntity(TYPE_METAL_BLOCK, 1.0f, 1.0f, 0.0f));
-	this->staticEntities.push_back(new MEntity(TYPE_METAL_BLOCK, 2.0f, 1.0f, 0.0f));
-	this->staticEntities.push_back(new MEntity(TYPE_METAL_BLOCK, 3.0f, 1.0f, 0.0f));
+	this->staticEntities.push_back(new Entity(TYPE_METAL_BLOCK, 1.0f, 1.0f, 0.0f));
+	this->staticEntities.push_back(new Entity(TYPE_METAL_BLOCK, 2.0f, 1.0f, 0.0f));
+	this->staticEntities.push_back(new Entity(TYPE_METAL_BLOCK, 3.0f, 1.0f, 0.0f));
 
 	for(uint i = 0; i < this->staticEntities.size(); i++) {
 		this->entityFactory.createBody(this->staticEntities[i]);
@@ -36,8 +36,8 @@ void PhysicsScene::updatePhysics() {
 	this->world.Step(timeStep, velocityIterations, positionIterations);
 }
 
-std::vector<MEntity> PhysicsScene::getStaticEntities() const {
-	std::vector<MEntity> entities;
+std::vector<Entity> PhysicsScene::getStaticEntities() const {
+	std::vector<Entity> entities;
 
 	for(uint i = 0; i < this->staticEntities.size(); i++) {
 		entities.push_back(*this->staticEntities[i]);
@@ -46,13 +46,13 @@ std::vector<MEntity> PhysicsScene::getStaticEntities() const {
 	return entities;
 }
 
-std::vector<MEntity> PhysicsScene::getDynamicEntities() const {
+std::vector<Entity> PhysicsScene::getDynamicEntities() const {
 	const b2Body * body = this->world.GetBodyList();
 
-	std::vector<MEntity> entities;
+	std::vector<Entity> entities;
 
 	while(body != nullptr) {
-		MEntity * entityPtr = (MEntity *) body->GetUserData();
+		Entity * entityPtr = (Entity *) body->GetUserData();
 
 		if(entityPtr->getType() >= DYNAMIC_ENTITY_START) {
 			const b2Vec2 position = body->GetPosition();

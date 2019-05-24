@@ -7,10 +7,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "texture.h"
-#include "sprite.h"
-#include "surface.h"
-#include "color.h"
+#include "client/view/texture.h"
+#include "client/view/surface.h"
+#include "client/view/color.h"
 
 class Renderer {
 public:
@@ -43,8 +42,8 @@ public:
 
     void clear();
 
-    void renderCopy(Texture& Texture, int x, int y);
-    void renderCopy(Sprite& sprite, int x, int y);
+    void render(SDL_Texture* texture, const SDL_Rect* srcrect, const SDL_Rect* dstrect,
+                double angle = 0.0, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
     void renderPresent();
 
@@ -52,9 +51,6 @@ public:
 
 private:
     SDL_Renderer* renderer = nullptr;
-
-    void render(SDL_Texture* texture, SDL_Rect* srcrect, SDL_Rect* dstrect,
-                double angle, SDL_RendererFlip flip);
 };
 
 #endif  // RENDERER_H

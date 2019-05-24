@@ -1,51 +1,21 @@
 #include "server/entities/entity_factory.h"
 
-#include <map>
-
-#include "server/entities/body_linked_entity.h"
-#include "server/entities/energy_ball.h"
-
-#define X_OFFSET 0
-#define Y_OFFSET 1
-#define HALF_WIDTH 2
-#define HALF_HEIGHT 3
-
-static const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
-	// {x_offset, y_offset, half-width, half-height}
-
-	{0.0f, 0.0f, 0.5f, 0.5f}, // TYPE_STONE_BLOCK
-	{0.0f, 0.0f, 0.5f, 0.5f}, // TYPE_METAL_BLOCK
-	{0.0f, 0.0f, 0.5f, 0.5f}, // TYPE_METAL_DIAG_BLOCK
-	{0.0f, -0.25f, 0.5f, 0.25f}, // TYPE_ACID
-	{0.0f, 0.0f, 0.5f, 1.0f}, // TYPE_DOOR
-	{0.0f, 0.5f, 0.5f, 0.05f}, // TYPE_ENERGY_BAR
-	{0.0f, 0.0f, 0.5f, 0.5f}, // TYPE_ENERGY_EMITTOR
-	{0.0f, 0.0f, 0.5f, 0.5f}, // TYPE_ENERGY_RECEIVER
-	{0.0f, 0.0f, 0.5f, 0.5f}, // TYPE_ENDCAKE
-	{0.0f, -0.25f, 0.5f, 0.25f}, // TYPE_BUTTON
-	{-0.5f, 0.0f, 0.05f, 0.5f}, // TYPE_PORTAL
-	{0.0f, 0.0f, 0.25f, 0.25f}, // TYPE_ROCK
-	{0.0f, -0.1f, 0.25f, 0.4f}, // TYPE_PLAYER
-	{0.0f, 0.0f, 0.25f, 0.25f}, // TYPE_ENERGY_BALL
-};
-
-
 EntityFactory::EntityFactory(b2World & world) : world(world) {}
 
-void EntityFactory::createBody(MEntity * entity) {
+void EntityFactory::createBody(Entity * entity) {
 	const float (&entitySettings)[4] = entitiesSettings[entity->getType()];
 
 	b2BodyDef bodyDef;
 	bodyDef.angle = entity->getAngle();
 	bodyDef.position.Set(entity->getX(), entity->getY());
 
-	if(entity->getType() == TYPE_PLAYER 
+	if(entity->getType() == TYPE_PLAYER
 		|| entity->getType() == TYPE_ROCK) {
 		bodyDef.type = b2_dynamicBody;
 		bodyDef.fixedRotation = true;
 	} else if(entity->getType() == TYPE_ENERGY_BALL) {
 		bodyDef.type = b2_kinematicBody;
-	} else { 
+	} else {
 		bodyDef.type = b2_staticBody;
 	}
 
@@ -56,12 +26,12 @@ void EntityFactory::createBody(MEntity * entity) {
 	}
 
 	b2PolygonShape shape;
-	shape.SetAsBox(entitySettings[HALF_WIDTH], 
+	shape.SetAsBox(entitySettings[HALF_WIDTH],
 		entitySettings[HALF_HEIGHT],
 		b2Vec2(entitySettings[X_OFFSET], entitySettings[Y_OFFSET]),
 		0.0f);
 
-	body->CreateFixture(&shape, 
+	body->CreateFixture(&shape,
 		(bodyDef.type == b2_staticBody) ? 0.0f : 1.0f);
 
 	body->SetUserData(entity);

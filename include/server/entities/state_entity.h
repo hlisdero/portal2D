@@ -1,7 +1,7 @@
 #ifndef STATE_ENTITY_H
 #define STATE_ENTITY_H
 
-#include "server/entities/m_entity.h"
+#include "common/entities/entity.h"
 
 enum State {
 	// EnergyReceiver, Button
@@ -17,10 +17,10 @@ enum State {
 	STATE_CLOSED
 };
 
-class StateEntity : public MEntity {
+class StateEntity : public Entity {
 public:
 	StateEntity(const EntityType type, const float x, const float y, const float angle, const State state);
-	
+
 	bool getState() const;
 	void setState(const State state);
 	void setState(const bool state);

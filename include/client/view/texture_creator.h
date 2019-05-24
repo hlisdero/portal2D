@@ -4,9 +4,9 @@
 #include <string>
 #include <SDL2/SDL_image.h>
 
-#include "texture.h"
-#include "renderer.h"
-#include "color.h"
+#include "client/view/texture.h"
+#include "client/view/renderer.h"
+#include "client/view/color.h"
 
 class TextureCreator {
 public:

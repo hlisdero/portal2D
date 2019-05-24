@@ -1,10 +1,18 @@
 #include "key_detector.h"
 
 KeyDetector::KeyDetector(int x, int y, std::vector<Sprite*> sprites) :
-    Entity(x, y), sprites(sprites) {}
+    x(x), y(y), sprites(sprites) {}
 
-Sprite& KeyDetector::getSprite() {
-    return *sprites[current];
+Texture& KeyDetector::getTexture() {
+    return sprites[current]->getTexture();
+}
+
+int KeyDetector::getX() const {
+    return x;
+}
+
+int KeyDetector::getY() const {
+    return y;
 }
 
 int KeyDetector::getWidth() const {
@@ -17,13 +25,13 @@ int KeyDetector::getHeight() const {
 
 void KeyDetector::handle(const KeyboardEvent& event) {
     if (event.pressed) {
-        if (event.key == 'w') {
+        if (event.key == SDLK_w) {
             current = 1;
-        } else if (event.key == 'a') {
+        } else if (event.key == SDLK_a) {
             current = 2;
-        } else if (event.key == 's') {
+        } else if (event.key == SDLK_s) {
             current = 3;
-        } else if (event.key == 'd') {
+        } else if (event.key == SDLK_d) {
             current = 4;
         } else {
             current = 0;

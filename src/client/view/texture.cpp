@@ -1,7 +1,7 @@
 #include "client/view/texture.h"
 
-Texture::Texture(SDL_Texture* texture, int width, int height) :
-    texture(texture), width(width), height(height){}
+Texture::Texture(SDL_Texture* texture, size_t width, size_t height) :
+    width(width), height(height), texture(texture) {}
 
 Texture::~Texture() {
     if (texture) {
@@ -30,28 +30,4 @@ Texture& Texture::operator=(Texture&& other) {
 
 SDL_Texture* Texture::get() const {
     return texture;
-}
-
-int Texture::getWidth() const {
-    return width;
-}
-
-int Texture::getHeight() const {
-    return height;
-}
-
-double Texture::getRotation() const {
-    return rotation;
-}
-
-SDL_RendererFlip Texture::getFlipState() const {
-    return flip_state;
-}
-
-void Texture::rotate(double degrees) {
-    rotation += degrees;
-}
-
-void Texture::flip(SDL_RendererFlip new_flip_state) {
-    flip_state = new_flip_state;
 }

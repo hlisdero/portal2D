@@ -4,7 +4,7 @@
 #include "server/entities/state_entity.h"
 #include "server/entities/energy_ball.h"
 
-class EnergyEmittorEntity : public MEntity {
+class EnergyEmittorEntity : public Entity {
 public:
 	EnergyEmittorEntity(const float x, const float y, const float angle);
 

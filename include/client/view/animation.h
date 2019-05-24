@@ -1,13 +1,13 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "sprite.h"
+#include "client/view/sprite.h"
 
 class Animation : public Sprite {
 public:
-    explicit Animation(Texture texture);
+    explicit Animation(Texture& texture);
 
-    virtual SDL_Rect& getClip() override;
+    virtual SDL_Rect* getClip() override;
 
 private:
     int slowdown = 4;

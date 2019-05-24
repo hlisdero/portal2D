@@ -1,20 +1,26 @@
 #include "catch.hpp"
-#include "screen.h"
-#include "sprite.h"
-#include "event_handler.h"
+#include "client/view/screen.h"
+#include "client/view/sprite.h"
+#include "client/event/event_handler.h"
 #include "key_detector.h"
 
-TEST_CASE("Keyboard Integration Test", "[integration]") {
+TEST_CASE("Keyboard Integration Test", "[modules][keyboard]") {
     Screen screen;
     size_t width = screen.getWidth();
     size_t height = screen.getHeight();
 
     const TextureCreator& textureCreator = screen.getTextureCreator();
-    Sprite sprite1(textureCreator("../test/data/press.png"));
-    Sprite sprite2(textureCreator("../test/data/up.png"));
-    Sprite sprite3(textureCreator("../test/data/left.png"));
-    Sprite sprite4(textureCreator("../test/data/down.png"));
-    Sprite sprite5(textureCreator("../test/data/right.png"));
+    Texture press = textureCreator("../test/data/press.png");
+    Texture up = textureCreator("../test/data/up.png");
+    Texture left = textureCreator("../test/data/left.png");
+    Texture down = textureCreator("../test/data/down.png");
+    Texture right = textureCreator("../test/data/right.png");
+
+    Sprite sprite1(press);
+    Sprite sprite2(up);
+    Sprite sprite3(left);
+    Sprite sprite4(down);
+    Sprite sprite5(right);
     std::vector<Sprite*> sprites = {
         &sprite1, &sprite2, &sprite3, &sprite4, &sprite5,
     };
@@ -26,7 +32,7 @@ TEST_CASE("Keyboard Integration Test", "[integration]") {
     EventHandler event_handler;
     event_handler.add(&key_detector);
 
-    while (event_handler) {
+    while (!event_handler.quit()) {
         event_handler.poll();
 
         screen.setRenderDrawColor("white");
