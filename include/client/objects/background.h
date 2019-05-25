@@ -1,7 +1,7 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
-#include "client/screen/texture.h"
+#include "client/texture/texture.h"
 #include "client/objects/drawable.h"
 
 class Background : public Drawable {

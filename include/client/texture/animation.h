@@ -1,7 +1,7 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "client/screen/sprite.h"
+#include "client/texture/sprite.h"
 
 class Animation : public Sprite {
 public:

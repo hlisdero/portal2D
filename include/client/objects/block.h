@@ -2,8 +2,7 @@
 #define BLOCK_H
 
 #include "client/objects/drawable_box2D.h"
-#include "client/screen/sprite.h"
-#include "client/screen/texture_creator.h"
+#include "client/texture/sprite.h"
 #include "common/position.h"
 #include "common/ratio.h"
 

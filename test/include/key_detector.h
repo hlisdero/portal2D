@@ -2,7 +2,7 @@
 #define KEY_DETECTOR_H
 
 #include "client/objects/drawable.h"
-#include "client/screen/sprite.h"
+#include "client/texture/sprite.h"
 #include "client/event/keyboard_handler.h"
 
 class KeyDetector : public Drawable, public KeyboardHandler {

@@ -6,9 +6,8 @@
 #include "client/objects/drawable_box2D.h"
 #include "client/screen/window.h"
 #include "client/screen/renderer.h"
-#include "client/screen/texture_creator.h"
-#include "client/screen/texture.h"
-#include "client/screen/color.h"
+#include "client/texture/texture_creator.h"
+#include "client/texture/color.h"
 
 class Screen {
 public:

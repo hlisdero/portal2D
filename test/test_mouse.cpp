@@ -1,6 +1,6 @@
 #include "catch.hpp"
 #include "client/screen/screen.h"
-#include "client/screen/sprite.h"
+#include "client/texture/sprite.h"
 #include "client/event/event_handler.h"
 #include "button.h"
 

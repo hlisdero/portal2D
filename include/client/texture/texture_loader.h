@@ -3,8 +3,8 @@
 
 #include <unordered_map>
 #include <string>
-#include "client/screen/texture_creator.h"
-#include "client/screen/texture.h"
+#include "client/texture/texture_creator.h"
+#include "client/texture/texture.h"
 
 class TextureLoader {
 public:

@@ -1,7 +1,7 @@
 #include "catch.hpp"
 #include <SDL2/SDL.h>
 #include "client/screen/screen.h"
-#include "client/screen/animation.h"
+#include "client/texture/animation.h"
 #include "character.h"
 
 TEST_CASE("Animation Test", "[modules][animation]") {

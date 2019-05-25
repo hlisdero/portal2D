@@ -3,8 +3,7 @@
 
 #include "client/objects/drawable_box2D.h"
 #include "client/event/keyboard_handler.h"
-#include "client/screen/animation.h"
-#include "client/screen/texture_creator.h"
+#include "client/texture/animation.h"
 #include "common/position.h"
 #include "common/ratio.h"
 #include "common/move_direction.h"

@@ -1,7 +1,7 @@
 #ifndef DRAWABLE_H
 #define DRAWABLE_H
 
-#include "client/screen/texture.h"
+#include "client/texture/texture.h"
 
 class Drawable {
 public:

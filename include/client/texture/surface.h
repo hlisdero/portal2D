@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "client/screen/color.h"
+#include "client/texture/color.h"
 
 class Surface {
 public:

@@ -1,9 +1,8 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include "client/screen/animation.h"
+#include "client/texture/animation.h"
 #include "client/objects/drawable.h"
-#include "client/screen/texture.h"
 
 class Character : public Drawable {
 public:
