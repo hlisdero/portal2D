@@ -7,9 +7,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "client/view/texture.h"
-#include "client/view/surface.h"
-#include "client/view/color.h"
+#include "client/texture/texture.h"
+#include "client/texture/surface.h"
+#include "client/texture/color.h"
 
 class Renderer {
 public:

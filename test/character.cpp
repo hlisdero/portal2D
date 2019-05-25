@@ -1,6 +1,6 @@
 #include "character.h"
 
-Character::Character(int x, int y, Texture& texture) :
+Character::Character(int x, int y, const Texture& texture) :
     x(x), y(y), animation(texture) {
     animation.addClip(0, 0, 64, 205);
     animation.addClip(64, 0, 64, 205);
@@ -8,7 +8,7 @@ Character::Character(int x, int y, Texture& texture) :
     animation.addClip(196, 0, 64, 205);
 }
 
-Texture& Character::getTexture() {
+const Texture& Character::getTexture() {
     return animation.getTexture();
 }
 

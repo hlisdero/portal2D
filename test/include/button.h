@@ -2,15 +2,15 @@
 #define BUTTON_H
 
 #include "client/objects/drawable.h"
-#include "client/view/sprite.h"
+#include "client/texture/sprite.h"
 #include "client/event/mouse_handler.h"
 #include "client/event/mouse_event.h"
 
 class Button : public MouseHandler, public Drawable {
 public:
-    Button(Texture& texture, int x, int y);
+    Button(const Texture& texture, int x, int y);
 
-    virtual Texture& getTexture() override;
+    virtual const Texture& getTexture() override;
     int getX() const override;
     int getY() const override;
     int getWidth() const override;

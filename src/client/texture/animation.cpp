@@ -1,6 +1,6 @@
-#include "client/view/animation.h"
+#include "client/texture/animation.h"
 
-Animation::Animation(Texture& texture) : Sprite(texture) {}
+Animation::Animation(const Texture& texture) : Sprite(texture) {}
 
 SDL_Rect* Animation::getClip() {
     SDL_Rect* clip = Sprite::getClip();

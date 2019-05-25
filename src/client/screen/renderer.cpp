@@ -1,4 +1,4 @@
-#include "client/view/renderer.h"
+#include "client/screen/renderer.h"
 
 Renderer::Renderer(SDL_Window* window) {
     renderer = SDL_CreateRenderer(window, -1,

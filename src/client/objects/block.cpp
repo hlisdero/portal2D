@@ -1,11 +1,11 @@
 #include "client/objects/block.h"
 
-Block::Block(const Position& initial, Ratio& ratio, Texture& texture) :
+Block::Block(const Position& initial, Ratio& ratio, const Texture& texture) :
     DrawableBox2D(initial, ratio), sprite(texture) {
     sprite.addClip(1, 600, 193, 192);
 }
 
-Texture& Block::getTexture() {
+const Texture& Block::getTexture() {
     return sprite.getTexture();
 }
 

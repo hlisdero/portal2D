@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "client/view/screen.h"
+#include "client/screen/screen.h"
 #include "client/event/event_handler.h"
 #include "client/sound/sound_manager.h"
 

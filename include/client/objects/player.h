@@ -3,17 +3,16 @@
 
 #include "client/objects/drawable_box2D.h"
 #include "client/event/keyboard_handler.h"
-#include "client/view/animation.h"
-#include "client/view/texture_creator.h"
+#include "client/texture/animation.h"
 #include "common/position.h"
 #include "common/ratio.h"
 #include "common/move_direction.h"
 
 class Player : public DrawableBox2D, public KeyboardHandler {
 public:
-    Player(const Position& initial, Ratio& ratio, Texture& texture);
+    Player(const Position& initial, Ratio& ratio, const Texture& texture);
 
-    virtual Texture& getTexture() override;
+    virtual const Texture& getTexture() override;
     virtual int getWidth() const override;
     virtual int getHeight() const override;
     virtual SDL_Rect* getClip() override;

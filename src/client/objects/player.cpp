@@ -1,6 +1,6 @@
 #include "client/objects/player.h"
 
-Player::Player(const Position& initial, Ratio& ratio, Texture& texture) :
+Player::Player(const Position& initial, Ratio& ratio, const Texture& texture) :
     DrawableBox2D(initial, ratio), idle(texture) {
     idle.addClip(1, 2073, 104, 215);
     idle.addClip(106, 2073, 104, 215);
@@ -11,7 +11,7 @@ Player::Player(const Position& initial, Ratio& ratio, Texture& texture) :
     idle.addClip(631, 2073, 104, 215);
 }
 
-Texture& Player::getTexture() {
+const Texture& Player::getTexture() {
     return idle.getTexture();
 }
 

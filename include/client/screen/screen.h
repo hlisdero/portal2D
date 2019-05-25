@@ -4,11 +4,10 @@
 #include <string>
 #include "client/objects/drawable.h"
 #include "client/objects/drawable_box2D.h"
-#include "client/view/window.h"
-#include "client/view/renderer.h"
-#include "client/view/texture_creator.h"
-#include "client/view/texture.h"
-#include "client/view/color.h"
+#include "client/screen/window.h"
+#include "client/screen/renderer.h"
+#include "client/texture/texture_creator.h"
+#include "client/texture/color.h"
 
 class Screen {
 public:
@@ -25,7 +24,7 @@ public:
 
     void clear();
 
-    void render(Texture& texture, int x, int y, double scale_factor = 1);
+    void render(const Texture& texture, int x, int y, double scale_factor = 1);
     void render(Drawable& drawable);
     void render(DrawableBox2D& drawable);
 

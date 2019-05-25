@@ -1,4 +1,4 @@
-#include "client/view/color.h"
+#include "client/texture/color.h"
 #include <map>
 
 static const std::map<std::string, std::array<uint8_t,4> > color_map = {

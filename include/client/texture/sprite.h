@@ -5,11 +5,11 @@
 #include <string>
 #include <vector>
 #include <SDL2/SDL.h>
-#include "client/view/texture.h"
+#include "client/texture/texture.h"
 
 class Sprite {
 public:
-    explicit Sprite(Texture& texture);
+    explicit Sprite(const Texture& texture);
 
     void addClip(int x, int y, int w, int h,
         double angle = 0.0, SDL_RendererFlip flip = SDL_FLIP_NONE);
@@ -22,12 +22,12 @@ public:
     double getRotation() const;
     SDL_RendererFlip getFlipState() const;
 
-    Texture& getTexture() const;
+    const Texture& getTexture() const;
     int getWidth() const;
     int getHeight() const;
 
 private:
-    Texture& texture;
+    const Texture& texture;
     std::vector<SDL_Rect> clips;
     std::vector<double> rotations;
     std::vector<SDL_RendererFlip> flip_states;

@@ -1,6 +1,6 @@
 #include "button.h"
 
-Button::Button(Texture& texture, int x, int y) :
+Button::Button(const Texture& texture, int x, int y) :
     sprite(texture), x(x), y(y) {
     sprite.addClip(0, 0, 300, 200);
     sprite.addClip(0, 200, 300, 200);
@@ -8,7 +8,7 @@ Button::Button(Texture& texture, int x, int y) :
     sprite.addClip(0, 600, 300, 200);
 }
 
-Texture& Button::getTexture() {
+const Texture& Button::getTexture() {
     return sprite.getTexture();
 }
 

@@ -1,15 +1,14 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include "client/view/animation.h"
+#include "client/texture/animation.h"
 #include "client/objects/drawable.h"
-#include "client/view/texture.h"
 
 class Character : public Drawable {
 public:
-    Character(int x, int y, Texture& texture);
+    Character(int x, int y, const Texture& texture);
 
-    virtual Texture& getTexture() override;
+    virtual const Texture& getTexture() override;
     virtual int getX() const override;
     virtual int getY() const override;
     virtual int getWidth() const override;
