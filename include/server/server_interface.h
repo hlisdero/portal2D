@@ -3,7 +3,8 @@
 
 #include <vector>
 
-#include "server/physics_scene.h"
+#include "server/world.h"
+#include "server/map.h"
 #include "common/entities/entity.h"
 #include "common/move_direction.h"
 #include "server/entities/player.h"
@@ -23,7 +24,8 @@ public:
 	void movePlayer(const MoveDirection direction, const bool pressed);
 
 private:
-	PhysicsScene scene;
+	Map map;
+	World world;
 	PlayerEntity player;
 };
 

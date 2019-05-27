@@ -71,11 +71,16 @@ public:
 
 	EntityType getType() const;
 	
+	void setId(const int id);
+	int getId() const;
+
 private:
 	EntityType type;
 	float32 x;
 	float32 y;
 	float32 angle;
+	// TODO uint ?
+	int id = 0;
 };
 
 #endif  // ENTITY_H

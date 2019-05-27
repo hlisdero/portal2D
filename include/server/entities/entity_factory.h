@@ -13,6 +13,7 @@ public:
 
 private:
 	b2World & world;
+	int nextDynamicEntityId = 0;
 };
 
 #endif  // ENTITY_FACTORY_H

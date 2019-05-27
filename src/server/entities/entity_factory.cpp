@@ -57,4 +57,6 @@ void EntityFactory::createBody(Entity * entity) {
 		default:
 			break;
 	}
+
+	entity->setId(this->nextDynamicEntityId++);
 }

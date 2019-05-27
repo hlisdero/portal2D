@@ -4,11 +4,11 @@ Entity::Entity(EntityType type, float32 x, float32 y, float32 angle) :
     type(type), x(x), y(y), angle(angle) {}
 
 float32 Entity::getX() const {
-    return x;
+    return this->x;
 }
 
 float32 Entity::getY() const {
-    return y;
+    return this->y;
 }
 
 void Entity::setX(float32 x) {
@@ -28,5 +28,13 @@ void Entity::setAngle(float angle) {
 }
 
 EntityType Entity::getType() const {
-    return type;
+    return this->type;
+}
+
+void Entity::setId(const int id) {
+    this->id = id;
+}
+
+int Entity::getId() const {
+    return this->id;
 }

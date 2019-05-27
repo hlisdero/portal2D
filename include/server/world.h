@@ -1,5 +1,5 @@
-#ifndef PHYSICS_SCENE_H
-#define PHYSICS_SCENE_H
+#ifndef WORLD_H
+#define WORLD_H
 
 #include <vector>
 
@@ -9,6 +9,7 @@
 #include "server/entities/player.h"
 #include "server/entities/entity_factory.h"
 #include "server/contact_listener.h"
+#include "server/map.h"
 
 /*
 	y
@@ -18,9 +19,9 @@
 	*------ > x
 */
 
-class PhysicsScene {
+class World {
 public:
-	PhysicsScene();
+	explicit World(Map map);
 
     void createPlayer(PlayerEntity * player);
     void updatePhysics();
@@ -30,8 +31,8 @@ public:
 private:
 	b2World world;
 	EntityFactory entityFactory;
+	Map & map;
 
-	std::vector<Entity*> staticEntities;
 	std::vector<PlayerEntity*> players;
 
 	ContactListener contactListener;
@@ -42,4 +43,4 @@ private:
 	void createDynamicEntity(Entity & entity);
 };
 
-#endif  // PHYSICS_SCENE_H
+#endif  // WORLD_H
