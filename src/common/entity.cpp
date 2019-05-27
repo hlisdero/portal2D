@@ -1,21 +1,21 @@
 #include "common/entities/entity.h"
 
-Entity::Entity(EntityType type, float32 x, float32 y, float32 angle) :
+Entity::Entity(EntityType type, float x, float y, float angle) :
     type(type), x(x), y(y), angle(angle) {}
 
-float32 Entity::getX() const {
+float Entity::getX() const {
     return this->x;
 }
 
-float32 Entity::getY() const {
+float Entity::getY() const {
     return this->y;
 }
 
-void Entity::setX(float32 x) {
+void Entity::setX(float x) {
     this->x = x;
 }
 
-void Entity::setY(float32 y) {
+void Entity::setY(float y) {
     this->y = y;
 }
 

@@ -1,8 +1,6 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <Box2D/Box2D.h>
-
 enum EntityType {
 	// Static
 	// - Ground
@@ -59,12 +57,12 @@ constexpr EntityType DYNAMIC_ENTITY_START = TYPE_ROCK;
 
 class Entity {
 public:
-	Entity(EntityType type, float32 x, float32 y, float32 angle = 0.0f);
+	Entity(EntityType type, float x, float y, float angle = 0.0f);
 
-	float32 getX() const;
-	float32 getY() const;
-    void setX(float32 x);
-    void setY(float32 y);
+	float getX() const;
+	float getY() const;
+    void setX(float x);
+    void setY(float y);
 
 	float getAngle() const;
     void setAngle(float angle);
@@ -76,9 +74,9 @@ public:
 
 private:
 	EntityType type;
-	float32 x;
-	float32 y;
-	float32 angle;
+	float x;
+	float y;
+	float angle;
 	// TODO uint ?
 	int id = 0;
 };
