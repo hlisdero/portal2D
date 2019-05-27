@@ -6,9 +6,7 @@
 
 EntityFactory::EntityFactory(b2World & world) : world(world) {}
 
-void EntityFactory::createBody(Entity * entity) {
-	const float (&entitySettings)[4] = entitiesSettings[entity->getType()];
-
+b2BodyDef EntityFactory::createBodyDef(Entity * entity) {
 	b2BodyDef bodyDef;
 	bodyDef.angle = entity->getAngle();
 	bodyDef.position.Set(entity->getX(), entity->getY());
@@ -23,23 +21,23 @@ void EntityFactory::createBody(Entity * entity) {
 		bodyDef.type = b2_staticBody;
 	}
 
-	b2Body * body = this->world.CreateBody(&bodyDef);
+	return bodyDef;
+}
 
-	if(entity->getType() == TYPE_ENERGY_BALL) {
-		body->SetLinearVelocity(b2Vec2(ENERGY_BALL_SPEED, 0.0f));
-	}
+b2PolygonShape EntityFactory::createShape(Entity * entity) {
+	const float (&entitySettings)[4] = entitiesSettings[entity->getType()];
 
 	b2PolygonShape shape;
+
 	shape.SetAsBox(entitySettings[HALF_WIDTH],
 		entitySettings[HALF_HEIGHT],
 		b2Vec2(entitySettings[X_OFFSET], entitySettings[Y_OFFSET]),
 		0.0f);
 
-	body->CreateFixture(&shape,
-		(bodyDef.type == b2_staticBody) ? 0.0f : 1.0f);
+	return shape;
+}
 
-	body->SetUserData(entity);
-
+void EntityFactory::attachBody(Entity * entity, b2Body * body) {
 	// TODO find a better way?
 	switch(entity->getType()) {
 		case TYPE_PLAYER:
@@ -57,6 +55,24 @@ void EntityFactory::createBody(Entity * entity) {
 		default:
 			break;
 	}
+}
 
+void EntityFactory::createBody(Entity * entity) {
 	entity->setId(this->nextDynamicEntityId++);
+
+	b2BodyDef bodyDef = createBodyDef(entity);
+	b2PolygonShape shape = createShape(entity);
+
+	b2Body * body = this->world.CreateBody(&bodyDef);
+	attachBody(entity, body);
+	body->SetUserData(entity);
+
+	if(entity->getType() == TYPE_ENERGY_BALL) {
+		body->SetLinearVelocity(
+			b2Vec2(ENERGY_BALL_SPEED, 0.0f));
+	}
+
+	// "Attach" shape to body
+	body->CreateFixture(&shape,
+		(bodyDef.type == b2_staticBody) ? 0.0f : 1.0f);
 }

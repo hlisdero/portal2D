@@ -14,6 +14,10 @@ public:
 private:
 	b2World & world;
 	int nextDynamicEntityId = 0;
+
+	b2BodyDef createBodyDef(Entity * entity);
+	b2PolygonShape createShape(Entity * entity);
+	void attachBody(Entity * entity, b2Body * body);
 };
 
 #endif  // ENTITY_FACTORY_H
