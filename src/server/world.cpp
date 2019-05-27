@@ -1,18 +1,18 @@
 #include "server/world.h"
 
 // Initialize the world with the gravity vector
-World::World(Map map) :
+World::World(Map & map) :
 	world(b2Vec2(0.0f, -10.0f)),
 	entityFactory(world), 
 	map(map) {
 	this->world.SetContactListener(&this->contactListener);
 
-	std::vector<Entity*> & staticEntities = map.getStaticEntities();
+	const std::vector<Entity*> & staticEntities = map.getStaticEntities();
 	for(uint i = 0; i < staticEntities.size(); i++) {
 		this->entityFactory.createBody(staticEntities[i]);
 	}
 
-	std::vector<Entity*> & dynamicEntities = map.getDynamicEntities();
+	const std::vector<Entity*> & dynamicEntities = map.getDynamicEntities();
 	for(uint i = 0; i < dynamicEntities.size(); i++) {
 		this->entityFactory.createBody(dynamicEntities[i]);
 	}
@@ -36,18 +36,11 @@ void World::updatePhysics() {
 	this->world.Step(timeStep, velocityIterations, positionIterations);
 }
 
-std::vector<Entity> World::getStaticEntities() const {
-	std::vector<Entity> entities;
-
-	// TODO change. Copy static entities, before passing them to the client: will no longer be necessary when using sockets
-	std::vector<Entity*> & staticEntities = this->map.getStaticEntities();
-	for(uint i = 0; i < staticEntities.size(); i++) {
-		entities.push_back(*staticEntities[i]);
-	}
-
-	return entities;
+std::vector<Entity*> World::getStaticEntities() const {
+	return this->map.getStaticEntities();
 }
 
+// TODO change: entity slicing, not a problem?
 std::vector<Entity> World::getDynamicEntities() const {
 	const b2Body * body = this->world.GetBodyList();
 

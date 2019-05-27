@@ -21,12 +21,12 @@
 
 class World {
 public:
-	explicit World(Map map);
+	explicit World(Map & map);
 
     void createPlayer(PlayerEntity * player);
     void updatePhysics();
 
-	std::vector<Entity> getStaticEntities() const;
+	std::vector<Entity*> getStaticEntities() const;
 	std::vector<Entity> getDynamicEntities() const;
 private:
 	b2World world;

@@ -16,7 +16,7 @@ void ServerInterface::updatePhysics() {
 	this->world.updatePhysics();
 }
 
-std::vector<Entity> ServerInterface::getStaticEntities() const {
+std::vector<Entity*> ServerInterface::getStaticEntities() const {
 	return this->world.getStaticEntities();
 }
 

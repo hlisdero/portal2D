@@ -6,18 +6,19 @@
 #include "server/entities/button.h"
 #include "server/entities/rock.h"
 
-Map::Map() : staticEntities(), dynamicEntities() {
+Map::Map() {
 	// this->staticEntities.push_back(new Entity(TYPE_METAL_BLOCK, 1.0f, 1.0f, 0.0f));
 	// this->staticEntities.push_back(new Entity(TYPE_METAL_BLOCK, 2.0f, 1.0f, 0.0f));
 	// this->staticEntities.push_back(new Entity(TYPE_METAL_BLOCK, 3.0f, 1.0f, 0.0f));
 	// this->dynamicEntities.push_back(new RockEntity(1.0f, 5.0f));
 
-	YAML::Node file = YAML::LoadFile("map1.yaml");
+	YAML::Node file = YAML::LoadFile("../data/maps/map1.yaml");
 	this->loadEntities(file);
 }
 
 void Map::loadEntities(YAML::Node yaml) {
 	YAML::Node entities = yaml["entities"];
+
 	for(uint i = 0; i < entities.size(); i++) {
 		Entity * entity = this->createEntity(entities[i]);
 		if(entity->getType() < DYNAMIC_ENTITY_START) {
@@ -63,20 +64,20 @@ Entity * Map::createEntity(YAML::Node yaml) {
 	return entity;
 }
 
-std::vector<Entity*> & Map::getStaticEntities() {
+const std::vector<Entity*> & Map::getStaticEntities() const {
 	return this->staticEntities;
 }
 
-std::vector<Entity*> & Map::getDynamicEntities() {
+const std::vector<Entity*> & Map::getDynamicEntities() const {
 	return this->dynamicEntities;
 }
 
 Map::~Map() {
 	for(uint i = 0; i < this->staticEntities.size(); i++) {
-		delete staticEntities[i];
+		delete this->staticEntities[i];
 	}
 
 	for(uint i = 0; i < this->dynamicEntities.size(); i++) {
-		delete dynamicEntities[i];
+		delete this->dynamicEntities[i];
 	}
 }
