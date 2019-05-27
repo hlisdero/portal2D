@@ -12,11 +12,12 @@ class DoorEntity;
 
 class DoorEntity : public Entity, public WithState {
 public:
-	DoorEntity(const float x, const float y, const float angle, DoorLogica & logica);
+	DoorEntity(const float x, const float y, const float angle, DoorLogica * logica);
+	DoorEntity(YAML::Node yaml);
 
 	void updateState();
 private:
-	DoorLogica & logica;
+	DoorLogica * logica;
 };
 
 #endif  // DOOR_ENTITY_H

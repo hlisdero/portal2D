@@ -1,5 +1,4 @@
-name: 'Hola Mundo'
-min-players: 4
+
 elements:
     -
         type: 1

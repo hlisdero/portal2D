@@ -2,6 +2,7 @@
 #define MAP_H
 
 #include <vector>
+#include "yaml-cpp/yaml.h"
 
 #include "common/entities/entity.h"
 
@@ -17,6 +18,9 @@ public:
 private:
 	std::vector<Entity*> staticEntities;
 	std::vector<Entity*> dynamicEntities;
+
+	void loadEntities(YAML::Node yaml);
+	Entity * createEntity(YAML::Node yaml);
 };
 
 #endif  // MAP_H

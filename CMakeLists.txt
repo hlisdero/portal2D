@@ -17,8 +17,12 @@ pkg_search_module(SDL2 REQUIRED sdl2)
 pkg_search_module(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
 pkg_search_module(SDL2MIXER REQUIRED SDL2_mixer>=2.0.0)
 
+# YAML
+pkg_search_module(YAML_CPP REQUIRED yaml-cpp)
+
 # Box2D
 pkg_search_module(BOX2D REQUIRED box2d)
+
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SDL2MIXER_INCLUDE_DIRS} ${YAML_CPP_INCLUDEDIR})
 
 # Executables
@@ -28,7 +32,7 @@ include_directories(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SDL2MIXER_I
 add_executable(game ${game_sources} ${common_sources} ${server_sources} ${client2_sources} ${client_sources})
 target_include_directories(game PRIVATE ${PROJECT_SOURCE_DIR}/include/)
 target_compile_options(game PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
-target_link_libraries(game ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} ${BOX2D_LIBRARIES})
+target_link_libraries(game ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} ${BOX2D_LIBRARIES} ${YAML_CPP_LIBRARIES})
 
 # View Test
 add_executable(view-test ${test_sources} ${client_sources})

@@ -3,6 +3,9 @@
 EnergyReceiverEntity::EnergyReceiverEntity(const float x, const float y) :
 	Entity(TYPE_ENERGY_RECEIVER, x, y, 0), WithState(STATE_DISABLED) {}
 
+EnergyReceiverEntity::EnergyReceiverEntity(YAML::Node yaml) :
+	Entity(TYPE_ENERGY_RECEIVER, yaml), WithState(yaml) {}
+
 void EnergyReceiverEntity::handleContactWith(Entity * other, b2Contact *, bool) {
 	if(other->getType() == TYPE_ENERGY_BALL) {
 		this->setState(STATE_ENABLED);

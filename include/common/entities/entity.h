@@ -1,6 +1,8 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include "yaml-cpp/yaml.h"
+
 enum EntityType {
 	// Static
 	// - Ground
@@ -13,7 +15,6 @@ enum EntityType {
 	TYPE_ENERGY_BAR,
 	TYPE_ENERGY_EMITTOR,
 	TYPE_ENERGY_RECEIVER,
-	TYPE_ENDCAKE,
 	TYPE_BUTTON,
 	TYPE_PORTAL,
 
@@ -45,7 +46,6 @@ const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
 	{0.0f, 0.5f, 0.5f, 0.05f},     // TYPE_ENERGY_BAR
 	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENERGY_EMITTOR
 	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENERGY_RECEIVER
-	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENDCAKE
 	{0.0f, -0.25f, 0.5f, 0.25f},   // TYPE_BUTTON
 	{-0.5f, 0.0f, 0.05f, 0.5f},    // TYPE_PORTAL
 	{0.0f, 0.0f, 0.25f, 0.25f},    // TYPE_ROCK
@@ -58,6 +58,7 @@ constexpr EntityType DYNAMIC_ENTITY_START = TYPE_ROCK;
 class Entity {
 public:
 	Entity(EntityType type, float x, float y, float angle = 0.0f);
+	Entity(EntityType type, YAML::Node yaml);
 
 	float getX() const;
 	float getY() const;

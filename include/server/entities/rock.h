@@ -8,6 +8,7 @@ class RockEntity :  public Entity, public BodyLinked {
 public:
 	// TODO add rock type
 	RockEntity(const float intialX, const float intialY);
+	RockEntity(YAML::Node yaml);
 
 	// TODO
 	//void respawn();

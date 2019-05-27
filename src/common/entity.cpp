@@ -3,6 +3,12 @@
 Entity::Entity(EntityType type, float x, float y, float angle) :
     type(type), x(x), y(y), angle(angle) {}
 
+Entity::Entity(EntityType type, YAML::Node yaml) :
+    type(type), 
+    x(yaml["x"].as<float>()), 
+    y(yaml["y"].as<float>()), 
+    angle(yaml["angle"].as<float>()) {}
+
 float Entity::getX() const {
     return this->x;
 }

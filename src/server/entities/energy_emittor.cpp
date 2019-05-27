@@ -3,6 +3,9 @@
 EnergyEmittorEntity::EnergyEmittorEntity(const float x, const float y, const float angle) :
 	Entity(TYPE_ENERGY_EMITTOR, x, y, angle) {}
 
+EnergyEmittorEntity::EnergyEmittorEntity(YAML::Node yaml) :
+Entity(TYPE_ENERGY_EMITTOR, yaml) {}
+
 bool EnergyEmittorEntity::hasABall() const {
 	return this->hasABall_;
 }

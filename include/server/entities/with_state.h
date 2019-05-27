@@ -18,6 +18,7 @@ enum State {
 class WithState {
 public:
 	WithState(const State state);
+	WithState(const bool state);
 
 	bool getState() const;
 	void setState(const State state);
