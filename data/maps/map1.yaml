@@ -19,6 +19,34 @@ entities:
         angle: 0.0
 
     -
+        type: 1
+        x: 4.0
+        y: 1.0
+        angle: 0.0
+    -
+        type: 1
+        x: 5.0
+        y: 1.0
+        angle: 0.0
+    -
+        type: 1
+        x: 6.0
+        y: 1.0
+        angle: 0.0
+
+    -
+        type: 1
+        x: 5.0
+        y: 5.0
+        angle: 0.0
+
+    -
+        type: 1
+        x: 1.0
+        y: 2.0
+        angle: 0.0
+
+    -
         type: 10
         x: 1.0
         y: 5.0

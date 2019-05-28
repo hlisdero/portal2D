@@ -11,11 +11,14 @@ int main() {
 	ServerInterface server;
 
 	// create drawable world with statics objects
-	// auto staticEntities = server.getStaticEntities();
+	auto staticEntities = server.getStaticEntities();
 	// auto initialDynamicEntities = server.getDynamicEntities();
 	ClockLoop<60> clock;
 
-    client.view.createPlayer(Position(1, 5));
+    for(uint i = 0; i < staticEntities.size(); i++) {
+        client.view.createBlock(Position((int)staticEntities[i]->getX(), (int) staticEntities[i]->getY()));
+    }
+    auto player_index = client.view.createPlayer(Position(1, 5));
 
 	while (!client.quit()) {
         client.pollEvents();
@@ -26,13 +29,13 @@ int main() {
 		server.updatePhysics();
 
 		// update drawable world
-		// auto dynamicEntities = server.getDynamicEntities();
-        // for (auto& entity : dynamicEntities) {
-        //     if (entity.getType() == TYPE_PLAYER) {
-        //         Position position(entity.getX(), entity.getY());
-        //         client.view.updatePosition(player_index, position);
-        //     }
-        // }
+		auto dynamicEntities = server.getDynamicEntities();
+        for (auto& entity : dynamicEntities) {
+            if (entity.getType() == TYPE_PLAYER) {
+                Position position(entity.getX(), entity.getY());
+                client.view.updatePosition(player_index, position);
+            }
+        }
         client.view.update();
 
 		// wait t1

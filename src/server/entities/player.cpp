@@ -7,7 +7,12 @@ void PlayerEntity::handleFloorContact(b2Contact * contact, bool inContact) {
 	float direction = (contact->GetFixtureA()->GetBody()->GetUserData() == this) ? -1.0f : 1.0f;
 
 	if(contact->GetManifold()->localNormal == b2Vec2(0.0f, direction)) {
-		this->isOnTheFloor = inContact;
+		if(inContact) {
+			this->contactWithTheFloor++;
+		} else {
+			this->contactWithTheFloor--;
+		}
+		this->isOnTheFloor = this->contactWithTheFloor > 0;
 	}
 }
 
