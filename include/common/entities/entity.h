@@ -60,6 +60,8 @@ public:
 	Entity(EntityType type, float x, float y, float angle = 0.0f);
 	Entity(EntityType type, YAML::Node yaml);
 
+	virtual ~Entity() = default;
+	
 	float getX() const;
 	float getY() const;
     void setX(float x);
