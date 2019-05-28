@@ -7,11 +7,6 @@
 #include "server/entities/rock.h"
 
 Map::Map() {
-	// this->staticEntities.push_back(new Entity(TYPE_METAL_BLOCK, 1.0f, 1.0f, 0.0f));
-	// this->staticEntities.push_back(new Entity(TYPE_METAL_BLOCK, 2.0f, 1.0f, 0.0f));
-	// this->staticEntities.push_back(new Entity(TYPE_METAL_BLOCK, 3.0f, 1.0f, 0.0f));
-	// this->dynamicEntities.push_back(new RockEntity(1.0f, 5.0f));
-
 	YAML::Node file = YAML::LoadFile("../data/maps/map1.yaml");
 	this->loadEntities(file);
 }

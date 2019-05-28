@@ -36,7 +36,7 @@ void World::updatePhysics() {
 	this->world.Step(timeStep, velocityIterations, positionIterations);
 }
 
-std::vector<Entity*> World::getStaticEntities() const {
+const std::vector<Entity*> & World::getStaticEntities() const {
 	return this->map.getStaticEntities();
 }
 

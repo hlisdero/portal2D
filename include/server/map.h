@@ -10,8 +10,6 @@ class Map {
 public:
 	Map();
 
-	// std::vector<Entity*> & getStaticEntities();
-
 	const std::vector<Entity*> & getStaticEntities() const;
 	const std::vector<Entity*> & getDynamicEntities() const;
 
