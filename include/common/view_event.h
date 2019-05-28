@@ -6,9 +6,11 @@
 class ViewEvent {
 public:
     explicit ViewEvent() = default;
-    explicit ViewEvent(MoveDirection direction);
+    ViewEvent(MoveDirection direction, bool pressed, bool repeat);
 
     MoveDirection direction = NONE;
+    bool pressed = false;
+    bool repeat = false;
 };
 
 #endif  // VIEW_EVENT_H

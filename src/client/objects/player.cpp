@@ -26,22 +26,3 @@ int Player::getHeight() const {
 SDL_Rect* Player::getClip() {
     return idle.getClip();
 }
-
-void Player::handle(const KeyboardEvent& event) {
-    MoveDirection direction = NONE;
-    switch (event.key) {
-        case 'w':
-            direction = UP;
-            break;
-        case 'a':
-            direction = LEFT;
-            break;
-        case 'd':
-            direction = RIGHT;
-            break;
-    }
-
-    if (direction != NONE) {
-        // world.move(this);
-    }
-}

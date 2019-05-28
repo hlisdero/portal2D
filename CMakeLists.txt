@@ -4,7 +4,6 @@ project(portal2d)
 
 # Sources
 file(GLOB_RECURSE client_sources ${PROJECT_SOURCE_DIR}/src/client/*)
-file(GLOB_RECURSE client2_sources ${PROJECT_SOURCE_DIR}/src/client2/*)
 file(GLOB_RECURSE server_sources ${PROJECT_SOURCE_DIR}/src/server/*)
 file(GLOB_RECURSE common_sources ${PROJECT_SOURCE_DIR}/src/common/*)
 file(GLOB_RECURSE game_sources ${PROJECT_SOURCE_DIR}/src/game/*)
@@ -29,15 +28,15 @@ include_directories(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SDL2MIXER_I
 # be sure there's exactly one main() function in the source files
 
 # Game
-add_executable(game ${game_sources} ${common_sources} ${server_sources} ${client2_sources} ${client_sources})
+add_executable(game ${game_sources} ${common_sources} ${server_sources} ${client_sources})
 target_include_directories(game PRIVATE ${PROJECT_SOURCE_DIR}/include/)
 target_compile_options(game PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
 target_link_libraries(game ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} ${BOX2D_LIBRARIES} ${YAML_CPP_LIBRARIES})
 
 # View Test
-add_executable(view-test ${test_sources} ${client_sources})
+add_executable(view-test ${test_sources} ${client_sources} ${common_sources})
 target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/include/)
 target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/test/include)
 target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/lib/Catch2)
 target_compile_options(view-test PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
-target_link_libraries(view-test ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES})
+target_link_libraries(view-test ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} ${YAML_CPP_LIBRARIES})
