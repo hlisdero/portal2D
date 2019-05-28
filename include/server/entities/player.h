@@ -21,9 +21,7 @@ public:
 
 	void handleFloorContact(b2Contact * contact, bool isBegin);
 
-private:
-	int contactWithTheFloor = 0;
-	
+private:	
 	bool isOnTheFloor = false;
 	// This allow for better gameplay experience
 	bool hasMovedInTheAir = false;

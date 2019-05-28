@@ -12,14 +12,16 @@ int main() {
 
 	// create drawable world with statics objects
 	auto staticEntities = server.getStaticEntities();
-	// auto initialDynamicEntities = server.getDynamicEntities();
-	ClockLoop<60> clock;
+	// auto initialDynamicEntities
+
+     = server.getDynamicEntities();
 
     for(uint i = 0; i < staticEntities.size(); i++) {
-        client.view.createBlock(Position((int)staticEntities[i]->getX(), (int) staticEntities[i]->getY()));
+        client.view.createBlock(Position(staticEntities[i]->getX(), staticEntities[i]->getY()));
     }
     auto player_index = client.view.createPlayer(Position(1, 5));
 
+	ClockLoop<60> clock;
 	while (!client.quit()) {
         client.pollEvents();
         while (!client.queue.empty()) {
