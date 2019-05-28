@@ -8,3 +8,7 @@ Client::Client() :
 void Client::pollEvents() {
     event_handler.poll();
 }
+
+bool Client::quit() const {
+    return event_handler.quit();
+}

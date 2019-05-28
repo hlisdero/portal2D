@@ -17,6 +17,8 @@ public:
 
     void pollEvents();
 
+    bool quit() const;
+
     WorldView view;
     BlockingQueue queue;
 
