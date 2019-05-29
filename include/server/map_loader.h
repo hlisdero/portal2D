@@ -11,6 +11,7 @@ public:
 	Map loadMap(const char * mapName);
 
 private:
+	void loadSettings(Map & map, YAML::Node yaml);
 	void loadEntities(Map & map, YAML::Node yaml);
 	Entity * createEntity(Map & map, YAML::Node yaml);
 };

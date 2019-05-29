@@ -1,4 +1,7 @@
 min-players: 1
+spawn:
+    x: 1.0
+    y: 4.0
 entities:
     -
         type: 1
@@ -48,6 +51,6 @@ entities:
 
     -
         type: 11
-        x: 1.0
+        x: 3.0
         y: 5.0
         angle: 0.0

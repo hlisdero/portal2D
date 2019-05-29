@@ -6,7 +6,7 @@ Map::Map(Map && other) :
 	dynamicEntities(std::move(other.dynamicEntities)),
 	endZone(other.endZone) {}
 
-Map::Map(int minPlayers) : minPlayers(minPlayers) {}
+Map::Map() {}
 
 const std::vector<Entity*> & Map::getStaticEntities() const {
 	return this->staticEntities;

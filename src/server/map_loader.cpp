@@ -10,14 +10,35 @@
 Map MapLoader::loadMap(const char * mapName) {
 	// TODO if map exist?
 	
-	YAML::Node file = YAML::LoadFile(mapName);
+	YAML::Node file;
+	try {
+		file = YAML::LoadFile(mapName);
+	} catch(...) {
+		throw std::runtime_error("Impossible to load the map");
+	}
 
-	int minPlayers = file["min-players"].as<int>();
+	Map map;
 
-	Map map(minPlayers);
-	this->loadEntities(map, file);
+	try {
+		this->loadSettings(map, file);
+	} catch(...) {
+		throw std::runtime_error("Impossible to load the map settings");
+	}
+	try {
+		this->loadEntities(map, file);
+	} catch(...) {
+		throw std::runtime_error("Impossible to load the map entities");
+	}
 
 	return std::move(map);
+}
+
+void MapLoader::loadSettings(Map & map, YAML::Node yaml) {
+	map.minPlayers = yaml["min-players"].as<int>();
+
+	YAML::Node spawn = yaml["spawn"];
+	map.spawn.x = spawn["x"].as<float>();
+	map.spawn.y = spawn["y"].as<float>();
 }
 
 void MapLoader::loadEntities(Map & map, YAML::Node yaml) {

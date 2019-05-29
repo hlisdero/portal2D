@@ -1,6 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "Box2D/Box2D.h"
+
 #include <vector>
 
 class Map;
@@ -14,8 +16,6 @@ public:
 	Map(Map & other) = default;
 	Map(Map && other);
 
-	explicit Map(int minPlayers);
-
 	const std::vector<Entity*> & getStaticEntities() const;
 	const std::vector<Entity*> & getDynamicEntities() const;
 
@@ -27,12 +27,15 @@ public:
 private:
 	friend MapLoader;
 
-	int minPlayers;
+	int minPlayers = 0;
+	b2Vec2 spawn;
 
 	std::vector<Entity*> staticEntities;
 	std::vector<Entity*> dynamicEntities;
 
 	EndZone endZone;
+
+	Map();
 };
 
 #endif  // MAP_H
