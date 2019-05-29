@@ -4,13 +4,7 @@
 #include <vector>
 #include "client/screen/screen.h"
 #include "client/texture/texture_loader.h"
-#include "client/objects/drawable_box2D.h"
-#include "client/objects/player.h"
-#include "client/objects/metal_block.h"
-#include "client/objects/stone_block.h"
-#include "client/objects/acid.h"
-#include "client/objects/button.h"
-#include "client/objects/background.h"
+#include "client/objects/objects.h"
 #include "common/ratio.h"
 #include "common/size.h"
 #include "common/entities/entity.h"
@@ -31,6 +25,9 @@ public:
     size_t createStoneBlock(const Position& initial);
     size_t createAcid(const Position& initial);
     size_t createButton(const Position& initial);
+    size_t createEnergyBall(const Position& initial);
+    size_t createEnergyReceiver(const Position& initial, double rotation = 0.0);
+    size_t createRock(const Position& initial, double rotation = 0.0);
 
     void updatePosition(size_t index, const Position& position);
 

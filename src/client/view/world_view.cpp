@@ -35,15 +35,36 @@ size_t WorldView::createStoneBlock(const Position& initial) {
 
 size_t WorldView::createAcid(const Position& initial) {
     Size size(entitiesSettings[TYPE_ACID][HALF_WIDTH]*2, entitiesSettings[TYPE_ACID][HALF_HEIGHT]*2);
-    Acid* block = new Acid(size, initial, meter_to_pixel, textures["Miscellaneous"]);
-    view_objects.push_back(block);
+    Acid* acid = new Acid(size, initial, meter_to_pixel, textures["Miscellaneous"]);
+    view_objects.push_back(acid);
     return view_objects.size() - 1;
 }
 
 size_t WorldView::createButton(const Position& initial) {
     Size size(entitiesSettings[TYPE_BUTTON][HALF_WIDTH]*2, entitiesSettings[TYPE_BUTTON][HALF_HEIGHT]*2);
-    Button* block = new Button(size, initial, meter_to_pixel, textures["Miscellaneous"]);
-    view_objects.push_back(block);
+    Button* button = new Button(size, initial, meter_to_pixel, textures["Miscellaneous"]);
+    view_objects.push_back(button);
+    return view_objects.size() - 1;
+}
+
+size_t WorldView::createEnergyBall(const Position& initial) {
+    Size size(entitiesSettings[TYPE_ENERGY_BALL][HALF_WIDTH]*2, entitiesSettings[TYPE_ENERGY_BALL][HALF_HEIGHT]*2);
+    EnergyBall* energy_ball = new EnergyBall(size, initial, meter_to_pixel, textures["FX"]);
+    view_objects.push_back(energy_ball);
+    return view_objects.size() - 1;
+}
+
+size_t WorldView::createEnergyReceiver(const Position& initial, double rotation) {
+    Size size(entitiesSettings[TYPE_ENERGY_RECEIVER][HALF_WIDTH]*2, entitiesSettings[TYPE_ENERGY_RECEIVER][HALF_HEIGHT]*2);
+    EnergyReceiver* energy_receiver = new EnergyReceiver(size, initial, meter_to_pixel, textures["Block"], rotation);
+    view_objects.push_back(energy_receiver);
+    return view_objects.size() - 1;
+}
+
+size_t WorldView::createRock(const Position& initial, double rotation) {
+    Size size(entitiesSettings[TYPE_ROCK][HALF_WIDTH]*2, entitiesSettings[TYPE_ROCK][HALF_HEIGHT]*2);
+    Rock* rock = new Rock(size, initial, meter_to_pixel, textures["Block"], rotation);
+    view_objects.push_back(rock);
     return view_objects.size() - 1;
 }
 
