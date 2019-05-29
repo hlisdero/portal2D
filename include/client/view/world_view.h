@@ -20,14 +20,14 @@ public:
 
     ~WorldView();
 
-    size_t createPlayer(const Position& initial);
-    size_t createMetalBlock(const Position& initial);
-    size_t createStoneBlock(const Position& initial);
-    size_t createAcid(const Position& initial);
-    size_t createButton(const Position& initial);
-    size_t createEnergyBall(const Position& initial);
-    size_t createEnergyReceiver(const Position& initial, double rotation = 0.0);
-    size_t createRock(const Position& initial, double rotation = 0.0);
+    void createPlayer(size_t index, const Position& initial);
+    void createMetalBlock(size_t index, const Position& initial);
+    void createStoneBlock(size_t index, const Position& initial);
+    void createAcid(size_t index, const Position& initial);
+    void createButton(size_t index, const Position& initial);
+    void createEnergyBall(size_t index, const Position& initial);
+    void createEnergyReceiver(size_t index, const Position& initial, double rotation = 0.0);
+    void createRock(size_t index, const Position& initial, double rotation = 0.0);
 
     void updatePosition(size_t index, const Position& position);
 
