@@ -20,11 +20,9 @@ public:
     ~WorldView();
 
     void createEntities(const std::vector<Entity*>& entities);
-    void createEntities(const std::vector<Entity>& entities);
 
     void updatePosition(size_t index, const Position& position);
     void updatePosition(const std::vector<Entity*>& entities);
-    void updatePosition(const std::vector<Entity>& entities);
 
     void update();
 
@@ -38,6 +36,7 @@ public:
 private:
     void renderObjects();
     void checkValidIndex(size_t index);
+    void reserveSize(size_t index);
     void createEntity(EntityType type, size_t id, const Position& initial);
 };
 

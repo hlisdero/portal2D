@@ -15,15 +15,9 @@ void WorldView::createEntities(const std::vector<Entity*>& entities) {
     for (const auto& entity : entities) {
         Position position(entity->getX(), entity->getY());
         size_t id(entity->getId());
+        reserveSize(id);
+        view_objects.reserve(id);
         createEntity(entity->getType(), id, position);
-    }
-}
-
-void WorldView::createEntities(const std::vector<Entity>& entities) {
-    for (const auto& entity : entities) {
-        Position position(entity.getX(), entity.getY());
-        size_t id(entity.getId());
-        createEntity(entity.getType(), id, position);
     }
 }
 
@@ -36,14 +30,6 @@ void WorldView::updatePosition(const std::vector<Entity*>& entities) {
     for (const auto& entity : entities) {
         Position position(entity->getX(), entity->getY());
         size_t id(entity->getId());
-        updatePosition(id, position);
-    }
-}
-
-void WorldView::updatePosition(const std::vector<Entity>& entities) {
-    for (const auto& entity : entities) {
-        Position position(entity.getX(), entity.getY());
-        size_t id(entity.getId());
         updatePosition(id, position);
     }
 }
@@ -66,6 +52,12 @@ void WorldView::renderObjects() {
 void WorldView::checkValidIndex(size_t index) {
     if (index >= view_objects.size() || view_objects[index] == nullptr) {
         throw std::runtime_error("Error: Índice de objeto en la vista inválido");
+    }
+}
+
+void WorldView::reserveSize(size_t index) {
+    if (index + 1 > view_objects.size()) {
+        view_objects.resize(index + 1, nullptr);
     }
 }
 
