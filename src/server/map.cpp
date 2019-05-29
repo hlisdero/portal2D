@@ -5,6 +5,7 @@
 #include "server/entities/energy_receiver.h"
 #include "server/entities/button.h"
 #include "server/entities/rock.h"
+#include "server/entities/end_barrier.h"
 
 Map::Map() {
 	YAML::Node file = YAML::LoadFile("../data/maps/map1.yaml");
@@ -48,6 +49,9 @@ Entity * Map::createEntity(YAML::Node yaml) {
 			break;
 		case TYPE_BUTTON:
 			entity = new ButtonEntity(yaml);
+			break;
+		case TYPE_END_BARRIER:
+			entity = new EndBarrierEntity(yaml);
 			break;
 		case TYPE_ROCK:
 			entity = new RockEntity(yaml);

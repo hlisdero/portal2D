@@ -3,6 +3,7 @@
 #include "server/entities/rock.h"
 #include "server/entities/portal.h"
 #include "server/entities/energy_ball.h"
+#include "server/entities/end_barrier.h"
 
 EntityFactory::EntityFactory(b2World & world) : world(world) {}
 
@@ -48,6 +49,9 @@ void EntityFactory::attachBody(Entity * entity, b2Body * body) {
 			break;
 		case TYPE_PORTAL:
 			entity->as<PortalEntity>()->attachBody(body);
+			break;
+		case TYPE_END_BARRIER:
+			entity->as<EndBarrierEntity>()->attachBody(body);
 			break;
 		case TYPE_ENERGY_BALL:
 			entity->as<EnergyBallEntity>()->attachBody(body);
