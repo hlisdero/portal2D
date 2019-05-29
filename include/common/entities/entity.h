@@ -75,6 +75,11 @@ public:
 	void setId(const int id);
 	int getId() const;
 
+	template <class T> 
+	T * as() {
+		return static_cast<T*>(this);
+	}
+
 private:
 	EntityType type;
 	float x;

@@ -41,16 +41,16 @@ void EntityFactory::attachBody(Entity * entity, b2Body * body) {
 	// TODO find a better way?
 	switch(entity->getType()) {
 		case TYPE_PLAYER:
-			static_cast<PlayerEntity*>(entity)->attachBody(body);
+			entity->as<PlayerEntity>()->attachBody(body);
 			break;
 		case TYPE_ROCK:
-			static_cast<RockEntity*>(entity)->attachBody(body);
+			entity->as<RockEntity>()->attachBody(body);
 			break;
 		case TYPE_PORTAL:
-			static_cast<PortalEntity*>(entity)->attachBody(body);
+			entity->as<PortalEntity>()->attachBody(body);
 			break;
 		case TYPE_ENERGY_BALL:
-			static_cast<EnergyBallEntity*>(entity)->attachBody(body);
+			entity->as<EnergyBallEntity>()->attachBody(body);
 			break;
 		default:
 			break;

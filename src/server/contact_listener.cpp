@@ -26,16 +26,16 @@ void ContactListener::handleContact(b2Contact * contact, bool inContact) {
 void ContactListener::broadcastContact(Entity * entityA, Entity * entityB, b2Contact * contact, bool inContact) {
 	switch(entityA->getType()) {
 		case TYPE_PLAYER:
-			static_cast<PlayerEntity*>(entityA)->handleContactWith(entityB, contact, inContact);
+			entityA->as<PlayerEntity>()->handleContactWith(entityB, contact, inContact);
 			break;
 		// case TYPE_ROCK:		
 		// 	static_cast<RockEntity*>(entityA)->handleContactWith(entityB, contact, inContact);
 		// 	break;
 		case TYPE_ENERGY_RECEIVER:
-			static_cast<EnergyReceiverEntity*>(entityA)->handleContactWith(entityB, contact, inContact);
+			entityA->as<EnergyReceiverEntity>()->handleContactWith(entityB, contact, inContact);
 			break;
 		case TYPE_BUTTON:
-			static_cast<ButtonEntity*>(entityA)->handleContactWith(entityB, contact, inContact);
+			entityA->as<ButtonEntity>()->handleContactWith(entityB, contact, inContact);
 			break;
 		// case TYPE_ENERGY_BALL:
 		// 	break;
