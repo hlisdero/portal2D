@@ -30,6 +30,7 @@ private:
     void updateFlipState(const Position& new_position);
     void updateAnimation(const Position& new_position);
     bool isMovingHorizontally(const Position& new_position) const;
+    float32 abs(float32 number) const;
 };
 
 #endif  // PLAYER_H
