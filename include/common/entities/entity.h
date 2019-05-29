@@ -38,19 +38,19 @@ enum EntitySetting {
 const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
 	// {x_offset, y_offset, half-width, half-height}
 
-	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_STONE_BLOCK
-	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_METAL_BLOCK
-	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_METAL_DIAG_BLOCK
-	{0.0f, -0.25f, 0.5f, 0.25f},   // TYPE_ACID
+	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_STONE_BLOCK
+	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_METAL_BLOCK
+	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_METAL_DIAG_BLOCK
+	{0.0f, -0.25f, 1.5f, 0.3f},    // TYPE_ACID
 	{0.0f, 0.0f, 0.5f, 1.0f},      // TYPE_DOOR
 	{0.0f, 0.5f, 0.5f, 0.05f},     // TYPE_ENERGY_BAR
-	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENERGY_EMITTOR
-	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENERGY_RECEIVER
-	{0.0f, -0.25f, 0.5f, 0.25f},   // TYPE_BUTTON
+	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_ENERGY_EMITTOR
+	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_ENERGY_RECEIVER
+	{0.0f, -0.25f, 0.87f, 0.27f},  // TYPE_BUTTON
 	{-0.5f, 0.0f, 0.05f, 0.5f},    // TYPE_PORTAL
-	{0.0f, 0.0f, 0.25f, 0.25f},    // TYPE_ROCK
-	{0.0f, -0.1f, 0.25f, 0.4f},    // TYPE_PLAYER
-	{0.0f, 0.0f, 0.25f, 0.25f},    // TYPE_ENERGY_BALL
+	{0.0f, 0.0f, 0.65f, 0.65f},    // TYPE_ROCK
+	{0.0f, 0.0f, 0.4f, 0.85f},     // TYPE_PLAYER
+	{0.0f, 0.0f, 0.55f, 0.30f},    // TYPE_ENERGY_BALL
 };
 
 constexpr EntityType DYNAMIC_ENTITY_START = TYPE_ROCK;
@@ -61,7 +61,7 @@ public:
 	Entity(EntityType type, YAML::Node yaml);
 
 	virtual ~Entity() = default;
-	
+
 	float getX() const;
 	float getY() const;
     void setX(float x);
@@ -71,7 +71,7 @@ public:
     void setAngle(float angle);
 
 	EntityType getType() const;
-	
+
 	void setId(const int id);
 	int getId() const;
 
