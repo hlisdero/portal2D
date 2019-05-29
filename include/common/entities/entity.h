@@ -41,12 +41,12 @@ const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
 	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_STONE_BLOCK
 	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_METAL_BLOCK
 	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_METAL_DIAG_BLOCK
-	{0.0f, -0.25f, 0.5f, 0.25f},   // TYPE_ACID
+	{0.0f, -0.25f, 3.0f, 0.61f},   // TYPE_ACID
 	{0.0f, 0.0f, 0.5f, 1.0f},      // TYPE_DOOR
 	{0.0f, 0.5f, 0.5f, 0.05f},     // TYPE_ENERGY_BAR
 	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENERGY_EMITTOR
 	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENERGY_RECEIVER
-	{0.0f, -0.25f, 0.5f, 0.25f},   // TYPE_BUTTON
+	{0.0f, -0.25f, 1.75f, 0.55f},  // TYPE_BUTTON
 	{-0.5f, 0.0f, 0.05f, 0.5f},    // TYPE_PORTAL
 	{0.0f, 0.0f, 0.25f, 0.25f},    // TYPE_ROCK
 	{0.0f, 0.0f, 0.4f, 0.8f},      // TYPE_PLAYER

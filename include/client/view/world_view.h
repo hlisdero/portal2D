@@ -8,6 +8,8 @@
 #include "client/objects/player.h"
 #include "client/objects/metal_block.h"
 #include "client/objects/stone_block.h"
+#include "client/objects/acid.h"
+#include "client/objects/button.h"
 #include "client/objects/background.h"
 #include "common/ratio.h"
 #include "common/size.h"
@@ -27,6 +29,8 @@ public:
     size_t createPlayer(const Position& initial);
     size_t createMetalBlock(const Position& initial);
     size_t createStoneBlock(const Position& initial);
+    size_t createAcid(const Position& initial);
+    size_t createButton(const Position& initial);
 
     void updatePosition(size_t index, const Position& position);
 

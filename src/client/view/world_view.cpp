@@ -33,6 +33,20 @@ size_t WorldView::createStoneBlock(const Position& initial) {
     return view_objects.size() - 1;
 }
 
+size_t WorldView::createAcid(const Position& initial) {
+    Size size(entitiesSettings[TYPE_ACID][HALF_WIDTH]*2, entitiesSettings[TYPE_ACID][HALF_HEIGHT]*2);
+    Acid* block = new Acid(size, initial, meter_to_pixel, textures["Miscellaneous"]);
+    view_objects.push_back(block);
+    return view_objects.size() - 1;
+}
+
+size_t WorldView::createButton(const Position& initial) {
+    Size size(entitiesSettings[TYPE_BUTTON][HALF_WIDTH]*2, entitiesSettings[TYPE_BUTTON][HALF_HEIGHT]*2);
+    Button* block = new Button(size, initial, meter_to_pixel, textures["Miscellaneous"]);
+    view_objects.push_back(block);
+    return view_objects.size() - 1;
+}
+
 void WorldView::updatePosition(size_t index, const Position& position) {
     checkValidIndex(index);
     view_objects[index]->updatePosition(position);
