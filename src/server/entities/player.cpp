@@ -15,8 +15,40 @@ void PlayerEntity::handleFloorContact(b2Contact * contact, bool inContact) {
 	}
 }
 
-void PlayerEntity::handleContactWith(Entity *, b2Contact * contact, bool inContact) {
+void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool inContact) {
 	this->handleFloorContact(contact, inContact);
+
+	switch(other->getType()) {
+		case TYPE_PORTAL: 
+			this->goThroughPortal(other->as<PortalEntity>());
+			break;
+		default:
+			break;
+	}
+}
+
+void PlayerEntity::goThroughPortal(PortalEntity * portal) {
+	PortalEntity * twin = portal->getTwin();
+
+	if(twin != nullptr) {
+		// rotation in [0, 2PI]
+		float rotation = (portal->getAngle() + twin->getAngle());
+		if(rotation >= TwoPI) {
+			rotation -= TwoPI;
+		}
+
+		const b2Vec2 & inVelocity = this->getBody()->GetLinearVelocity();
+
+		// Apply rotation to velocity
+		b2Vec2 outVelocity(
+			inVelocity.x * cos(rotation) - inVelocity.y * sin(rotation),
+			inVelocity.x * sin(rotation) + inVelocity.y * cos(rotation)
+			);
+
+		// Update player velocity and position
+		this->getBody()->SetLinearVelocity(outVelocity);
+		this->getBody()->SetTransform(b2Vec2(twin->getX(), twin->getY()), 0);
+	}
 }
 
 void PlayerEntity::keyDown(const MoveDirection direction) {

@@ -1,12 +1,17 @@
 #ifndef PLAYER_ENTITY_H
 #define PLAYER_ENTITY_H
 
+#include <cmath>
+
 #include "Box2D/Box2D.h"
 
 #include "common/entities/entity.h"
 #include "server/entities/body_linked.h"
 #include "server/entities/handle_contact.h"
 #include "common/move_direction.h"
+#include "server/entities/portal.h"
+
+#define TwoPI 6.2831854f
 
 class PlayerEntity :  public Entity, public BodyLinked, public HandleContact {
 public:
@@ -28,6 +33,8 @@ private:
 	MoveDirection moveDirection = NONE;
 
 	void applyImpulseToCenter(float vx, float vy);
+
+	void goThroughPortal(PortalEntity * portal);
 };
 
 #endif  // PLAYER_ENTITY_H
