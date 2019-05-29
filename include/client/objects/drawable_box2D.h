@@ -17,6 +17,9 @@ public:
     virtual int getWidth() const override;
     virtual int getHeight() const override;
 
+    float32 currentX() const;
+    float32 currentY() const;
+
     virtual void updatePosition(const Position& new_position);
 
     virtual ~DrawableBox2D() = default;

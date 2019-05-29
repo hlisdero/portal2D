@@ -19,6 +19,14 @@ int DrawableBox2D::getHeight() const {
     return size.y * meter_to_pixel.y;
 }
 
+float32 DrawableBox2D::currentX() const {
+    return position.x;
+}
+
+float32 DrawableBox2D::currentY() const {
+    return position.y;
+}
+
 void DrawableBox2D::updatePosition(const Position& new_position) {
     position = new_position;
 }
