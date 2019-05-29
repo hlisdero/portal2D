@@ -51,7 +51,7 @@ Entity * Map::createEntity(YAML::Node yaml) {
 			entity = new ButtonEntity(yaml);
 			break;
 		case TYPE_END_BARRIER:
-			entity = new EndBarrierEntity(yaml);
+			entity = new EndBarrierEntity(yaml, this->endZone);
 			break;
 		case TYPE_ROCK:
 			entity = new RockEntity(yaml);

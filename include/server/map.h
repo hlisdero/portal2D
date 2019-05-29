@@ -5,6 +5,7 @@
 #include "yaml-cpp/yaml.h"
 
 #include "common/entities/entity.h"
+#include "server/end_zone.h"
 
 class Map {
 public:
@@ -18,6 +19,8 @@ public:
 private:
 	std::vector<Entity*> staticEntities;
 	std::vector<Entity*> dynamicEntities;
+
+	EndZone endZone;
 
 	void loadEntities(YAML::Node yaml);
 	Entity * createEntity(YAML::Node yaml);
