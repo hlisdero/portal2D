@@ -17,6 +17,7 @@ enum EntityType {
 	TYPE_ENERGY_RECEIVER,
 	TYPE_BUTTON,
 	TYPE_PORTAL,
+	TYPE_END_BARRIER,
 
 	// Dynamic
 	TYPE_ROCK,
@@ -48,6 +49,7 @@ const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
 	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_ENERGY_RECEIVER
 	{0.0f, -0.25f, 0.87f, 0.27f},  // TYPE_BUTTON
 	{-0.5f, 0.0f, 0.05f, 0.5f},    // TYPE_PORTAL
+	{0.0f, 0.5f, 0.05f, 0.5f},     // TYPE_END_BARRIER
 	{0.0f, 0.0f, 0.65f, 0.65f},    // TYPE_ROCK
 	{0.0f, 0.0f, 0.4f, 0.85f},     // TYPE_PLAYER
 	{0.0f, 0.0f, 0.55f, 0.30f},    // TYPE_ENERGY_BALL

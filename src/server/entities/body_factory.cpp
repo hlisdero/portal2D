@@ -1,12 +1,13 @@
-#include "server/entities/entity_factory.h"
+#include "server/entities/body_factory.h"
 #include "server/entities/player.h"
 #include "server/entities/rock.h"
 #include "server/entities/portal.h"
 #include "server/entities/energy_ball.h"
+#include "server/entities/end_barrier.h"
 
-EntityFactory::EntityFactory(b2World & world) : world(world) {}
+BodyFactory::BodyFactory(b2World & world) : world(world) {}
 
-b2BodyDef EntityFactory::createBodyDef(Entity * entity) {
+b2BodyDef BodyFactory::createBodyDef(Entity * entity) {
 	b2BodyDef bodyDef;
 	bodyDef.angle = entity->getAngle();
 	bodyDef.position.Set(entity->getX(), entity->getY());
@@ -24,7 +25,7 @@ b2BodyDef EntityFactory::createBodyDef(Entity * entity) {
 	return bodyDef;
 }
 
-b2PolygonShape EntityFactory::createShape(Entity * entity) {
+b2PolygonShape BodyFactory::createShape(Entity * entity) {
 	const float (&entitySettings)[4] = entitiesSettings[entity->getType()];
 
 	b2PolygonShape shape;
@@ -37,7 +38,7 @@ b2PolygonShape EntityFactory::createShape(Entity * entity) {
 	return shape;
 }
 
-void EntityFactory::attachBody(Entity * entity, b2Body * body) {
+void BodyFactory::attachBody(Entity * entity, b2Body * body) {
 	// TODO find a better way?
 	switch(entity->getType()) {
 		case TYPE_PLAYER:
@@ -49,6 +50,9 @@ void EntityFactory::attachBody(Entity * entity, b2Body * body) {
 		case TYPE_PORTAL:
 			entity->as<PortalEntity>()->attachBody(body);
 			break;
+		case TYPE_END_BARRIER:
+			entity->as<EndBarrierEntity>()->attachBody(body);
+			break;
 		case TYPE_ENERGY_BALL:
 			entity->as<EnergyBallEntity>()->attachBody(body);
 			break;
@@ -57,7 +61,7 @@ void EntityFactory::attachBody(Entity * entity, b2Body * body) {
 	}
 }
 
-void EntityFactory::createBody(Entity * entity) {
+void BodyFactory::createBody(Entity * entity) {
 	entity->setId(this->nextDynamicEntityId++);
 
 	b2BodyDef bodyDef = createBodyDef(entity);

@@ -21,7 +21,7 @@ int main() {
             ViewEvent event = client.queue.pop();
             server.movePlayer(event.direction, event.pressed);
         }
-		server.updatePhysics();
+		server.update();
 
 		// update drawable world
 		// auto dynamicEntities = server.getDynamicEntities();

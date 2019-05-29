@@ -3,8 +3,7 @@
 
 #include <vector>
 
-#include "server/world.h"
-#include "server/map.h"
+#include "server/game.h"
 #include "common/entities/entity.h"
 #include "common/move_direction.h"
 #include "server/entities/player.h"
@@ -16,16 +15,16 @@ public:
 	// - create the scene
 	ServerInterface();
 
-	void updatePhysics();
+	void update();
 
 	const std::vector<Entity*> & getStaticEntities() const;
-	std::vector<Entity> getDynamicEntities() const;
+	const std::vector<Entity*> getDynamicEntities() const;
 
 	void movePlayer(const MoveDirection direction, const bool pressed);
 
 private:
-	Map map;
-	World world;
+	MapLoader mapLoader;
+	Game game;
 	PlayerEntity player;
 };
 

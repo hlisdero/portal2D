@@ -4,6 +4,7 @@
 #include "server/entities/rock.h"
 #include "server/entities/energy_receiver.h"
 #include "server/entities/button.h"
+#include "server/entities/end_barrier.h"
 
 void ContactListener::BeginContact(b2Contact * contact) {
 	handleContact(contact, true);
@@ -36,6 +37,9 @@ void ContactListener::broadcastContact(Entity * entityA, Entity * entityB, b2Con
 			break;
 		case TYPE_BUTTON:
 			entityA->as<ButtonEntity>()->handleContactWith(entityB, contact, inContact);
+			break;
+		case TYPE_END_BARRIER:
+			entityA->as<EndBarrierEntity>()->handleContactWith(entityB, contact, inContact);
 			break;
 		// case TYPE_ENERGY_BALL:
 		// 	break;

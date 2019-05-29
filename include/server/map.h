@@ -2,25 +2,36 @@
 #define MAP_H
 
 #include <vector>
-#include "yaml-cpp/yaml.h"
+
+class Map;
 
 #include "common/entities/entity.h"
+#include "server/end_zone.h"
+#include "server/map_loader.h"
 
 class Map {
 public:
-	Map();
+	Map(Map & other) = default;
+	Map(Map && other);
+
+	explicit Map(int minPlayers);
 
 	const std::vector<Entity*> & getStaticEntities() const;
 	const std::vector<Entity*> & getDynamicEntities() const;
 
+	EndZone & getEndZone();
+
 	~Map();
 
 private:
+	friend MapLoader;
+
+	int minPlayers;
+
 	std::vector<Entity*> staticEntities;
 	std::vector<Entity*> dynamicEntities;
 
-	void loadEntities(YAML::Node yaml);
-	Entity * createEntity(YAML::Node yaml);
+	EndZone endZone;
 };
 
 #endif  // MAP_H
