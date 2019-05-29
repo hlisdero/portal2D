@@ -9,7 +9,12 @@
 
 Map::Map() {
 	YAML::Node file = YAML::LoadFile("../data/maps/map1.yaml");
+	this->loadSettings(file);
 	this->loadEntities(file);
+}
+
+void Map::loadSettings(YAML::Node yaml) {
+	this->minPlayers = yaml["min-players"].as<int>();
 }
 
 void Map::loadEntities(YAML::Node yaml) {

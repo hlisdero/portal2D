@@ -1,4 +1,4 @@
-
+min-players: 1
 entities:
     -
         type: 1

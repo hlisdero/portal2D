@@ -17,12 +17,15 @@ public:
 	~Map();
 
 private:
+	int minPlayers = 1;
+
 	std::vector<Entity*> staticEntities;
 	std::vector<Entity*> dynamicEntities;
 
 	EndZone endZone;
 
 	void loadEntities(YAML::Node yaml);
+	void loadSettings(YAML::Node yaml);
 	Entity * createEntity(YAML::Node yaml);
 };
 
