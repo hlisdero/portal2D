@@ -9,6 +9,8 @@
 
 class Map {
 public:
+	explicit Map(int minPlayers);
+
 	const std::vector<Entity*> & getStaticEntities() const;
 	const std::vector<Entity*> & getDynamicEntities() const;
 
@@ -18,6 +20,8 @@ public:
 
 private:
 	friend MapLoader;
+
+	int minPlayers;
 
 	std::vector<Entity*> staticEntities;
 	std::vector<Entity*> dynamicEntities;

@@ -7,6 +7,8 @@
 #include "server/entities/rock.h"
 #include "server/entities/end_barrier.h"
 
+Map::Map(int minPlayers) : minPlayers(minPlayers) {}
+
 const std::vector<Entity*> & Map::getStaticEntities() const {
 	return this->staticEntities;
 }

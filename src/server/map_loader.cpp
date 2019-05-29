@@ -2,11 +2,13 @@
 
 Map MapLoader::loadMap(char * mapName) {
 	// TODO if map exist?
-
-	Map map;
-
+	
 	YAML::Node file = YAML::LoadFile("../data/maps/map1.yaml");
-	this->loadEntities(file);
+
+	int minPlayers = yaml["min-players"].as<int>();
+
+	Map map(minPlayers);
+	this->loadEntities(map, file);
 
 	return map;
 }
