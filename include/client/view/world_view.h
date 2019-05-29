@@ -2,11 +2,10 @@
 #define WORLD_VIEW_H
 
 #include <vector>
+#include <stdexcept>
 #include "client/screen/screen.h"
-#include "client/texture/texture_loader.h"
-#include "client/objects/objects.h"
+#include "client/view/view_object_creator.h"
 #include "common/ratio.h"
-#include "common/size.h"
 #include "common/entities/entity.h"
 
 class WorldView {
@@ -20,28 +19,26 @@ public:
 
     ~WorldView();
 
-    size_t createPlayer(const Position& initial);
-    size_t createMetalBlock(const Position& initial);
-    size_t createStoneBlock(const Position& initial);
-    size_t createAcid(const Position& initial);
-    size_t createButton(const Position& initial);
-    size_t createEnergyBall(const Position& initial);
-    size_t createEnergyReceiver(const Position& initial, double rotation = 0.0);
-    size_t createRock(const Position& initial, double rotation = 0.0);
+    void createEntities(const std::vector<Entity*>& entities);
+    void createEntities(const std::vector<Entity>& entities);
 
     void updatePosition(size_t index, const Position& position);
+    void updatePosition(const std::vector<Entity*>& entities);
+    void updatePosition(const std::vector<Entity>& entities);
 
     void update();
 
 private:
     Ratio meter_to_pixel;
     Screen screen;
-    TextureLoader textures;
-    Background background;
     std::vector<DrawableBox2D*> view_objects;
+public:
+    ViewObjectCreator view_object_creator;
 
+private:
     void renderObjects();
     void checkValidIndex(size_t index);
+    void createEntity(EntityType type, size_t id, const Position& initial);
 };
 
 #endif  // WORLD_VIEW_H
