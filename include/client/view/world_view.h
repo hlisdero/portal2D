@@ -9,6 +9,8 @@
 #include "client/objects/block.h"
 #include "client/objects/background.h"
 #include "common/ratio.h"
+#include "common/size.h"
+#include "common/entities/entity.h"
 
 class WorldView {
 public:

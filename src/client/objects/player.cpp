@@ -1,8 +1,9 @@
 #include "client/objects/player.h"
 #define EPSILON 0.125f
 
-Player::Player(const Position& initial, Ratio& ratio, const Texture& texture) :
-    DrawableBox2D(initial, ratio), idle(texture), run(texture),
+Player::Player(const Size& size, const Position& initial, Ratio& ratio, const Texture& texture) :
+    DrawableBox2D(size, initial, ratio),
+    idle(texture), run(texture),
     jump_rise(texture), jump_apex(texture),
     jump_fall(texture), jump_land(texture),
     current(&idle) {
@@ -32,14 +33,6 @@ Player::Player(const Position& initial, Ratio& ratio, const Texture& texture) :
 
 const Texture& Player::getTexture() {
     return current->getTexture();
-}
-
-int Player::getWidth() const {
-    return current->getWidth();
-}
-
-int Player::getHeight() const {
-    return current->getHeight();
 }
 
 SDL_Rect* Player::getClip() {

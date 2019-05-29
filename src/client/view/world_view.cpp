@@ -13,13 +13,15 @@ WorldView::~WorldView() {
 }
 
 size_t WorldView::createPlayer(const Position& initial) {
-    Player* player = new Player(initial, meter_to_pixel, textures["Player"]);
+    Size size(entitiesSettings[TYPE_PLAYER][HALF_WIDTH]*2, entitiesSettings[TYPE_PLAYER][HALF_HEIGHT]*2);
+    Player* player = new Player(size, initial, meter_to_pixel, textures["Player"]);
     view_objects.push_back(player);
     return view_objects.size() - 1;
 }
 
 size_t WorldView::createBlock(const Position& initial) {
-    Block* block = new Block(initial, meter_to_pixel, textures["Block"]);
+    Size size(entitiesSettings[TYPE_METAL_BLOCK][HALF_WIDTH]*2, entitiesSettings[TYPE_METAL_BLOCK][HALF_HEIGHT]*2);
+    Block* block = new Block(size, initial, meter_to_pixel, textures["Block"]);
     view_objects.push_back(block);
     return view_objects.size() - 1;
 }
