@@ -2,6 +2,7 @@
 
 Map::Map(Map && other) :
 	minPlayers(other.minPlayers),
+	spawn(other.spawn),
 	staticEntities(std::move(other.staticEntities)),
 	dynamicEntities(std::move(other.dynamicEntities)),
 	endZone(other.endZone) {}
@@ -18,6 +19,10 @@ const std::vector<Entity*> & Map::getDynamicEntities() const {
 
 EndZone & Map::getEndZone() {
 	return this->endZone;
+}
+
+b2Vec2 & Map::getSpawn() {
+	return this->spawn;
 }
 
 int Map::getMinPlayers() {

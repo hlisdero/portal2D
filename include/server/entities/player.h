@@ -15,7 +15,7 @@
 
 class PlayerEntity :  public Entity, public BodyLinked, public HandleContact {
 public:
-	PlayerEntity(const float x, const float y);
+	PlayerEntity();
 
 	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 

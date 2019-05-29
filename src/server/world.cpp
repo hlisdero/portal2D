@@ -20,6 +20,11 @@ World::World(Map & map) :
 
 void World::createPlayer(PlayerEntity * player) {
 	this->players.push_back(player);
+
+	b2Vec2 & spawn = this->map.getSpawn();
+	player->setX(spawn.x); 
+	player->setY(spawn.y);
+
 	this->bodyFactory.createBody(player);
 }
 

@@ -1,7 +1,7 @@
 #include "server/entities/player.h"
 
-PlayerEntity::PlayerEntity(const float x, const float y) :
-	Entity(TYPE_PLAYER, x, y, 0) {}
+PlayerEntity::PlayerEntity() :
+	Entity(TYPE_PLAYER, 0, 0, 0) {}
 
 void PlayerEntity::handleFloorContact(b2Contact * contact, bool inContact) {
 	float direction = (contact->GetFixtureA()->GetBody()->GetUserData() == this) ? -1.0f : 1.0f;

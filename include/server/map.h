@@ -20,6 +20,7 @@ public:
 	const std::vector<Entity*> & getDynamicEntities() const;
 
 	EndZone & getEndZone();
+	b2Vec2 & getSpawn();
 	int getMinPlayers();
 
 	~Map();
@@ -28,7 +29,7 @@ private:
 	friend MapLoader;
 
 	int minPlayers = 0;
-	b2Vec2 spawn;
+	b2Vec2 spawn = b2Vec2(0,0);
 
 	std::vector<Entity*> staticEntities;
 	std::vector<Entity*> dynamicEntities;
