@@ -10,7 +10,7 @@ public:
     virtual SDL_Rect* getClip() override;
 
 private:
-    int slowdown = 4;
+    int slowdown = 7;
 
     void next();
 };
