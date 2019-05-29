@@ -7,7 +7,7 @@
 
 #include "common/entities/entity.h"
 #include "server/entities/player.h"
-#include "server/entities/entity_factory.h"
+#include "server/entities/body_factory.h"
 #include "server/contact_listener.h"
 #include "server/map.h"
 
@@ -24,13 +24,13 @@ public:
 	explicit World(Map & map);
 
     void createPlayer(PlayerEntity * player);
+
     void updatePhysics();
 
-	const std::vector<Entity*> & getStaticEntities() const;
-	std::vector<Entity> getDynamicEntities() const;
+	const std::vector<Entity*> getDynamicEntities() const;
 private:
 	b2World world;
-	EntityFactory entityFactory;
+	BodyFactory bodyFactory;
 	Map & map;
 
 	std::vector<PlayerEntity*> players;

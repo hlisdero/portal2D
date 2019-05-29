@@ -1,7 +1,9 @@
 #include "server/server_interface.h"
 
-ServerInterface::ServerInterface() : world(this->map), player(1.0f, 5.0f) {
-	this->world.createPlayer(&this->player);
+ServerInterface::ServerInterface() : 
+	game(this->mapLoader, "../data/maps/map1.yaml"), 
+	player(1.0f, 5.0f) {
+	this->game.addPlayer(&this->player);
 }
 
 void ServerInterface::movePlayer(const MoveDirection direction, const bool pressed) {
@@ -12,14 +14,14 @@ void ServerInterface::movePlayer(const MoveDirection direction, const bool press
 	}
 }
 
-void ServerInterface::updatePhysics() {
-	this->world.updatePhysics();
+void ServerInterface::update() {
+	this->game.update();
 }
 
 const std::vector<Entity*> & ServerInterface::getStaticEntities() const {
-	return this->world.getStaticEntities();
+	return this->game.getStaticEntities();
 }
 
-std::vector<Entity> ServerInterface::getDynamicEntities() const {
-	return this->world.getDynamicEntities();
+const std::vector<Entity*> ServerInterface::getDynamicEntities() const {
+	return this->game.getDynamicEntities();
 }

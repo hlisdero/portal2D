@@ -1,11 +1,10 @@
 #include "server/map.h"
 
-#include "server/entities/door.h"
-#include "server/entities/energy_emittor.h"
-#include "server/entities/energy_receiver.h"
-#include "server/entities/button.h"
-#include "server/entities/rock.h"
-#include "server/entities/end_barrier.h"
+Map::Map(Map && other) :
+	minPlayers(other.minPlayers),
+	staticEntities(std::move(other.staticEntities)),
+	dynamicEntities(std::move(other.dynamicEntities)),
+	endZone(other.endZone) {}
 
 Map::Map(int minPlayers) : minPlayers(minPlayers) {}
 

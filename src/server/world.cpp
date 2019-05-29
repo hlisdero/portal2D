@@ -3,24 +3,24 @@
 // Initialize the world with the gravity vector
 World::World(Map & map) :
 	world(b2Vec2(0.0f, -10.0f)),
-	entityFactory(world), 
+	bodyFactory(world), 
 	map(map) {
 	this->world.SetContactListener(&this->contactListener);
 
 	const std::vector<Entity*> & staticEntities = map.getStaticEntities();
 	for(uint i = 0; i < staticEntities.size(); i++) {
-		this->entityFactory.createBody(staticEntities[i]);
+		this->bodyFactory.createBody(staticEntities[i]);
 	}
 
 	const std::vector<Entity*> & dynamicEntities = map.getDynamicEntities();
 	for(uint i = 0; i < dynamicEntities.size(); i++) {
-		this->entityFactory.createBody(dynamicEntities[i]);
+		this->bodyFactory.createBody(dynamicEntities[i]);
 	}
 }
 
 void World::createPlayer(PlayerEntity * player) {
 	this->players.push_back(player);
-	this->entityFactory.createBody(player);
+	this->bodyFactory.createBody(player);
 }
 
 void World::updatePhysics() {
@@ -36,26 +36,20 @@ void World::updatePhysics() {
 	this->world.Step(timeStep, velocityIterations, positionIterations);
 }
 
-const std::vector<Entity*> & World::getStaticEntities() const {
-	return this->map.getStaticEntities();
-}
-
-// TODO change: entity slicing, not a problem?
-std::vector<Entity> World::getDynamicEntities() const {
+const std::vector<Entity*> World::getDynamicEntities() const {
 	const b2Body * body = this->world.GetBodyList();
 
-	std::vector<Entity> entities;
+	std::vector<Entity*> entities;
 
 	while(body != nullptr) {
-		Entity * entityPtr = (Entity *) body->GetUserData();
+		Entity * entity = (Entity *) body->GetUserData();
 
-		if(entityPtr->getType() >= DYNAMIC_ENTITY_START) {
+		if(entity->getType() >= DYNAMIC_ENTITY_START) {
 			const b2Vec2 position = body->GetPosition();
-			entityPtr->setX(position.x);
-			entityPtr->setY(position.y);
+			entity->setX(position.x);
+			entity->setY(position.y);
 
-			// TODO change. Copy entities, before passing them to the client: will no longer be necessary when using sockets
-			entities.push_back(*entityPtr);
+			entities.push_back(entity);
 		}
 
 		body = body->GetNext();

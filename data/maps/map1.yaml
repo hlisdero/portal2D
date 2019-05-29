@@ -47,7 +47,7 @@ entities:
         angle: 0.0
 
     -
-        type: 10
+        type: 11
         x: 1.0
         y: 5.0
         angle: 0.0

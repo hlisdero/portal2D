@@ -1,16 +1,23 @@
 #include "server/map_loader.h"
 
-Map MapLoader::loadMap(char * mapName) {
+#include "server/entities/door.h"
+#include "server/entities/energy_emittor.h"
+#include "server/entities/energy_receiver.h"
+#include "server/entities/button.h"
+#include "server/entities/rock.h"
+#include "server/entities/end_barrier.h"
+
+Map MapLoader::loadMap(const char * mapName) {
 	// TODO if map exist?
 	
-	YAML::Node file = YAML::LoadFile("../data/maps/map1.yaml");
+	YAML::Node file = YAML::LoadFile(mapName);
 
-	int minPlayers = yaml["min-players"].as<int>();
+	int minPlayers = file["min-players"].as<int>();
 
 	Map map(minPlayers);
 	this->loadEntities(map, file);
 
-	return map;
+	return std::move(map);
 }
 
 void MapLoader::loadEntities(Map & map, YAML::Node yaml) {
