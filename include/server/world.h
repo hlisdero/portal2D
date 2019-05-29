@@ -36,11 +36,6 @@ private:
 	std::vector<PlayerEntity*> players;
 
 	ContactListener contactListener;
-
-	void createStaticEntities(b2Body * groundBody);
-	void createStaticEntity(b2Body * groundBody, const Entity & entity);
-	void createDynamicEntities();
-	void createDynamicEntity(Entity & entity);
 };
 
 #endif  // WORLD_H

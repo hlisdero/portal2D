@@ -9,21 +9,20 @@
 
 class Map {
 public:
-	Map();
-
 	const std::vector<Entity*> & getStaticEntities() const;
 	const std::vector<Entity*> & getDynamicEntities() const;
+
+	EndZone & getEndZone();
 
 	~Map();
 
 private:
+	friend MapLoader;
+
 	std::vector<Entity*> staticEntities;
 	std::vector<Entity*> dynamicEntities;
 
 	EndZone endZone;
-
-	void loadEntities(YAML::Node yaml);
-	Entity * createEntity(YAML::Node yaml);
 };
 
 #endif  // MAP_H
