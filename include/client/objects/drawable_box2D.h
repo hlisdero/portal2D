@@ -16,7 +16,7 @@ public:
     virtual int getX() const override;
     virtual int getY() const override;
 
-    void updatePosition(const Position& new_position);
+    virtual void updatePosition(const Position& new_position);
 
     virtual ~DrawableBox2D() = default;
 private:
