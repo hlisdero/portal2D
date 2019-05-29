@@ -15,10 +15,22 @@ void Game::processEvent() {
 
 void Game::addPlayer(PlayerEntity * player) {
 	this->world.createPlayer(player);
+
+	// TODO Check in progress (enough player to play)
+	if(this->status == WAITING_FOR_PLAYERS
+		&& this->world.getPlayersCount() >= this->map.getMinPlayers()) {
+		this->status = IN_PROGRESS;
+	}
+
 }
 
 void Game::update() {
-
+	// Check victory
+	if(this->map.getEndZone().getNumberOfPlayersInZone() 
+		>= this->map.getMinPlayers() - 1) {
+		this->status = VICTORY;
+	}
+	// TODO Check defeat
 
 	this->world.updatePhysics();
 }

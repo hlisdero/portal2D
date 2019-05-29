@@ -57,3 +57,7 @@ const std::vector<Entity*> World::getDynamicEntities() const {
 
 	return std::move(entities);
 }
+
+int World::getPlayersCount() {
+	return this->players.size();
+}

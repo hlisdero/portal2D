@@ -20,6 +20,7 @@ public:
 	const std::vector<Entity*> & getDynamicEntities() const;
 
 	EndZone & getEndZone();
+	int getMinPlayers();
 
 	~Map();
 

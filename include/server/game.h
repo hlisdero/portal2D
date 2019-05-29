@@ -8,10 +8,10 @@
 #include "server/entities/player.h"
 
 enum GameStatus {
-	WAITING_FOR_PLAYER,
+	WAITING_FOR_PLAYERS,
 	IN_PROGRESS,
-	WIN,
-	LOSE
+	VICTORY,
+	DEFEAT
 };
 
 class Game {
@@ -31,7 +31,7 @@ public:
 private:
 	// std::vector<Client/Player>
 
-	GameStatus status = WAITING_FOR_PLAYER; 
+	GameStatus status = WAITING_FOR_PLAYERS; 
 	Map map;
 	World world;
 };

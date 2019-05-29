@@ -20,6 +20,11 @@ EndZone & Map::getEndZone() {
 	return this->endZone;
 }
 
+int Map::getMinPlayers() {
+	return this->minPlayers;
+}
+
+
 Map::~Map() {
 	for(uint i = 0; i < this->staticEntities.size(); i++) {
 		delete this->staticEntities[i];

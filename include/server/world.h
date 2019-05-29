@@ -28,6 +28,8 @@ public:
     void updatePhysics();
 
 	const std::vector<Entity*> getDynamicEntities() const;
+
+	int getPlayersCount();
 private:
 	b2World world;
 	BodyFactory bodyFactory;
