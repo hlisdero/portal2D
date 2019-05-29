@@ -11,7 +11,7 @@ public:
     virtual const Texture& getTexture() override;
     virtual SDL_Rect* getClip() override;
 
-private:
+protected:
     Sprite sprite;
 };
 

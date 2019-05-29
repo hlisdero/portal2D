@@ -10,7 +10,7 @@ TEST_CASE("Player and Block Test", "[view]") {
     EventHandler event_handler;
 
     size_t player = view.createPlayer(Position(1, 3));
-    size_t block = view.createBlock(Position(3, 3));
+    size_t block = view.createMetalBlock(Position(3, 3));
 
     while (!event_handler.quit()) {
         event_handler.poll();

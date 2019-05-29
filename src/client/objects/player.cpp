@@ -1,5 +1,4 @@
 #include "client/objects/player.h"
-#define EPSILON 0.125f
 
 Player::Player(const Size& size, const Position& initial, Ratio& ratio, const Texture& texture) :
     DrawableBox2D(size, initial, ratio),
@@ -50,21 +49,21 @@ void Player::updatePosition(const Position& new_position) {
 }
 
 void Player::updateFlipState(const Position& new_position) {
-    if (new_position.x - getX() > EPSILON) {
+    if (new_position.x > getX()) {
         flip_state = SDL_FLIP_NONE;
-    } else if (getX() - new_position.x > EPSILON) {
+    } else if (new_position.x < getX()) {
         flip_state = SDL_FLIP_HORIZONTAL;
     }
 }
 
 void Player::updateAnimation(const Position& new_position) {
-    if (new_position.y - getY() > EPSILON) {
+    if (new_position.y > getY()) {
         current = &jump_rise;
-    } else if (current == &jump_rise && (new_position.y - getY() < EPSILON)) {
+    } else if (current == &jump_rise && (new_position.y - getY()) < 0.01) {
         current = &jump_apex;
-    } else if (getY() - new_position.y > EPSILON) {
+    } else if (new_position.y < getY()) {
         current = &jump_fall;
-    } else if (current == &jump_fall && (new_position.y - getY() < EPSILON)) {
+    } else if (current == &jump_fall && (new_position.y - getY()) < 0.01) {
         current = &jump_land;
     } else if (current == &idle && isMovingHorizontally(new_position)) {
         current = &run;
@@ -74,5 +73,5 @@ void Player::updateAnimation(const Position& new_position) {
 }
 
 bool Player::isMovingHorizontally(const Position& new_position) const {
-    return (new_position.x - getX() > EPSILON) || (getX() - new_position.x > EPSILON);
+    return (new_position.x - getX()) > 0.01;
 }

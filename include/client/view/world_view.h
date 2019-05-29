@@ -6,7 +6,8 @@
 #include "client/texture/texture_loader.h"
 #include "client/objects/drawable_box2D.h"
 #include "client/objects/player.h"
-#include "client/objects/block.h"
+#include "client/objects/metal_block.h"
+#include "client/objects/stone_block.h"
 #include "client/objects/background.h"
 #include "common/ratio.h"
 #include "common/size.h"
@@ -24,7 +25,8 @@ public:
     ~WorldView();
 
     size_t createPlayer(const Position& initial);
-    size_t createBlock(const Position& initial);
+    size_t createMetalBlock(const Position& initial);
+    size_t createStoneBlock(const Position& initial);
 
     void updatePosition(size_t index, const Position& position);
 

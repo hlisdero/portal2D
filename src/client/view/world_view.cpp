@@ -19,9 +19,16 @@ size_t WorldView::createPlayer(const Position& initial) {
     return view_objects.size() - 1;
 }
 
-size_t WorldView::createBlock(const Position& initial) {
+size_t WorldView::createMetalBlock(const Position& initial) {
     Size size(entitiesSettings[TYPE_METAL_BLOCK][HALF_WIDTH]*2, entitiesSettings[TYPE_METAL_BLOCK][HALF_HEIGHT]*2);
-    Block* block = new Block(size, initial, meter_to_pixel, textures["Block"]);
+    Block* block = new MetalBlock(size, initial, meter_to_pixel, textures["Block"]);
+    view_objects.push_back(block);
+    return view_objects.size() - 1;
+}
+
+size_t WorldView::createStoneBlock(const Position& initial) {
+    Size size(entitiesSettings[TYPE_STONE_BLOCK][HALF_WIDTH]*2, entitiesSettings[TYPE_STONE_BLOCK][HALF_HEIGHT]*2);
+    Block* block = new MetalBlock(size, initial, meter_to_pixel, textures["Block"]);
     view_objects.push_back(block);
     return view_objects.size() - 1;
 }
