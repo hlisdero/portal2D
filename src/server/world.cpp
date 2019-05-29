@@ -55,5 +55,5 @@ const std::vector<Entity*> World::getDynamicEntities() const {
 		body = body->GetNext();
 	}
 
-	return entities;
+	return std::move(entities);
 }

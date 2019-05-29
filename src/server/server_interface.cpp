@@ -23,5 +23,5 @@ const std::vector<Entity*> & ServerInterface::getStaticEntities() const {
 }
 
 const std::vector<Entity*> ServerInterface::getDynamicEntities() const {
-	return this->game.getDynamicEntities();
+	return std::move(this->game.getDynamicEntities());
 }
