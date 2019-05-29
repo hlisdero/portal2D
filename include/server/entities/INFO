@@ -62,6 +62,7 @@ default: collide
 
 Player - Door: depend
 Player - EnergyBar : no collide
+Player - EndBarrier : no collide
 
 ======= CONTACT ======
 Player -> Acid
@@ -69,8 +70,14 @@ Player -> Portal
 Player <-> Rock (a voir)
 Player -> EnergyBall
 
+
 Player -> EnergyBar*
 Rock -> EnergyBar*
+
+Player -> EndBarrier*
+Rock -> EndBarrier*
+
+EndBarrier -> Player
 
 Rock -> Acid
 
@@ -79,8 +86,37 @@ EnergyReceiver -> EnergyBall
 Button -> Player
 Button -> Rock
 
+
 maybe:
 Player -> MapBorder
 Rock -> MapBorder
 EnergyBall -> MapBorder
 EnergyBall -> EnergyReceiver
+
+================
+
+EVENTOS:
+
+updateDynamics = worldevent
+	entities
+		id, position
+updateDoor
+	id, state
+updateButton
+	id, state
+destroyEntity
+	id
+(respawnRock)
+	id
+createPortal
+	id, color, pos
+resetPortal
+	id
+movePortal
+	id, pos
+win
+	??
+lose
+	??
+dead
+	??
