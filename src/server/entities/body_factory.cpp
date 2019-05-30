@@ -124,11 +124,11 @@ b2FixtureDef BodyFactory::createFixtureDef(Entity * entity,
 
 	if(entity->getType() == TYPE_PLAYER) {
 		fixtureDef.filter.categoryBits = 0x0001;
-		fixtureDef.filter.maskBits = 0x0002;
+		fixtureDef.filter.maskBits = 0xFFFD;
 	} else if(entity->getType() == TYPE_ENERGY_BAR ||
 		entity->getType() == TYPE_END_BARRIER) {
 		fixtureDef.filter.categoryBits = 0x0002;
-		fixtureDef.filter.maskBits = 0x0001;
+		fixtureDef.filter.maskBits = 0xFFFF;
 	}
 
 	return std::move(fixtureDef);
