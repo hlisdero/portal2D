@@ -151,5 +151,10 @@ void BodyFactory::createBody(Entity * entity) {
 
 	// "Attach" shape to body
 	b2FixtureDef fixtureDef = createFixtureDef(entity, &shape, bodyDef);
-	body->CreateFixture(&fixtureDef);
+	b2Fixture * fixture = body->CreateFixture(&fixtureDef);
+
+	// Set shape center to entity for client-side use
+	const b2Vec2 & center = fixture->GetAABB(0).GetCenter();
+	entity->setX(center.x);
+	entity->setY(center.y);
 }
