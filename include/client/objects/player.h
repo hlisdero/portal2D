@@ -14,7 +14,7 @@ public:
     virtual SDL_Rect* getClip() override;
     virtual SDL_RendererFlip getFlipState() const override;
 
-    virtual void updatePosition(const Position& new_position) override;
+    virtual void updatePosition(const Position& new_position, double angle) override;
 
 private:
     Animation idle;

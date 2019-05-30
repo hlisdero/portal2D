@@ -19,6 +19,10 @@ int DrawableBox2D::getHeight() const {
     return size.y * meter_to_pixel.y;
 }
 
+double DrawableBox2D::getRotation() const {
+    return angle;
+}
+
 float32 DrawableBox2D::currentX() const {
     return position.x;
 }
@@ -27,6 +31,7 @@ float32 DrawableBox2D::currentY() const {
     return position.y;
 }
 
-void DrawableBox2D::updatePosition(const Position& new_position) {
+void DrawableBox2D::updatePosition(const Position& new_position, double angle) {
     position = new_position;
+    angle = angle;
 }

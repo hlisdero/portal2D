@@ -3,7 +3,7 @@
 WorldView::WorldView(float32 width, float32 height) :
     meter_to_pixel(1024/width, 768/height),
     screen(1024, 768),
-    view_object_creator(meter_to_pixel, view_objects, screen.getTextureCreator(), 1024, 768) { 
+    view_object_creator(meter_to_pixel, view_objects, screen.getTextureCreator(), 1024, 768) {
 }
 
 WorldView::~WorldView() {
@@ -16,22 +16,24 @@ void WorldView::createEntities(const std::vector<Entity*>& entities) {
     for (const auto& entity : entities) {
         Position position(entity->getX(), entity->getY());
         size_t id(entity->getId());
+        double angle(entity->getRotationDeg());
         reserveSize(id);
         view_objects.reserve(id);
-        createEntity(entity->getType(), id, position);
+        createEntity(entity->getType(), id, position, angle);
     }
 }
 
-void WorldView::updatePosition(size_t index, const Position& position) {
+void WorldView::updatePosition(size_t index, const Position& position, double angle) {
     checkValidIndex(index);
-    view_objects[index]->updatePosition(position);
+    view_objects[index]->updatePosition(position, angle);
 }
 
 void WorldView::updatePosition(const std::vector<Entity*>& entities) {
     for (const auto& entity : entities) {
         Position position(entity->getX(), entity->getY());
         size_t id(entity->getId());
-        updatePosition(id, position);
+        double angle(entity->getRotationDeg());
+        updatePosition(id, position, angle);
     }
 }
 
@@ -62,7 +64,8 @@ void WorldView::reserveSize(size_t index) {
     }
 }
 
-void WorldView::createEntity(EntityType type, size_t id, const Position& position) {
+void WorldView::createEntity(EntityType type, size_t id,
+                const Position& position, double rotation) {
     switch (type) {
         case TYPE_STONE_BLOCK:
             view_object_creator.createStoneBlock(id, position);
@@ -71,7 +74,7 @@ void WorldView::createEntity(EntityType type, size_t id, const Position& positio
             view_object_creator.createMetalBlock(id, position);
             break;
         case TYPE_METAL_DIAG_BLOCK:
-            view_object_creator.createDiagonalMetalBlock(id, position);
+            view_object_creator.createDiagonalMetalBlock(id, position, rotation);
             break;
         case TYPE_ACID:
             view_object_creator.createAcid(id, position);
@@ -80,22 +83,22 @@ void WorldView::createEntity(EntityType type, size_t id, const Position& positio
             view_object_creator.createGate(id, position);
             break;
         case TYPE_ENERGY_BAR:
-            view_object_creator.createEnergyBar(id, position);
+            view_object_creator.createEnergyBar(id, position, rotation);
             break;
         case TYPE_ENERGY_EMITTER:
-            view_object_creator.createEnergyEmitter(id, position);
+            view_object_creator.createEnergyEmitter(id, position, rotation);
             break;
         case TYPE_ENERGY_RECEIVER:
-            view_object_creator.createEnergyReceiver(id, position);
+            view_object_creator.createEnergyReceiver(id, position, rotation);
             break;
         case TYPE_BUTTON:
             view_object_creator.createButton(id, position);
             break;
         case TYPE_PORTAL:
-            view_object_creator.createPortal(id, position);
+            view_object_creator.createPortal(id, position, rotation);
             break;
         case TYPE_ROCK:
-            view_object_creator.createRock(id, position);
+            view_object_creator.createRock(id, position, rotation);
             break;
         case TYPE_PLAYER:
             view_object_creator.createPlayer(id, position);
