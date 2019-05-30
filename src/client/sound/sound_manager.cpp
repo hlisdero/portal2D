@@ -12,6 +12,9 @@ SoundManager::SoundManager() {
         error_message += std::string(Mix_GetError());
         throw std::runtime_error(error_message);
     }
+
+    addMusic("../data/sounds/soundtrack.mp3");
+    playMusic(0);
 }
 
 SoundManager::~SoundManager() {
@@ -63,18 +66,8 @@ void SoundManager::handle(const KeyboardEvent& event) {
     if (!event.pressed) {
         return;
     }
-    if (event.key == '9') {
+    if (event.key == SDLK_m) {
         toggleMusic(0);
-    } else if (event.key == '0') {
-        haltMusic();
-    } else if (event.key == '1') {
-        playSoundEffect(0);
-    } else if (event.key == '2') {
-        playSoundEffect(1);
-    } else if (event.key == '3') {
-        playSoundEffect(2);
-    } else if (event.key == '4') {
-        playSoundEffect(3);
     }
 }
 

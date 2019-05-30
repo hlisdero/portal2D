@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdexcept>
 #include "client/screen/screen.h"
+#include "client/sound/sound_manager.h"
 #include "client/view/view_object_creator.h"
 #include "common/ratio.h"
 #include "common/entities/entity.h"
@@ -30,6 +31,7 @@ private:
     Ratio meter_to_pixel;
     Screen screen;
     std::vector<DrawableBox2D*> view_objects;
+
 public:
     ViewObjectCreator view_object_creator;
 

@@ -3,7 +3,8 @@
 WorldView::WorldView(float32 width, float32 height) :
     meter_to_pixel(1024/width, 768/height),
     screen(1024, 768),
-    view_object_creator(meter_to_pixel, view_objects, screen.getTextureCreator(), 1024, 768) {}
+    view_object_creator(meter_to_pixel, view_objects, screen.getTextureCreator(), 1024, 768) { 
+}
 
 WorldView::~WorldView() {
     for (const auto& object : view_objects) {
