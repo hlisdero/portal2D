@@ -68,10 +68,10 @@ Entity * MapLoader::createEntity(Map & map, YAML::Node yaml) {
 		case TYPE_ENERGY_BAR:
 			entity = new Entity(type, yaml);
 			break;
-		case TYPE_DOOR:
+		case TYPE_GATE:
 			entity = new DoorEntity(yaml);
 			break;
-		case TYPE_ENERGY_EMITTOR:
+		case TYPE_ENERGY_EMITTER:
 			entity = new EnergyEmittorEntity(yaml);
 			break;
 		case TYPE_ENERGY_RECEIVER:

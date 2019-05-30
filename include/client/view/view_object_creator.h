@@ -22,12 +22,17 @@ public:
 
     void createPlayer(size_t index, const Position& initial);
     void createMetalBlock(size_t index, const Position& initial);
+    void createDiagonalMetalBlock(size_t index, const Position& initial, double rotation = 0.0);
     void createStoneBlock(size_t index, const Position& initial);
     void createAcid(size_t index, const Position& initial);
+    void createGate(size_t index, const Position& initial);
     void createButton(size_t index, const Position& initial);
     void createEnergyBall(size_t index, const Position& initial);
+    void createEnergyBar(size_t index, const Position& initial, double rotation = 0.0);
+    void createEnergyEmitter(size_t index, const Position& initial, double rotation = 0.0);
     void createEnergyReceiver(size_t index, const Position& initial, double rotation = 0.0);
     void createRock(size_t index, const Position& initial, double rotation = 0.0);
+    void createPortal(size_t index, const Position& initial, double rotation = 0.0);
 
 private:
     Ratio& meter_to_pixel;

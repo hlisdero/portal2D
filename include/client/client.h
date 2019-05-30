@@ -25,6 +25,7 @@ public:
 private:
     EventHandler event_handler;
     InputHandler input_handler;
+    SoundManager sound_manager;
 };
 
 #endif  // CLIENT_H
