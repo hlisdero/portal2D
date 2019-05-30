@@ -1,7 +1,7 @@
 #include "server/server_interface.h"
 
 ServerInterface::ServerInterface() : 
-	game(this->mapLoader, "../data/maps/map1.yaml") {
+	game(this->mapLoader, "../data/maps/map2.yaml") {
 	this->game.addPlayer(&this->player);
 }
 
