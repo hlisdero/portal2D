@@ -29,15 +29,64 @@ b2BodyDef BodyFactory::createBodyDef(Entity * entity) {
 	return bodyDef;
 }
 
+void BodyFactory::setButtonShape(b2PolygonShape & shape, const float * entitySettings, b2Vec2 & offset) {
+	b2Vec2 points[4];
+	points[0].Set(-1 * entitySettings[HALF_WIDTH], 
+				-1 * entitySettings[HALF_HEIGHT]);
+
+	points[1].Set(-1 * BUTTON_TOP_SIZE_PERCENTAGE * entitySettings[HALF_WIDTH], 
+				entitySettings[HALF_HEIGHT]);
+
+	points[2].Set(BUTTON_TOP_SIZE_PERCENTAGE * entitySettings[HALF_WIDTH], 
+				entitySettings[HALF_HEIGHT]);
+
+	points[3].Set(entitySettings[HALF_WIDTH], 
+				-1 * entitySettings[HALF_HEIGHT]);
+
+	for(b2Vec2 & point : points) {
+		point += offset;
+	}
+
+	shape.Set(points, 4);
+}
+
+void BodyFactory::setDiagBlockShape(b2PolygonShape & shape, const float * entitySettings, b2Vec2 & offset) {
+	b2Vec2 points[3];
+	points[0].Set(-1 * entitySettings[HALF_WIDTH], 
+				-1 * entitySettings[HALF_HEIGHT]);
+
+	points[1].Set(-1 * entitySettings[HALF_WIDTH], 
+				entitySettings[HALF_HEIGHT]);
+
+	points[2].Set(entitySettings[HALF_WIDTH], 
+				-1 * entitySettings[HALF_HEIGHT]);
+
+	for(b2Vec2 & point : points) {
+		point += offset;
+	}
+
+	shape.Set(points, 3);
+}
+
+void BodyFactory::setBlockShape(b2PolygonShape & shape, const float * entitySettings, b2Vec2 & offset) {
+	shape.SetAsBox(
+			entitySettings[HALF_WIDTH], entitySettings[HALF_HEIGHT],
+			offset, 0.0f);
+}
+
 b2PolygonShape BodyFactory::createShape(Entity * entity) {
 	const float (&entitySettings)[4] = entitiesSettings[entity->getType()];
+	b2Vec2 offset(entitySettings[X_OFFSET], entitySettings[Y_OFFSET]);
 
 	b2PolygonShape shape;
 
-	shape.SetAsBox(entitySettings[HALF_WIDTH],
-		entitySettings[HALF_HEIGHT],
-		b2Vec2(entitySettings[X_OFFSET], entitySettings[Y_OFFSET]),
-		0.0f);
+	if(entity->getType() == TYPE_METAL_DIAG_BLOCK) {
+		this->setDiagBlockShape(shape, entitySettings, offset);
+	} else if(entity->getType() == TYPE_BUTTON) {
+		this->setButtonShape(shape, entitySettings, offset);
+	} else {
+		this->setBlockShape(shape, entitySettings, offset);
+	}
 
 	return shape;
 }

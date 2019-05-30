@@ -16,7 +16,15 @@ private:
 	int nextDynamicEntityId = 0;
 
 	b2BodyDef createBodyDef(Entity * entity);
+
 	b2PolygonShape createShape(Entity * entity);
+	void setDiagBlockShape(b2PolygonShape & shape, 
+		const float * entitySettings, b2Vec2 & offset);
+	void setButtonShape(b2PolygonShape & shape, 
+		const float * entitySettings, b2Vec2 & offset);
+	void setBlockShape(b2PolygonShape & shape, 
+		const float * entitySettings, b2Vec2 & offset);
+
 	void attachBody(Entity * entity, b2Body * body);
 };
 
