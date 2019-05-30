@@ -56,6 +56,7 @@ const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
 };
 
 constexpr EntityType DYNAMIC_ENTITY_START = TYPE_ROCK;
+#define PI 3.1415926f
 
 class Entity {
 public:
@@ -69,8 +70,9 @@ public:
     void setX(float x);
     void setY(float y);
 
-	float getAngle() const;
-    void setAngle(float angle);
+	float getRotationRad() const;
+	float getRotationDeg() const;
+    void setRotationDeg(float angleDegrees);
 
 	EntityType getType() const;
 
@@ -86,7 +88,7 @@ private:
 	EntityType type;
 	float x;
 	float y;
-	float angle;
+	float rotation;
 	// TODO uint ?
 	int id = 0;
 };

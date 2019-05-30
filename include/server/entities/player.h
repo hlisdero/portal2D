@@ -11,8 +11,6 @@
 #include "common/move_direction.h"
 #include "server/entities/portal.h"
 
-#define TwoPI 6.2831854f
-
 class PlayerEntity :  public Entity, public BodyLinked, public HandleContact {
 public:
 	PlayerEntity();

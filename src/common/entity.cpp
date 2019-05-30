@@ -1,13 +1,13 @@
 #include "common/entities/entity.h"
 
-Entity::Entity(EntityType type, float x, float y, float angle) :
-    type(type), x(x), y(y), angle(angle) {}
+Entity::Entity(EntityType type, float x, float y, float rotation) :
+    type(type), x(x), y(y), rotation(rotation) {}
 
 Entity::Entity(EntityType type, YAML::Node yaml) :
     type(type), 
     x(yaml["x"].as<float>()), 
     y(yaml["y"].as<float>()), 
-    angle(yaml["angle"].as<float>()) {}
+    rotation(yaml["rotation"].as<float>()) {}
 
 float Entity::getX() const {
     return this->x;
@@ -25,12 +25,16 @@ void Entity::setY(float y) {
     this->y = y;
 }
 
-float Entity::getAngle() const {
-    return angle;
+float Entity::getRotationDeg() const {
+    return this->rotation;
 }
 
-void Entity::setAngle(float angle) {
-    this->angle = angle;
+float Entity::getRotationRad() const {
+    return this->rotation * PI / 180.0;
+}
+
+void Entity::setRotationDeg(float rotation) {
+    this->rotation = rotation;
 }
 
 EntityType Entity::getType() const {

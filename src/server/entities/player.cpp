@@ -32,9 +32,9 @@ void PlayerEntity::goThroughPortal(PortalEntity * portal) {
 
 	if(twin != nullptr) {
 		// rotation in [0, 2PI]
-		float rotation = (portal->getAngle() + twin->getAngle());
-		if(rotation >= TwoPI) {
-			rotation -= TwoPI;
+		float rotation = (portal->getRotationRad() + twin->getRotationRad());
+		if(rotation >= 2*PI) {
+			rotation -= 2*PI;
 		}
 
 		const b2Vec2 & inVelocity = this->getBody()->GetLinearVelocity();

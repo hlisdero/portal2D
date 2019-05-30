@@ -5,11 +5,15 @@
 #include "server/entities/energy_ball.h"
 #include "server/entities/end_barrier.h"
 
+#include "common/entities/entities_settings.h"
+
 BodyFactory::BodyFactory(b2World & world) : world(world) {}
 
 b2BodyDef BodyFactory::createBodyDef(Entity * entity) {
 	b2BodyDef bodyDef;
-	bodyDef.angle = entity->getAngle();
+
+	bodyDef.angle = entity->getRotationRad();
+	
 	bodyDef.position.Set(entity->getX(), entity->getY());
 
 	if(entity->getType() == TYPE_PLAYER
