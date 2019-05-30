@@ -22,7 +22,7 @@ public:
 
     void createEntities(const std::vector<Entity*>& entities);
 
-    void updatePosition(size_t index, const Position& position);
+    void updatePosition(size_t index, const Position& position, double angle = 0.0);
     void updatePosition(const std::vector<Entity*>& entities);
 
     void update();
@@ -39,7 +39,7 @@ private:
     void renderObjects();
     void checkValidIndex(size_t index);
     void reserveSize(size_t index);
-    void createEntity(EntityType type, size_t id, const Position& initial);
+    void createEntity(EntityType type, size_t id, const Position& initial, double rotation);
 };
 
 #endif  // WORLD_VIEW_H

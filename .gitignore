@@ -34,6 +34,9 @@
 # Build dir
 build/
 
+# Soundtrack
+data/sounds/soundtrack.mp3
+
 # Box2D
 Box2D/
 

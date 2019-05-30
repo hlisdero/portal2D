@@ -17,16 +17,19 @@ public:
     virtual int getWidth() const override;
     virtual int getHeight() const override;
 
+    virtual double getRotation() const override;
+
     float32 currentX() const;
     float32 currentY() const;
 
-    virtual void updatePosition(const Position& new_position);
+    virtual void updatePosition(const Position& new_position, double angle);
 
     virtual ~DrawableBox2D() = default;
 
 private:
     const Size size;
     Position position;
+    double angle = 0.0;
     const Ratio& meter_to_pixel;
 };
 
