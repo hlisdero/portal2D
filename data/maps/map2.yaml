@@ -87,7 +87,7 @@ entities:
         type: 2
         x: 4.0
         y: 1.0
-        angle: 0.0
+        angle: 90.0
     -
         type: 1
         x: 5.0
@@ -97,12 +97,7 @@ entities:
         type: 2
         x: 6.0
         y: 1.0
-        angle: 0.0
-    -
-        type: 10
-        x: 9.0
-        y: 1.0
-        angle: 0.0
+        angle: 270.0
     -
         type: 0
         x: 12.0
@@ -117,7 +112,7 @@ entities:
         type: 5
         x: 5.0
         y: 2.0
-        angle: 0.0
+        angle: 90.0
     -
         type: 7
         x: 9.0
@@ -225,7 +220,7 @@ entities:
         angle: 0.0
     -
         type: 0
-        x: 6.0
+        x: 5.0
         y: 6.0
         angle: 0.0
     -
@@ -237,12 +232,7 @@ entities:
         type: 4
         x: 7.0
         y: 6.0
-        angle: 0.0
-    -
-        type: 0
-        x: 8.0
-        y: 6.0
-        angle: 0.0
+        angle: 90.0
     -
         type: 0
         x: 9.0
