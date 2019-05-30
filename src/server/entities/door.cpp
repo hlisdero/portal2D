@@ -10,9 +10,7 @@ DoorEntity::DoorEntity(YAML::Node yaml) :
 Entity(TYPE_GATE, yaml),
 WithState(STATE_CLOSED),
 // TODO logica
-logica(nullptr) {
-	this->setState(logica->value());
-}
+logica(nullptr) {}
 
 void DoorEntity::updateState() {
 	this->setState(this->logica->value());
