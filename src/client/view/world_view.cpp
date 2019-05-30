@@ -70,15 +70,19 @@ void WorldView::createEntity(EntityType type, size_t id, const Position& positio
             view_object_creator.createMetalBlock(id, position);
             break;
         case TYPE_METAL_DIAG_BLOCK:
+            view_object_creator.createDiagonalMetalBlock(id, position);
             break;
         case TYPE_ACID:
             view_object_creator.createAcid(id, position);
             break;
-        case TYPE_DOOR:
+        case TYPE_GATE:
+            view_object_creator.createGate(id, position);
             break;
         case TYPE_ENERGY_BAR:
+            view_object_creator.createEnergyBar(id, position);
             break;
-        case TYPE_ENERGY_EMITTOR:
+        case TYPE_ENERGY_EMITTER:
+            view_object_creator.createEnergyEmitter(id, position);
             break;
         case TYPE_ENERGY_RECEIVER:
             view_object_creator.createEnergyReceiver(id, position);
@@ -87,6 +91,7 @@ void WorldView::createEntity(EntityType type, size_t id, const Position& positio
             view_object_creator.createButton(id, position);
             break;
         case TYPE_PORTAL:
+            view_object_creator.createPortal(id, position);
             break;
         case TYPE_ROCK:
             view_object_creator.createRock(id, position);

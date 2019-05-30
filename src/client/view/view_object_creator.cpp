@@ -13,13 +13,19 @@ void ViewObjectCreator::createPlayer(size_t index, const Position& initial) {
 
 void ViewObjectCreator::createMetalBlock(size_t index, const Position& initial) {
     Size size(entitiesSettings[TYPE_METAL_BLOCK][HALF_WIDTH]*2, entitiesSettings[TYPE_METAL_BLOCK][HALF_HEIGHT]*2);
-    Block* block = new MetalBlock(size, initial, meter_to_pixel, textures["Block"]);
+    MetalBlock* block = new MetalBlock(size, initial, meter_to_pixel, textures["Block"]);
+    view_objects.at(index) = block;
+}
+
+void ViewObjectCreator::createDiagonalMetalBlock(size_t index, const Position& initial, double rotation) {
+    Size size(entitiesSettings[TYPE_METAL_DIAG_BLOCK][HALF_WIDTH]*2, entitiesSettings[TYPE_METAL_DIAG_BLOCK][HALF_HEIGHT]*2);
+    DiagonalMetalBlock* block = new DiagonalMetalBlock(size, initial, meter_to_pixel, textures["Block"], rotation);
     view_objects.at(index) = block;
 }
 
 void ViewObjectCreator::createStoneBlock(size_t index, const Position& initial) {
     Size size(entitiesSettings[TYPE_STONE_BLOCK][HALF_WIDTH]*2, entitiesSettings[TYPE_STONE_BLOCK][HALF_HEIGHT]*2);
-    Block* block = new MetalBlock(size, initial, meter_to_pixel, textures["Block"]);
+    StoneBlock* block = new StoneBlock(size, initial, meter_to_pixel, textures["Block"]);
     view_objects.at(index) = block;
 }
 
@@ -27,6 +33,12 @@ void ViewObjectCreator::createAcid(size_t index, const Position& initial) {
     Size size(entitiesSettings[TYPE_ACID][HALF_WIDTH]*2, entitiesSettings[TYPE_ACID][HALF_HEIGHT]*2);
     Acid* acid = new Acid(size, initial, meter_to_pixel, textures["Miscellaneous"]);
     view_objects.at(index) = acid;
+}
+
+void ViewObjectCreator::createGate(size_t index, const Position& initial) {
+    Size size(entitiesSettings[TYPE_GATE][HALF_WIDTH]*2, entitiesSettings[TYPE_GATE][HALF_HEIGHT]*2);
+    Gate* gate = new Gate(size, initial, meter_to_pixel, textures["Gate"]);
+    view_objects.at(index) = gate;
 }
 
 void ViewObjectCreator::createButton(size_t index, const Position& initial) {
@@ -41,6 +53,18 @@ void ViewObjectCreator::createEnergyBall(size_t index, const Position& initial) 
     view_objects.at(index) = energy_ball;
 }
 
+void ViewObjectCreator::createEnergyBar(size_t index, const Position& initial, double rotation) {
+    Size size(entitiesSettings[TYPE_ENERGY_BAR][HALF_WIDTH]*2, entitiesSettings[TYPE_ENERGY_BAR][HALF_HEIGHT]*2);
+    EnergyBar* energy_bar = new EnergyBar(size, initial, meter_to_pixel, textures["FX"], rotation);
+    view_objects.at(index) = energy_bar;
+}
+
+void ViewObjectCreator::createEnergyEmitter(size_t index, const Position& initial, double rotation) {
+    Size size(entitiesSettings[TYPE_ENERGY_EMITTER][HALF_WIDTH]*2, entitiesSettings[TYPE_ENERGY_EMITTER][HALF_HEIGHT]*2);
+    EnergyReceiver* energy_receiver = new EnergyReceiver(size, initial, meter_to_pixel, textures["Block"], rotation);
+    view_objects.at(index) = energy_receiver;
+}
+
 void ViewObjectCreator::createEnergyReceiver(size_t index, const Position& initial, double rotation) {
     Size size(entitiesSettings[TYPE_ENERGY_RECEIVER][HALF_WIDTH]*2, entitiesSettings[TYPE_ENERGY_RECEIVER][HALF_HEIGHT]*2);
     EnergyReceiver* energy_receiver = new EnergyReceiver(size, initial, meter_to_pixel, textures["Block"], rotation);
@@ -51,4 +75,10 @@ void ViewObjectCreator::createRock(size_t index, const Position& initial, double
     Size size(entitiesSettings[TYPE_ROCK][HALF_WIDTH]*2, entitiesSettings[TYPE_ROCK][HALF_HEIGHT]*2);
     Rock* rock = new Rock(size, initial, meter_to_pixel, textures["Block"], rotation);
     view_objects.at(index) = rock;
+}
+
+void ViewObjectCreator::createPortal(size_t index, const Position& initial, double rotation) {
+    Size size(entitiesSettings[TYPE_PORTAL][HALF_WIDTH]*2, entitiesSettings[TYPE_PORTAL][HALF_HEIGHT]*2);
+    Portal* portal = new Portal(size, initial, meter_to_pixel, textures["FX"], rotation);
+    view_objects.at(index) = portal;
 }

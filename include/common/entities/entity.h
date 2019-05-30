@@ -11,9 +11,9 @@ enum EntityType {
 	TYPE_METAL_DIAG_BLOCK,
 	// - Not Ground
 	TYPE_ACID,
-	TYPE_DOOR,
+	TYPE_GATE,
 	TYPE_ENERGY_BAR,
-	TYPE_ENERGY_EMITTOR,
+	TYPE_ENERGY_EMITTER,
 	TYPE_ENERGY_RECEIVER,
 	TYPE_BUTTON,
 	TYPE_PORTAL,
@@ -43,9 +43,9 @@ const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
 	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_METAL_BLOCK
 	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_METAL_DIAG_BLOCK
 	{0.0f, -0.25f, 1.5f, 0.3f},    // TYPE_ACID
-	{0.0f, 0.0f, 0.5f, 1.0f},      // TYPE_DOOR
+	{0.0f, 0.0f, 1.0f, 2.0f},      // TYPE_GATE
 	{0.0f, 0.5f, 0.5f, 0.05f},     // TYPE_ENERGY_BAR
-	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_ENERGY_EMITTOR
+	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_ENERGY_EMITTER
 	{0.0f, 0.0f, 1.0f, 1.0f},      // TYPE_ENERGY_RECEIVER
 	{0.0f, -0.25f, 0.87f, 0.27f},  // TYPE_BUTTON
 	{-0.5f, 0.0f, 0.05f, 0.5f},    // TYPE_PORTAL
@@ -77,7 +77,7 @@ public:
 	void setId(const int id);
 	int getId() const;
 
-	template <class T> 
+	template <class T>
 	T * as() {
 		return static_cast<T*>(this);
 	}
