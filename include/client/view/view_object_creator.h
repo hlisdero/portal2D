@@ -5,7 +5,7 @@
 #include "client/objects/drawable_box2D.h"
 #include "client/objects/objects.h"
 #include "client/texture/texture_loader.h"
-#include "common/entities/entity.h"
+#include "common/entities/entities_settings.h"
 #include "common/position.h"
 #include "common/size.h"
 
