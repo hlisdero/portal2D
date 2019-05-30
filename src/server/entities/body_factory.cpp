@@ -26,7 +26,7 @@ b2BodyDef BodyFactory::createBodyDef(Entity * entity) {
 		bodyDef.type = b2_staticBody;
 	}
 
-	return bodyDef;
+	return std::move(bodyDef);
 }
 
 void BodyFactory::setButtonShape(b2PolygonShape & shape, const float * entitySettings, b2Vec2 & offset) {
@@ -81,14 +81,14 @@ b2PolygonShape BodyFactory::createShape(Entity * entity) {
 	b2PolygonShape shape;
 
 	if(entity->getType() == TYPE_METAL_DIAG_BLOCK) {
-		this->setDiagBlockShape(shape, entitySettings, offset);
+		setDiagBlockShape(shape, entitySettings, offset);
 	} else if(entity->getType() == TYPE_BUTTON) {
-		this->setButtonShape(shape, entitySettings, offset);
+		setButtonShape(shape, entitySettings, offset);
 	} else {
-		this->setBlockShape(shape, entitySettings, offset);
+		setBlockShape(shape, entitySettings, offset);
 	}
 
-	return shape;
+	return std::move(shape);
 }
 
 void BodyFactory::attachBody(Entity * entity, b2Body * body) {
@@ -114,6 +114,26 @@ void BodyFactory::attachBody(Entity * entity, b2Body * body) {
 	}
 }
 
+b2FixtureDef BodyFactory::createFixtureDef(Entity * entity, 
+	b2PolygonShape * shape, b2BodyDef & bodyDef) {
+
+	b2FixtureDef fixtureDef;
+
+	fixtureDef.shape = shape;
+	fixtureDef.density = (bodyDef.type == b2_staticBody) ? 0.0f : 1.0f;
+
+	if(entity->getType() == TYPE_PLAYER) {
+		fixtureDef.filter.categoryBits = 0x0001;
+		fixtureDef.filter.maskBits = 0x0002;
+	} else if(entity->getType() == TYPE_ENERGY_BAR ||
+		entity->getType() == TYPE_END_BARRIER) {
+		fixtureDef.filter.categoryBits = 0x0002;
+		fixtureDef.filter.maskBits = 0x0001;
+	}
+
+	return std::move(fixtureDef);
+}
+
 void BodyFactory::createBody(Entity * entity) {
 	entity->setId(this->nextDynamicEntityId++);
 
@@ -130,6 +150,6 @@ void BodyFactory::createBody(Entity * entity) {
 	}
 
 	// "Attach" shape to body
-	body->CreateFixture(&shape,
-		(bodyDef.type == b2_staticBody) ? 0.0f : 1.0f);
+	b2FixtureDef fixtureDef = createFixtureDef(entity, &shape, bodyDef);
+	body->CreateFixture(&fixtureDef);
 }
