@@ -28,8 +28,8 @@ public:
 private:
 	friend MapLoader;
 
-	int minPlayers = 0;
-	b2Vec2 spawn = b2Vec2(0,0);
+	int minPlayers;
+	b2Vec2 spawn;
 
 	std::vector<Entity*> staticEntities;
 	std::vector<Entity*> dynamicEntities;

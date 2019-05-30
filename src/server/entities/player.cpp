@@ -75,6 +75,23 @@ void PlayerEntity::keyUp(const MoveDirection direction) {
 	}
 }
 
+void firePortalGun(float angle) {
+	float32 L = 25.0f;
+
+	b2Vec2 & origin = this->getBody()->GetPosition();
+	
+	b2Vec2 distance(L * cosf(angle), -L * b2Abs(sinf(angle)));
+	b2Vec2 end = origin + distance;
+
+	EdgeShapesCallback callback;
+
+	m_world->RayCast(&callback, origin, end);
+
+	if(callback.m_fixture) {
+		// check if possible to create a portal
+	}
+}
+
 void PlayerEntity::applyImpulseToCenter(const float vx, const float vy) {
 	b2Vec2 vector(vx, vy);
 	vector *= this->getBody()->GetMass();
