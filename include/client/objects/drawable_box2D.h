@@ -8,7 +8,7 @@
 
 class DrawableBox2D : public Drawable {
 public:
-    explicit DrawableBox2D(const Size& size, const Position& initial, Ratio& ratio);
+    explicit DrawableBox2D(const Size& size, const Position& initial, const Ratio& ratio);
 
     virtual const Texture& getTexture() = 0;
 

@@ -5,7 +5,8 @@
 
 class Rock : public Block {
 public:
-    Rock(const Size& size, const Position& initial, Ratio& ratio, const Texture& texture, double rotation);
+    Rock(const Size& size, const Position& initial,
+         const Ratio& ratio, const Texture& texture, double rotation);
 };
 
 #endif  // ROCK_H

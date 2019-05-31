@@ -1,6 +1,7 @@
 #include "client/objects/gate.h"
 
-Gate::Gate(const Size& size, const Position& initial, Ratio& ratio, const Texture& texture) :
+Gate::Gate(const Size& size, const Position& initial,
+           const Ratio& ratio, const Texture& texture) :
     DrawableBox2D(size, initial, ratio), sprite(texture), animation(texture) {
     sprite.addClip(1, 21, 193, 385);
     for (int i = 0; i < 10; ++i) {

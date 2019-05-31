@@ -6,7 +6,7 @@
 class EnergyEmitter : public Block {
 public:
     EnergyEmitter(const Size& size, const Position& initial,
-                   Ratio& ratio, const Texture& texture, double rotation);
+                  const Ratio& ratio, const Texture& texture, double rotation);
 };
 
 #endif  // ENERGY_EMITTER_H
