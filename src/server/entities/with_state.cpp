@@ -8,8 +8,9 @@ bool WithState::getState() const {
 }
 
 void WithState::setState(const State state) {
-	this->state = state;
+	this->setState((bool) state);
 }
+
 void WithState::setState(const bool state) {
 	this->state = state;
 }

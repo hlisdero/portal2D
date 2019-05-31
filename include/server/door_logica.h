@@ -1,54 +1,69 @@
 #ifndef DOOR_LOGICA_H
 #define DOOR_LOGICA_H
 
-class DoorLogica;
+#include <string>
+#include <memory>
 
-#include "server/entities/button.h"
+class DoorLogica;
+typedef std::unique_ptr<DoorLogica> DoorLogicaPtr;
+
+#include "server/entities/with_subscribable_state.h"
 
 class DoorLogica {
 public:
 	virtual bool value() const = 0;
+	virtual void attach(DoorEntity * door, subscribablesMap & subscribables) = 0;
 };
 
 class Value_DL : public DoorLogica {
 public:
-	explicit Value_DL(ButtonEntity & button);
+	explicit Value_DL(YAML::Node yaml);
 
 	virtual bool value() const override;
+	virtual void attach(DoorEntity * door, subscribablesMap & subscribables) override;
+
 private:
-	ButtonEntity & button;
+	std::string subscribableName;
+	WithSubscribableState * subscribable;
 };
 
-class Or_DL : public DoorLogica {
+class Double_DL : public DoorLogica {
 public:
-	Or_DL(DoorLogica & logicaA, DoorLogica & logicaB);
+	Double_DL(YAML::Node yaml);
 
-	virtual bool value() const override;
+	virtual bool value() const = 0;
+	virtual void attach(DoorEntity * door, subscribablesMap & subscribables) override;
 
-private:
-	DoorLogica & logicaA;
-	DoorLogica & logicaB;
+protected:
+	DoorLogicaPtr logicaA;
+	DoorLogicaPtr logicaB;
 };
 
-class And_DL : public DoorLogica {
+class Or_DL : public Double_DL {
 public:
-	And_DL(DoorLogica & logicaA, DoorLogica & logicaB);
+	using Double_DL::Double_DL; // inherit constructor
 
 	virtual bool value() const override;
+};
 
-private:
-	DoorLogica & logicaA;
-	DoorLogica & logicaB;
+class And_DL : public Double_DL {
+public:
+	using Double_DL::Double_DL; // inherit constructor
+
+	virtual bool value() const override;
 };
 
 class Not_DL : public DoorLogica {
 public:
-	explicit Not_DL(DoorLogica & logica);
+	explicit Not_DL(YAML::Node yaml );
 
 	virtual bool value() const override;
+	virtual void attach(DoorEntity * door, subscribablesMap & subscribables) override;
 
 private:
-	DoorLogica & logica;
+	DoorLogicaPtr logica;
 };
+
+DoorLogicaPtr loadDoorLogica(YAML::Node yaml);
 
 #endif  // DOOR_LOGICA_H

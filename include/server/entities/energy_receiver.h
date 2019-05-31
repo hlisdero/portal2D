@@ -4,10 +4,10 @@
 #include "Box2D/Box2D.h"
 
 #include "common/entities/entity.h"
-#include "server/entities/with_state.h"
+#include "server/entities/with_subscribable_state.h"
 #include "server/entities/handle_contact.h"
 
-class EnergyReceiverEntity : public Entity, public WithState, public HandleContact {
+class EnergyReceiverEntity : public Entity, public WithSubscribableState, public HandleContact {
 public:
 	EnergyReceiverEntity(const float x, const float y);
 	EnergyReceiverEntity(YAML::Node yaml);

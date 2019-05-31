@@ -4,6 +4,7 @@
 #include "server/entities/portal.h"
 #include "server/entities/energy_ball.h"
 #include "server/entities/end_barrier.h"
+#include "server/entities/door.h"
 
 #include "common/entities/entities_settings.h"
 
@@ -109,6 +110,9 @@ void BodyFactory::attachBody(Entity * entity, b2Body * body) {
 		case TYPE_ENERGY_BALL:
 			entity->as<EnergyBallEntity>()->attachBody(body);
 			break;
+		case TYPE_GATE:
+			entity->as<DoorEntity>()->attachBody(body);
+			break;
 		default:
 			break;
 	}
@@ -141,8 +145,6 @@ void BodyFactory::createBody(Entity * entity) {
 	b2PolygonShape shape = createShape(entity);
 
 	b2Body * body = this->world.CreateBody(&bodyDef);
-	attachBody(entity, body);
-	body->SetUserData(entity);
 
 	if(entity->getType() == TYPE_ENERGY_BALL) {
 		body->SetLinearVelocity(
@@ -157,4 +159,7 @@ void BodyFactory::createBody(Entity * entity) {
 	const b2Vec2 & center = fixture->GetAABB(0).GetCenter();
 	entity->setX(center.x);
 	entity->setY(center.y);
+	
+	body->SetUserData(entity);
+	attachBody(entity, body);
 }
