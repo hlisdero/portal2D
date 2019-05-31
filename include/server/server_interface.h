@@ -24,7 +24,6 @@ public:
 	void createPortal(PlayerEntity & player, float angle, PortalColor color);
 
 private:
-	MapLoader mapLoader;
 	Game game;
 	PlayerEntity player;
 };

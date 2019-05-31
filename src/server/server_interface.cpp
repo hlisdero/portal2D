@@ -1,7 +1,7 @@
 #include "server/server_interface.h"
 
 ServerInterface::ServerInterface(const char * mapName) : 
-	game(this->mapLoader, mapName) {
+	game(mapName) {
 	this->game.addPlayer(&this->player);
 }
 

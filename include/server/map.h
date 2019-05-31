@@ -5,16 +5,14 @@
 
 #include <vector>
 
-class Map;
-
+#include "yaml-cpp/yaml.h"
 #include "common/entities/entity.h"
 #include "server/end_zone.h"
-#include "server/map_loader.h"
+#include "server/door_logica.h"
 
 class Map {
 public:
-	Map(Map & other) = default;
-	Map(Map && other);
+	Map(const char * mapName);
 
 	const std::vector<Entity*> & getStaticEntities() const;
 	const std::vector<Entity*> & getDynamicEntities() const;
@@ -26,8 +24,6 @@ public:
 	~Map();
 
 private:
-	friend MapLoader;
-
 	int minPlayers;
 	b2Vec2 spawn;
 
@@ -36,7 +32,9 @@ private:
 
 	EndZone endZone;
 
-	Map();
+	void loadSettings(YAML::Node yaml);
+	void loadEntities(YAML::Node yaml);
+	Entity * createEntity(YAML::Node yaml);
 };
 
 #endif  // MAP_H
