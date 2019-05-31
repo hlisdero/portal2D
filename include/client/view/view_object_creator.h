@@ -29,6 +29,7 @@ public:
     void createButton(size_t index, const Position& initial) const;
     void createEnergyBall(size_t index, const Position& initial) const;
     void createEnergyBar(size_t index, const Position& initial, double rotation = 0.0) const;
+    void createEndBarrier(size_t index, const Position& initial, double rotation = 0.0) const;
     void createEnergyEmitter(size_t index, const Position& initial, double rotation = 0.0) const;
     void createEnergyReceiver(size_t index, const Position& initial, double rotation = 0.0) const;
     void createRock(size_t index, const Position& initial, double rotation = 0.0) const;

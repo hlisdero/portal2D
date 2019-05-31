@@ -14,5 +14,6 @@
 #include "client/objects/energy_receiver.h"
 #include "client/objects/rock.h"
 #include "client/objects/portal.h"
+#include "client/objects/end_barrier.h"
 
 #endif  // OBJECTS_H
