@@ -19,12 +19,14 @@
 	*------ > x
 */
 
+#define PORTAL_REACH 30.0f
+
 class World {
 public:
 	explicit World(Map & map);
 
     void createPlayer(PlayerEntity * player);
-    void createPortal(PlayerEntity & player, float angle, PortalColor color);
+    void createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor color);
 
     void updatePhysics();
 

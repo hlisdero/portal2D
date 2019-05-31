@@ -13,8 +13,8 @@ void ServerInterface::movePlayer(const MoveDirection direction, const bool press
 	}
 }
 
-void ServerInterface::createPortal(PlayerEntity & player, float angle, PortalColor color) {
-	this->game.createPortal(player, angle, color);
+void ServerInterface::createPortal(b2Vec2 & direction, PortalColor color) {
+	this->game.createPortal(this->player, direction, color);
 }
 
 void ServerInterface::update() {

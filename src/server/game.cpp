@@ -24,8 +24,8 @@ void Game::addPlayer(PlayerEntity * player) {
 
 }
 
-void Game::createPortal(PlayerEntity & player, float angle, PortalColor color) {
-	this->world.createPortal(player, angle, color);
+void Game::createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor color) {
+	this->world.createPortal(player, direction, color);
 }
 
 void Game::update() {

@@ -19,7 +19,7 @@ public:
 	Game(MapLoader & mapLoader, const char * mapName);
 
 	void addPlayer(PlayerEntity * player);
-	void createPortal(PlayerEntity & player, float angle, PortalColor color);
+	void createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor color);
 
 	void update();
 

@@ -30,13 +30,10 @@ void World::createPlayer(PlayerEntity * player) {
 	this->bodyFactory.createBody(player);
 }
 
-void World::createPortal(PlayerEntity & player, float angle, PortalColor color) {
-	float32 L = 25.0f;
+void World::createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor color) {
 
 	const b2Vec2 & origin = player.getBody()->GetPosition();
-	
-	b2Vec2 distance(L * cosf(angle), -L * b2Abs(sinf(angle)));
-	b2Vec2 end = origin + distance;
+	b2Vec2 end = origin + (PORTAL_REACH * direction);
 
 	PortalRayCastCallback callback;
 
