@@ -52,6 +52,11 @@ void ViewObjectCreator::createEnergyBar(size_t index, const Position& initial, d
     view_objects[index] = energy_bar;
 }
 
+void ViewObjectCreator::createEndBarrier(size_t index, const Position& initial, double rotation) const {
+    EndBarrier* energy_bar = new EndBarrier(getSize(TYPE_END_BARRIER), initial, meter_to_pixel, textures["FX"], rotation);
+    view_objects[index] = energy_bar;
+}
+
 void ViewObjectCreator::createEnergyEmitter(size_t index, const Position& initial, double rotation) const {
     EnergyReceiver* energy_receiver = new EnergyReceiver(getSize(TYPE_ENERGY_EMITTER), initial, meter_to_pixel, textures["Block"], rotation);
     view_objects[index] = energy_receiver;

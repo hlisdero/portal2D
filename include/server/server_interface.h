@@ -24,7 +24,6 @@ public:
 	void createPortal(b2Vec2 & direction, PortalColor color);
 
 private:
-	MapLoader mapLoader;
 	Game game;
 	PlayerEntity player;
 };

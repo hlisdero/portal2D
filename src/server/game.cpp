@@ -1,7 +1,7 @@
 #include "server/game.h"
 
-Game::Game(MapLoader & mapLoader, const char * mapName) :
-	map(mapLoader.loadMap(mapName)),
+Game::Game(const char * mapName) :
+	map(mapName),
 	world(this->map) {}
 
 void Game::processEvent() {

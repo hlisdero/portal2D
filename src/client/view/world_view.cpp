@@ -98,6 +98,9 @@ void WorldView::createEntity(EntityType type, size_t id,
         case TYPE_PORTAL:
             object_creator.createPortal(id, position, rotation);
             break;
+        case TYPE_END_BARRIER:
+            object_creator.createEndBarrier(id, position, rotation);
+            break;
         case TYPE_ROCK:
             object_creator.createRock(id, position, rotation);
             break;
