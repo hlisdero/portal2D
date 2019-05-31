@@ -22,6 +22,8 @@ public:
 	void keyDown(const MoveDirection direction);
 	void keyUp(const MoveDirection direction);
 
+	void createPortal(float angle);
+
 	void applyMovement();
 
 	void handleFloorContact(b2Contact * contact, bool isBegin);

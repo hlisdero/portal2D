@@ -1,5 +1,7 @@
 #include "server/entities/player.h"
 
+#include "server/portal_ray_cast_callback.h"
+
 PlayerEntity::PlayerEntity() :
 	Entity(TYPE_PLAYER, 0, 0, 0) {}
 
@@ -75,20 +77,23 @@ void PlayerEntity::keyUp(const MoveDirection direction) {
 	}
 }
 
-void firePortalGun(float angle) {
+void PlayerEntity::createPortal(float angle) {
 	float32 L = 25.0f;
 
-	b2Vec2 & origin = this->getBody()->GetPosition();
+	const b2Vec2 & origin = this->getBody()->GetPosition();
 	
 	b2Vec2 distance(L * cosf(angle), -L * b2Abs(sinf(angle)));
 	b2Vec2 end = origin + distance;
 
-	EdgeShapesCallback callback;
+	PortalRayCastCallback callback;
 
-	m_world->RayCast(&callback, origin, end);
+	// TODO get world
+	// m_world->RayCast(&callback, origin, end);
 
-	if(callback.m_fixture) {
+	if(callback.hit) {
 		// check if possible to create a portal
+
+		// create a portal
 	}
 }
 
