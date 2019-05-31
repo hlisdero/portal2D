@@ -131,8 +131,10 @@ b2FixtureDef BodyFactory::createFixtureDef(Entity * entity,
 		fixtureDef.filter.maskBits = 0xFFFD;
 	} else if(entity->getType() == TYPE_ENERGY_BAR ||
 		entity->getType() == TYPE_END_BARRIER) {
-		fixtureDef.filter.categoryBits = 0x0002;
-		fixtureDef.filter.maskBits = 0xFFFF;
+		fixtureDef.isSensor = true;
+		// TODO util ?
+		// fixtureDef.filter.categoryBits = 0x0002;
+		// fixtureDef.filter.maskBits = 0xFFFF;
 	}
 
 	return std::move(fixtureDef);
