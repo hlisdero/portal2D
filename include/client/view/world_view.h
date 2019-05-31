@@ -11,7 +11,8 @@
 
 class WorldView {
 public:
-    WorldView(float32 width, float32 height);
+    WorldView(float32 width, float32 height,
+              size_t level_width, size_t level_height);
 
     WorldView(const WorldView&) = delete;
     WorldView& operator=(const WorldView&) = delete;
@@ -28,7 +29,11 @@ public:
     void update();
 
 private:
+    const size_t screen_width = 1024;
+    const size_t screen_height = 768;
     Ratio meter_to_pixel;
+    size_t level_width;
+    size_t level_height;
     Screen screen;
     std::vector<DrawableBox2D*> view_objects;
 
@@ -38,8 +43,8 @@ public:
 private:
     void renderObjects();
     void checkValidIndex(size_t index);
-    void reserveSize(size_t index);
     void createEntity(EntityType type, size_t id, const Position& initial, double rotation);
+    void createPlayerWithCamera(size_t id, const Position& position);
 };
 
 #endif  // WORLD_VIEW_H

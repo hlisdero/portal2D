@@ -4,8 +4,10 @@
 #include <string>
 #include "client/objects/drawable.h"
 #include "client/objects/drawable_box2D.h"
+#include "client/objects/background.h"
 #include "client/screen/window.h"
 #include "client/screen/renderer.h"
+#include "client/screen/camera.h"
 #include "client/texture/texture_creator.h"
 #include "client/texture/color.h"
 
@@ -19,6 +21,8 @@ public:
     Screen(Screen&& other) = delete;
     Screen& operator=(Screen&& other) = delete;
 
+    ~Screen();
+
     size_t getWidth() const;
     size_t getHeight() const;
 
@@ -27,6 +31,7 @@ public:
     void render(const Texture& texture, int x, int y, double scale_factor = 1);
     void render(Drawable& drawable);
     void render(DrawableBox2D& drawable);
+    void render(Background background);
 
     void setRenderDrawColor(const std::string& color_name);
     void setRenderDrawColor(uint8_t red, uint8_t green,
@@ -52,12 +57,16 @@ public:
 
     const TextureCreator& getTextureCreator() const;
 
+    void createCamera(int level_width, int level_height, const DrawableBox2D& drawable);
+    void makeRelativeToCamera(SDL_Rect& rect);
+
 private:
     static const size_t DEFAULT_SCREEN_WIDTH = 640;
     static const size_t DEFAULT_SCREEN_HEIGHT = 480;
 
     Window window;
     Renderer renderer;
+    Camera* camera = nullptr;
     const TextureCreator texture_creator;
 };
 

@@ -4,6 +4,13 @@ Screen::Screen(size_t width, size_t height) :
     window(width, height), renderer(window.get()),
     texture_creator(renderer) {}
 
+Screen::~Screen() {
+    if (camera) {
+        delete camera;
+    }
+}
+
+
 size_t Screen::getWidth() const {
     return window.width;
 }
@@ -21,11 +28,13 @@ void Screen::render(const Texture& texture, int x, int y, double scale_factor) {
     int w = texture.width * scale_factor;
     int h = texture.height * scale_factor;
     SDL_Rect rect = {x, y, w, h};
+    makeRelativeToCamera(rect);
     renderer.render(texture.get(), nullptr, &rect);
 }
 
 void Screen::render(Drawable& drawable) {
     SDL_Rect dst = {drawable.getX(), drawable.getY(), drawable.getWidth(), drawable.getHeight()};
+    makeRelativeToCamera(dst);
     SDL_Rect* src = drawable.getClip();
     const Texture& texture = drawable.getTexture();
     renderer.render(texture.get(), src, &dst, drawable.getRotation(), drawable.getFlipState());
@@ -38,9 +47,24 @@ void Screen::render(DrawableBox2D& drawable) {
     int y = window.height - (drawable.getY() + drawable.getHeight()/2);
 
     SDL_Rect dst = {x, y, drawable.getWidth(), drawable.getHeight()};
+    makeRelativeToCamera(dst);
     SDL_Rect* src = drawable.getClip();
     const Texture& texture = drawable.getTexture();
     renderer.render(texture.get(), src, &dst, drawable.getRotation(), drawable.getFlipState());
+}
+
+void Screen::render(Background background) {
+    SDL_Rect dst = {background.getX(), background.getY(), background.getWidth(), background.getHeight()};
+    const Texture& texture = background.getTexture();
+    SDL_Rect* src;
+    if (camera) {
+        src = &camera->position;
+        dst.w = camera->position.w;
+        dst.h = camera->position.h;
+    } else {
+        src = background.getClip();
+    }
+    renderer.render(texture.get(), src, &dst);
 }
 
 void Screen::setRenderDrawColor(const std::string& color_name) {
@@ -81,9 +105,24 @@ void Screen::resetViewport() {
 }
 
 void Screen::update() {
+    if (camera) {
+        camera->center();
+    }
     renderer.renderPresent();
 }
 
 const TextureCreator& Screen::getTextureCreator() const {
     return texture_creator;
+}
+
+void Screen::createCamera(int level_width, int level_height, const DrawableBox2D& drawable) {
+    camera = new Camera(getWidth(), getHeight(), level_width, level_height, drawable);
+}
+
+void Screen::makeRelativeToCamera(SDL_Rect& rect) {
+    if (!camera) {
+        return;
+    }
+    rect.x = rect.x - camera->position.x;
+    rect.y = rect.y - camera->position.y;
 }

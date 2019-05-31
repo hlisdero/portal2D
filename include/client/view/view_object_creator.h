@@ -20,7 +20,7 @@ public:
     ViewObjectCreator(ViewObjectCreator&& other) = delete;
     ViewObjectCreator& operator=(ViewObjectCreator&& other) = delete;
 
-    void createPlayer(size_t index, const Position& initial);
+    const Player& createPlayer(size_t index, const Position& initial);
     void createMetalBlock(size_t index, const Position& initial);
     void createDiagonalMetalBlock(size_t index, const Position& initial, double rotation = 0.0);
     void createStoneBlock(size_t index, const Position& initial);
@@ -38,6 +38,8 @@ private:
     Ratio& meter_to_pixel;
     std::vector<DrawableBox2D*>& view_objects;
     TextureLoader textures;
+
+    void reserveSize(size_t index);
 
 public:
     Background background;
