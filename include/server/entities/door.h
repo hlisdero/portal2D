@@ -3,10 +3,14 @@
 
 #include "Box2D/Box2D.h"
 
+class DoorEntity;
+
 #include "common/entities/entity.h"
 #include "server/entities/with_state.h"
 
-class DoorEntity;
+#include "server/entities/with_subscribable_state.h"
+
+typedef std::map<std::string, WithSubscribableState*> subscribablesMap;
 
 #include "server/door_logica.h"
 
@@ -16,8 +20,10 @@ public:
 	DoorEntity(YAML::Node yaml);
 
 	void updateState();
+
+	void attach(subscribablesMap & subscribables);
 private:
-	DoorLogica * logica;
+	DoorLogicaPtr logica;
 };
 
 #endif  // DOOR_ENTITY_H
