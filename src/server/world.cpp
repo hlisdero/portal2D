@@ -1,5 +1,7 @@
 #include "server/world.h"
 
+#include "server/portal_ray_cast_callback.h"
+
 // Initialize the world with the gravity vector
 World::World(Map & map) :
 	world(b2Vec2(0.0f, -10.0f)),
@@ -26,6 +28,35 @@ void World::createPlayer(PlayerEntity * player) {
 	player->setY(spawn.y);
 
 	this->bodyFactory.createBody(player);
+}
+
+void World::createPortal(PlayerEntity & player, float angle, PortalColor color) {
+	float32 L = 25.0f;
+
+	const b2Vec2 & origin = player.getBody()->GetPosition();
+	
+	b2Vec2 distance(L * cosf(angle), -L * b2Abs(sinf(angle)));
+	b2Vec2 end = origin + distance;
+
+	PortalRayCastCallback callback;
+
+	this->world.RayCast(&callback, origin, end);
+
+	if(callback.hit) {
+		// check if possible to create a portal
+
+		// create a portal
+		PortalEntity * portal = player.getPortal(color);
+		if(portal != nullptr) {
+			portal->move(callback.m_point.x, callback.m_point.y);
+		} else {
+			portal = new PortalEntity(callback.m_point.x, callback.m_point.y, color);
+
+			this->bodyFactory.createBody(portal);
+			player.setPortal(color, portal);
+		}
+
+	}	
 }
 
 void World::updatePhysics() {

@@ -21,6 +21,7 @@ public:
 	const std::vector<Entity*> getDynamicEntities() const;
 
 	void movePlayer(const MoveDirection direction, const bool pressed);
+	void createPortal(PlayerEntity & player, float angle, PortalColor color);
 
 private:
 	MapLoader mapLoader;

@@ -11,6 +11,8 @@
 #include "common/move_direction.h"
 #include "server/entities/portal.h"
 
+#define PORTALS_NB 2
+
 class PlayerEntity :  public Entity, public BodyLinked, public HandleContact {
 public:
 	PlayerEntity();
@@ -20,15 +22,22 @@ public:
 	void keyDown(const MoveDirection direction);
 	void keyUp(const MoveDirection direction);
 
+	PortalEntity * getPortal(PortalColor color);
+	void setPortal(PortalColor color, PortalEntity * portal);
+
 	void applyMovement();
 
 	void handleFloorContact(b2Contact * contact, bool isBegin);
+
+	virtual ~PlayerEntity() override;
 
 private:	
 	bool isOnTheFloor = false;
 	// This allow for better gameplay experience
 	bool hasMovedInTheAir = false;
 	MoveDirection moveDirection = NONE;
+
+	PortalEntity * portals[PORTALS_NB];
 
 	void applyImpulseToCenter(float vx, float vy);
 

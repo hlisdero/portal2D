@@ -9,13 +9,14 @@ enum State {
 	STATE_ENABLED,
 
 	// Portal
-	STATE_BLUE = 0,
-	STATE_ORANGE,
+	COLOR_BLUE = 0,
+	COLOR_ORANGE,
 
 	// Door
 	STATE_CLOSED = 0,
 	STATE_OPENED
 };
+typedef enum State PortalColor;
 
 class WithState {
 public:

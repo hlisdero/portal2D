@@ -24,6 +24,10 @@ void Game::addPlayer(PlayerEntity * player) {
 
 }
 
+void Game::createPortal(PlayerEntity & player, float angle, PortalColor color) {
+	this->world.createPortal(player, angle, color);
+}
+
 void Game::update() {
 	// Check victory
 	if(this->map.getEndZone().getNumberOfPlayersInZone() 
