@@ -1,5 +1,8 @@
 #include "server/map_loader.h"
 
+#include <map>
+#include <string>
+
 #include "server/entities/door.h"
 #include "server/entities/energy_emittor.h"
 #include "server/entities/energy_receiver.h"
@@ -44,6 +47,9 @@ void MapLoader::loadSettings(Map & map, YAML::Node yaml) {
 void MapLoader::loadEntities(Map & map, YAML::Node yaml) {
 	YAML::Node entities = yaml["entities"];
 
+	std::map<std::string, WithSubscribableState*> subscribables; 
+	std::vector<DoorEntity*> doors; 
+
 	for(uint i = 0; i < entities.size(); i++) {
 		Entity * entity = this->createEntity(map, entities[i]);
 
@@ -52,6 +58,25 @@ void MapLoader::loadEntities(Map & map, YAML::Node yaml) {
 		} else {
 			map.dynamicEntities.push_back(entity);
 		}
+
+		if(entity->getType() == TYPE_BUTTON ||
+			entity->getType() == TYPE_ENERGY_RECEIVER) {
+			std::string entityName = entities[i]["name"].as<std::string>();
+
+			if(entity->getType() == TYPE_BUTTON) {
+				subscribables[entityName] = entity->as<ButtonEntity>();
+			} else {
+				subscribables[entityName] = entity->as<EnergyReceiverEntity>();
+			}
+		}
+
+		if(entity->getType() == TYPE_GATE) {
+			doors.push_back(entity->as<DoorEntity>());
+		}
+	}
+
+	for(DoorEntity * door : doors) {
+		door->attach(subscribables);
 	}
 }
 

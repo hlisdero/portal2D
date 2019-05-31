@@ -5,6 +5,7 @@ class MapLoader;
 
 #include "yaml-cpp/yaml.h"
 #include "server/map.h"
+#include "server/door_logica.h"
 
 class MapLoader {
 public:
