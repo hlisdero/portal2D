@@ -7,10 +7,9 @@
 
 class PortalEntity :  public Entity, public WithState, public BodyLinked {
 public:
-	PortalEntity(const float x, const float y, const State color);
+	PortalEntity(const float x, const float y, const PortalColor color);
 
-	// TODO
-	//void move();
+	void move(const float newX, const float newY);
 
 	PortalEntity * getTwin();
 	void setTwin(PortalEntity * twin);

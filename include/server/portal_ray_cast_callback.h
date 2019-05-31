@@ -1,6 +1,8 @@
 #ifndef PORTAL_RAY_CAST_CALLBACK_H
 #define PORTAL_RAY_CAST_CALLBACK_H
 
+#include "Box2D/Box2D.h"
+
 class PortalRayCastCallback : public b2RayCastCallback
 {
 public:

@@ -24,6 +24,7 @@ public:
 	explicit World(Map & map);
 
     void createPlayer(PlayerEntity * player);
+    void createPortal(PlayerEntity & player, float angle, PortalColor color);
 
     void updatePhysics();
 

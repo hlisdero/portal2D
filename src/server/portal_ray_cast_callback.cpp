@@ -1,5 +1,7 @@
 #include "server/portal_ray_cast_callback.h"
 
+#include "server/entities/player.h"
+
 float32 PortalRayCastCallback::ReportFixture(b2Fixture* fixture, 
 	const b2Vec2& point, const b2Vec2& normal, float32 fraction) {
 
@@ -7,7 +9,7 @@ float32 PortalRayCastCallback::ReportFixture(b2Fixture* fixture,
 	Entity* entity = static_cast<Entity*>(this->body->GetUserData());
 
 	// Go through players
-	if(entity.getType() == TYPE_PLAYER) {
+	if(entity->getType() == TYPE_PLAYER) {
 		return -1.0f;
 	}
 

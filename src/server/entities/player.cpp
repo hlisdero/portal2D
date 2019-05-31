@@ -1,9 +1,32 @@
 #include "server/entities/player.h"
 
-#include "server/portal_ray_cast_callback.h"
-
 PlayerEntity::PlayerEntity() :
-	Entity(TYPE_PLAYER, 0, 0, 0) {}
+	Entity(TYPE_PLAYER, 0, 0, 0) {
+	for(int i = 0; i < PORTALS_NB; i++) {
+		this->portals[i] = nullptr;
+	}
+}
+
+PlayerEntity::~PlayerEntity() {
+	for(int i = 0; i < PORTALS_NB; i++) {
+		if(this->portals[i] != nullptr) {
+			delete this->portals[i];
+		}
+	}
+}
+
+PortalEntity * PlayerEntity::getPortal(PortalColor color) {
+	return this->portals[color];
+}
+
+void PlayerEntity::setPortal(PortalColor color, PortalEntity * portal) {
+	PortalEntity * twin = this->portals[(color+1)%PORTALS_NB];
+	if(twin != nullptr) {
+		twin->setTwin(portal);
+		portal->setTwin(twin);
+	}
+	this->portals[color] = portal;
+}
 
 void PlayerEntity::handleFloorContact(b2Contact * contact, bool inContact) {
 	float direction = (contact->GetFixtureA()->GetBody()->GetUserData() == this) ? -1.0f : 1.0f;
@@ -74,26 +97,6 @@ void PlayerEntity::keyDown(const MoveDirection direction) {
 void PlayerEntity::keyUp(const MoveDirection direction) {
 	if(this->moveDirection == direction) {
 		this->moveDirection = NONE;
-	}
-}
-
-void PlayerEntity::createPortal(float angle) {
-	float32 L = 25.0f;
-
-	const b2Vec2 & origin = this->getBody()->GetPosition();
-	
-	b2Vec2 distance(L * cosf(angle), -L * b2Abs(sinf(angle)));
-	b2Vec2 end = origin + distance;
-
-	PortalRayCastCallback callback;
-
-	// TODO get world
-	// m_world->RayCast(&callback, origin, end);
-
-	if(callback.hit) {
-		// check if possible to create a portal
-
-		// create a portal
 	}
 }
 
