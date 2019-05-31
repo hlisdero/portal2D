@@ -1,18 +1,20 @@
 #ifndef WITH_STATE_H
 #define WITH_STATE_H
 
+#include "yaml-cpp/yaml.h"
+
 enum State {
 	// EnergyReceiver, Button
-	STATE_ENABLED = 0,
-	STATE_DISABLED,
+	STATE_DISABLED = 0,
+	STATE_ENABLED,
 
 	// Portal
 	STATE_BLUE = 0,
 	STATE_ORANGE,
 
 	// Door
-	STATE_OPENED = 0,
-	STATE_CLOSED
+	STATE_CLOSED = 0,
+	STATE_OPENED
 };
 
 class WithState {
@@ -22,7 +24,8 @@ public:
 
 	bool getState() const;
 	void setState(const State state);
-	void setState(const bool state);
+	virtual void setState(const bool state);
+
 private:
 	bool state;
 };
