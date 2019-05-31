@@ -13,6 +13,10 @@ void ServerInterface::movePlayer(const MoveDirection direction, const bool press
 	}
 }
 
+void ServerInterface::createPortal(PlayerEntity & player, float angle, PortalColor color) {
+	this->game.createPortal(player, angle, color);
+}
+
 void ServerInterface::update() {
 	this->game.update();
 }
