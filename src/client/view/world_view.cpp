@@ -6,6 +6,9 @@ WorldView::WorldView(float32 width, float32 height,
     level_width(level_width), level_height(level_height),
     screen(screen_width, screen_height),
     view_object_creator(meter_to_pixel, view_objects, screen.getTextureCreator(), 1024, 768) {
+    if (level_width < screen_width || level_height < screen_height) {
+        throw std::runtime_error("Error: el tamaño del mundo en pixeles es demasiado pequeño");
+    }
 }
 
 WorldView::~WorldView() {
