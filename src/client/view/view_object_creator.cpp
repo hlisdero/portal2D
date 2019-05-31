@@ -1,104 +1,77 @@
 #include "client/view/view_object_creator.h"
 
-ViewObjectCreator::ViewObjectCreator(Ratio& ratio, std::vector<DrawableBox2D*>& view_objects,
-    const TextureCreator& texture_creator, size_t width, size_t height) :
-    meter_to_pixel(ratio), view_objects(view_objects), textures(texture_creator),
-    background(width, height, textures["Background"]) {}
+ViewObjectCreator::ViewObjectCreator(std::map<size_t, DrawableBox2D*>& view_objects,
+                                     const WorldViewSettings& settings) :
+    view_objects(view_objects),
+    meter_to_pixel(settings.getRatio()),
+    textures(settings.getTextureLoader()) {}
 
-const Player& ViewObjectCreator::createPlayer(size_t index, const Position& initial) {
-    Size size(entitiesSettings[TYPE_PLAYER][HALF_WIDTH]*2, entitiesSettings[TYPE_PLAYER][HALF_HEIGHT]*2);
-    Player* player = new Player(size, initial, meter_to_pixel, textures["Player"]);
-    reserveSize(index);
-    view_objects.at(index) = player;
+const Player& ViewObjectCreator::createPlayer(size_t index, const Position& initial) const {
+    Player* player = new Player(getSize(TYPE_PLAYER), initial, meter_to_pixel, textures["Player"]);
+    view_objects[index] = player;
     return *player;
 }
 
-void ViewObjectCreator::createMetalBlock(size_t index, const Position& initial) {
-    Size size(entitiesSettings[TYPE_METAL_BLOCK][HALF_WIDTH]*2, entitiesSettings[TYPE_METAL_BLOCK][HALF_HEIGHT]*2);
-    MetalBlock* block = new MetalBlock(size, initial, meter_to_pixel, textures["Block"]);
-    reserveSize(index);
-    view_objects.at(index) = block;
+void ViewObjectCreator::createMetalBlock(size_t index, const Position& initial) const {
+    MetalBlock* block = new MetalBlock(getSize(TYPE_METAL_BLOCK), initial, meter_to_pixel, textures["Block"]);
+    view_objects[index] = block;
 }
 
-void ViewObjectCreator::createDiagonalMetalBlock(size_t index, const Position& initial, double rotation) {
-    Size size(entitiesSettings[TYPE_METAL_DIAG_BLOCK][HALF_WIDTH]*2, entitiesSettings[TYPE_METAL_DIAG_BLOCK][HALF_HEIGHT]*2);
-    DiagonalMetalBlock* block = new DiagonalMetalBlock(size, initial, meter_to_pixel, textures["Block"], rotation);
-    reserveSize(index);
-    view_objects.at(index) = block;
+void ViewObjectCreator::createDiagonalMetalBlock(size_t index, const Position& initial, double rotation) const {
+    DiagonalMetalBlock* block = new DiagonalMetalBlock(getSize(TYPE_METAL_DIAG_BLOCK), initial, meter_to_pixel, textures["Block"], rotation);
+    view_objects[index] = block;
 }
 
-void ViewObjectCreator::createStoneBlock(size_t index, const Position& initial) {
-    Size size(entitiesSettings[TYPE_STONE_BLOCK][HALF_WIDTH]*2, entitiesSettings[TYPE_STONE_BLOCK][HALF_HEIGHT]*2);
-    StoneBlock* block = new StoneBlock(size, initial, meter_to_pixel, textures["Block"]);
-    reserveSize(index);
-    view_objects.at(index) = block;
+void ViewObjectCreator::createStoneBlock(size_t index, const Position& initial) const {
+    StoneBlock* block = new StoneBlock(getSize(TYPE_STONE_BLOCK), initial, meter_to_pixel, textures["Block"]);
+    view_objects[index] = block;
 }
 
-void ViewObjectCreator::createAcid(size_t index, const Position& initial) {
-    Size size(entitiesSettings[TYPE_ACID][HALF_WIDTH]*2, entitiesSettings[TYPE_ACID][HALF_HEIGHT]*2);
-    Acid* acid = new Acid(size, initial, meter_to_pixel, textures["Miscellaneous"]);
-    reserveSize(index);
-    view_objects.at(index) = acid;
+void ViewObjectCreator::createAcid(size_t index, const Position& initial) const {
+    Acid* acid = new Acid(getSize(TYPE_ACID), initial, meter_to_pixel, textures["Miscellaneous"]);
+    view_objects[index] = acid;
 }
 
-void ViewObjectCreator::createGate(size_t index, const Position& initial) {
-    Size size(entitiesSettings[TYPE_GATE][HALF_WIDTH]*2, entitiesSettings[TYPE_GATE][HALF_HEIGHT]*2);
-    Gate* gate = new Gate(size, initial, meter_to_pixel, textures["Gate"]);
-    reserveSize(index);
-    view_objects.at(index) = gate;
+void ViewObjectCreator::createGate(size_t index, const Position& initial) const {
+    Gate* gate = new Gate(getSize(TYPE_GATE), initial, meter_to_pixel, textures["Gate"]);
+    view_objects[index] = gate;
 }
 
-void ViewObjectCreator::createButton(size_t index, const Position& initial) {
-    Size size(entitiesSettings[TYPE_BUTTON][HALF_WIDTH]*2, entitiesSettings[TYPE_BUTTON][HALF_HEIGHT]*2);
-    Button* button = new Button(size, initial, meter_to_pixel, textures["Miscellaneous"]);
-    reserveSize(index);
-    view_objects.at(index) = button;
+void ViewObjectCreator::createButton(size_t index, const Position& initial) const {
+    Button* button = new Button(getSize(TYPE_BUTTON), initial, meter_to_pixel, textures["Miscellaneous"]);
+    view_objects[index] = button;
 }
 
-void ViewObjectCreator::createEnergyBall(size_t index, const Position& initial) {
-    Size size(entitiesSettings[TYPE_ENERGY_BALL][HALF_WIDTH]*2, entitiesSettings[TYPE_ENERGY_BALL][HALF_HEIGHT]*2);
-    EnergyBall* energy_ball = new EnergyBall(size, initial, meter_to_pixel, textures["FX"]);
-    reserveSize(index);
-    view_objects.at(index) = energy_ball;
+void ViewObjectCreator::createEnergyBall(size_t index, const Position& initial) const {
+    EnergyBall* energy_ball = new EnergyBall(getSize(TYPE_ENERGY_BALL), initial, meter_to_pixel, textures["FX"]);
+    view_objects[index] = energy_ball;
 }
 
-void ViewObjectCreator::createEnergyBar(size_t index, const Position& initial, double rotation) {
-    Size size(entitiesSettings[TYPE_ENERGY_BAR][HALF_WIDTH]*2, entitiesSettings[TYPE_ENERGY_BAR][HALF_HEIGHT]*2);
-    EnergyBar* energy_bar = new EnergyBar(size, initial, meter_to_pixel, textures["FX"], rotation);
-    reserveSize(index);
-    view_objects.at(index) = energy_bar;
+void ViewObjectCreator::createEnergyBar(size_t index, const Position& initial, double rotation) const {
+    EnergyBar* energy_bar = new EnergyBar(getSize(TYPE_ENERGY_BAR), initial, meter_to_pixel, textures["FX"], rotation);
+    view_objects[index] = energy_bar;
 }
 
-void ViewObjectCreator::createEnergyEmitter(size_t index, const Position& initial, double rotation) {
-    Size size(entitiesSettings[TYPE_ENERGY_EMITTER][HALF_WIDTH]*2, entitiesSettings[TYPE_ENERGY_EMITTER][HALF_HEIGHT]*2);
-    EnergyReceiver* energy_receiver = new EnergyReceiver(size, initial, meter_to_pixel, textures["Block"], rotation);
-    reserveSize(index);
-    view_objects.at(index) = energy_receiver;
+void ViewObjectCreator::createEnergyEmitter(size_t index, const Position& initial, double rotation) const {
+    EnergyReceiver* energy_receiver = new EnergyReceiver(getSize(TYPE_ENERGY_EMITTER), initial, meter_to_pixel, textures["Block"], rotation);
+    view_objects[index] = energy_receiver;
 }
 
-void ViewObjectCreator::createEnergyReceiver(size_t index, const Position& initial, double rotation) {
-    Size size(entitiesSettings[TYPE_ENERGY_RECEIVER][HALF_WIDTH]*2, entitiesSettings[TYPE_ENERGY_RECEIVER][HALF_HEIGHT]*2);
-    EnergyReceiver* energy_receiver = new EnergyReceiver(size, initial, meter_to_pixel, textures["Block"], rotation);
-    reserveSize(index);
-    view_objects.at(index) = energy_receiver;
+void ViewObjectCreator::createEnergyReceiver(size_t index, const Position& initial, double rotation) const {
+    EnergyReceiver* energy_receiver = new EnergyReceiver(getSize(TYPE_ENERGY_RECEIVER), initial, meter_to_pixel, textures["Block"], rotation);
+    view_objects[index] = energy_receiver;
 }
 
-void ViewObjectCreator::createRock(size_t index, const Position& initial, double rotation) {
-    Size size(entitiesSettings[TYPE_ROCK][HALF_WIDTH]*2, entitiesSettings[TYPE_ROCK][HALF_HEIGHT]*2);
-    Rock* rock = new Rock(size, initial, meter_to_pixel, textures["Block"], rotation);
-    reserveSize(index);
-    view_objects.at(index) = rock;
+void ViewObjectCreator::createRock(size_t index, const Position& initial, double rotation) const {
+    Rock* rock = new Rock(getSize(TYPE_ROCK), initial, meter_to_pixel, textures["Block"], rotation);
+    view_objects[index] = rock;
 }
 
-void ViewObjectCreator::createPortal(size_t index, const Position& initial, double rotation) {
-    Size size(entitiesSettings[TYPE_PORTAL][HALF_WIDTH]*2, entitiesSettings[TYPE_PORTAL][HALF_HEIGHT]*2);
-    Portal* portal = new Portal(size, initial, meter_to_pixel, textures["FX"], rotation);
-    reserveSize(index);
-    view_objects.at(index) = portal;
+void ViewObjectCreator::createPortal(size_t index, const Position& initial, double rotation) const {
+    Portal* portal = new Portal(getSize(TYPE_PORTAL), initial, meter_to_pixel, textures["FX"], rotation);
+    view_objects[index] = portal;
 }
 
-void ViewObjectCreator::reserveSize(size_t index) {
-    if (index + 1 > view_objects.size()) {
-        view_objects.resize(index + 1, nullptr);
-    }
+Size ViewObjectCreator::getSize(EntityType type) const {
+    return Size(entitiesSettings[type][HALF_WIDTH]*2, entitiesSettings[type][HALF_HEIGHT]*2);
 }

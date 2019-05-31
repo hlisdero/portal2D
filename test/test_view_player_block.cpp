@@ -11,8 +11,9 @@ TEST_CASE("Player and Block Test", "[view]") {
 
     size_t player_index = 0;
     size_t block_index = 1;
-    view.view_object_creator.createPlayer(player_index, Position(1, 3));
-    view.view_object_creator.createMetalBlock(block_index, Position(3, 3));
+    const ViewObjectCreator& object_creator = view.getObjectCreator();
+    object_creator.createPlayer(player_index, Position(1, 3));
+    object_creator.createMetalBlock(block_index, Position(3, 3));
 
     while (!event_handler.quit()) {
         event_handler.poll();

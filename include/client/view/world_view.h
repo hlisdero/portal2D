@@ -1,11 +1,12 @@
 #ifndef WORLD_VIEW_H
 #define WORLD_VIEW_H
 
-#include <vector>
+#include <map>
 #include <stdexcept>
 #include "client/screen/screen.h"
 #include "client/sound/sound_manager.h"
 #include "client/view/view_object_creator.h"
+#include "client/view/world_view_settings.h"
 #include "common/ratio.h"
 #include "common/entities/entity.h"
 
@@ -21,6 +22,8 @@ public:
 
     ~WorldView();
 
+    const ViewObjectCreator& getObjectCreator() const;
+
     void createEntities(const std::vector<Entity*>& entities);
 
     void updatePosition(size_t index, const Position& position, double angle = 0.0);
@@ -31,16 +34,12 @@ public:
 private:
     const size_t screen_width = 1024;
     const size_t screen_height = 768;
-    Ratio meter_to_pixel;
-    size_t level_width;
-    size_t level_height;
     Screen screen;
-    std::vector<DrawableBox2D*> view_objects;
+    WorldViewSettings settings;
+    Background background;
+    std::map<size_t, DrawableBox2D*> view_objects;
+    ViewObjectCreator object_creator;
 
-public:
-    ViewObjectCreator view_object_creator;
-
-private:
     void renderObjects();
     void checkValidIndex(size_t index);
     void createEntity(EntityType type, size_t id, const Position& initial, double rotation);

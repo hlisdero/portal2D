@@ -5,7 +5,7 @@
 
 class EnergyBall : public AnimatedDrawableBox2D {
 public:
-    EnergyBall(const Size& size, const Position& initial, Ratio& ratio, const Texture& texture);
+    EnergyBall(const Size& size, const Position& initial, const Ratio& ratio, const Texture& texture);
 };
 
 #endif  // ENERGY_BALL_H

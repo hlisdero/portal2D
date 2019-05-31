@@ -1,6 +1,6 @@
 #include "client/objects/drawable_box2D.h"
 
-DrawableBox2D::DrawableBox2D(const Size& size, const Position& initial, Ratio& ratio) :
+DrawableBox2D::DrawableBox2D(const Size& size, const Position& initial, const Ratio& ratio) :
     size(size), position(initial), meter_to_pixel(ratio) {}
 
 int DrawableBox2D::getX() const {

@@ -1,9 +1,10 @@
 #ifndef VIEW_OBJECT_CREATOR_H
 #define VIEW_OBJECT_CREATOR_H
 
-#include <vector>
+#include <map>
 #include "client/objects/drawable_box2D.h"
 #include "client/objects/objects.h"
+#include "client/view/world_view_settings.h"
 #include "client/texture/texture_loader.h"
 #include "common/entities/entities_settings.h"
 #include "common/position.h"
@@ -11,38 +12,34 @@
 
 class ViewObjectCreator {
 public:
-    ViewObjectCreator(Ratio& ratio, std::vector<DrawableBox2D*>& view_objects,
-                      const TextureCreator& texture_creator,
-                      size_t width, size_t height);
+    ViewObjectCreator(std::map<size_t, DrawableBox2D*>& view_objects,
+                      const WorldViewSettings& settings);
 
     ViewObjectCreator(const ViewObjectCreator&) = delete;
     ViewObjectCreator& operator=(const ViewObjectCreator&) = delete;
     ViewObjectCreator(ViewObjectCreator&& other) = delete;
     ViewObjectCreator& operator=(ViewObjectCreator&& other) = delete;
 
-    const Player& createPlayer(size_t index, const Position& initial);
-    void createMetalBlock(size_t index, const Position& initial);
-    void createDiagonalMetalBlock(size_t index, const Position& initial, double rotation = 0.0);
-    void createStoneBlock(size_t index, const Position& initial);
-    void createAcid(size_t index, const Position& initial);
-    void createGate(size_t index, const Position& initial);
-    void createButton(size_t index, const Position& initial);
-    void createEnergyBall(size_t index, const Position& initial);
-    void createEnergyBar(size_t index, const Position& initial, double rotation = 0.0);
-    void createEnergyEmitter(size_t index, const Position& initial, double rotation = 0.0);
-    void createEnergyReceiver(size_t index, const Position& initial, double rotation = 0.0);
-    void createRock(size_t index, const Position& initial, double rotation = 0.0);
-    void createPortal(size_t index, const Position& initial, double rotation = 0.0);
+    const Player& createPlayer(size_t index, const Position& initial) const;
+    void createMetalBlock(size_t index, const Position& initial) const;
+    void createDiagonalMetalBlock(size_t index, const Position& initial, double rotation = 0.0) const;
+    void createStoneBlock(size_t index, const Position& initial) const;
+    void createAcid(size_t index, const Position& initial) const;
+    void createGate(size_t index, const Position& initial) const;
+    void createButton(size_t index, const Position& initial) const;
+    void createEnergyBall(size_t index, const Position& initial) const;
+    void createEnergyBar(size_t index, const Position& initial, double rotation = 0.0) const;
+    void createEnergyEmitter(size_t index, const Position& initial, double rotation = 0.0) const;
+    void createEnergyReceiver(size_t index, const Position& initial, double rotation = 0.0) const;
+    void createRock(size_t index, const Position& initial, double rotation = 0.0) const;
+    void createPortal(size_t index, const Position& initial, double rotation = 0.0) const;
 
 private:
-    Ratio& meter_to_pixel;
-    std::vector<DrawableBox2D*>& view_objects;
-    TextureLoader textures;
+    std::map<size_t, DrawableBox2D*>& view_objects;
+    const Ratio& meter_to_pixel;
+    const TextureLoader& textures;
 
-    void reserveSize(size_t index);
-
-public:
-    Background background;
+    Size getSize(EntityType type) const;
 };
 
 #endif  // VIEW_OBJECT_CREATOR_H
