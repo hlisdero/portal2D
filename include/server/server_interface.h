@@ -13,7 +13,7 @@ class ServerInterface {
 public:
 	// Constructor:
 	// - create the scene
-	ServerInterface();
+	ServerInterface(const char * mapName);
 
 	void update();
 
