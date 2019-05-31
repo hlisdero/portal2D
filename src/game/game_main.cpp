@@ -7,10 +7,11 @@
 #include "common/view_event.h"
 
 int main() {
-    Client client;
+    // World size in meter 53.32 x 40
+    // World size in pixels 1920 x 1080
+    Client client(53.32, 40, 1920, 1080);
 	ServerInterface server;
 
-	// create drawable world with statics objects
 	client.view.createEntities(server.getStaticEntities());
 	client.view.createEntities(server.getDynamicEntities());
 
@@ -23,14 +24,6 @@ int main() {
         }
 		server.update();
 
-		// update drawable world
-		// auto dynamicEntities = server.getDynamicEntities();
-        // for (auto& entity : dynamicEntities) {
-        //     if (entity.getType() == TYPE_PLAYER) {
-        //         Position position(entity.getX(), entity.getY());
-        //         client.view.updatePosition(player_index, position);
-        //     }
-        // }
         client.view.updatePosition(server.getDynamicEntities());
         client.view.update();
 

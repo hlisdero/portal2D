@@ -8,7 +8,8 @@
 
 class Client {
 public:
-    explicit Client();
+    Client(float32 world_width, float32 world_height,
+           size_t level_width, size_t level_height);
 
     Client(const Client&) = delete;
     Client& operator=(const Client&) = delete;

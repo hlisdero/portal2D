@@ -1,8 +1,10 @@
 #include "client/view/world_view.h"
 
-WorldView::WorldView(float32 width, float32 height) :
-    meter_to_pixel(1024/width, 768/height),
-    screen(1024, 768),
+WorldView::WorldView(float32 width, float32 height,
+                     size_t level_width, size_t level_height) :
+    meter_to_pixel(screen_width/width, screen_height/height),
+    level_width(level_width), level_height(level_height),
+    screen(screen_width, screen_height),
     view_object_creator(meter_to_pixel, view_objects, screen.getTextureCreator(), 1024, 768) {
 }
 
@@ -17,7 +19,6 @@ void WorldView::createEntities(const std::vector<Entity*>& entities) {
         Position position(entity->getX(), entity->getY());
         size_t id(entity->getId());
         double angle(entity->getRotationDeg());
-        reserveSize(id);
         view_objects.reserve(id);
         createEntity(entity->getType(), id, position, angle);
     }
@@ -58,12 +59,6 @@ void WorldView::checkValidIndex(size_t index) {
     }
 }
 
-void WorldView::reserveSize(size_t index) {
-    if (index + 1 > view_objects.size()) {
-        view_objects.resize(index + 1, nullptr);
-    }
-}
-
 void WorldView::createEntity(EntityType type, size_t id,
                 const Position& position, double rotation) {
     switch (type) {
@@ -101,7 +96,7 @@ void WorldView::createEntity(EntityType type, size_t id,
             view_object_creator.createRock(id, position, rotation);
             break;
         case TYPE_PLAYER:
-            view_object_creator.createPlayer(id, position);
+            createPlayerWithCamera(id, position);
             break;
         case TYPE_ENERGY_BALL:
             view_object_creator.createEnergyBall(id, position);
@@ -109,4 +104,11 @@ void WorldView::createEntity(EntityType type, size_t id,
         default:
             throw std::runtime_error("Error: EntityType inválido");
     }
+}
+
+void WorldView::createPlayerWithCamera(size_t id, const Position& position) {
+    const Player& player = view_object_creator.createPlayer(id, position);
+    screen.createCamera(level_width, level_height, player);
+    meter_to_pixel.x = meter_to_pixel.x*level_width/screen_width;
+    meter_to_pixel.y = meter_to_pixel.x*level_height/screen_height;
 }
