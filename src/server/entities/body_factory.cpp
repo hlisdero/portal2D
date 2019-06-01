@@ -165,3 +165,16 @@ void BodyFactory::createBody(Entity * entity) {
 	body->SetUserData(entity);
 	attachBody(entity, body);
 }
+
+void BodyFactory::createFloor(b2Vec2 start, b2Vec2 end) {
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_staticBody;
+
+	b2Body * body = this->world.CreateBody(&bodyDef);
+
+	b2EdgeShape shape;
+	shape.Set(start, end);
+
+	body->CreateFixture(&shape, 0.0f);
+
+}

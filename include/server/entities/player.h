@@ -27,12 +27,12 @@ public:
 
 	void applyMovement();
 
-	void handleFloorContact(b2Contact * contact, bool isBegin);
+	void handleFloorContact(bool inContact);
 
 	virtual ~PlayerEntity() override;
 
 private:	
-	bool isOnTheFloor = false;
+	int contactWithTheFloor = 0;
 	// This allow for better gameplay experience
 	bool hasMovedInTheAir = false;
 	MoveDirection moveDirection = NONE;

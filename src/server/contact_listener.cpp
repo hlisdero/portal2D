@@ -25,25 +25,33 @@ void ContactListener::handleContact(b2Contact * contact, bool inContact) {
 }
 
 void ContactListener::broadcastContact(Entity * entityA, Entity * entityB, b2Contact * contact, bool inContact) {
-	switch(entityA->getType()) {
-		case TYPE_PLAYER:
-			entityA->as<PlayerEntity>()->handleContactWith(entityB, contact, inContact);
-			break;
-		// case TYPE_ROCK:		
-		// 	static_cast<RockEntity*>(entityA)->handleContactWith(entityB, contact, inContact);
-		// 	break;
-		case TYPE_ENERGY_RECEIVER:
-			entityA->as<EnergyReceiverEntity>()->handleContactWith(entityB, contact, inContact);
-			break;
-		case TYPE_BUTTON:
-			entityA->as<ButtonEntity>()->handleContactWith(entityB, contact, inContact);
-			break;
-		case TYPE_END_BARRIER:
-			entityA->as<EndBarrierEntity>()->handleContactWith(entityB, contact, inContact);
-			break;
-		// case TYPE_ENERGY_BALL:
-		// 	break;
-		default:
-			break;
+	if(entityA == nullptr) {
+		return;
+	}
+
+	if(entityB == nullptr && entityA->getType() == TYPE_PLAYER) {
+		entityA->as<PlayerEntity>()->handleFloorContact(inContact);
+	} else {
+		switch(entityA->getType()) {
+			case TYPE_PLAYER:
+				entityA->as<PlayerEntity>()->handleContactWith(entityB, contact, inContact);
+				break;
+			// case TYPE_ROCK:		
+			// 	static_cast<RockEntity*>(entityA)->handleContactWith(entityB, contact, inContact);
+			// 	break;
+			case TYPE_ENERGY_RECEIVER:
+				entityA->as<EnergyReceiverEntity>()->handleContactWith(entityB, contact, inContact);
+				break;
+			case TYPE_BUTTON:
+				entityA->as<ButtonEntity>()->handleContactWith(entityB, contact, inContact);
+				break;
+			case TYPE_END_BARRIER:
+				entityA->as<EndBarrierEntity>()->handleContactWith(entityB, contact, inContact);
+				break;
+			// case TYPE_ENERGY_BALL:
+			// 	break;
+			default:
+				break;
+		}
 	}
 }

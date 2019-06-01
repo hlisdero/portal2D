@@ -9,6 +9,7 @@
 #include "server/entities/button.h"
 #include "server/entities/rock.h"
 #include "server/entities/end_barrier.h"
+#include "common/entities/entities_settings.h"
 
 Map::Map(const char * mapName) {
 	YAML::Node file;
@@ -27,8 +28,9 @@ Map::Map(const char * mapName) {
 
 	try {
 		this->loadEntities(file);
+		this->loadFloors(file);
 	} catch(...) {
-		throw std::runtime_error("Impossible to load the map entities");
+		throw std::runtime_error("Impossible to load the map entities and floors");
 	}
 }
 
@@ -38,6 +40,10 @@ const std::vector<Entity*> & Map::getStaticEntities() const {
 
 const std::vector<Entity*> & Map::getDynamicEntities() const {
 	return this->dynamicEntities;
+}
+
+const std::vector<Floor*> & Map::getFloors() const {
+	return this->floors;
 }
 
 EndZone & Map::getEndZone() {
@@ -58,6 +64,26 @@ void Map::loadSettings(YAML::Node yaml) {
 	YAML::Node spawn = yaml["spawn"];
 	this->spawn.x = spawn["x"].as<float>();
 	this->spawn.y = spawn["y"].as<float>();
+}
+
+void Map::loadFloors(YAML::Node yaml) {
+	YAML::Node floorsYaml = yaml["floors"];
+
+	for(uint i = 0; i < floorsYaml.size(); i++) {
+		Floor * floor = new Floor;
+
+		YAML::Node floorYml = floorsYaml[i];
+
+		floor->start.Set(
+			floorYml["start"]["x"].as<float>() - FLOOR_WIDTH_OFFSET,
+			floorYml["start"]["y"].as<float>() + FLOOR_HEIGHT_OFFSET);
+
+		floor->end.Set(
+			floorYml["end"]["x"].as<float>() + FLOOR_WIDTH_OFFSET,
+			floorYml["end"]["y"].as<float>() + FLOOR_HEIGHT_OFFSET);
+
+		this->floors.push_back(floor);
+	}
 }
 
 void Map::loadEntities(YAML::Node yaml) {
@@ -141,5 +167,9 @@ Map::~Map() {
 
 	for(uint i = 0; i < this->dynamicEntities.size(); i++) {
 		delete this->dynamicEntities[i];
+	}
+
+	for(uint i = 0; i < this->floors.size(); i++) {
+		delete this->floors[i];
 	}
 }

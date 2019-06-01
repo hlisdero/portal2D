@@ -1,6 +1,7 @@
 #include "server/world.h"
 
 #include "server/portal_ray_cast_callback.h"
+#include "server/floor.h"
 
 // Initialize the world with the gravity vector
 World::World(Map & map) :
@@ -10,13 +11,18 @@ World::World(Map & map) :
 	this->world.SetContactListener(&this->contactListener);
 
 	const std::vector<Entity*> & staticEntities = map.getStaticEntities();
-	for(uint i = 0; i < staticEntities.size(); i++) {
-		this->bodyFactory.createBody(staticEntities[i]);
+	for(auto staticEntity : staticEntities) {
+		this->bodyFactory.createBody(staticEntity);
 	}
 
 	const std::vector<Entity*> & dynamicEntities = map.getDynamicEntities();
-	for(uint i = 0; i < dynamicEntities.size(); i++) {
-		this->bodyFactory.createBody(dynamicEntities[i]);
+	for(auto dynamicEntity : dynamicEntities) {
+		this->bodyFactory.createBody(dynamicEntity);
+	}
+
+	const std::vector<Floor*> & floors = map.getFloors();
+	for(auto floor : floors) {
+		this->bodyFactory.createFloor(floor->start, floor->end);
 	}
 }
 
@@ -77,7 +83,7 @@ const std::vector<Entity*> World::getDynamicEntities() const {
 	while(body != nullptr) {
 		Entity * entity = (Entity *) body->GetUserData();
 
-		if(entity->getType() >= DYNAMIC_ENTITY_START) {
+		if(entity != nullptr && entity->getType() >= DYNAMIC_ENTITY_START) {
 			const b2Vec2 position = body->GetPosition();
 			entity->setX(position.x);
 			entity->setY(position.y);

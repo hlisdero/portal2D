@@ -10,6 +10,7 @@ public:
 	BodyFactory(b2World & world);
 
 	void createBody(Entity * Entity);
+	void createFloor(b2Vec2 start, b2Vec2 end);
 
 private:
 	b2World & world;
@@ -18,6 +19,8 @@ private:
 	b2BodyDef createBodyDef(Entity * entity);
 
 	b2PolygonShape createShape(Entity * entity);
+
+	void setPlayerShape(b2PolygonShape & shape, const float * entitySettings, b2Vec2 & offset);
 
 	void setDiagBlockShape(b2PolygonShape & shape, 
 		const float * entitySettings, b2Vec2 & offset);
