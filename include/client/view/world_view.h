@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include "client/screen/screen.h"
 #include "client/sound/sound_manager.h"
+#include "client/view/event_manager.h"
+#include "client/view/main_player.h"
 #include "client/view/view_object_creator.h"
 #include "client/view/world_view_settings.h"
 #include "common/ratio.h"
@@ -12,7 +14,7 @@
 
 class WorldView {
 public:
-    WorldView(float32 width, float32 height,
+    WorldView(const float32 width, float32 height,
               size_t level_width, size_t level_height);
 
     WorldView(const WorldView&) = delete;
@@ -21,6 +23,10 @@ public:
     WorldView& operator=(WorldView&& other) = delete;
 
     ~WorldView();
+
+    void pollEvents();
+    BlockingQueue& getQueue();
+    bool quit() const;
 
     const ViewObjectCreator& getObjectCreator() const;
 
@@ -34,10 +40,13 @@ public:
 private:
     const size_t screen_width = 1024;
     const size_t screen_height = 768;
+    EventManager event_manager;
+    SoundManager sound_manager;
     Screen screen;
     WorldViewSettings settings;
     Background background;
     std::map<size_t, DrawableBox2D*> view_objects;
+    MainPlayer * main_player = nullptr;
     ViewObjectCreator object_creator;
 
     void renderObjects();

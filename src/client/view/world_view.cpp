@@ -9,12 +9,28 @@ WorldView::WorldView(float32 width, float32 height,
     if (level_width < screen_width || level_height < screen_height) {
         throw std::runtime_error("Error: el tamaño del mundo en pixeles es demasiado pequeño");
     }
+    event_manager.addHandler(&sound_manager);
 }
 
 WorldView::~WorldView() {
     for (const auto& object : view_objects) {
         delete object.second;
     }
+    if (main_player) {
+        delete main_player;
+    }
+}
+
+void WorldView::pollEvents() {
+    event_manager.pollEvents();
+}
+
+BlockingQueue& WorldView::getQueue() {
+    return event_manager.getQueue();
+}
+
+bool WorldView::quit() const {
+    return event_manager.quit();
 }
 
 const ViewObjectCreator& WorldView::getObjectCreator() const {
@@ -117,6 +133,9 @@ void WorldView::createEntity(EntityType type, size_t id,
 
 void WorldView::createPlayerWithCamera(size_t id, const Position& position) {
     const Player& player = object_creator.createPlayer(id, position);
-    screen.createCamera(settings.getLevelWidth(), settings.getLevelWidth(), player);
+    screen.createCamera(settings.getLevelWidth(), settings.getLevelHeight(), player);
+    main_player = new MainPlayer(player, settings.getRatio(), event_manager.getQueue());
+    event_manager.addHandler((KeyboardHandler*) main_player);
+    event_manager.addHandler((MouseHandler*) main_player);
     settings.changeRatioCameraMode();
 }

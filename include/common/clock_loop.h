@@ -1,5 +1,5 @@
-#ifndef CLOCK_LOOP_HPP
-#define CLOCK_LOOP_HPP
+#ifndef CLOCK_LOOP_H
+#define CLOCK_LOOP_H
 
 #include <chrono>
 #include <thread>
@@ -27,4 +27,4 @@ private:
 	time_point_t loopEnd;
 };
 
-#endif  // SERVER_SCENE_HPP
+#endif  // CLOCK_LOOP_H
