@@ -5,6 +5,7 @@
 #include "server/server_interface.h"
 #include "common/clock_loop.h"
 #include "common/view_event.h"
+#include "server/entities/with_state.h"
 
 int main(int argc, char const *argv[]) {
     // World size in meter 53.32 x 40
@@ -22,9 +23,14 @@ int main(int argc, char const *argv[]) {
 	ClockLoop<60> clock;
 	while (!client.quit()) {
         client.pollEvents();
-        while (!client.queue.empty()) {
-            ViewEvent event = client.queue.pop();
-            server.movePlayer(event.direction, event.pressed);
+        BlockingQueue& queue = client.getQueue();
+        while (!queue.empty()) {
+            ViewEvent event = queue.pop();
+            if (event.type == KEYBOARD) {
+                server.movePlayer(event.direction, event.pressed);
+            } else if (event.type == MOUSE) {
+                server.createPortal(event.click_direction, COLOR_BLUE);
+            }
         }
 		server.update();
 

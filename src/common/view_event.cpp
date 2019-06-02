@@ -1,4 +1,7 @@
 #include "common/view_event.h"
 
 ViewEvent::ViewEvent(MoveDirection direction, bool pressed, bool repeat) :
-    direction(direction), pressed(pressed), repeat(repeat) {}
+    type(KEYBOARD), direction(direction), pressed(pressed), repeat(repeat) {}
+
+ViewEvent::ViewEvent(ClickDirection click_direction) :
+    type(MOUSE), click_direction(click_direction) {}

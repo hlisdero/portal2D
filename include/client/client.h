@@ -1,10 +1,7 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include "client/event/event_handler.h"
 #include "client/view/world_view.h"
-#include "client/view/input_handler.h"
-#include "common/queue/blocking_queue.h"
 
 class Client {
 public:
@@ -17,16 +14,10 @@ public:
     Client& operator=(Client&& other) = delete;
 
     void pollEvents();
-
+    BlockingQueue& getQueue();
     bool quit() const;
 
     WorldView view;
-    BlockingQueue queue;
-
-private:
-    EventHandler event_handler;
-    InputHandler input_handler;
-    SoundManager sound_manager;
 };
 
 #endif  // CLIENT_H
