@@ -30,7 +30,7 @@ const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
 };
 
 #define BUTTON_TOP_SIZE_PERCENTAGE 0.6
-#define FLOOR_WIDTH_OFFSET 0.6
-#define FLOOR_HEIGHT_OFFSET 0.5
+#define FLOOR_WIDTH_OFFSET 0.5
+#define FLOOR_HEIGHT_OFFSET 0.6
 
 #endif

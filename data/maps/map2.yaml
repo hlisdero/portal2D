@@ -2,6 +2,13 @@ min-players: 1
 spawn:
     x: 3.0
     y: 3.0
+floors:
+  - start:
+      x: 1
+      y: 0
+    end:
+      x: 11
+      y: 0
 entities:
     -
         type: 0
