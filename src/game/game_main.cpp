@@ -20,6 +20,8 @@ int main(int argc, char const *argv[]) {
 	client.view.createEntities(server.getStaticEntities());
 	client.view.createEntities(server.getDynamicEntities());
 
+    bool color = false;
+
 	ClockLoop<60> clock;
 	while (!client.quit()) {
         client.pollEvents();
@@ -29,7 +31,8 @@ int main(int argc, char const *argv[]) {
             if (event.type == KEYBOARD) {
                 server.movePlayer(event.direction, event.pressed);
             } else if (event.type == MOUSE) {
-                server.createPortal(event.click_direction, COLOR_BLUE);
+                color = !color;
+                server.createPortal(event.click_direction, color ? COLOR_BLUE: COLOR_ORANGE);
             }
         }
 		server.update();

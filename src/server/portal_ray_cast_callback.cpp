@@ -5,8 +5,8 @@
 float32 PortalRayCastCallback::ReportFixture(b2Fixture* fixture, 
 	const b2Vec2& point, const b2Vec2& normal, float32 fraction) {
 
-	this->body = fixture->GetBody();
-	Entity* entity = static_cast<Entity*>(this->body->GetUserData());
+	b2Body * body = fixture->GetBody();
+	Entity* entity = static_cast<Entity*>(body->GetUserData());
 
 	// Go through players
 	if(entity->getType() == TYPE_PLAYER) {
@@ -14,6 +14,7 @@ float32 PortalRayCastCallback::ReportFixture(b2Fixture* fixture,
 	}
 
 	this->hit = true;
+	this->body = body;
 	this->m_point = point;
 	this->m_normal = normal;
 
