@@ -76,7 +76,7 @@ void WorldView::renderObjects() {
 }
 
 void WorldView::checkValidIndex(size_t index) {
-    if (index >= view_objects.size() || view_objects[index] == nullptr) {
+    if (view_objects[index] == nullptr) {
         throw std::runtime_error("Error: Índice de objeto en la vista inválido");
     }
 }
