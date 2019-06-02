@@ -134,7 +134,7 @@ void WorldView::createEntity(EntityType type, size_t id,
 void WorldView::createPlayerWithCamera(size_t id, const Position& position) {
     const Player& player = object_creator.createPlayer(id, position);
     screen.createCamera(settings.getLevelWidth(), settings.getLevelHeight(), player);
-    main_player = new MainPlayer(player, settings.getRatio(), event_manager.getQueue());
+    main_player = new MainPlayer(player, screen.getCamera(), event_manager.getQueue(), screen.getHeight());
     event_manager.addHandler((KeyboardHandler*) main_player);
     event_manager.addHandler((MouseHandler*) main_player);
     settings.changeRatioCameraMode();

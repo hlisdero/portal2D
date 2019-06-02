@@ -4,16 +4,16 @@
 #include <SDL2/SDL.h>
 #include "client/event/keyboard_handler.h"
 #include "client/event/mouse_handler.h"
+#include "client/screen/camera.h"
 #include "client/objects/player.h"
 #include "common/queue/blocking_queue.h"
 #include "common/view_event.h"
-#include "common/ratio.h"
 #include "common/move_direction.h"
 #include "common/click_direction.h"
 
 class MainPlayer : public KeyboardHandler, public MouseHandler {
 public:
-    MainPlayer(const Player& player, const Ratio& meter_to_pixel, BlockingQueue& queue);
+    MainPlayer(const Player& player, const Camera& camera, BlockingQueue& queue, const size_t& screen_height);
 
     virtual void handle(const KeyboardEvent& event) override;
 
@@ -21,8 +21,9 @@ public:
 
 private:
     const Player& player;
-    const Ratio& meter_to_pixel;
+    const Camera& camera;
     BlockingQueue& queue;
+    const size_t& screen_height;
 
     MoveDirection processMoveDirection(const KeyboardEvent& event) const;
 };
