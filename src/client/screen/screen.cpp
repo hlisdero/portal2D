@@ -56,14 +56,7 @@ void Screen::render(DrawableBox2D& drawable) {
 void Screen::render(Background background) {
     SDL_Rect dst = {background.getX(), background.getY(), background.getWidth(), background.getHeight()};
     const Texture& texture = background.getTexture();
-    SDL_Rect* src;
-    if (camera) {
-        src = &camera->position;
-        dst.w = camera->position.w;
-        dst.h = camera->position.h;
-    } else {
-        src = background.getClip();
-    }
+    SDL_Rect* src = background.getClip();
     renderer.render(texture.get(), src, &dst);
 }
 
