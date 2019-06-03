@@ -29,7 +29,7 @@ public:
 private:
     const Size size;
     Position position;
-    const double& pixel_to_meter;
+    const double& pixel_per_meter;
     double angle = 0.0;
 };
 

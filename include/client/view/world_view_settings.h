@@ -26,7 +26,7 @@ private:
     const size_t& screen_width;
     const size_t& screen_height;
     Size world_size;
-    double pixel_to_meter;
+    double pixel_per_meter;
     size_t level_width;
     size_t level_height;
 

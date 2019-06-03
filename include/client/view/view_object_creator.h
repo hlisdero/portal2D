@@ -37,7 +37,7 @@ public:
 
 private:
     std::map<size_t, DrawableBox2D*>& view_objects;
-    const double& pixel_to_meter;
+    const double& pixel_per_meter;
     const TextureLoader& textures;
 
     Size getSize(EntityType type) const;

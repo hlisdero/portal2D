@@ -2,22 +2,22 @@
 
 DrawableBox2D::DrawableBox2D(const Size& size, const Position& initial,
                              const double& ratio, double angle) :
-    size(size), position(initial), pixel_to_meter(ratio), angle(angle) {}
+    size(size), position(initial), pixel_per_meter(ratio), angle(angle) {}
 
 int DrawableBox2D::getX() const {
-    return position.x * pixel_to_meter;
+    return position.x * pixel_per_meter;
 }
 
 int DrawableBox2D::getY() const {
-    return position.y * pixel_to_meter;
+    return position.y * pixel_per_meter;
 }
 
 int DrawableBox2D::getWidth() const {
-    return size.x * pixel_to_meter;
+    return size.x * pixel_per_meter;
 }
 
 int DrawableBox2D::getHeight() const {
-    return size.y * pixel_to_meter;
+    return size.y * pixel_per_meter;
 }
 
 double DrawableBox2D::getRotation() const {
