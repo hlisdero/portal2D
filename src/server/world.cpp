@@ -57,16 +57,16 @@ void World::createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor 
 }
 
 void World::updatePhysics() {
-	for(uint i = 0; i < players.size(); i++) {
-		players[i]->applyMovement();
-	}
-
 	// TODO change to constantes
 	float32 timeStep = 1.0f / 60.0f;
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 
 	this->world.Step(timeStep, velocityIterations, positionIterations);
+
+	for(uint i = 0; i < players.size(); i++) {
+		players[i]->applyMovement();
+	}
 }
 
 const std::vector<Entity*> World::getDynamicEntities() const {

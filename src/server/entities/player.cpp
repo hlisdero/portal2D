@@ -72,7 +72,10 @@ void PlayerEntity::goThroughPortal(PortalEntity * portal) {
 
 		// Update player velocity and position
 		this->getBody()->SetLinearVelocity(outVelocity);
-		this->getBody()->SetTransform(b2Vec2(twin->getX(), twin->getY()), 0);
+
+		this->resetPosition = true;
+		this->setX(twin->getX());
+		this->setY(twin->getY());
 	}
 }
 
@@ -108,6 +111,11 @@ void PlayerEntity::applyImpulseToCenter(const float vx, const float vy) {
 }
 
 void PlayerEntity::applyMovement() {
+	if(this->resetPosition) {
+		this->getBody()->SetTransform(b2Vec2(this->getX(), this->getY()), 0);
+		this->resetPosition = false;
+	}
+
 	b2Vec2 velocity = this->getBody()->GetLinearVelocity();
 
 	// - If on the floor

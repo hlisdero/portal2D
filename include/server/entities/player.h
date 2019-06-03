@@ -39,6 +39,8 @@ private:
 
 	PortalEntity * portals[PORTALS_NB];
 
+	bool resetPosition = false;
+
 	void applyImpulseToCenter(float vx, float vy);
 
 	void goThroughPortal(PortalEntity * portal);
