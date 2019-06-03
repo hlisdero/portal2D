@@ -6,7 +6,7 @@
 class EnergyReceiver : public Block {
 public:
     EnergyReceiver(const Size& size, const Position& initial,
-                   const Ratio& ratio, const Texture& texture, double rotation);
+                   const double& ratio, const Texture& texture, double rotation);
 };
 
 #endif  // ENERGY_RECEIVER_H

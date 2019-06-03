@@ -3,12 +3,12 @@
 
 #include "client/objects/drawable.h"
 #include "common/position.h"
-#include "common/ratio.h"
 #include "common/size.h"
 
 class DrawableBox2D : public Drawable {
 public:
-    explicit DrawableBox2D(const Size& size, const Position& initial, const Ratio& ratio);
+    explicit DrawableBox2D(const Size& size, const Position& initial,
+                           const double& ratio, double angle = 0.0);
 
     virtual const Texture& getTexture() = 0;
 
@@ -29,8 +29,8 @@ public:
 private:
     const Size size;
     Position position;
+    const double& pixel_to_meter;
     double angle = 0.0;
-    const Ratio& meter_to_pixel;
 };
 
 #endif  // DRAWABLE_BOX2D_H

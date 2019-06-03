@@ -1,26 +1,27 @@
 #include "client/objects/drawable_box2D.h"
 
-DrawableBox2D::DrawableBox2D(const Size& size, const Position& initial, const Ratio& ratio) :
-    size(size), position(initial), meter_to_pixel(ratio) {}
+DrawableBox2D::DrawableBox2D(const Size& size, const Position& initial,
+                             const double& ratio, double angle) :
+    size(size), position(initial), pixel_to_meter(ratio), angle(angle) {}
 
 int DrawableBox2D::getX() const {
-    return position.x * meter_to_pixel.x;
+    return position.x * pixel_to_meter;
 }
 
 int DrawableBox2D::getY() const {
-    return position.y * meter_to_pixel.y;
+    return position.y * pixel_to_meter;
 }
 
 int DrawableBox2D::getWidth() const {
-    return size.x * meter_to_pixel.x;
+    return size.x * pixel_to_meter;
 }
 
 int DrawableBox2D::getHeight() const {
-    return size.y * meter_to_pixel.y;
+    return size.y * pixel_to_meter;
 }
 
 double DrawableBox2D::getRotation() const {
-    return angle;
+    return -angle;  // BOX2D counterclockwise, SDL clockwise
 }
 
 float32 DrawableBox2D::currentX() const {

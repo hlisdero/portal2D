@@ -10,12 +10,11 @@ Screen::~Screen() {
     }
 }
 
-
-size_t Screen::getWidth() const {
+const size_t& Screen::getWidth() const {
     return window.width;
 }
 
-size_t Screen::getHeight() const {
+const size_t& Screen::getHeight() const {
     return window.height;
 }
 

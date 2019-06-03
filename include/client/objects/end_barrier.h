@@ -6,7 +6,7 @@
 class EndBarrier : public AnimatedDrawableBox2D {
 public:
     EndBarrier(const Size& size, const Position& initial,
-              const Ratio& ratio, const Texture& texture, double rotation);
+              const double& ratio, const Texture& texture, double rotation);
 };
 
 #endif  // END_BARRIER_H

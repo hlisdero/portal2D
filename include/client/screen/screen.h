@@ -23,8 +23,8 @@ public:
 
     ~Screen();
 
-    size_t getWidth() const;
-    size_t getHeight() const;
+    const size_t& getWidth() const;
+    const size_t& getHeight() const;
 
     void clear();
 

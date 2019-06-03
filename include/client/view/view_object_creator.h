@@ -25,9 +25,9 @@ public:
     void createDiagonalMetalBlock(size_t index, const Position& initial, double rotation = 0.0) const;
     void createStoneBlock(size_t index, const Position& initial) const;
     void createAcid(size_t index, const Position& initial) const;
-    void createGate(size_t index, const Position& initial) const;
+    void createGate(size_t index, const Position& initial, double rotation = 0.0) const;
     void createButton(size_t index, const Position& initial) const;
-    void createEnergyBall(size_t index, const Position& initial) const;
+    void createEnergyBall(size_t index, const Position& initial, double rotation = 0.0) const;
     void createEnergyBar(size_t index, const Position& initial, double rotation = 0.0) const;
     void createEndBarrier(size_t index, const Position& initial, double rotation = 0.0) const;
     void createEnergyEmitter(size_t index, const Position& initial, double rotation = 0.0) const;
@@ -37,7 +37,7 @@ public:
 
 private:
     std::map<size_t, DrawableBox2D*>& view_objects;
-    const Ratio& meter_to_pixel;
+    const double& pixel_to_meter;
     const TextureLoader& textures;
 
     Size getSize(EntityType type) const;

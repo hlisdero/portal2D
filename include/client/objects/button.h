@@ -5,7 +5,7 @@
 
 class Button : public Block {
 public:
-    Button(const Size& size, const Position& initial, const Ratio& ratio, const Texture& texture);
+    Button(const Size& size, const Position& initial, const double& ratio, const Texture& texture);
 
     void toggleState();
 };

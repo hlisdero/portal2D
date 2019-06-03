@@ -7,7 +7,8 @@
 
 class Gate : public DrawableBox2D {
 public:
-    Gate(const Size& size, const Position& initial, const Ratio& ratio, const Texture& texture);
+    Gate(const Size& size, const Position& initial,
+         const double& ratio, const Texture& texture, double rotation = 0.0);
 
     virtual const Texture& getTexture();
     virtual SDL_Rect* getClip();

@@ -1,8 +1,8 @@
 #include "client/objects/block.h"
 
 Block::Block(const Size& size, const Position& initial,
-             const Ratio& ratio, const Texture& texture) :
-    DrawableBox2D(size, initial, ratio), sprite(texture) {}
+             const double& ratio, const Texture& texture, double angle) :
+    DrawableBox2D(size, initial, ratio, angle), sprite(texture) {}
 
 const Texture& Block::getTexture() {
     return sprite.getTexture();

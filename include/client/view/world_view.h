@@ -9,13 +9,11 @@
 #include "client/view/main_player.h"
 #include "client/view/view_object_creator.h"
 #include "client/view/world_view_settings.h"
-#include "common/ratio.h"
 #include "common/entities/entity.h"
 
 class WorldView {
 public:
-    WorldView(const float32 width, float32 height,
-              size_t level_width, size_t level_height);
+    WorldView(float32 world_width, float32 world_height);
 
     WorldView(const WorldView&) = delete;
     WorldView& operator=(const WorldView&) = delete;

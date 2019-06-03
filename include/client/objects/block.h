@@ -6,7 +6,8 @@
 
 class Block : public DrawableBox2D {
 public:
-    Block(const Size& size, const Position& initial, const Ratio& ratio, const Texture& texture);
+    Block(const Size& size, const Position& initial,
+          const double& ratio, const Texture& texture, double angle = 0.0);
 
     virtual const Texture& getTexture() override;
     virtual SDL_Rect* getClip() override;

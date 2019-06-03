@@ -1,14 +1,10 @@
 #include "client/view/world_view.h"
 
-WorldView::WorldView(float32 width, float32 height,
-                     size_t level_width, size_t level_height) :
+WorldView::WorldView(float32 world_width, float32 world_height) :
     screen(screen_width, screen_height),
-    settings(screen_width, screen_height, level_width, level_height, width, height, screen.getTextureCreator()),
+    settings(screen.getWidth(), screen.getHeight(), world_width, world_height, screen.getTextureCreator()),
     background(screen_width, screen_height, settings.getTextureLoader()["Background"]),
     object_creator(view_objects, settings) {
-    if (level_width < screen_width || level_height < screen_height) {
-        throw std::runtime_error("Error: el tamaño del mundo en pixeles es demasiado pequeño");
-    }
     event_manager.addHandler(&sound_manager);
 }
 
@@ -97,7 +93,7 @@ void WorldView::createEntity(EntityType type, size_t id,
             object_creator.createAcid(id, position);
             break;
         case TYPE_GATE:
-            object_creator.createGate(id, position);
+            object_creator.createGate(id, position, rotation);
             break;
         case TYPE_ENERGY_BAR:
             object_creator.createEnergyBar(id, position, rotation);
@@ -124,7 +120,7 @@ void WorldView::createEntity(EntityType type, size_t id,
             createPlayerWithCamera(id, position);
             break;
         case TYPE_ENERGY_BALL:
-            object_creator.createEnergyBall(id, position);
+            object_creator.createEnergyBall(id, position, rotation);
             break;
         default:
             throw std::runtime_error("Error: EntityType inválido");
