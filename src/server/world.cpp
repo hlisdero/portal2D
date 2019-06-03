@@ -40,14 +40,15 @@ void World::createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor 
 	this->world.RayCast(&callback, origin, end);
 
 	if(callback.hit) {
-		// check if possible to create a portal
+		// TODO check if possible to create a portal
 
 		// create a portal
+
 		PortalEntity * portal = player.getPortal(color);
 		if(portal != nullptr) {
-			portal->move(callback.m_point.x, callback.m_point.y);
+			portal->move(callback.m_point.x, callback.m_point.y, callback.m_normal);
 		} else {
-			portal = new PortalEntity(callback.m_point.x, callback.m_point.y, color);
+			portal = new PortalEntity(callback.m_point.x, callback.m_point.y, callback.m_normal, color);
 
 			this->bodyFactory.createBody(portal);
 			player.setPortal(color, portal);

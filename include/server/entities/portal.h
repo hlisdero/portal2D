@@ -7,15 +7,17 @@
 
 class PortalEntity :  public Entity, public WithState, public BodyLinked {
 public:
-	PortalEntity(const float x, const float y, const PortalColor color);
+	PortalEntity(const float x, const float y, const b2Vec2 & normal, const PortalColor color);
 
-	void move(const float newX, const float newY);
+	void move(const float newX, const float newY, const b2Vec2 & normal);
 
 	PortalEntity * getTwin();
 	void setTwin(PortalEntity * twin);
 
 private:
 	PortalEntity * twin;
+
+	static float getRotationFromNormal(const b2Vec2 & normal);
 };
 
 #endif  // PORTAL_ENTITY_H

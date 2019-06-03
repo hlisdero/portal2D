@@ -22,7 +22,7 @@ const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
 	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENERGY_EMITTER
 	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENERGY_RECEIVER
 	{0.0f, -0.4f, 0.5f, 0.10f},  // TYPE_BUTTON
-	{-0.5f, 0.0f, 0.05f, 0.5f},    // TYPE_PORTAL
+	{0.0f, 0.0f, 0.05f, 0.5f},    // TYPE_PORTAL
 	{0.0f, 0.0f, 0.05f, 0.5f},     // TYPE_END_BARRIER
 	{0.0f, 0.0f, 0.30f, 0.30f},    // TYPE_ROCK
 	{0.0f, 0.0f, 0.2f, 0.40f},     // TYPE_PLAYER
