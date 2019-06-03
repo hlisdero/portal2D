@@ -8,10 +8,8 @@ Camera::Camera(int width, int height,
 }
 
 void Camera::center() {
-    // Transformo el sistema de coordenadas de Box2D al de SDL
-    // La posición se mide desde el medio del objeto
     position.x = drawable.getX() - position.w / 2;
-    position.y = position.h / 2 - drawable.getY();
+    position.y = drawable.getY() - position.h / 2;
 
     if (position.x < 0) {
         position.x = 0;

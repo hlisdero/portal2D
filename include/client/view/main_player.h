@@ -13,7 +13,7 @@
 
 class MainPlayer : public KeyboardHandler, public MouseHandler {
 public:
-    MainPlayer(const Player& player, const Camera& camera, BlockingQueue& queue, const size_t& screen_height);
+    MainPlayer(const Player& player, const Camera& camera, BlockingQueue& queue);
 
     virtual void handle(const KeyboardEvent& event) override;
 
@@ -23,7 +23,6 @@ private:
     const Player& player;
     const Camera& camera;
     BlockingQueue& queue;
-    const size_t& screen_height;
 
     MoveDirection processMoveDirection(const KeyboardEvent& event) const;
 };

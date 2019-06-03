@@ -5,8 +5,7 @@
 
 class Client {
 public:
-    Client(float32 world_width, float32 world_height,
-           size_t level_width, size_t level_height);
+    Client(float32 world_width, float32 world_height);
 
     Client(const Client&) = delete;
     Client& operator=(const Client&) = delete;

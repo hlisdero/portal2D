@@ -10,12 +10,11 @@ Screen::~Screen() {
     }
 }
 
-
-size_t Screen::getWidth() const {
+const size_t& Screen::getWidth() const {
     return window.width;
 }
 
-size_t Screen::getHeight() const {
+const size_t& Screen::getHeight() const {
     return window.height;
 }
 
@@ -34,19 +33,6 @@ void Screen::render(const Texture& texture, int x, int y, double scale_factor) {
 
 void Screen::render(Drawable& drawable) {
     SDL_Rect dst = {drawable.getX(), drawable.getY(), drawable.getWidth(), drawable.getHeight()};
-    makeRelativeToCamera(dst);
-    SDL_Rect* src = drawable.getClip();
-    const Texture& texture = drawable.getTexture();
-    renderer.render(texture.get(), src, &dst, drawable.getRotation(), drawable.getFlipState());
-}
-
-void Screen::render(DrawableBox2D& drawable) {
-    // Transformo el sistema de coordenadas de Box2D al de SDL
-    // La posición se mide desde el medio del objeto
-    int x = drawable.getX() - drawable.getWidth()/2;
-    int y = window.height - (drawable.getY() + drawable.getHeight()/2);
-
-    SDL_Rect dst = {x, y, drawable.getWidth(), drawable.getHeight()};
     makeRelativeToCamera(dst);
     SDL_Rect* src = drawable.getClip();
     const Texture& texture = drawable.getTexture();

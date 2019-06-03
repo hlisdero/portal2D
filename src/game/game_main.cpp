@@ -9,8 +9,7 @@
 
 int main(int argc, char const *argv[]) {
     // World size in meter 53.32 x 40
-    // World size in pixels 1920 x 1080
-    Client client(53.32, 40, 1920, 1080);
+    Client client(53.32, 40);
     const char * mapName = "../data/maps/map3.yaml";
     if(argc > 1) {
     	mapName = argv[1];

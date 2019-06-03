@@ -3,11 +3,12 @@
 
 #include "client/objects/drawable_box2D.h"
 #include "client/texture/animation.h"
+#include "client/view/world_view_settings.h"
 
 class AnimatedDrawableBox2D : public DrawableBox2D {
 public:
     AnimatedDrawableBox2D(const Size& size, const Position& initial,
-                          const Ratio& ratio, const Texture& texture);
+                          const WorldViewSettings& settings, const Texture& texture);
 
     virtual const Texture& getTexture() override;
     virtual SDL_Rect* getClip() override;
