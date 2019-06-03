@@ -5,7 +5,7 @@
 
 class MetalBlock : public Block {
 public:
-    MetalBlock(const Size& size, const Position& initial, const double& ratio, const Texture& texture);
+    MetalBlock(const Size& size, const Position& initial, const WorldViewSettings& settings, const Texture& texture);
 };
 
 #endif  // METAL_BLOCK_H

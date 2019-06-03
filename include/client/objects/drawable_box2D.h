@@ -2,13 +2,14 @@
 #define DRAWABLE_BOX2D_H
 
 #include "client/objects/drawable.h"
+#include "client/view/world_view_settings.h"
 #include "common/position.h"
 #include "common/size.h"
 
 class DrawableBox2D : public Drawable {
 public:
     explicit DrawableBox2D(const Size& size, const Position& initial,
-                           const double& ratio, double angle = 0.0);
+                           const WorldViewSettings& settings, double angle = 0.0);
 
     virtual const Texture& getTexture() = 0;
 
@@ -30,6 +31,7 @@ private:
     const Size size;
     Position position;
     const double& pixel_per_meter;
+    const size_t& window_height;
     double angle = 0.0;
 };
 

@@ -6,7 +6,7 @@
 class StoneBlock : public Block {
 public:
     StoneBlock(const Size& size, const Position& initial,
-               const double& ratio, const Texture& texture);
+               const WorldViewSettings& settings, const Texture& texture);
 };
 
 #endif  // STONE_BLOCK_H

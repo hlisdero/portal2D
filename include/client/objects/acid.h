@@ -5,7 +5,7 @@
 
 class Acid : public AnimatedDrawableBox2D {
 public:
-    Acid(const Size& size, const Position& initial, const double& ratio, const Texture& texture);
+    Acid(const Size& size, const Position& initial, const WorldViewSettings& settings, const Texture& texture);
 };
 
 #endif  // ACID_H

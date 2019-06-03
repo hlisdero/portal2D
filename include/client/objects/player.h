@@ -8,7 +8,7 @@
 
 class Player : public DrawableBox2D {
 public:
-    Player(const Size& size, const Position& initial, const double& ratio, const Texture& texture);
+    Player(const Size& size, const Position& initial, const WorldViewSettings& settings, const Texture& texture);
 
     virtual const Texture& getTexture() override;
     virtual SDL_Rect* getClip() override;

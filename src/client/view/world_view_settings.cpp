@@ -11,6 +11,14 @@ WorldViewSettings::WorldViewSettings(const size_t& screen_width, const size_t& s
     textures(texture_creator) {
 }
 
+const size_t& WorldViewSettings::getScreenWidth() const {
+    return screen_width;
+}
+
+const size_t& WorldViewSettings::getScreenHeight() const {
+    return screen_height;
+}
+
 const double& WorldViewSettings::getRatio() const {
     return pixel_per_meter;
 }

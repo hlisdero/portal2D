@@ -1,15 +1,21 @@
 #include "client/objects/drawable_box2D.h"
 
 DrawableBox2D::DrawableBox2D(const Size& size, const Position& initial,
-                             const double& ratio, double angle) :
-    size(size), position(initial), pixel_per_meter(ratio), angle(angle) {}
+                             const WorldViewSettings& settings, double angle) :
+    size(size), position(initial),
+    pixel_per_meter(settings.getRatio()), window_height(settings.getScreenHeight()),
+    angle(angle) {}
 
 int DrawableBox2D::getX() const {
-    return position.x * pixel_per_meter;
+    // Transformo el sistema de coordenadas de Box2D al de SDL
+    // La posición se mide desde el medio del objeto
+    return position.x * pixel_per_meter - getWidth()/2;
 }
 
 int DrawableBox2D::getY() const {
-    return position.y * pixel_per_meter;
+    // Transformo el sistema de coordenadas de Box2D al de SDL
+    // La posición se mide desde el medio del objeto
+    return window_height - (position.y * pixel_per_meter + getHeight()/2);
 }
 
 int DrawableBox2D::getWidth() const {

@@ -3,7 +3,6 @@
 
 #include <string>
 #include "client/objects/drawable.h"
-#include "client/objects/drawable_box2D.h"
 #include "client/objects/background.h"
 #include "client/screen/window.h"
 #include "client/screen/renderer.h"
@@ -30,7 +29,6 @@ public:
 
     void render(const Texture& texture, int x, int y, double scale_factor = 1);
     void render(Drawable& drawable);
-    void render(DrawableBox2D& drawable);
     void render(Background background);
 
     void setRenderDrawColor(const std::string& color_name);

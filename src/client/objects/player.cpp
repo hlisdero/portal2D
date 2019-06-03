@@ -1,8 +1,8 @@
 #include "client/objects/player.h"
 
 Player::Player(const Size& size, const Position& initial,
-               const double& ratio, const Texture& texture) :
-    DrawableBox2D(size, initial, ratio),
+               const WorldViewSettings& settings, const Texture& texture) :
+    DrawableBox2D(size, initial, settings),
     idle(texture), run(texture),
     jump_rise(texture), jump_apex(texture),
     jump_fall(texture), jump_land(texture),

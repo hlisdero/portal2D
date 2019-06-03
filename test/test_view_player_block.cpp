@@ -6,7 +6,7 @@
 #include <chrono>
 
 TEST_CASE("Player and Block Test", "[view]") {
-    WorldView view(13.33, 10, 1920, 1080);
+    WorldView view(13.33, 10);
     EventHandler event_handler;
 
     size_t player_index = 0;
