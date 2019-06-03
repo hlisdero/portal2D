@@ -20,7 +20,7 @@ Window::Window(size_t width, size_t height) : width(width), height(height) {
         throw std::runtime_error(error_message);
     }
 
-    window = SDL_CreateWindow("Ventana de prueba", SDL_WINDOWPOS_UNDEFINED,
+    window = SDL_CreateWindow("Portal2D", SDL_WINDOWPOS_UNDEFINED,
                     SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN );
     if (!window) {
         std::string error_message("Error al crear la ventana: ");

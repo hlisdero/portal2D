@@ -5,8 +5,7 @@
 
 class Client {
 public:
-    Client(float32 world_width, float32 world_height,
-           size_t level_width, size_t level_height);
+    Client(float32 world_width, float32 world_height);
 
     Client(const Client&) = delete;
     Client& operator=(const Client&) = delete;
@@ -14,7 +13,7 @@ public:
     Client& operator=(Client&& other) = delete;
 
     void pollEvents();
-    BlockingQueue& getQueue();
+    BlockingQueue<ViewEvent>& getQueue();
     bool quit() const;
 
     WorldView view;

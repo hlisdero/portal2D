@@ -1,26 +1,33 @@
 #include "client/objects/drawable_box2D.h"
 
-DrawableBox2D::DrawableBox2D(const Size& size, const Position& initial, const Ratio& ratio) :
-    size(size), position(initial), meter_to_pixel(ratio) {}
+DrawableBox2D::DrawableBox2D(const Size& size, const Position& initial,
+                             const WorldViewSettings& settings) :
+    size(size), position(initial),
+    pixel_per_meter(settings.getRatio()),
+    window_height(settings.getScreenHeight()) {}
 
 int DrawableBox2D::getX() const {
-    return position.x * meter_to_pixel.x;
+    // Transformo el sistema de coordenadas de Box2D al de SDL
+    // La posición se mide desde el medio del objeto
+    return position.x * pixel_per_meter - getWidth()/2;
 }
 
 int DrawableBox2D::getY() const {
-    return position.y * meter_to_pixel.y;
+    // Transformo el sistema de coordenadas de Box2D al de SDL
+    // La posición se mide desde el medio del objeto
+    return window_height - (position.y * pixel_per_meter + getHeight()/2);
 }
 
 int DrawableBox2D::getWidth() const {
-    return size.x * meter_to_pixel.x;
+    return size.x * pixel_per_meter;
 }
 
 int DrawableBox2D::getHeight() const {
-    return size.y * meter_to_pixel.y;
+    return size.y * pixel_per_meter;
 }
 
 double DrawableBox2D::getRotation() const {
-    return angle;
+    return -position.z;  // BOX2D counterclockwise, SDL clockwise
 }
 
 float32 DrawableBox2D::currentX() const {
@@ -31,7 +38,6 @@ float32 DrawableBox2D::currentY() const {
     return position.y;
 }
 
-void DrawableBox2D::updatePosition(const Position& new_position, double angle) {
+void DrawableBox2D::updatePosition(const Position& new_position) {
     position = new_position;
-    angle = angle;
 }

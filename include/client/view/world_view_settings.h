@@ -3,13 +3,11 @@
 
 #include "client/texture/texture_creator.h"
 #include "client/texture/texture_loader.h"
-#include "common/ratio.h"
 #include "common/size.h"
 
 class WorldViewSettings {
 public:
-    WorldViewSettings(size_t screen_width, size_t screen_height,
-                      size_t level_width, size_t level_height,
+    WorldViewSettings(const size_t& screen_width, const size_t& screen_height,
                       float32 world_width, size_t world_height, const TextureCreator& texture_creator);
 
     WorldViewSettings(const WorldViewSettings&) = delete;
@@ -17,7 +15,9 @@ public:
     WorldViewSettings(WorldViewSettings&& other) = delete;
     WorldViewSettings& operator=(WorldViewSettings&& other) = delete;
 
-    const Ratio& getRatio() const;
+    const size_t& getScreenWidth() const;
+    const size_t& getScreenHeight() const;
+    const double& getRatio() const;
     size_t getLevelWidth() const;
     size_t getLevelHeight() const;
     const TextureLoader& getTextureLoader() const;
@@ -25,12 +25,12 @@ public:
     void changeRatioCameraMode();
 
 private:
-    size_t screen_width;
-    size_t screen_height;
+    const size_t& screen_width;
+    const size_t& screen_height;
+    Size world_size;
+    double pixel_per_meter;
     size_t level_width;
     size_t level_height;
-    Size world_size;
-    Ratio meter_to_pixel;
 
     TextureLoader textures;
 };

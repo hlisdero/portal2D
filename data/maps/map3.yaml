@@ -3,407 +3,407 @@ spawn:
     x: 3.0
     y: 3.0
 entities:
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 1
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 2
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 3
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 4
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 5
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 6
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 7
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 8
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 9
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 10
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 11
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 12
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 13
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 14
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 15
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 16
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 17
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 18
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 19
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 20
       y: 0
       rotation: 0
-    - type: 10
+    - type: TYPE_END_BARRIER
       x: 20.0
       y: 1.0
       rotation: 0.0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 21
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 22
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 23
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 24
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 25
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 26
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 27
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 28
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 29
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 30
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 31
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 32
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 33
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 34
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 35
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 36
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 37
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 38
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 39
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 40
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 41
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 42
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 43
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 44
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 45
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 46
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 47
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 48
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 49
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 50
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 51
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 52
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 53
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 54
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 55
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 56
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 57
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 58
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 59
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 60
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 61
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 62
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 63
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 64
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 65
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 66
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 67
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 68
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 69
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 70
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 71
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 72
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 73
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 74
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 75
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 76
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 77
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 78
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 79
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 80
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 81
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 82
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 83
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 84
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 85
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 86
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 87
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 88
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 89
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 90
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 91
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 92
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 93
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 94
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 95
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 96
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 97
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 98
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 99
       y: 0
       rotation: 0
-    - type: 1
+    - type: TYPE_METAL_BLOCK
       x: 100
       y: 0
       rotation: 0

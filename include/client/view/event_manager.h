@@ -13,7 +13,7 @@ public:
     EventManager(EventManager&& other) = delete;
     EventManager& operator=(EventManager&& other) = delete;
 
-    BlockingQueue& getQueue();
+    BlockingQueue<ViewEvent>& getQueue();
 
     void addHandler(KeyboardHandler* keyboard_handler);
     void addHandler(MouseHandler* mouse_handler);
@@ -23,7 +23,7 @@ public:
 
 private:
     EventHandler event_handler;
-    BlockingQueue queue;
+    BlockingQueue<ViewEvent> queue;
 };
 
 #endif  // EVENT_MANAGER_H

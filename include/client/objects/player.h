@@ -8,13 +8,13 @@
 
 class Player : public DrawableBox2D {
 public:
-    Player(const Size& size, const Position& initial, const Ratio& ratio, const Texture& texture);
+    Player(const Size& size, const Position& initial, const WorldViewSettings& settings, const Texture& texture);
 
     virtual const Texture& getTexture() override;
     virtual SDL_Rect* getClip() override;
     virtual SDL_RendererFlip getFlipState() const override;
 
-    virtual void updatePosition(const Position& new_position, double angle) override;
+    virtual void updatePosition(const Position& new_position) override;
 
 private:
     Animation idle;

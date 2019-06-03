@@ -6,7 +6,7 @@
 class EnergyBar : public AnimatedDrawableBox2D {
 public:
     EnergyBar(const Size& size, const Position& initial,
-              const Ratio& ratio, const Texture& texture, double rotation);
+              const WorldViewSettings& settings, const Texture& texture);
 };
 
 #endif  // ENERGY_BAR_H

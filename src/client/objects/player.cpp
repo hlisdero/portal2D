@@ -1,8 +1,8 @@
 #include "client/objects/player.h"
 
 Player::Player(const Size& size, const Position& initial,
-               const Ratio& ratio, const Texture& texture) :
-    DrawableBox2D(size, initial, ratio),
+               const WorldViewSettings& settings, const Texture& texture) :
+    DrawableBox2D(size, initial, settings),
     idle(texture), run(texture),
     jump_rise(texture), jump_apex(texture),
     jump_fall(texture), jump_land(texture),
@@ -43,10 +43,10 @@ SDL_RendererFlip Player::getFlipState() const {
     return flip_state;
 }
 
-void Player::updatePosition(const Position& new_position, double angle) {
+void Player::updatePosition(const Position& new_position) {
     updateFlipState(new_position);
     updateAnimation(new_position);
-    DrawableBox2D::updatePosition(new_position, angle);
+    DrawableBox2D::updatePosition(new_position);
 }
 
 void Player::updateFlipState(const Position& new_position) {

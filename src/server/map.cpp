@@ -1,35 +1,9 @@
 #include "server/map.h"
 
-#include <map>
-#include <string>
-
-#include "server/entities/door.h"
-#include "server/entities/energy_emittor.h"
-#include "server/entities/energy_receiver.h"
-#include "server/entities/button.h"
-#include "server/entities/rock.h"
-#include "server/entities/end_barrier.h"
-
 Map::Map(const char * mapName) {
-	YAML::Node file;
-	
-	try {
-		file = YAML::LoadFile(mapName);
-	} catch(...) {
-		throw std::runtime_error("Impossible to load the map");
-	}
-
-	try {
-		this->loadSettings(file);
-	} catch(...) {
-		throw std::runtime_error("Impossible to load the map settings");
-	}
-
-	try {
-		this->loadEntities(file);
-	} catch(...) {
-		throw std::runtime_error("Impossible to load the map entities");
-	}
+	YAML::Node file = YAML::LoadFile(mapName);
+    this->loadSettings(file);
+	this->loadEntities(file);
 }
 
 const std::vector<Entity*> & Map::getStaticEntities() const {
@@ -63,8 +37,8 @@ void Map::loadSettings(YAML::Node yaml) {
 void Map::loadEntities(YAML::Node yaml) {
 	YAML::Node entities = yaml["entities"];
 
-	std::map<std::string, WithSubscribableState*> subscribables; 
-	std::vector<DoorEntity*> doors; 
+	std::map<std::string, WithSubscribableState*> subscribables;
+	std::vector<DoorEntity*> doors;
 
 	for(uint i = 0; i < entities.size(); i++) {
 		Entity * entity = this->createEntity(entities[i]);
@@ -97,10 +71,10 @@ void Map::loadEntities(YAML::Node yaml) {
 }
 
 Entity * Map::createEntity(YAML::Node yaml) {
-	EntityType type = static_cast<EntityType>(yaml["type"].as<int>());
+	std::string type_string = yaml["type"].as<std::string>();
 
 	Entity * entity = nullptr;
-
+    EntityType type = getEntityType(type_string);
 	switch(type) {
 		case TYPE_STONE_BLOCK:
 		case TYPE_METAL_BLOCK:
@@ -142,4 +116,50 @@ Map::~Map() {
 	for(uint i = 0; i < this->dynamicEntities.size(); i++) {
 		delete this->dynamicEntities[i];
 	}
+}
+
+EntityType Map::getEntityType(std::string str) {
+    if (str == "TYPE_STONE_BLOCK") {
+        return TYPE_STONE_BLOCK;
+    }
+	if (str == "TYPE_METAL_BLOCK") {
+        return TYPE_METAL_BLOCK;
+    }
+	if (str == "TYPE_METAL_DIAG_BLOCK") {
+        return TYPE_METAL_DIAG_BLOCK;
+    }
+	if (str == "TYPE_ACID") {
+        return TYPE_ACID;
+    }
+	if (str == "TYPE_GATE") {
+        return TYPE_GATE;
+    }
+	if (str == "TYPE_ENERGY_BAR") {
+        return TYPE_ENERGY_BAR;
+    }
+	if (str == "TYPE_ENERGY_EMITTER") {
+        return TYPE_ENERGY_EMITTER;
+    }
+	if (str == "TYPE_ENERGY_RECEIVER") {
+        return TYPE_ENERGY_RECEIVER;
+    }
+	if (str == "TYPE_BUTTON") {
+        return TYPE_BUTTON;
+    }
+	if (str == "TYPE_PORTAL") {
+        return TYPE_PORTAL;
+    }
+	if (str == "TYPE_END_BARRIER") {
+        return TYPE_END_BARRIER;
+    }
+	if (str == "TYPE_ROCK") {
+        return TYPE_ROCK;
+    }
+	if (str == "TYPE_PLAYER") {
+        return TYPE_PLAYER;
+    }
+	if (str == "TYPE_ENERGY_BALL") {
+        return TYPE_PLAYER;
+    }
+    throw std::runtime_error("Error: string mal formado en el archivo del mapa");
 }

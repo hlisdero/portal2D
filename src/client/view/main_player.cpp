@@ -1,7 +1,7 @@
 #include "client/view/main_player.h"
 
-MainPlayer::MainPlayer(const Player& player, const Camera& camera, BlockingQueue& queue, const size_t& screen_height) :
-    player(player), camera(camera), queue(queue), screen_height(screen_height) {}
+MainPlayer::MainPlayer(const Player& player, const Camera& camera, BlockingQueue<ViewEvent>& queue) :
+    player(player), camera(camera), queue(queue) {}
 
 void MainPlayer::handle(const KeyboardEvent& event) {
     MoveDirection direction = processMoveDirection(event);
@@ -16,17 +16,14 @@ void MainPlayer::handle(const MouseEvent& event) {
          event.x == 0 || event.y == 0) {
         return;
     }
-    // Transformo el sistema de coordenadas de Box2D al de SDL
-    // La posición se mide desde el medio del objeto
-    int player_x = player.getX() - camera.position.x;
-    int player_y = screen_height - player.getY() - camera.position.y;
+    int player_x = player.getX() + player.getWidth()/2 - camera.position.x;
+    int player_y = player.getY() + player.getHeight()/2 - camera.position.y;
 
     // Calculo un vector de norma 1 con la dirección desde el jugador hacia el clic
     double x = event.x - player_x;
     double y = event.y - player_y;
-    x = x/sqrt(x*x + y*y);
-    y = y/sqrt(x*x + y*y);
-    queue.push(ViewEvent(ClickDirection(x, y)));
+    ClickDirection click_direction(x/sqrt(x*x + y*y), -y/sqrt(x*x + y*y));
+    queue.push(ViewEvent(click_direction));
 }
 
 MoveDirection MainPlayer::processMoveDirection(const KeyboardEvent& event) const {
