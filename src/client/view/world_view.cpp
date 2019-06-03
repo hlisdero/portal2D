@@ -21,7 +21,7 @@ void WorldView::pollEvents() {
     event_manager.pollEvents();
 }
 
-BlockingQueue& WorldView::getQueue() {
+BlockingQueue<ViewEvent>& WorldView::getQueue() {
     return event_manager.getQueue();
 }
 

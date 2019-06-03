@@ -23,7 +23,7 @@ public:
     ~WorldView();
 
     void pollEvents();
-    BlockingQueue& getQueue();
+    BlockingQueue<ViewEvent>& getQueue();
     bool quit() const;
 
     const ViewObjectCreator& getObjectCreator() const;

@@ -13,7 +13,7 @@ public:
     Client& operator=(Client&& other) = delete;
 
     void pollEvents();
-    BlockingQueue& getQueue();
+    BlockingQueue<ViewEvent>& getQueue();
     bool quit() const;
 
     WorldView view;

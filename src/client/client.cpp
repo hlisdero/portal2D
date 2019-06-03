@@ -8,7 +8,7 @@ void Client::pollEvents() {
     view.pollEvents();
 }
 
-BlockingQueue& Client::getQueue() {
+BlockingQueue<ViewEvent>& Client::getQueue() {
     return view.getQueue();
 }
 

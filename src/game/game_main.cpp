@@ -22,7 +22,7 @@ int main(int argc, char const *argv[]) {
 	ClockLoop<60> clock;
 	while (!client.quit()) {
         client.pollEvents();
-        BlockingQueue& queue = client.getQueue();
+        BlockingQueue<ViewEvent>& queue = client.getQueue();
         while (!queue.empty()) {
             ViewEvent event = queue.pop();
             if (event.type == KEYBOARD) {

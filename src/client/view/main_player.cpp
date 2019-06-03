@@ -1,6 +1,6 @@
 #include "client/view/main_player.h"
 
-MainPlayer::MainPlayer(const Player& player, const Camera& camera, BlockingQueue& queue) :
+MainPlayer::MainPlayer(const Player& player, const Camera& camera, BlockingQueue<ViewEvent>& queue) :
     player(player), camera(camera), queue(queue) {}
 
 void MainPlayer::handle(const KeyboardEvent& event) {
