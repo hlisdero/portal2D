@@ -48,17 +48,29 @@ void ContactListener::broadcastContact(Entity * entityA, Entity * entityB, b2Con
 	}
 }
 
-void ContactListener::PreSolve(b2Contact * contact, const b2Manifold *) {
-	Entity * userDataA = static_cast<Entity*>(
-		contact->GetFixtureA()->GetBody()->GetUserData());
-	Entity * userDataB = static_cast<Entity*>(
-		contact->GetFixtureB()->GetBody()->GetUserData());
+void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * manifold) {
+	b2Fixture * fixtureA = contact->GetFixtureA();
+	b2Fixture * fixtureB = contact->GetFixtureB();
 
-	if(userDataA->getType() == TYPE_PLAYER && 
-		userDataA->as<PlayerEntity>()->waitingForResetPosition()) {
-		contact->SetEnabled(false);
-	} else if(userDataB->getType() == TYPE_PLAYER && 
-		userDataB->as<PlayerEntity>()->waitingForResetPosition()) {
-		contact->SetEnabled(false);
-	} 
+	handlePreSolve(fixtureA, fixtureB, contact, manifold);
+	handlePreSolve(fixtureB, fixtureA, contact, manifold);
+}
+
+void ContactListener::handlePreSolve(b2Fixture * fixtureA, b2Fixture * fixtureB, b2Contact * contact, const b2Manifold * manifold) {
+	Entity * entityA = static_cast<Entity*>(
+		contact->GetFixtureA()->GetBody()->GetUserData());
+
+	if(entityA->getType() == TYPE_PLAYER) {
+		if(entityA->as<PlayerEntity>()->waitingForResetPosition()) {
+			contact->SetEnabled(false);
+		} else {
+			b2WorldManifold worldManifold;
+			contact->GetWorldManifold(&worldManifold);
+
+			// If it's horizontal direction and if the vertical distance is less than the threshold
+			if(manifold->localNormal.y == 0 && abs(fixtureA->GetAABB(0).lowerBound.y - fixtureB->GetAABB(0).upperBound.y) < CONTACT_THRESHOLD) {
+				contact->SetEnabled(false);
+			}
+		}
+	}
 }
