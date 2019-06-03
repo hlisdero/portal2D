@@ -32,15 +32,35 @@ void PlayerEntity::setPortal(PortalColor color, PortalEntity * portal) {
 	this->portals[color] = portal;
 }
 
-void PlayerEntity::handleFloorContact(b2Contact * contact, bool inContact) {
-	float direction = (contact->GetFixtureA()->GetBody()->GetUserData() == this) ? -1.0f : 1.0f;
+void PlayerEntity::handleFloorContact(b2Contact * contact, bool) {
+	b2WorldManifold worldManifold;
+	contact->GetWorldManifold(&worldManifold);
 
-	if(contact->GetManifold()->localNormal == b2Vec2(0.0f, direction)) {
-		this->isOnTheFloor = true;
-		
-		if(inContact) {
-			this->hasMovedInTheAir = false;
+	bool oldContact = false;
+
+	auto it = this->floorsContacts.begin();
+	while(!oldContact && it != this->floorsContacts.end()) {
+		oldContact = (*it == contact);
+
+		if(oldContact) {
+			floorsContacts.erase(it);
 		}
+
+		it++;
+	}
+
+	if(!oldContact) {
+		if(contact->GetFixtureA()->GetBody()->GetUserData() == this) {
+			if(worldManifold.normal.y < -0.707) {
+				this->floorsContacts.push_back(contact);
+			}
+		} else if(worldManifold.normal.y > 0.707) {
+			this->floorsContacts.push_back(contact);
+		}
+	}
+
+	if(this->floorsContacts.size() > 0) {
+		this->hasMovedInTheAir = false;
 	}
 }
 
@@ -99,7 +119,7 @@ void PlayerEntity::keyDown(const MoveDirection direction) {
 	switch(direction) {
 		// If on the floor, jump
 		case UP:
-			if(this->isOnTheFloor) {
+			if(this->floorsContacts.size() > 0) {
 				// TODO load speed from file
 				this->applyImpulseToCenter(0.0f, 5.0f);
 			}
@@ -142,7 +162,7 @@ void PlayerEntity::applyMovement() {
 	// 		- can move one time in one of the two direction
 	//		- after, the player will continue his movement
 	//			(no resistance in the air)
-	if(!this->isOnTheFloor) {
+	if(this->floorsContacts.size() == 0) {
 		if(this->hasMovedInTheAir) {
 			return;
 		} else {

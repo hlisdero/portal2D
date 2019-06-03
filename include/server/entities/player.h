@@ -33,8 +33,8 @@ public:
 
 	virtual ~PlayerEntity() override;
 
-private:	
-	bool isOnTheFloor = false;
+private:
+	std::vector<b2Contact *> floorsContacts;
 	// This allow for better gameplay experience
 	bool hasMovedInTheAir = false;
 	MoveDirection moveDirection = NONE;
