@@ -47,3 +47,18 @@ void ContactListener::broadcastContact(Entity * entityA, Entity * entityB, b2Con
 			break;
 	}
 }
+
+void ContactListener::PreSolve(b2Contact * contact, const b2Manifold *) {
+	Entity * userDataA = static_cast<Entity*>(
+		contact->GetFixtureA()->GetBody()->GetUserData());
+	Entity * userDataB = static_cast<Entity*>(
+		contact->GetFixtureB()->GetBody()->GetUserData());
+
+	if(userDataA->getType() == TYPE_PLAYER && 
+		userDataA->as<PlayerEntity>()->waitingForResetPosition()) {
+		contact->SetEnabled(false);
+	} else if(userDataB->getType() == TYPE_PLAYER && 
+		userDataB->as<PlayerEntity>()->waitingForResetPosition()) {
+		contact->SetEnabled(false);
+	} 
+}

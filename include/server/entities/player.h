@@ -29,6 +29,8 @@ public:
 
 	void handleFloorContact(b2Contact * contact, bool isBegin);
 
+	bool waitingForResetPosition();
+
 	virtual ~PlayerEntity() override;
 
 private:	
@@ -40,6 +42,7 @@ private:
 	PortalEntity * portals[PORTALS_NB];
 
 	bool resetPosition = false;
+	int goingTroughPortal = 0;
 
 	void applyImpulseToCenter(float vx, float vy);
 

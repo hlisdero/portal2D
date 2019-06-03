@@ -15,6 +15,10 @@ PlayerEntity::~PlayerEntity() {
 	}
 }
 
+bool PlayerEntity::waitingForResetPosition() {
+	return this->resetPosition;
+}
+
 PortalEntity * PlayerEntity::getPortal(PortalColor color) {
 	return this->portals[color];
 }
