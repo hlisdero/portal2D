@@ -49,7 +49,11 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 
 	switch(other->getType()) {
 		case TYPE_PORTAL: 
-			this->goThroughPortal(other->as<PortalEntity>());
+			if(inContact) {
+				this->goThroughPortal(other->as<PortalEntity>());
+			} else if(this->goingTroughPortal > 0) {
+				this->goingTroughPortal--;	
+			}
 			break;
 		default:
 			break;
@@ -57,6 +61,11 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 }
 
 void PlayerEntity::goThroughPortal(PortalEntity * portal) {
+	// Do not go through the portal if already going through the portal
+	if(this->goingTroughPortal > 0) {
+		return;
+	}
+
 	PortalEntity * twin = portal->getTwin();
 
 	if(twin != nullptr) {
@@ -74,10 +83,13 @@ void PlayerEntity::goThroughPortal(PortalEntity * portal) {
 			inVelocity.x * sin(rotation) + inVelocity.y * cos(rotation)
 			);
 
+		outVelocity += twin->getOutVector();
+
 		// Update player velocity and position
 		this->getBody()->SetLinearVelocity(outVelocity);
 
 		this->resetPosition = true;
+		this->goingTroughPortal = 2;
 		this->setX(twin->getX());
 		this->setY(twin->getY());
 	}

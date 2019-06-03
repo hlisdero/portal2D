@@ -14,8 +14,11 @@ public:
 	PortalEntity * getTwin();
 	void setTwin(PortalEntity * twin);
 
+	const b2Vec2 & getOutVector() const;
+
 private:
 	PortalEntity * twin;
+	b2Vec2 outVector;
 
 	static float getRotationFromNormal(const b2Vec2 & normal);
 };
