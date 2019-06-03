@@ -30,7 +30,7 @@ public:
 
     void createEntities(const std::vector<Entity*>& entities);
 
-    void updatePosition(size_t index, const Position& position, double angle = 0.0);
+    void updatePosition(size_t index, const Position& position);
     void updatePosition(const std::vector<Entity*>& entities);
 
     void update();
@@ -49,7 +49,7 @@ private:
 
     void renderObjects();
     void checkValidIndex(size_t index);
-    void createEntity(EntityType type, size_t id, const Position& initial, double rotation);
+    void createEntity(EntityType type, size_t id, const Position& initial);
     void createPlayerWithCamera(size_t id, const Position& position);
 };
 

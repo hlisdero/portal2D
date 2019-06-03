@@ -6,7 +6,7 @@
 class DiagonalMetalBlock : public Block {
 public:
     DiagonalMetalBlock(const Size& size, const Position& initial,
-                       const WorldViewSettings& settings, const Texture& texture, double rotation);
+                       const WorldViewSettings& settings, const Texture& texture);
 };
 
 #endif  // DIAGONAL_METAL_BLOCK_H

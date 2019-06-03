@@ -1,10 +1,10 @@
 #include "client/objects/drawable_box2D.h"
 
 DrawableBox2D::DrawableBox2D(const Size& size, const Position& initial,
-                             const WorldViewSettings& settings, double angle) :
+                             const WorldViewSettings& settings) :
     size(size), position(initial),
-    pixel_per_meter(settings.getRatio()), window_height(settings.getScreenHeight()),
-    angle(angle) {}
+    pixel_per_meter(settings.getRatio()),
+    window_height(settings.getScreenHeight()) {}
 
 int DrawableBox2D::getX() const {
     // Transformo el sistema de coordenadas de Box2D al de SDL
@@ -27,7 +27,7 @@ int DrawableBox2D::getHeight() const {
 }
 
 double DrawableBox2D::getRotation() const {
-    return -angle;  // BOX2D counterclockwise, SDL clockwise
+    return -position.z;  // BOX2D counterclockwise, SDL clockwise
 }
 
 float32 DrawableBox2D::currentX() const {
@@ -38,7 +38,6 @@ float32 DrawableBox2D::currentY() const {
     return position.y;
 }
 
-void DrawableBox2D::updatePosition(const Position& new_position, double angle) {
+void DrawableBox2D::updatePosition(const Position& new_position) {
     position = new_position;
-    angle = angle;
 }

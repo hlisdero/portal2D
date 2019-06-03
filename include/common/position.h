@@ -1,8 +1,13 @@
 #ifndef POSITION_H
 #define POSITION_H
 
-#include <Box2D/Box2D.h>
+class Position {
+public:
+    Position(double x, double y, double z);
 
-typedef b2Vec2 Position;
+    double x;
+    double y;
+    double z;
+};
 
 #endif // POSITION_H

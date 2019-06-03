@@ -6,7 +6,7 @@
 class EnergyBall : public AnimatedDrawableBox2D {
 public:
     EnergyBall(const Size& size, const Position& initial,
-               const WorldViewSettings& settings, const Texture& texture, double rotation = 0.0);
+               const WorldViewSettings& settings, const Texture& texture);
 };
 
 #endif  // ENERGY_BALL_H

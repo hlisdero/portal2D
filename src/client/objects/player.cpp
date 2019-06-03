@@ -43,10 +43,10 @@ SDL_RendererFlip Player::getFlipState() const {
     return flip_state;
 }
 
-void Player::updatePosition(const Position& new_position, double angle) {
+void Player::updatePosition(const Position& new_position) {
     updateFlipState(new_position);
     updateAnimation(new_position);
-    DrawableBox2D::updatePosition(new_position, angle);
+    DrawableBox2D::updatePosition(new_position);
 }
 
 void Player::updateFlipState(const Position& new_position) {

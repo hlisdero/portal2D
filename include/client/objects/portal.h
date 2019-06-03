@@ -6,7 +6,7 @@
 class Portal : public Block {
 public:
     Portal(const Size& size, const Position& initial,
-           const WorldViewSettings& settings, const Texture& texture, double rotation);
+           const WorldViewSettings& settings, const Texture& texture);
 };
 
 #endif  // PORTAL_H

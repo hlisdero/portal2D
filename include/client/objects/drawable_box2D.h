@@ -9,7 +9,7 @@
 class DrawableBox2D : public Drawable {
 public:
     explicit DrawableBox2D(const Size& size, const Position& initial,
-                           const WorldViewSettings& settings, double angle = 0.0);
+                           const WorldViewSettings& settings);
 
     virtual const Texture& getTexture() = 0;
 
@@ -23,7 +23,7 @@ public:
     float32 currentX() const;
     float32 currentY() const;
 
-    virtual void updatePosition(const Position& new_position, double angle);
+    virtual void updatePosition(const Position& new_position);
 
     virtual ~DrawableBox2D() = default;
 
@@ -32,7 +32,6 @@ private:
     Position position;
     const double& pixel_per_meter;
     const size_t& window_height;
-    double angle = 0.0;
 };
 
 #endif  // DRAWABLE_BOX2D_H

@@ -6,7 +6,7 @@
 class Rock : public Block {
 public:
     Rock(const Size& size, const Position& initial,
-         const WorldViewSettings& settings, const Texture& texture, double rotation);
+         const WorldViewSettings& settings, const Texture& texture);
 };
 
 #endif  // ROCK_H
