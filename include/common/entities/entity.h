@@ -8,7 +8,7 @@
 
 class Entity {
 public:
-	Entity(EntityType type, float x, float y, float angle = 0.0f);
+	Entity(EntityType type, float x, float y, float rotation);
 	Entity(EntityType type, YAML::Node yaml);
 
 	virtual ~Entity() = default;

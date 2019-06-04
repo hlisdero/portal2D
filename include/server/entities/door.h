@@ -17,7 +17,6 @@ typedef std::map<std::string, WithSubscribableState*> subscribablesMap;
 
 class DoorEntity : public Entity, public BodyLinked, public WithState {
 public:
-	DoorEntity(const float x, const float y, const float angle, DoorLogica * logica);
 	DoorEntity(YAML::Node yaml);
 
 	void updateState();

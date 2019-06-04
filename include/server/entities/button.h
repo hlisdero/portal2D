@@ -10,7 +10,6 @@
 
 class ButtonEntity : public Entity, public WithSubscribableState, public HandleContact {
 public:
-	ButtonEntity(const float x, const float y);
 	ButtonEntity(YAML::Node yaml);
 
 	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
