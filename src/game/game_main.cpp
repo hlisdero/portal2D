@@ -6,6 +6,7 @@
 #include "common/clock_loop.h"
 #include "common/view_event.h"
 #include "server/entities/with_state.h"
+#include "common/events/dynamics_update.h"
 
 int main(int argc, char const *argv[]) {
     // World size in meter 53.32 x 40
@@ -19,12 +20,14 @@ int main(int argc, char const *argv[]) {
 	client.view.createEntities(server.getStaticEntities());
 	client.view.createEntities(server.getDynamicEntities());
 
+    BlockingQueue<ViewEvent>& queue = client.getQueue();
+    BlockingQueue<WorldEventPtr> & worldQueue = server.getQueue();
+
     bool color = false;
 
 	ClockLoop<60> clock;
 	while (!client.quit()) {
         client.pollEvents();
-        BlockingQueue<ViewEvent>& queue = client.getQueue();
         while (!queue.empty()) {
             ViewEvent event = queue.pop();
             if (event.type == KEYBOARD) {
@@ -36,7 +39,14 @@ int main(int argc, char const *argv[]) {
         }
 		server.update();
 
-        client.view.updatePosition(server.getDynamicEntities());
+        while (!worldQueue.empty()) {
+            WorldEventPtr event = worldQueue.pop();
+            if(event->getType() == DYNAMICS_UPDATE) {
+                DynamicsUpdateEvent* ev = static_cast<DynamicsUpdateEvent*>(event.get());
+                client.view.updatePosition(ev->getUpdates());
+            }
+        }
+        
         client.view.update();
 
 		// wait t1

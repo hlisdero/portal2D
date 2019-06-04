@@ -2,21 +2,7 @@
 #define WITH_STATE_H
 
 #include "yaml-cpp/yaml.h"
-
-enum State {
-	// EnergyReceiver, Button
-	STATE_DISABLED = 0,
-	STATE_ENABLED,
-
-	// Portal
-	COLOR_BLUE = 0,
-	COLOR_ORANGE,
-
-	// Door
-	STATE_CLOSED = 0,
-	STATE_OPENED
-};
-typedef enum State PortalColor;
+#include "server/entities/state.h"
 
 class WithState {
 public:

@@ -46,10 +46,10 @@ void WorldView::updatePosition(size_t index, const Position& position) {
     view_objects[index]->updatePosition(position);
 }
 
-void WorldView::updatePosition(const std::vector<Entity*>& entities) {
+void WorldView::updatePosition(const std::vector<EntityPosition>& entities) {
     for (const auto& entity : entities) {
-        Position position(entity->getX(), entity->getY(), entity->getRotationDeg());
-        size_t id(entity->getId());
+        Position position(entity.x, entity.y, entity.rotation);
+        size_t id(entity.id);
         updatePosition(id, position);
     }
 }
