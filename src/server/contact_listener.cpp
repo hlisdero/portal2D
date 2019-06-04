@@ -58,7 +58,7 @@ void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * manifold)
 
 void ContactListener::handlePreSolve(b2Fixture * fixtureA, b2Fixture * fixtureB, b2Contact * contact, const b2Manifold * manifold) {
 	Entity * entityA = static_cast<Entity*>(
-		contact->GetFixtureA()->GetBody()->GetUserData());
+		fixtureA->GetBody()->GetUserData());
 
 	if(entityA->getType() == TYPE_PLAYER) {
 		if(entityA->as<PlayerEntity>()->waitingForResetPosition()) {
