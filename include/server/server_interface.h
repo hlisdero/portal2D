@@ -7,6 +7,9 @@
 #include "common/entities/entity.h"
 #include "common/move_direction.h"
 #include "server/entities/player.h"
+#include "common/queue/blocking_queue.h"
+#include "common/events/world_event.h"
+#include "server/events/event_creator.h"
 
 // Temporary class to simulate the separation between client y server.
 class ServerInterface {
@@ -23,7 +26,11 @@ public:
 	void movePlayer(const MoveDirection direction, const bool pressed);
 	void createPortal(b2Vec2 & direction, PortalColor color);
 
+	BlockingQueue<WorldEventPtr> & getQueue();
+
 private:
+	BlockingQueue<WorldEventPtr> queue;
+	EventCreator eventCreator;
 	Game game;
 	PlayerEntity player;
 };

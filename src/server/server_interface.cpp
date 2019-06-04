@@ -1,7 +1,7 @@
 #include "server/server_interface.h"
 
 ServerInterface::ServerInterface(const char * mapName) : 
-	game(mapName) {
+	eventCreator(queue), game(mapName, eventCreator) {
 	this->game.addPlayer(&this->player);
 }
 
@@ -27,4 +27,8 @@ const std::vector<Entity*> & ServerInterface::getStaticEntities() const {
 
 const std::vector<Entity*> ServerInterface::getDynamicEntities() const {
 	return std::move(this->game.getDynamicEntities());
+}
+
+BlockingQueue<WorldEventPtr> & ServerInterface::getQueue() {
+	return this->queue;
 }

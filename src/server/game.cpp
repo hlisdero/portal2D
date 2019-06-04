@@ -1,8 +1,9 @@
 #include "server/game.h"
 
-Game::Game(const char * mapName) :
+Game::Game(const char * mapName, EventCreator & eventCreator) :
 	map(mapName),
-	world(this->map) {}
+	world(this->map),
+	eventCreator(eventCreator) {}
 
 void Game::processEvent() {
 	// if player join
@@ -37,6 +38,8 @@ void Game::update() {
 	// TODO Check defeat
 
 	this->world.updatePhysics();
+	this->eventCreator.sendDynamicsUpdate(
+		this->world.getDynamicEntities());
 }
 
 const std::vector<Entity*> & Game::getStaticEntities() const {

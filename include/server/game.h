@@ -6,6 +6,7 @@
 #include "server/world.h"
 #include "server/map.h"
 #include "server/entities/player.h"
+#include "server/events/event_creator.h"
 
 enum GameStatus {
 	WAITING_FOR_PLAYERS,
@@ -16,7 +17,7 @@ enum GameStatus {
 
 class Game {
 public:
-	Game(const char * mapName);
+	Game(const char * mapName, EventCreator & eventCreator);
 
 	void addPlayer(PlayerEntity * player);
 	void createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor color);
@@ -35,6 +36,7 @@ private:
 	GameStatus status = WAITING_FOR_PLAYERS; 
 	Map map;
 	World world;
+	EventCreator & eventCreator;
 };
 
 #endif  // GAME_H

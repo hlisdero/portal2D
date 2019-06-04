@@ -10,6 +10,7 @@
 #include "client/view/view_object_creator.h"
 #include "client/view/world_view_settings.h"
 #include "common/entities/entity.h"
+#include "common/events/entity_position.h"
 
 class WorldView {
 public:
@@ -31,7 +32,7 @@ public:
     void createEntities(const std::vector<Entity*>& entities);
 
     void updatePosition(size_t index, const Position& position);
-    void updatePosition(const std::vector<Entity*>& entities);
+    void updatePosition(const std::vector<EntityPosition>& entities);
 
     void update();
 
