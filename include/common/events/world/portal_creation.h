@@ -7,13 +7,11 @@ class PortalCreationEvent : public WorldEvent {
 public:
 	PortalCreationEvent(int entityId, float x, float y, float rotation, bool color);
 
-private:
 	int entityId;
 	float x;
 	float y;
 	float rotation;
 	bool color;
-
 };
 
 #endif

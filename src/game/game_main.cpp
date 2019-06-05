@@ -7,6 +7,8 @@
 #include "server/server_interface.h"
 #include "server/entities/attributes/with_state.h"
 #include "common/events/world/dynamics_update.h"
+#include "common/events/world/portal_creation.h"
+#include "common/events/world/portal_move.h"
 
 int main(int argc, char const *argv[]) {
     // World size in meter 53.32 x 40
@@ -41,16 +43,21 @@ int main(int argc, char const *argv[]) {
 
         while (!worldQueue.empty()) {
             WorldEventPtr event = worldQueue.pop();
-            if(event->getType() == DYNAMICS_UPDATE) {
+            if (event->getType() == DYNAMICS_UPDATE) {
                 DynamicsUpdateEvent* ev = static_cast<DynamicsUpdateEvent*>(event.get());
                 client.view.updatePosition(ev->getUpdates());
-            } else if(event->getType() == PORTAL_CREATION) {
-                // TODO
-            } else if(event->getType() == PORTAL_MOVE) {
-                // TODO
+            } else if (event->getType() == PORTAL_CREATION) {
+                PortalCreationEvent* ev = static_cast<PortalCreationEvent*>(event.get());
+                const ViewObjectCreator& object_creator = client.view.getObjectCreator();
+                Position position(ev->x, ev->y, ev->rotation);
+                object_creator.createPortal(ev->entityId, position);
+            } else if (event->getType() == PORTAL_MOVE) {
+                PortalMoveEvent* ev = static_cast<PortalMoveEvent*>(event.get());
+                Position position(ev->x, ev->y, ev->rotation);
+                client.view.updatePosition(ev->entityId, position);
             }
         }
-        
+
         client.view.update();
 
 		// wait t1
