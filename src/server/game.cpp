@@ -2,7 +2,7 @@
 
 Game::Game(const char * mapName, EventCreator & eventCreator) :
 	map(mapName),
-	world(this->map),
+	world(this->map, eventCreator),
 	eventCreator(eventCreator) {}
 
 void Game::processEvent() {

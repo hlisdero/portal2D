@@ -3,10 +3,11 @@
 #include "server/physics/portal_ray_cast_callback.h"
 
 // Initialize the world with the gravity vector
-World::World(Map & map) :
+World::World(Map & map, EventCreator & eventCreator) :
 	world(b2Vec2(0.0f, -10.0f)),
 	bodyFactory(world), 
-	map(map) {
+	map(map),
+	eventCreator(eventCreator) {
 	this->world.SetContactListener(&this->contactListener);
 
 	const std::vector<Entity*> & staticEntities = map.getStaticEntities();
@@ -47,11 +48,15 @@ void World::createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor 
 		PortalEntity * portal = player.getPortal(color);
 		if(portal != nullptr) {
 			portal->move(callback.m_point.x, callback.m_point.y, callback.m_normal);
+			this->eventCreator.sendPortalMove(portal);
 		} else {
 			portal = new PortalEntity(callback.m_point.x, callback.m_point.y, callback.m_normal, color);
 
+
 			this->bodyFactory.createBody(portal);
 			player.setPortal(color, portal);
+			
+			this->eventCreator.sendPortalCreation(portal);
 		}
 
 	}	

@@ -10,6 +10,7 @@
 #include "server/entities/player.h"
 #include "server/entities/utils/body_factory.h"
 #include "server/physics/contact_listener.h"
+#include "server/events/event_creator.h"
 
 /*
 	y
@@ -23,7 +24,7 @@
 
 class World {
 public:
-	explicit World(Map & map);
+	explicit World(Map & map, EventCreator & eventCreator);
 
     void createPlayer(PlayerEntity * player);
     void createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor color);
@@ -38,6 +39,7 @@ private:
 	b2World world;
 	BodyFactory bodyFactory;
 	Map & map;
+	EventCreator & eventCreator;
 
 	std::vector<PlayerEntity*> players;
 
