@@ -7,8 +7,8 @@
 #include "client/view/world_view_settings.h"
 #include "client/texture/texture_loader.h"
 #include "common/entities/entities_settings.h"
-#include "common/position.h"
-#include "common/size.h"
+#include "common/objects/position.h"
+#include "common/objects/size.h"
 
 class ViewObjectCreator {
 public:

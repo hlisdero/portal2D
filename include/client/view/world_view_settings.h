@@ -3,7 +3,7 @@
 
 #include "client/texture/texture_creator.h"
 #include "client/texture/texture_loader.h"
-#include "common/size.h"
+#include "common/objects/size.h"
 
 class WorldViewSettings {
 public:

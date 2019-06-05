@@ -2,10 +2,10 @@
 #define END_BARRIER_ENTITY_H
 
 #include "common/entities/entity.h"
-#include "server/entities/body_linked.h"
-#include "server/entities/handle_contact.h"
 #include "server/entities/player.h"
-#include "server/end_zone.h"
+#include "server/entities/attributes/body_linked.h"
+#include "server/entities/attributes/handle_contact.h"
+#include "server/physics/end_zone.h"
 
 class EndBarrierEntity :  public Entity, public BodyLinked, public HandleContact {
 public:

@@ -1,7 +1,9 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+// TODO server dependency: remove from common
 #include "yaml-cpp/yaml.h"
+
 #include "common/entities/entities_types.h"
 
 #define PI 3.1415926f

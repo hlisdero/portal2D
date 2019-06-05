@@ -3,12 +3,12 @@
 
 #include <vector>
 
-#include "server/game.h"
-#include "common/entities/entity.h"
-#include "common/move_direction.h"
-#include "server/entities/player.h"
-#include "common/queue/blocking_queue.h"
+#include "common/objects/move_direction.h"
 #include "common/events/world_event.h"
+#include "common/entities/entity.h"
+#include "common/queue/blocking_queue.h"
+#include "server/game.h"
+#include "server/entities/player.h"
 #include "server/events/event_creator.h"
 
 // Temporary class to simulate the separation between client y server.

@@ -2,14 +2,12 @@
 #define MAP_H
 
 #include "Box2D/Box2D.h"
+#include "yaml-cpp/yaml.h"
 
 #include <map>
 #include <string>
 #include <vector>
 
-#include "yaml-cpp/yaml.h"
-#include "server/end_zone.h"
-#include "server/door_logica.h"
 #include "common/entities/entity.h"
 #include "server/entities/door.h"
 #include "server/entities/energy_emittor.h"
@@ -17,6 +15,8 @@
 #include "server/entities/button.h"
 #include "server/entities/rock.h"
 #include "server/entities/end_barrier.h"
+#include "server/physics/end_zone.h"
+#include "server/entities/utils/door_logica.h"
 
 class Map {
 public:

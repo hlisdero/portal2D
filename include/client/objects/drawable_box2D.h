@@ -3,8 +3,8 @@
 
 #include "client/objects/drawable.h"
 #include "client/view/world_view_settings.h"
-#include "common/position.h"
-#include "common/size.h"
+#include "common/objects/position.h"
+#include "common/objects/size.h"
 
 class DrawableBox2D : public Drawable {
 public:

@@ -5,11 +5,11 @@
 
 #include "Box2D/Box2D.h"
 
+#include "common/objects/move_direction.h"
 #include "common/entities/entity.h"
-#include "server/entities/body_linked.h"
-#include "server/entities/handle_contact.h"
-#include "common/move_direction.h"
 #include "server/entities/portal.h"
+#include "server/entities/attributes/body_linked.h"
+#include "server/entities/attributes/handle_contact.h"
 
 #define PORTALS_NB 2
 

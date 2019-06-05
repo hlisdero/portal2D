@@ -7,9 +7,9 @@
 #include "client/screen/camera.h"
 #include "client/objects/player.h"
 #include "common/queue/blocking_queue.h"
-#include "common/view_event.h"
-#include "common/move_direction.h"
-#include "common/click_direction.h"
+#include "common/events/view_event.h"
+#include "common/objects/move_direction.h"
+#include "common/objects/click_direction.h"
 
 class MainPlayer : public KeyboardHandler, public MouseHandler {
 public:

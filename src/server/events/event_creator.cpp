@@ -1,8 +1,8 @@
 #include "server/events/event_creator.h"
 
-#include "common/events/entity_position.h"
+#include "common/events/world/dynamics_update.h"
+#include "common/objects/entity_position.h"
 #include "common/events/world_event.h"
-#include "common/events/dynamics_update.h"
 
 EventCreator::EventCreator(BlockingQueue<WorldEventPtr> & eventQueue) : eventQueue(eventQueue) {}
 

@@ -4,8 +4,8 @@
 #include <vector>
 
 #include "common/entities/entity.h"
-#include "common/queue/blocking_queue.h"
 #include "common/events/world_event.h"
+#include "common/queue/blocking_queue.h"
 
 class EventCreator {
 public:

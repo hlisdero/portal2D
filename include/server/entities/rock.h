@@ -2,7 +2,7 @@
 #define ROCK_ENTITY_H
 
 #include "common/entities/entity.h"
-#include "server/entities/body_linked.h"
+#include "server/entities/attributes/body_linked.h"
 
 class RockEntity :  public Entity, public BodyLinked {
 public:

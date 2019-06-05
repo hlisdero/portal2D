@@ -2,8 +2,8 @@
 #define PORTAL_ENTITY_H
 
 #include "common/entities/entity.h"
-#include "server/entities/with_state.h"
-#include "server/entities/body_linked.h"
+#include "server/entities/attributes/with_state.h"
+#include "server/entities/attributes/body_linked.h"
 
 class PortalEntity :  public Entity, public WithState, public BodyLinked {
 public:

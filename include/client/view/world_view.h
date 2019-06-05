@@ -10,7 +10,7 @@
 #include "client/view/view_object_creator.h"
 #include "client/view/world_view_settings.h"
 #include "common/entities/entity.h"
-#include "common/events/entity_position.h"
+#include "common/objects/entity_position.h"
 
 class WorldView {
 public:

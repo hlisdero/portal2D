@@ -2,7 +2,7 @@
 #define ENERGY_BALL_ENTITY_H
 
 #include "common/entities/entity.h"
-#include "server/entities/body_linked.h"
+#include "server/entities/attributes/body_linked.h"
 
 // TODO load from file
 #define ENERGY_BALL_SPEED 5.0f

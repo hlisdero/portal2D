@@ -2,11 +2,11 @@
 #include <chrono>
 
 #include "client/client.h"
-#include "server/server_interface.h"
 #include "common/clock_loop.h"
-#include "common/view_event.h"
-#include "server/entities/with_state.h"
-#include "common/events/dynamics_update.h"
+#include "common/events/view_event.h"
+#include "server/server_interface.h"
+#include "server/entities/attributes/with_state.h"
+#include "common/events/world/dynamics_update.h"
 
 int main(int argc, char const *argv[]) {
     // World size in meter 53.32 x 40

@@ -3,10 +3,10 @@
 
 #include <vector>
 
-#include "server/world.h"
 #include "server/map.h"
-#include "server/entities/player.h"
 #include "server/events/event_creator.h"
+#include "server/entities/player.h"
+#include "server/physics/world.h"
 
 enum GameStatus {
 	WAITING_FOR_PLAYERS,
