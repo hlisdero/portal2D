@@ -7,11 +7,10 @@ class PortalMoveEvent : public WorldEvent {
 public:
 	PortalMoveEvent(int entityId, float x, float y, float rotation);
 
-private:
 	int entityId;
 	float x;
 	float y;
-	float rotation;	
+	float rotation;
 };
 
 #endif
