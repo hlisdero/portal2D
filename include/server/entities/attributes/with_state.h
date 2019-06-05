@@ -7,6 +7,7 @@
 class WithState {
 public:
 	WithState(const State state);
+	// TODO replace bool by int?
 	WithState(const bool state);
 
 	bool getState() const;

@@ -2,18 +2,17 @@
 #define PORTAL_CREATION_EVENT_H
 
 #include "common/events/world_event.h"
-#include "server/entities/attributes/state.h"
 
 class PortalCreationEvent : public WorldEvent {
 public:
-	PortalCreationEvent(int entityId, float x, float y, float rotation, PortalColor color);
+	PortalCreationEvent(int entityId, float x, float y, float rotation, bool color);
 
 private:
 	int entityId;
 	float x;
 	float y;
 	float rotation;
-	PortalColor color;
+	bool color;
 
 };
 
