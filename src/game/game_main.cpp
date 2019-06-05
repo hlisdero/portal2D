@@ -44,7 +44,7 @@ int main(int argc, char const *argv[]) {
             if(event->getType() == DYNAMICS_UPDATE) {
                 DynamicsUpdateEvent* ev = static_cast<DynamicsUpdateEvent*>(event.get());
                 client.view.updatePosition(ev->getUpdates());
-            } else if(event->getType() == PORTAL_CREATE) {
+            } else if(event->getType() == PORTAL_CREATION) {
                 // TODO
             } else if(event->getType() == PORTAL_MOVE) {
                 // TODO
