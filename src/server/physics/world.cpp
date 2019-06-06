@@ -3,42 +3,44 @@
 #include "server/physics/portal_ray_cast_callback.h"
 
 // Initialize the world with the gravity vector
-World::World(Map & map, EventCreator & eventCreator) :
+World::World(Map& map, EventCreator& eventCreator) :
 	world(b2Vec2(0.0f, -10.0f)),
-	bodyFactory(world), 
+	bodyFactory(world),
 	map(map),
 	eventCreator(eventCreator) {
-	this->world.SetContactListener(&this->contactListener);
+	world.SetContactListener(&contactListener);
 
 	const std::vector<Entity*> & staticEntities = map.getStaticEntities();
 	for(uint i = 0; i < staticEntities.size(); i++) {
-		this->bodyFactory.createBody(staticEntities[i]);
+		bodyFactory.createBody(staticEntities[i]);
 	}
 
 	const std::vector<Entity*> & dynamicEntities = map.getDynamicEntities();
 	for(uint i = 0; i < dynamicEntities.size(); i++) {
-		this->bodyFactory.createBody(dynamicEntities[i]);
+		bodyFactory.createBody(dynamicEntities[i]);
 	}
 }
 
 void World::createPlayer(PlayerEntity * player) {
-	this->players.push_back(player);
+	players.push_back(player);
 
-	b2Vec2 & spawn = this->map.getSpawn();
-	player->setX(spawn.x); 
+	b2Vec2 & spawn = map.getSpawn();
+	player->setX(spawn.x);
 	player->setY(spawn.y);
 
-	this->bodyFactory.createBody(player);
+	bodyFactory.createBody(player);
 }
 
-void World::createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor color) {
+void World::createPortal(PlayerEntity & player, b2Vec2 & direction) {
+    portal_color = !portal_color;
+    PortalColor color = portal_color ? COLOR_BLUE: COLOR_ORANGE;
 
 	const b2Vec2 & origin = player.getBody()->GetPosition();
 	b2Vec2 end = origin + (PORTAL_REACH * direction);
 
 	PortalRayCastCallback callback;
 
-	this->world.RayCast(&callback, origin, end);
+	world.RayCast(&callback, origin, end);
 
 	if(callback.hit) {
 		// TODO check if possible to create a portal
@@ -48,18 +50,18 @@ void World::createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor 
 		PortalEntity * portal = player.getPortal(color);
 		if(portal != nullptr) {
 			portal->move(callback.m_point.x, callback.m_point.y, callback.m_normal);
-			this->eventCreator.sendPortalMove(portal);
+			eventCreator.addPortalMove(portal);
 		} else {
 			portal = new PortalEntity(callback.m_point.x, callback.m_point.y, callback.m_normal, color);
 
 
-			this->bodyFactory.createBody(portal);
+			bodyFactory.createBody(portal);
 			player.setPortal(color, portal);
-			
-			this->eventCreator.sendPortalCreation(portal);
+
+			eventCreator.addPortalCreation(portal);
 		}
 
-	}	
+	}
 }
 
 void World::updatePhysics() {
@@ -68,7 +70,7 @@ void World::updatePhysics() {
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 
-	this->world.Step(timeStep, velocityIterations, positionIterations);
+	world.Step(timeStep, velocityIterations, positionIterations);
 
 	for(uint i = 0; i < players.size(); i++) {
 		players[i]->applyMovement();
@@ -76,7 +78,7 @@ void World::updatePhysics() {
 }
 
 const std::vector<Entity*> World::getDynamicEntities() const {
-	const b2Body * body = this->world.GetBodyList();
+	const b2Body * body = world.GetBodyList();
 
 	std::vector<Entity*> entities;
 
@@ -98,5 +100,5 @@ const std::vector<Entity*> World::getDynamicEntities() const {
 }
 
 int World::getPlayersCount() {
-	return this->players.size();
+	return players.size();
 }

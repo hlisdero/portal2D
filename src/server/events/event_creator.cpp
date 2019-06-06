@@ -1,32 +1,50 @@
 #include "server/events/event_creator.h"
 
-#include "common/events/world/dynamics_update.h"
-#include "common/events/world/portal_creation.h"
-#include "common/events/world/portal_move.h"
-#include "common/objects/entity_position.h"
-#include "common/events/world_event.h"
+EventCreator::EventCreator(BlockingQueue<WorldEvent>& queue) : queue(queue) {}
 
-EventCreator::EventCreator(BlockingQueue<WorldEventPtr> & eventQueue) : eventQueue(eventQueue) {}
-
-void EventCreator::sendDynamicsUpdate(const std::vector<Entity*> entities) {
-	std::vector<EntityPosition> positions;
-
-	for(auto entity : entities) {
-		positions.emplace_back(entity->getId(), entity->getX(), entity->getY(), entity->getRotationDeg());
-	}
-
-	this->eventQueue.push(WorldEventPtr(new DynamicsUpdateEvent(positions)));
+void EventCreator::addEntityCreation(Entity* entity) {
+    Position position(entity->getX(), entity->getY(), entity->getRotationDeg());
+    WorldEvent event(entity->getId(), entity->getType(), position);
+    queue.push(event);
 }
 
-void EventCreator::sendPortalCreation(PortalEntity * portal) {
-	this->eventQueue.push(WorldEventPtr(new PortalCreationEvent(
-		portal->getId(), 
-		portal->getX(), portal->getY(), portal->getRotationDeg(), 
-		portal->getState())));
+void EventCreator::addPositionUpdate(Entity* entity) {
+    Position position(entity->getX(), entity->getY(), entity->getRotationDeg());
+    WorldEvent event(entity->getId(), position);
+    queue.push(event);
 }
 
-void EventCreator::sendPortalMove(PortalEntity * portal) {
-	this->eventQueue.push(WorldEventPtr(new PortalMoveEvent(
-		portal->getId(), 
-		portal->getX(), portal->getY(), portal->getRotationDeg())));
+void EventCreator::addButtonStateUpdate(ButtonEntity* entity) {
+    State state;
+    if (entity->getState()) {
+        state = STATE_DISABLED;
+    } else {
+        state = STATE_ENABLED;
+    }
+    WorldEvent event(entity->getId(), state);
+    queue.push(event);
+}
+
+void EventCreator::addEntityCreations(const std::vector<Entity*>& entities) {
+    for (const auto& entity : entities) {
+        addEntityCreation(entity);
+    }
+}
+
+void EventCreator::addPositionUpdates(const std::vector<Entity*>& entities) {
+    for (const auto& entity : entities) {
+        addPositionUpdate(entity);
+    }
+}
+
+void EventCreator::addPortalCreation(PortalEntity * portal) {
+    Position position(portal->getX(), portal->getY(), portal->getRotationDeg());
+    WorldEvent event(portal->getId(), TYPE_PORTAL, position);
+	queue.push(event);
+}
+
+void EventCreator::addPortalMove(PortalEntity * portal) {
+    Position position(portal->getX(), portal->getY(), portal->getRotationDeg());
+    WorldEvent event(portal->getId(), position);
+	queue.push(event);
 }

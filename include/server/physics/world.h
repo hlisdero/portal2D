@@ -24,22 +24,24 @@
 
 class World {
 public:
-	explicit World(Map & map, EventCreator & eventCreator);
+	explicit World(Map& map, EventCreator& eventCreator);
 
-    void createPlayer(PlayerEntity * player);
-    void createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor color);
+    void createPlayer(PlayerEntity* player);
+    void createPortal(PlayerEntity& player, b2Vec2& direction);
 
     void updatePhysics();
 
 	const std::vector<Entity*> getDynamicEntities() const;
 
 	int getPlayersCount();
-	
+
 private:
 	b2World world;
 	BodyFactory bodyFactory;
-	Map & map;
-	EventCreator & eventCreator;
+	Map& map;
+	EventCreator& eventCreator;
+
+    bool portal_color = false;
 
 	std::vector<PlayerEntity*> players;
 
