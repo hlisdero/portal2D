@@ -1,9 +1,14 @@
 #ifndef CLICK_DIRECTION_H
 #define CLICK_DIRECTION_H
 
-// TODO server dependency: remove from common
-#include <Box2D/Box2D.h>
+class ClickDirection {
+public:
+    ClickDirection(float x, float y);
 
-typedef b2Vec2 ClickDirection;
+    ClickDirection operator*(double num);
+
+    float x = 0;
+    float y = 0;
+};
 
 #endif  // CLICK_DIRECTION_H

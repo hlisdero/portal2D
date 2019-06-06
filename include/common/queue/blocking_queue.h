@@ -4,7 +4,6 @@
 #include <queue>
 #include <mutex>
 #include <condition_variable>
-#include "common/events/view_event.h"
 
 template <class T>
 class BlockingQueue {

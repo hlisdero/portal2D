@@ -6,6 +6,7 @@
 #include "Box2D/Box2D.h"
 
 #include "common/entities/entity.h"
+#include "common/objects/click_direction.h"
 #include "server/map.h"
 #include "server/entities/player.h"
 #include "server/entities/utils/body_factory.h"
@@ -24,22 +25,24 @@
 
 class World {
 public:
-	explicit World(Map & map, EventCreator & eventCreator);
+	explicit World(Map& map, EventCreator& eventCreator);
 
-    void createPlayer(PlayerEntity * player);
-    void createPortal(PlayerEntity & player, b2Vec2 & direction, PortalColor color);
+    void createPlayer(PlayerEntity* player);
+    void createPortal(PlayerEntity& player, ClickDirection& direction);
 
     void updatePhysics();
 
 	const std::vector<Entity*> getDynamicEntities() const;
 
 	int getPlayersCount();
-	
+
 private:
 	b2World world;
 	BodyFactory bodyFactory;
-	Map & map;
-	EventCreator & eventCreator;
+	Map& map;
+	EventCreator& eventCreator;
+
+    bool portal_color = false;
 
 	std::vector<PlayerEntity*> players;
 

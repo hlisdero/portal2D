@@ -1,9 +1,14 @@
 #ifndef SIZE_H
 #define SIZE_H
 
-// TODO server dependency: remove from common
-#include <Box2D/Box2D.h>
+#include <stdexcept>
 
-typedef b2Vec2 Size;
+class Size {
+public:
+    Size(float x, float y);
+
+    float x = 0;
+    float y = 0;
+};
 
 #endif // SIZE_H

@@ -20,8 +20,8 @@ public:
 
     virtual double getRotation() const override;
 
-    float32 currentX() const;
-    float32 currentY() const;
+    double currentX() const;
+    double currentY() const;
 
     virtual void updatePosition(const Position& new_position);
 

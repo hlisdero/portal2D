@@ -10,11 +10,10 @@
 #include "client/view/view_object_creator.h"
 #include "client/view/world_view_settings.h"
 #include "common/entities/entity.h"
-#include "common/objects/entity_position.h"
 
 class WorldView {
 public:
-    WorldView(float32 world_width, float32 world_height);
+    WorldView(float world_width, float world_height);
 
     WorldView(const WorldView&) = delete;
     WorldView& operator=(const WorldView&) = delete;
@@ -29,10 +28,10 @@ public:
 
     const ViewObjectCreator& getObjectCreator() const;
 
+    void createEntity(size_t id, EntityType type, const Position& initial);
     void createEntities(const std::vector<Entity*>& entities);
 
     void updatePosition(size_t index, const Position& position);
-    void updatePosition(const std::vector<EntityPosition>& entities);
 
     void update();
 
@@ -50,7 +49,6 @@ private:
 
     void renderObjects();
     void checkValidIndex(size_t index);
-    void createEntity(EntityType type, size_t id, const Position& initial);
     void createPlayerWithCamera(size_t id, const Position& position);
 };
 

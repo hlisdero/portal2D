@@ -30,11 +30,11 @@ double DrawableBox2D::getRotation() const {
     return -position.z;  // BOX2D counterclockwise, SDL clockwise
 }
 
-float32 DrawableBox2D::currentX() const {
+double DrawableBox2D::currentX() const {
     return position.x;
 }
 
-float32 DrawableBox2D::currentY() const {
+double DrawableBox2D::currentY() const {
     return position.y;
 }
 

@@ -3,6 +3,7 @@
 
 #include "client/event/event_handler.h"
 #include "common/queue/blocking_queue.h"
+#include "common/events/view_event.h"
 
 class EventManager {
 public:

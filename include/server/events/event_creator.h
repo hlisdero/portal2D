@@ -1,24 +1,31 @@
 #ifndef EVENT_CREATOR_H
 #define EVENT_CREATOR_H
 
-#include <vector>
-
 #include "common/entities/entity.h"
 #include "common/events/world_event.h"
 #include "common/queue/blocking_queue.h"
 #include "server/entities/portal.h"
+#include "server/entities/button.h"
 
 class EventCreator {
 public:
-	EventCreator(BlockingQueue<WorldEventPtr> & eventQueue);
+	EventCreator(BlockingQueue<WorldEvent>& queue);
 
-	void sendDynamicsUpdate(const std::vector<Entity*> entities);
+    void addEntityCreation(Entity* entity);
+    void addPositionUpdate(Entity* entity);
+    void addButtonStateUpdate(ButtonEntity* entity);
+    void addDoorStateUpdate(DoorEntity* entity);
 
-	void sendPortalCreation(PortalEntity * portal);
-	void sendPortalMove(PortalEntity * portal);
+    // Métodos para vectores
+    void addEntityCreations(const std::vector<Entity*>& entities);
+    void addPositionUpdates(const std::vector<Entity*>& entities);
+
+    // TODO: Métodos viejos modificados, deberían generalizarse
+	void addPortalCreation(PortalEntity* portal);
+	void addPortalMove(PortalEntity* portal);
 
 private:
-	BlockingQueue<WorldEventPtr> & eventQueue;
+	BlockingQueue<WorldEvent>& queue;
 };
 
 #endif
