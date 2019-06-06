@@ -28,11 +28,15 @@ public:
 
     /* Operadores sobrecargados para enviar y recibir ciertos tipos
      * Lanzan excepciones si hubo error */
+    ActiveSocket& operator<<(double num);
+    ActiveSocket& operator<<(float num);
     ActiveSocket& operator<<(uint32_t num);
     ActiveSocket& operator<<(uint16_t num);
     ActiveSocket& operator<<(uint8_t num);
     ActiveSocket& operator<<(const std::string& str);
 
+    ActiveSocket& operator>>(double& num);
+    ActiveSocket& operator>>(float& num);
     ActiveSocket& operator>>(uint32_t& num);
     ActiveSocket& operator>>(uint16_t& num);
     ActiveSocket& operator>>(uint8_t& num);

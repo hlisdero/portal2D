@@ -69,6 +69,16 @@ void ActiveSocket::receive(std::string& str, int size) {
     str = std::string(&buffer[0]);
 }
 
+ActiveSocket& ActiveSocket::operator<<(double num) {
+    send(reinterpret_cast<char*>(&num), sizeof(double));
+    return *this;
+}
+
+ActiveSocket& ActiveSocket::operator<<(float num) {
+    send(reinterpret_cast<char*>(&num), sizeof(float));
+    return *this;
+}
+
 ActiveSocket& ActiveSocket::operator<<(uint32_t num) {
     uint32_t net_num = htonl(num);
     send(reinterpret_cast<char*>(&net_num), 4);
@@ -88,6 +98,16 @@ ActiveSocket& ActiveSocket::operator<<(uint8_t num) {
 
 ActiveSocket& ActiveSocket::operator<<(const std::string& str) {
     send(str.c_str(), str.length());
+    return *this;
+}
+
+ActiveSocket& ActiveSocket::operator>>(double& num) {
+    receive(reinterpret_cast<char*>(&num), sizeof(double));
+    return *this;
+}
+
+ActiveSocket& ActiveSocket::operator>>(float& num) {
+    receive(reinterpret_cast<char*>(&num), sizeof(float));
     return *this;
 }
 
