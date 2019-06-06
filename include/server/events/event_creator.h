@@ -20,10 +20,6 @@ public:
     void addEntityCreations(const std::vector<Entity*>& entities);
     void addPositionUpdates(const std::vector<Entity*>& entities);
 
-    // TODO: Métodos viejos modificados, deberían generalizarse
-	void addPortalCreation(PortalEntity* portal);
-	void addPortalMove(PortalEntity* portal);
-
 private:
 	BlockingQueue<WorldEvent>& queue;
 };

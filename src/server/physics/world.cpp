@@ -51,7 +51,7 @@ void World::createPortal(PlayerEntity& player, ClickDirection& direction) {
 		PortalEntity * portal = player.getPortal(color);
 		if(portal != nullptr) {
 			portal->move(callback.m_point.x, callback.m_point.y, callback.m_normal);
-			eventCreator.addPortalMove(portal);
+			eventCreator.addPositionUpdate(portal);
 		} else {
 			portal = new PortalEntity(callback.m_point.x, callback.m_point.y, callback.m_normal, color);
 
@@ -59,7 +59,7 @@ void World::createPortal(PlayerEntity& player, ClickDirection& direction) {
 			bodyFactory.createBody(portal);
 			player.setPortal(color, portal);
 
-			eventCreator.addPortalCreation(portal);
+			eventCreator.addEntityCreation(portal);
 		}
 
 	}

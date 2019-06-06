@@ -36,15 +36,3 @@ void EventCreator::addPositionUpdates(const std::vector<Entity*>& entities) {
         addPositionUpdate(entity);
     }
 }
-
-void EventCreator::addPortalCreation(PortalEntity * portal) {
-    Position position(portal->getX(), portal->getY(), portal->getRotationDeg());
-    WorldEvent event(portal->getId(), TYPE_PORTAL, position);
-	queue.push(event);
-}
-
-void EventCreator::addPortalMove(PortalEntity * portal) {
-    Position position(portal->getX(), portal->getY(), portal->getRotationDeg());
-    WorldEvent event(portal->getId(), position);
-	queue.push(event);
-}
