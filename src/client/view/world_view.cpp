@@ -1,6 +1,6 @@
 #include "client/view/world_view.h"
 
-WorldView::WorldView(float32 world_width, float32 world_height) :
+WorldView::WorldView(float world_width, float world_height) :
     screen(screen_width, screen_height),
     settings(screen.getWidth(), screen.getHeight(), world_width, world_height, screen.getTextureCreator()),
     background(screen_width, screen_height, settings.getTextureLoader()["Background"]),

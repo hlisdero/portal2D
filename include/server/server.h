@@ -22,7 +22,7 @@ public:
     void processQueue(BlockingQueue<ViewEvent>& queue);
 
 	void movePlayer(const MoveDirection direction, const bool pressed);
-	void createPortal(b2Vec2& direction);
+	void createPortal(ClickDirection& direction);
 
 private:
 	BlockingQueue<WorldEvent> queue;

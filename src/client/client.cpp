@@ -1,6 +1,6 @@
 #include "client/client.h"
 
-Client::Client(float32 world_width, float32 world_height) :
+Client::Client(float world_width, float world_height) :
     view(world_width, world_height) {
 }
 

@@ -31,12 +31,13 @@ void World::createPlayer(PlayerEntity * player) {
 	bodyFactory.createBody(player);
 }
 
-void World::createPortal(PlayerEntity & player, b2Vec2 & direction) {
+void World::createPortal(PlayerEntity& player, ClickDirection& direction) {
     portal_color = !portal_color;
     PortalColor color = portal_color ? COLOR_BLUE: COLOR_ORANGE;
 
+    b2Vec2 dir_vec(direction.x, direction.y);
 	const b2Vec2 & origin = player.getBody()->GetPosition();
-	b2Vec2 end = origin + (PORTAL_REACH * direction);
+	b2Vec2 end = origin + (PORTAL_REACH * dir_vec);
 
 	PortalRayCastCallback callback;
 

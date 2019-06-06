@@ -34,6 +34,6 @@ void Server::movePlayer(const MoveDirection direction, const bool pressed) {
 	}
 }
 
-void Server::createPortal(b2Vec2 & direction) {
+void Server::createPortal(ClickDirection& direction) {
 	game.createPortal(player, direction);
 }

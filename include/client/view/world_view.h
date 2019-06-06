@@ -13,7 +13,7 @@
 
 class WorldView {
 public:
-    WorldView(float32 world_width, float32 world_height);
+    WorldView(float world_width, float world_height);
 
     WorldView(const WorldView&) = delete;
     WorldView& operator=(const WorldView&) = delete;

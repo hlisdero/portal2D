@@ -8,7 +8,7 @@
 class WorldViewSettings {
 public:
     WorldViewSettings(const size_t& screen_width, const size_t& screen_height,
-                      float32 world_width, size_t world_height, const TextureCreator& texture_creator);
+                      float world_width, float world_height, const TextureCreator& texture_creator);
 
     WorldViewSettings(const WorldViewSettings&) = delete;
     WorldViewSettings& operator=(const WorldViewSettings&) = delete;

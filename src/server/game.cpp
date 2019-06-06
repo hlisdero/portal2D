@@ -1,20 +1,11 @@
 #include "server/game.h"
 
-Game::Game(const char * mapName, EventCreator & eventCreator) :
+Game::Game(const char* mapName, EventCreator& eventCreator) :
 	map(mapName),
 	world(map, eventCreator),
 	eventCreator(eventCreator) {}
 
-void Game::processEvent() {
-	// if player join
-	//	createPlayer
-	// if playerCount > map.getRequiredPlayersCount(): status= In progress
-
-	// if player move
-	//	move player
-}
-
-void Game::addPlayer(PlayerEntity * player) {
+void Game::addPlayer(PlayerEntity* player) {
 	world.createPlayer(player);
 
 	// TODO Check in progress (enough player to play)
@@ -22,10 +13,9 @@ void Game::addPlayer(PlayerEntity * player) {
 		&& world.getPlayersCount() >= map.getMinPlayers()) {
 		status = IN_PROGRESS;
 	}
-
 }
 
-void Game::createPortal(PlayerEntity & player, b2Vec2 & direction) {
+void Game::createPortal(PlayerEntity& player, ClickDirection& direction) {
 	world.createPortal(player, direction);
 }
 
@@ -39,4 +29,21 @@ void Game::update() {
 
 	world.updatePhysics();
 	eventCreator.addPositionUpdates(world.getDynamicEntities());
+}
+
+const std::vector<Entity*>& Game::getStaticEntities() const {
+	return map.getStaticEntities();
+}
+
+const std::vector<Entity*> Game::getDynamicEntities() const {
+	return std::move(world.getDynamicEntities());
+}
+
+void Game::processEvent() {
+	// if player join
+	//	createPlayer
+	// if playerCount > map.getRequiredPlayersCount(): status= In progress
+
+	// if player move
+	//	move player
 }

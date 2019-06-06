@@ -76,7 +76,3 @@ void Player::updateAnimation(const Position& new_position) {
 bool Player::isMovingHorizontally(const Position& new_position) const {
     return abs(new_position.x - currentX()) > 0.0001;
 }
-
-float32 Player::abs(float32 number) const {
-    return number > 0? number: -number;
-}

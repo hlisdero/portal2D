@@ -17,12 +17,15 @@ enum GameStatus {
 
 class Game {
 public:
-	Game(const char * mapName, EventCreator & eventCreator);
+	Game(const char* mapName, EventCreator& eventCreator);
 
-	void addPlayer(PlayerEntity * player);
-	void createPortal(PlayerEntity & player, b2Vec2 & direction);
+	void addPlayer(PlayerEntity* player);
+	void createPortal(PlayerEntity& player, ClickDirection& direction);
 
 	void update();
+
+    const std::vector<Entity*>& getStaticEntities() const;
+    const std::vector<Entity*> getDynamicEntities() const;
 
 	// void addEvent();
 	void processEvent();
@@ -33,7 +36,7 @@ private:
 	GameStatus status = WAITING_FOR_PLAYERS;
 	Map map;
 	World world;
-	EventCreator & eventCreator;
+	EventCreator& eventCreator;
 };
 
 #endif  // GAME_H
