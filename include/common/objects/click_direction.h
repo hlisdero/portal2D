@@ -5,7 +5,9 @@ class ClickDirection {
 public:
     ClickDirection(float x, float y);
 
-    ClickDirection operator*(double num);
+    ClickDirection& operator*(double num);
+
+    bool operator==(const ClickDirection& rhs);
 
     float x = 0;
     float y = 0;
