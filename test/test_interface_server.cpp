@@ -9,7 +9,10 @@ int main() {
 
     ActiveSocket skt = passive_skt.accept();
     Interface<WorldEvent, ViewEvent> interface(std::move(skt));
-    ViewEvent event = interface.receive_queue.pop();
+    BlockingQueue<WorldEvent>& world_event_queue = interface.getSendQueue();
+    BlockingQueue<ViewEvent>& view_event_queue = interface.getReceiveQueue();
+
+    ViewEvent event = view_event_queue.pop();
     if (event.type == KEYBOARD) {
         std::cout << "Tipo correcto!" << std::endl;
     }
@@ -32,7 +35,7 @@ int main() {
     world_event.entity_type = TYPE_PORTAL;
     world_event.position = Position(1.4, 1.5, 90);
     world_event.state = STATE_DISABLED;
-    interface.send_queue.push(world_event);
+    world_event_queue.push(world_event);
 
     return 0;
 }

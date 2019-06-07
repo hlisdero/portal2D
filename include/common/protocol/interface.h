@@ -20,6 +20,11 @@ public:
         receiver_thread->start();
     }
 
+    Interface(const Interface&) = delete;
+    Interface& operator=(const Interface&) = delete;
+    Interface(Interface&& other) = delete;
+    Interface& operator=(Interface&& other) = delete;
+
     ~Interface() {
         send_queue.close();
         receive_queue.close();
@@ -29,16 +34,18 @@ public:
         delete receiver_thread;
     }
 
-    Interface(const Interface&) = delete;
-    Interface& operator=(const Interface&) = delete;
-    Interface(Interface&& other) = delete;
-    Interface& operator=(Interface&& other) = delete;
+    BlockingQueue<T>& getSendQueue() {
+        return send_queue;
+    }
 
-    BlockingQueue<T> send_queue;
-    BlockingQueue<U> receive_queue;
+    BlockingQueue<U>& getReceiveQueue() {
+        return receive_queue;
+    }
 
 private:
     Protocol protocol;
+    BlockingQueue<T> send_queue;
+    BlockingQueue<U> receive_queue;
     SenderThread<T>* sender_thread = nullptr;
     ReceiverThread<U>* receiver_thread = nullptr;
 };

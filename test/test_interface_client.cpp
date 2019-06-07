@@ -5,6 +5,8 @@ int main() {
     ActiveSocket skt("localhost", "8080");
     skt.connect();
     Interface<ViewEvent, WorldEvent> interface(std::move(skt));
+    BlockingQueue<ViewEvent>& view_event_queue = interface.getSendQueue();
+    BlockingQueue<WorldEvent>& world_event_queue = interface.getReceiveQueue();
 
     ViewEvent event;
     event.type = KEYBOARD;
@@ -12,9 +14,9 @@ int main() {
     event.pressed = true;
     event.repeat = false;
     event.click_direction = ClickDirection(4.0, -2.0);
-    interface.send_queue.push(event);
+    view_event_queue.push(event);
 
-    WorldEvent world_event = interface.receive_queue.pop();
+    WorldEvent world_event = world_event_queue.pop();
 
     if (world_event.type == ENTITY_CREATION) {
         std::cout << "Tipo correcto!" << std::endl;
