@@ -20,8 +20,7 @@ public:
 private:
 	const duration_t loopDuration = duration_t(1);
 
-	time_point_t loopStart =
-		std::chrono::time_point_cast<duration_t>(std::chrono::system_clock::now());
+	time_point_t loopStart = std::chrono::time_point_cast<duration_t>(std::chrono::system_clock::now());
 	time_point_t loopEnd;
 };
 
