@@ -18,24 +18,20 @@ void Protocol::send(const WorldEvent& event) {
     sendInteger<State>(event.state);
 }
 
-ViewEvent Protocol::receiveViewEvent() {
-    ViewEvent event;
+void Protocol::receive(ViewEvent& event) {
     event.type = receiveInteger<ViewEventType>();
     event.direction = receiveInteger<MoveDirection>();
     event.pressed = receiveBoolean();
     event.repeat = receiveBoolean();
     event.click_direction = receiveClickDirection();
-    return event;
 }
 
-WorldEvent Protocol::receiveWorldEvent() {
-    WorldEvent event;
+void Protocol::receive(WorldEvent& event) {
     event.type = receiveInteger<WorldEventType>();
     event.id = receiveInteger<int>();
     event.entity_type = receiveInteger<EntityType>();
     event.position = receivePosition();
     event.state = receiveInteger<State>();
-    return event;
 }
 
 void Protocol::sendBoolean(const bool& flag) {

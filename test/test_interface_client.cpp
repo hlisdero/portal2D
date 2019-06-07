@@ -1,19 +1,20 @@
 #include <iostream>
-#include "common/protocol/protocol.h"
+#include "common/protocol/interface.h"
 
 int main() {
     ActiveSocket skt("localhost", "8080");
     skt.connect();
-    Protocol protocol(std::move(skt));
+    Interface<ViewEvent, WorldEvent> interface(std::move(skt));
+
     ViewEvent event;
     event.type = KEYBOARD;
     event.direction = UP;
     event.pressed = true;
     event.repeat = false;
     event.click_direction = ClickDirection(4.0, -2.0);
-    protocol.send(event);
+    interface.send_queue.push(event);
 
-    WorldEvent world_event = protocol.receiveWorldEvent();
+    WorldEvent world_event = interface.receive_queue.pop();
 
     if (world_event.type == ENTITY_CREATION) {
         std::cout << "Tipo correcto!" << std::endl;

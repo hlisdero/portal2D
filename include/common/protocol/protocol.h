@@ -16,8 +16,8 @@ public:
 
     void send(const ViewEvent& event);
     void send(const WorldEvent& event);
-    ViewEvent receiveViewEvent();
-    WorldEvent receiveWorldEvent();
+    void receive(ViewEvent& event);
+    void receive(WorldEvent& event);
 
 private:
     ActiveSocket skt;

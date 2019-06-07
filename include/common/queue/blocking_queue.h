@@ -19,6 +19,9 @@ public:
         while (events.empty() && !is_closed) {
             events_cv.wait(lock);
         }
+        if (is_closed) {
+            return T();
+        }
         T event = events.front();
         events.pop();
         is_closed_cv.notify_one();
