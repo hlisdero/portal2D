@@ -19,6 +19,10 @@ entities:
       x: 3
       y: 1
       rotation: 0
+    - type: TYPE_ROCK
+      x: 5
+      y: 5
+      rotation: 0
     - type: TYPE_METAL_DIAG_BLOCK
       x: 10
       y: 1
