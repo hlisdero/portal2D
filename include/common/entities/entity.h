@@ -31,7 +31,7 @@ public:
 
 	template <class T>
 	T * as() {
-		return static_cast<T*>(this);
+		return dynamic_cast<T*>(this);
 	}
 
 private:
