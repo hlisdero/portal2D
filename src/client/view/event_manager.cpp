@@ -1,5 +1,8 @@
 #include "client/view/event_manager.h"
 
+EventManager::EventManager(BlockingQueue<ViewEvent>& queue) :
+    queue(queue) {}
+
 BlockingQueue<ViewEvent>& EventManager::getQueue() {
     return queue;
 }

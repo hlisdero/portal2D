@@ -3,10 +3,11 @@
 
 #include "common/entities/entity.h"
 #include "common/objects/position.h"
-#include "server/entities/attributes/state.h"
+#include "common/objects/state.h"
 
 enum WorldEventType {
-    ENTITY_CREATION = 0,
+    INVALID_WE = 0,
+    ENTITY_CREATION,
 	ENTITY_DESTRUCTION,
     POSITION_UPDATE,
     STATE_UPDATE,
@@ -14,11 +15,12 @@ enum WorldEventType {
 
 class WorldEvent {
 public:
+    explicit WorldEvent() = default;
     WorldEvent(int id, EntityType type, const Position& position);
 	WorldEvent(int id, const Position& position);
     WorldEvent(int id, const State& state);
 
-	WorldEventType type;
+	WorldEventType type = INVALID_WE;
     int id = -1;
     EntityType entity_type = TYPE_STONE_BLOCK;
     Position position = {0, 0, 0};

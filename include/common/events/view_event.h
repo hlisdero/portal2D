@@ -4,8 +4,9 @@
 #include "common/objects/move_direction.h"
 #include "common/objects/click_direction.h"
 
-enum EventType {
+enum ViewEventType {
     INVALID = 0,
+    QUIT = 1,
     KEYBOARD,
     MOUSE,
 };
@@ -16,7 +17,7 @@ public:
     ViewEvent(MoveDirection direction, bool pressed, bool repeat);
     ViewEvent(ClickDirection click_direction);
 
-    EventType type = INVALID;
+    ViewEventType type = INVALID;
     MoveDirection direction = NONE;
     bool pressed = false;
     bool repeat = false;

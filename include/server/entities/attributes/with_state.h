@@ -2,7 +2,7 @@
 #define WITH_STATE_H
 
 #include "yaml-cpp/yaml.h"
-#include "server/entities/attributes/state.h"
+#include "common/objects/state.h"
 
 class WithState {
 public:

@@ -1,29 +1,35 @@
 #include "server/server.h"
 
-Server::Server(const char * mapName) :
-	eventCreator(queue), game(mapName, eventCreator) {
+Server::Server(const char * mapName, ActiveSocket skt) :
+	interface(std::move(skt)),
+    eventCreator(interface.getSendQueue()),
+    game(mapName, eventCreator) {
 	game.addPlayer(&player);
     eventCreator.addEntityCreations(game.getStaticEntities());
     eventCreator.addEntityCreations(game.getDynamicEntities());
 }
 
-BlockingQueue<WorldEvent>& Server::getQueue() {
-	return queue;
+void Server::run() {
+    ClockLoop<60> clock;
+    while (!quit) {
+        processQueue();
+        clock.waitNextLoop();
+    }
 }
 
-void Server::update() {
-	game.update();
-}
-
-void Server::processQueue(BlockingQueue<ViewEvent>& queue) {
-    while (!queue.empty()) {
-        ViewEvent event = queue.pop();
+void Server::processQueue() {
+    BlockingQueue<ViewEvent>& queue = interface.getReceiveQueue();
+    std::vector<ViewEvent> events = queue.popAll();
+    for (auto& event : events) {
         if (event.type == KEYBOARD) {
             movePlayer(event.direction, event.pressed);
         } else if (event.type == MOUSE) {
-            createPortal(event.click_direction);
+            game.createPortal(player, event.click_direction);
+        } else if (event.type == QUIT) {
+            quit = true;
         }
     }
+    game.update();
 }
 
 void Server::movePlayer(const MoveDirection direction, const bool pressed) {
@@ -32,8 +38,4 @@ void Server::movePlayer(const MoveDirection direction, const bool pressed) {
 	} else {
 		player.keyUp(direction);
 	}
-}
-
-void Server::createPortal(ClickDirection& direction) {
-	game.createPortal(player, direction);
 }

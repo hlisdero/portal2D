@@ -3,18 +3,12 @@
 Entity::Entity(EntityType type, float x, float y, float rotation) :
     type(type), x(x), y(y), rotation(rotation) {}
 
-Entity::Entity(EntityType type, YAML::Node yaml) :
-    type(type), 
-    x(yaml["x"].as<float>()), 
-    y(yaml["y"].as<float>()), 
-    rotation(yaml["rotation"].as<float>()) {}
-
 float Entity::getX() const {
-    return this->x;
+    return x;
 }
 
 float Entity::getY() const {
-    return this->y;
+    return y;
 }
 
 void Entity::setX(float x) {
@@ -26,11 +20,11 @@ void Entity::setY(float y) {
 }
 
 float Entity::getRotationDeg() const {
-    return this->rotation;
+    return rotation;
 }
 
 float Entity::getRotationRad() const {
-    return this->rotation * PI / 180.0;
+    return rotation * PI / 180.0;
 }
 
 void Entity::setRotationDeg(float rotation) {
@@ -38,7 +32,7 @@ void Entity::setRotationDeg(float rotation) {
 }
 
 EntityType Entity::getType() const {
-    return this->type;
+    return type;
 }
 
 void Entity::setId(const int id) {
@@ -46,5 +40,5 @@ void Entity::setId(const int id) {
 }
 
 int Entity::getId() const {
-    return this->id;
+    return id;
 }

@@ -1,9 +1,9 @@
 #include "server/entities/door.h"
 
-DoorEntity::DoorEntity(YAML::Node yaml) :
-Entity(TYPE_GATE, yaml),
-WithState(STATE_CLOSED),
-logica(loadDoorLogica(yaml["logica"])) {}
+DoorEntity::DoorEntity(float x, float y, float rotation, DoorLogicaPtr logica) :
+    Entity(TYPE_GATE, x, y, rotation),
+    WithState(STATE_CLOSED),
+    logica(std::move(logica)) {}
 
 void DoorEntity::updateState() {
 	bool newState = this->logica->value();

@@ -1,10 +1,14 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+#include <vector>
 #include <stdexcept>
-#include "client/view/world_view.h"
+#include "common/clock_loop.h"
+#include "common/socket/active_socket.h"
+#include "common/protocol/interface.h"
 #include "common/events/world_event.h"
 #include "common/events/view_event.h"
+#include "client/view/world_view.h"
 
 class Client {
 public:
@@ -15,15 +19,14 @@ public:
     Client(Client&& other) = delete;
     Client& operator=(Client&& other) = delete;
 
-    void createInitialView(BlockingQueue<WorldEvent>& queue);
-    void processQueue(BlockingQueue<WorldEvent>& queue);
-
-    void pollEvents();
-    BlockingQueue<ViewEvent>& getQueue();
-    bool quit() const;
+    void run();
 
 private:
+    Interface<ViewEvent, WorldEvent> interface;
     WorldView view;
+
+    void processQueue();
+    void sendQuitSignal();
 };
 
 #endif  // CLIENT_H

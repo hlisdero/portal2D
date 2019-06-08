@@ -7,7 +7,7 @@
 class RockEntity :  public Entity, public BodyLinked {
 public:
 	// TODO add rock type
-	RockEntity(YAML::Node yaml);
+	RockEntity(float x, float y, float rotation);
 
 	// TODO
 	//void respawn();

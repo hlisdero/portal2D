@@ -5,6 +5,8 @@ class Position {
 public:
     Position(double x, double y, double z);
 
+    bool operator==(const Position& rhs);
+
     double x;
     double y;
     double z;

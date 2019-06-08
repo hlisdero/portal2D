@@ -2,32 +2,32 @@
 
 Map::Map(const char * mapName) {
 	YAML::Node file = YAML::LoadFile(mapName);
-    this->loadSettings(file);
-	this->loadEntities(file);
+    loadSettings(file);
+	loadEntities(file);
 }
 
 const std::vector<Entity*> & Map::getStaticEntities() const {
-	return this->staticEntities;
+	return staticEntities;
 }
 
 const std::vector<Entity*> & Map::getDynamicEntities() const {
-	return this->dynamicEntities;
+	return dynamicEntities;
 }
 
 EndZone & Map::getEndZone() {
-	return this->endZone;
+	return endZone;
 }
 
 b2Vec2 & Map::getSpawn() {
-	return this->spawn;
+	return spawn;
 }
 
 int Map::getMinPlayers() {
-	return this->minPlayers;
+	return minPlayers;
 }
 
 void Map::loadSettings(YAML::Node yaml) {
-	this->minPlayers = yaml["min-players"].as<int>();
+	minPlayers = yaml["min-players"].as<int>();
 
 	YAML::Node spawn = yaml["spawn"];
 	this->spawn.x = spawn["x"].as<float>();
@@ -41,12 +41,12 @@ void Map::loadEntities(YAML::Node yaml) {
 	std::vector<DoorEntity*> doors;
 
 	for(uint i = 0; i < entities.size(); i++) {
-		Entity * entity = this->createEntity(entities[i]);
+		Entity * entity = createEntity(entities[i]);
 
 		if(entity->getType() < DYNAMIC_ENTITY_START) {
-			this->staticEntities.push_back(entity);
+			staticEntities.push_back(entity);
 		} else {
-			this->dynamicEntities.push_back(entity);
+			dynamicEntities.push_back(entity);
 		}
 
 		if(entity->getType() == TYPE_BUTTON ||
@@ -73,33 +73,36 @@ void Map::loadEntities(YAML::Node yaml) {
 Entity * Map::createEntity(YAML::Node yaml) {
 	std::string type_string = yaml["type"].as<std::string>();
 
-	Entity * entity = nullptr;
+	Entity* entity = nullptr;
     EntityType type = getEntityType(type_string);
-	switch(type) {
+    float x = yaml["x"].as<float>();
+    float y = yaml["y"].as<float>();
+    float rotation = yaml["rotation"].as<float>();
+	switch (type) {
 		case TYPE_STONE_BLOCK:
 		case TYPE_METAL_BLOCK:
 		case TYPE_METAL_DIAG_BLOCK:
 		case TYPE_ACID:
 		case TYPE_ENERGY_BAR:
-			entity = new Entity(type, yaml);
+			entity = new Entity(type, x, y, rotation);
 			break;
 		case TYPE_GATE:
-			entity = new DoorEntity(yaml);
+            entity = new DoorEntity(x, y, rotation, loadDoorLogica(yaml["logica"]));
 			break;
 		case TYPE_ENERGY_EMITTER:
-			entity = new EnergyEmittorEntity(yaml);
+			entity = new EnergyEmittorEntity(x, y, rotation);
 			break;
 		case TYPE_ENERGY_RECEIVER:
-			entity = new EnergyReceiverEntity(yaml);
+			entity = new EnergyReceiverEntity(x, y, rotation);
 			break;
 		case TYPE_BUTTON:
-			entity = new ButtonEntity(yaml);
+			entity = new ButtonEntity(x, y, rotation);
 			break;
 		case TYPE_END_BARRIER:
-			entity = new EndBarrierEntity(yaml, this->endZone);
+			entity = new EndBarrierEntity(x, y, rotation, endZone);
 			break;
 		case TYPE_ROCK:
-			entity = new RockEntity(yaml);
+			entity = new RockEntity(x, y, rotation);
 			break;
 		default:
 			throw std::runtime_error("Unsupported entity type");
@@ -109,12 +112,12 @@ Entity * Map::createEntity(YAML::Node yaml) {
 }
 
 Map::~Map() {
-	for(uint i = 0; i < this->staticEntities.size(); i++) {
-		delete this->staticEntities[i];
+	for(uint i = 0; i < staticEntities.size(); i++) {
+		delete staticEntities[i];
 	}
 
-	for(uint i = 0; i < this->dynamicEntities.size(); i++) {
-		delete this->dynamicEntities[i];
+	for(uint i = 0; i < dynamicEntities.size(); i++) {
+		delete dynamicEntities[i];
 	}
 }
 

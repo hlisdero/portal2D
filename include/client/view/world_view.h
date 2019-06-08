@@ -13,7 +13,7 @@
 
 class WorldView {
 public:
-    WorldView(float world_width, float world_height);
+    WorldView(float world_width, float world_height, BlockingQueue<ViewEvent>& queue);
 
     WorldView(const WorldView&) = delete;
     WorldView& operator=(const WorldView&) = delete;
@@ -23,7 +23,6 @@ public:
     ~WorldView();
 
     void pollEvents();
-    BlockingQueue<ViewEvent>& getQueue();
     bool quit() const;
 
     const ViewObjectCreator& getObjectCreator() const;
