@@ -8,8 +8,9 @@ float32 PortalRayCastCallback::ReportFixture(b2Fixture* fixture,
 	b2Body * body = fixture->GetBody();
 	Entity* entity = static_cast<Entity*>(body->GetUserData());
 
-	// Go through players
-	if(entity->getType() == TYPE_PLAYER) {
+	// Go through dynamics entities
+	if(entity->getType() >= DYNAMIC_ENTITY_START ||
+		entity->getType() == TYPE_PORTAL) {
 		return -1.0f;
 	}
 
