@@ -1,7 +1,8 @@
 #include "client/client.h"
 
-Client::Client(float world_width, float world_height) :
-    interface(std::move(ActiveSocket("localhost", "8080"))),
+Client::Client(const std::string& hostname, const std::string& port,
+               float world_width, float world_height) :
+    interface(std::move(ActiveSocket(hostname, port))),
     view(world_width, world_height, interface.getSendQueue()) {}
 
 void Client::run() {
