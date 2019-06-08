@@ -9,11 +9,11 @@
 
 class EndBarrierEntity :  public Entity, public BodyLinked, public HandleContact {
 public:
-	EndBarrierEntity(YAML::Node yaml, EndZone & endZone);
+	EndBarrierEntity(float x, float y, float rotation, EndZone & endZone);
 
 	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 
-private:	
+private:
 	EndZone & endZone;
 	std::map<PlayerEntity*, b2Vec2> contacts;
 };

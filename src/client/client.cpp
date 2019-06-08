@@ -1,25 +1,27 @@
 #include "client/client.h"
 
 Client::Client(float world_width, float world_height) :
-    view(world_width, world_height) {
-}
+    interface(std::move(ActiveSocket("localhost", "8080"))),
+    view(world_width, world_height, interface.getSendQueue()) {}
 
-void Client::createInitialView(BlockingQueue<WorldEvent>& queue) {
-    while (!queue.empty()) {
-        WorldEvent event = queue.pop();
-        if (event.type == ENTITY_CREATION) {
-            view.createEntity(event.id, event.entity_type, event.position);
-        } else {
-            throw std::runtime_error("Error al crear el mundo: "
-                                     "la cola del servidor tiene eventos inválidos");
+void Client::run() {
+    ClockLoop<60> clock;
+    while (true) {
+        view.pollEvents();
+        if (view.quit()) {
+            break;
         }
+        processQueue();
+
+        clock.waitNextLoop();
     }
-    view.update();
+    sendQuitSignal();
 }
 
-void Client::processQueue(BlockingQueue<WorldEvent>& queue) {
-    while (!queue.empty()) {
-        WorldEvent event = queue.pop();
+void Client::processQueue() {
+    BlockingQueue<WorldEvent>& queue = interface.getReceiveQueue();
+    std::vector<WorldEvent> events = queue.popAll();
+    for (const auto& event : events) {
         if (event.type == POSITION_UPDATE) {
             view.updatePosition(event.id, event.position);
         } else if (event.type == ENTITY_CREATION) {
@@ -29,14 +31,9 @@ void Client::processQueue(BlockingQueue<WorldEvent>& queue) {
     view.update();
 }
 
-void Client::pollEvents() {
-    view.pollEvents();
-}
-
-BlockingQueue<ViewEvent>& Client::getQueue() {
-    return view.getQueue();
-}
-
-bool Client::quit() const {
-    return view.quit();
+void Client::sendQuitSignal() {
+    BlockingQueue<ViewEvent>& queue = interface.getSendQueue();
+    ViewEvent quit_event;
+    quit_event.type = QUIT;
+    queue.push(quit_event);
 }

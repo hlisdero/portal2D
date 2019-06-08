@@ -1,7 +1,7 @@
 #include "server/entities/energy_emittor.h"
 
-EnergyEmittorEntity::EnergyEmittorEntity(YAML::Node yaml) :
-Entity(TYPE_ENERGY_EMITTER, yaml) {}
+EnergyEmittorEntity::EnergyEmittorEntity(float x, float y, float rotation) :
+    Entity(TYPE_ENERGY_EMITTER, x, y, rotation) {}
 
 bool EnergyEmittorEntity::hasABall() const {
 	return this->hasABall_;

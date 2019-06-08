@@ -7,7 +7,9 @@ ActiveSocket::ActiveSocket(int fd): Socket(fd) {}
 
 ActiveSocket::ActiveSocket(const std::string& hostname,
                            const std::string& port) :
-    Socket(hostname.c_str(), port.c_str(), AF_INET, SOCK_STREAM, 0) {}
+    Socket(hostname.c_str(), port.c_str(), AF_INET, SOCK_STREAM, 0) {
+    connect();
+}
 
 void ActiveSocket::connect() {
     int ret_code = -1;

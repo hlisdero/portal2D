@@ -3,7 +3,7 @@
 
 #include "common/entities/entity.h"
 #include "common/objects/position.h"
-#include "server/entities/attributes/state.h"
+#include "common/objects/state.h"
 
 enum WorldEventType {
     INVALID_WE = 0,

@@ -45,11 +45,17 @@ include_directories(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SDL2MIXER_I
 # Executables
 # be sure there's exactly one main() function in the source files
 
-# Game
-add_executable(game src/game/game_main.cpp ${common_sources} ${server_sources} ${client_sources})
-target_include_directories(game PRIVATE ${PROJECT_SOURCE_DIR}/include/)
-target_compile_options(game PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
-target_link_libraries(game "-pthread" ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} ${BOX2D_LIBRARIES} ${YAML_CPP_LIBRARIES})
+# Client
+add_executable(client src/client_main.cpp ${client_sources} ${common_sources})
+target_include_directories(client PRIVATE ${PROJECT_SOURCE_DIR}/include/)
+target_compile_options(client PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
+target_link_libraries(client "-pthread" ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES})
+
+# Server
+add_executable(server src/server_main.cpp ${server_sources} ${common_sources})
+target_include_directories(server PRIVATE ${PROJECT_SOURCE_DIR}/include/)
+target_compile_options(server PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
+target_link_libraries(server "-pthread" ${BOX2D_LIBRARIES} ${YAML_CPP_LIBRARIES})
 
 # Interface-Test
 # Client

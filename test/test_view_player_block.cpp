@@ -1,12 +1,14 @@
 #include "catch.hpp"
 #include "client/view/world_view.h"
 #include "client/event/event_handler.h"
+#include "common/queue/blocking_queue.h"
 
 #include <thread>
 #include <chrono>
 
 TEST_CASE("Player and Block Test", "[view]") {
-    WorldView view(13.33, 10);
+    BlockingQueue<ViewEvent> queue;
+    WorldView view(13.33, 10, queue);
     EventHandler event_handler;
 
     size_t player_index = 0;

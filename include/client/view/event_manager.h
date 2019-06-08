@@ -7,7 +7,7 @@
 
 class EventManager {
 public:
-    explicit EventManager() = default;
+    explicit EventManager(BlockingQueue<ViewEvent>& queue);
 
     EventManager(const EventManager&) = delete;
     EventManager& operator=(const EventManager&) = delete;
@@ -24,7 +24,7 @@ public:
 
 private:
     EventHandler event_handler;
-    BlockingQueue<ViewEvent> queue;
+    BlockingQueue<ViewEvent>& queue;
 };
 
 #endif  // EVENT_MANAGER_H

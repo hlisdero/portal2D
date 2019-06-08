@@ -2,10 +2,10 @@
 #define SERVER_H
 
 #include <vector>
+#include "common/clock_loop.h"
+#include "common/protocol/interface.h"
 #include "common/events/view_event.h"
 #include "common/events/world_event.h"
-#include "common/entities/entity.h"
-#include "common/queue/blocking_queue.h"
 
 #include "server/game.h"
 #include "server/entities/player.h"
@@ -13,22 +13,25 @@
 
 class Server {
 public:
-	Server(const char * mapName);
+	Server(const char * mapName, ActiveSocket skt);
 
-    BlockingQueue<WorldEvent>& getQueue();
+    Server(const Server&) = delete;
+    Server& operator=(const Server&) = delete;
+    Server(Server&& other) = delete;
+    Server& operator=(Server&& other) = delete;
 
-	void update();
+    void run();
 
-    void processQueue(BlockingQueue<ViewEvent>& queue);
-
-	void movePlayer(const MoveDirection direction, const bool pressed);
-	void createPortal(ClickDirection& direction);
+    void processQueue();
 
 private:
-	BlockingQueue<WorldEvent> queue;
+    Interface<WorldEvent, ViewEvent> interface;
 	EventCreator eventCreator;
 	Game game;
 	PlayerEntity player;
+    bool quit;
+
+    void movePlayer(const MoveDirection direction, const bool pressed);
 };
 
 #endif  // SERVER_H

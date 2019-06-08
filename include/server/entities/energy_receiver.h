@@ -9,7 +9,7 @@
 
 class EnergyReceiverEntity : public Entity, public WithSubscribableState, public HandleContact {
 public:
-	EnergyReceiverEntity(YAML::Node yaml);
+    EnergyReceiverEntity(float x, float y, float rotation);
 
 	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 };

@@ -27,9 +27,9 @@ public:
 
     ~Interface() {
         send_queue.close();
-        receive_queue.close();
         sender_thread->join();
         delete sender_thread;
+        receive_queue.close();
         receiver_thread->join();
         delete receiver_thread;
     }

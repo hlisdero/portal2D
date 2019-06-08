@@ -1,6 +1,7 @@
 #include "client/view/world_view.h"
 
-WorldView::WorldView(float world_width, float world_height) :
+WorldView::WorldView(float world_width, float world_height, BlockingQueue<ViewEvent>& queue) :
+    event_manager(queue),
     screen(screen_width, screen_height),
     settings(screen.getWidth(), screen.getHeight(), world_width, world_height, screen.getTextureCreator()),
     background(screen_width, screen_height, settings.getTextureLoader()["Background"]),
@@ -19,10 +20,6 @@ WorldView::~WorldView() {
 
 void WorldView::pollEvents() {
     event_manager.pollEvents();
-}
-
-BlockingQueue<ViewEvent>& WorldView::getQueue() {
-    return event_manager.getQueue();
 }
 
 bool WorldView::quit() const {

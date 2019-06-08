@@ -6,7 +6,7 @@
 
 class EnergyEmittorEntity : public Entity {
 public:
-	EnergyEmittorEntity(YAML::Node yaml);
+    EnergyEmittorEntity(float x, float y, float rotation);
 
 	bool hasABall() const;
 	void setNoBall();

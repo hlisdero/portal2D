@@ -6,6 +6,7 @@
 
 enum ViewEventType {
     INVALID = 0,
+    QUIT = 1,
     KEYBOARD,
     MOUSE,
 };

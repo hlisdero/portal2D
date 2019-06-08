@@ -1,6 +1,7 @@
 #include "server/entities/end_barrier.h"
 
-EndBarrierEntity::EndBarrierEntity(YAML::Node yaml, EndZone & endZone) : Entity(TYPE_END_BARRIER, yaml), endZone(endZone) {}
+EndBarrierEntity::EndBarrierEntity(float x, float y, float rotation, EndZone & endZone) :
+    Entity(TYPE_END_BARRIER, x, y, rotation), endZone(endZone) {}
 
 void EndBarrierEntity::handleContactWith(Entity * entity, b2Contact * contact, bool inContact) {
 
@@ -16,7 +17,7 @@ void EndBarrierEntity::handleContactWith(Entity * entity, b2Contact * contact, b
 			auto iterator = this->contacts.find(player);
 
 			if(iterator != this->contacts.end()) {
-				if(iterator->second == 
+				if(iterator->second ==
 					-1 * manifold.normal) {
 					// Player went through
 					endZone.playerWentTroughBarrier(player);
