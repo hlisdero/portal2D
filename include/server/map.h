@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#include "common/entities/entity.h"
+#include "server/entities/entity.h"
 #include "server/entities/door.h"
 #include "server/entities/energy_emittor.h"
 #include "server/entities/energy_receiver.h"

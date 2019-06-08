@@ -1,4 +1,4 @@
-#include "common/entities/entity.h"
+#include "server/entities/entity.h"
 
 Entity::Entity(EntityType type, float x, float y, float rotation) :
     type(type), x(x), y(y), rotation(rotation) {}

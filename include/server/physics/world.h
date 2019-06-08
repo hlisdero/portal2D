@@ -5,7 +5,7 @@
 
 #include "Box2D/Box2D.h"
 
-#include "common/entities/entity.h"
+#include "server/entities/entity.h"
 #include "common/objects/click_direction.h"
 #include "server/map.h"
 #include "server/entities/player.h"

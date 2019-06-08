@@ -1,7 +1,7 @@
 #ifndef EVENT_CREATOR_H
 #define EVENT_CREATOR_H
 
-#include "common/entities/entity.h"
+#include "server/entities/entity.h"
 #include "common/events/world_event.h"
 #include "common/queue/blocking_queue.h"
 #include "server/entities/portal.h"

@@ -5,7 +5,7 @@
 
 class DoorEntity;
 
-#include "common/entities/entity.h"
+#include "server/entities/entity.h"
 #include "server/entities/attributes/body_linked.h"
 #include "server/entities/attributes/with_state.h"
 #include "server/entities/attributes/with_subscribable_state.h"

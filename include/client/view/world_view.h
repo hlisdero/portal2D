@@ -9,7 +9,6 @@
 #include "client/view/main_player.h"
 #include "client/view/view_object_creator.h"
 #include "client/view/world_view_settings.h"
-#include "common/entities/entity.h"
 
 class WorldView {
 public:
@@ -28,7 +27,6 @@ public:
     const ViewObjectCreator& getObjectCreator() const;
 
     void createEntity(size_t id, EntityType type, const Position& initial);
-    void createEntities(const std::vector<Entity*>& entities);
 
     void updatePosition(size_t index, const Position& position);
 

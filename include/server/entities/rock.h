@@ -1,7 +1,7 @@
 #ifndef ROCK_ENTITY_H
 #define ROCK_ENTITY_H
 
-#include "common/entities/entity.h"
+#include "server/entities/entity.h"
 #include "server/entities/attributes/body_linked.h"
 
 class RockEntity :  public Entity, public BodyLinked {

@@ -4,7 +4,7 @@
 #include <vector>
 #include "Box2D/Box2D.h"
 
-#include "common/entities/entity.h"
+#include "server/entities/entity.h"
 #include "server/entities/attributes/with_subscribable_state.h"
 #include "server/entities/attributes/handle_contact.h"
 
