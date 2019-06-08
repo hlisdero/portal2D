@@ -92,7 +92,16 @@ void World::updateDynamics() {
 
 		if(entity->getType() >= DYNAMIC_ENTITY_START) {
 			if(!entity->as<TeleportableEntity>()->applyPositionReset()) {
-				const b2Vec2 position = body->GetPosition();
+				b2Vec2 position = body->GetPosition();
+
+				// Set grabed rock to holder position 
+				if(entity->getType() == TYPE_ROCK) {
+					PlayerEntity* rockHolder = entity->as<RockEntity>()->getHolder();
+					if(rockHolder != nullptr) {
+						position = rockHolder->getBody()->GetPosition();
+					}
+				}
+
 				entity->setX(position.x);
 				entity->setY(position.y);
 			}

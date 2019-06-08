@@ -13,8 +13,11 @@ public:
     virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 
     bool isGoingThroughPortal();
+
+    void markForPositionReset();
+    bool isMarkedForPositionReset();
+
     bool applyPositionReset();
-    bool markedForPositionReset();
 
 private:
 	int goingTroughPortal = 0;

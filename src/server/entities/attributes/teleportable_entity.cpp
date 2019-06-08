@@ -62,6 +62,10 @@ bool TeleportableEntity::applyPositionReset() {
 	return false;
 }
 
-bool TeleportableEntity::markedForPositionReset() {
+bool TeleportableEntity::isMarkedForPositionReset() {
 	return resetPosition;
+}
+
+void TeleportableEntity::markForPositionReset() {
+	resetPosition = true;
 }

@@ -1,6 +1,8 @@
 #ifndef PLAYER_ENTITY_H
 #define PLAYER_ENTITY_H
 
+#define PORTALS_NB 2
+
 #include <cmath>
 
 #include "Box2D/Box2D.h"
@@ -11,7 +13,10 @@
 #include "server/entities/attributes/body_linked.h"
 #include "server/entities/attributes/teleportable_entity.h"
 
-#define PORTALS_NB 2
+class PlayerEntity;
+
+#include "server/entities/rock.h"
+
 
 class PlayerEntity :  public TeleportableEntity {
 public:
@@ -29,8 +34,6 @@ public:
 
 	void handleFloorContact(b2Contact * contact, bool isBegin);
 
-	bool waitingForResetPosition();
-
 	virtual ~PlayerEntity() override;
 
 private:
@@ -40,10 +43,12 @@ private:
 	MoveDirection moveDirection = NONE;
 
 	PortalEntity * portals[PORTALS_NB];
+	RockEntity * carriedRock;
 
 	void applyImpulseToCenter(float vx, float vy);
 
-	void goThroughPortal(PortalEntity * portal);
+	void grabRock(RockEntity* rock);
+	void releaseRock();
 };
 
 #endif  // PLAYER_ENTITY_H

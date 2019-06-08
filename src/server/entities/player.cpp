@@ -1,5 +1,7 @@
 #include "server/entities/player.h"
 
+#include "server/entities/rock.h"
+
 PlayerEntity::PlayerEntity() :
 	TeleportableEntity(TYPE_PLAYER, 0, 0, 0) {
 	for(int i = 0; i < PORTALS_NB; i++) {
@@ -63,6 +65,23 @@ void PlayerEntity::handleFloorContact(b2Contact * contact, bool) {
 void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool inContact) {
 	handleFloorContact(contact, inContact);
 	TeleportableEntity::handleContactWith(other, contact, inContact);
+
+	if(inContact && other->getType() == TYPE_ROCK) {
+		// TODO: only work when outside of the contacts events
+		// grabRock(other->as<RockEntity>());
+	}
+}
+
+void PlayerEntity::grabRock(RockEntity* rock) {
+	if(rock->getHolder() == nullptr) {
+		carriedRock = rock;
+		rock->grab(this);
+	}
+}
+
+void PlayerEntity::releaseRock() {
+	carriedRock->release();
+	carriedRock = nullptr;
 }
 
 void PlayerEntity::keyDown(const MoveDirection direction) {
