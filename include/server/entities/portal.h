@@ -17,7 +17,7 @@ public:
 	const b2Vec2 & getOutVector() const;
 
 private:
-	PortalEntity * twin;
+	PortalEntity * twin = nullptr;
 	b2Vec2 outVector;
 
 	static float getRotationFromNormal(const b2Vec2 & normal);
