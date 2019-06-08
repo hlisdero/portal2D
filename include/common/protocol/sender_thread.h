@@ -15,7 +15,7 @@ public:
         while (true) {
             T event = queue.pop();
             protocol.send(event);
-            if (!event.type) {
+            if (event.type == 0) {
                 return;
             }
         }

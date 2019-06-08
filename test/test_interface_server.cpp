@@ -37,5 +37,6 @@ int main() {
     world_event.state = STATE_DISABLED;
     world_event_queue.push(world_event);
 
+    interface.closeWait();
     return 0;
 }

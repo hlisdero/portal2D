@@ -42,6 +42,11 @@ public:
         return receive_queue;
     }
 
+    void closeWait() {
+        send_queue.closeWait();
+        receive_queue.closeWait();
+    }
+
 private:
     Protocol protocol;
     BlockingQueue<T> send_queue;

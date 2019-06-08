@@ -15,7 +15,7 @@ public:
         while (true) {
             T event;
             protocol.receive(event);
-            if (!event.type) {
+            if (event.type == 0) {
                 return;
             }
             queue.push(event);

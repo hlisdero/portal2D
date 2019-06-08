@@ -88,7 +88,7 @@ ActiveSocket& ActiveSocket::operator<<(uint32_t num) {
 }
 
 ActiveSocket& ActiveSocket::operator<<(uint16_t num) {
-    uint32_t net_num = htons(num);
+    uint16_t net_num = htons(num);
     send(reinterpret_cast<char*>(&net_num), 2);
     return *this;
 }
@@ -128,8 +128,6 @@ ActiveSocket& ActiveSocket::operator>>(uint16_t& num) {
 }
 
 ActiveSocket& ActiveSocket::operator>>(uint8_t& num) {
-    uint32_t net_num;
-    receive(reinterpret_cast<char*>(&net_num), 1);
-    num = net_num;
+    receive(reinterpret_cast<char*>(&num), 1);
     return *this;
 }

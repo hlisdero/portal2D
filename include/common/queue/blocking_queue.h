@@ -25,6 +25,7 @@ public:
         }
         T event = events.front();
         events.pop();
+        is_closed_cv.notify_one();
         return event;
     }
 
@@ -45,12 +46,22 @@ public:
         events_cv.notify_all();
     }
 
+    void closeWait() {
+        std::unique_lock<std::mutex> lock(is_closed_m);
+        while (!events.empty()) {
+            is_closed_cv.wait(lock);
+        }
+        is_closed = true;
+        events_cv.notify_all();
+    }
+
 private:
     std::queue<T> events;
     std::mutex events_m;
     std::condition_variable events_cv;
     bool is_closed = false;
     std::mutex is_closed_m;
+    std::condition_variable is_closed_cv;
 };
 
 #endif  // BLOCKING_QUEUE_H

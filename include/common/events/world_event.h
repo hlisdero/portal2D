@@ -7,10 +7,10 @@
 
 enum WorldEventType {
     INVALID_WE = 0,
-    ENTITY_CREATION,
-	ENTITY_DESTRUCTION,
-    POSITION_UPDATE,
-    STATE_UPDATE,
+    ENTITY_CREATION = 1,
+	ENTITY_DESTRUCTION = 2,
+    POSITION_UPDATE = 3,
+    STATE_UPDATE = 4,
 };
 
 class WorldEvent {

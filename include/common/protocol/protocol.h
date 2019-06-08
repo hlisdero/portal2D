@@ -24,13 +24,13 @@ private:
 
     template<class T>
     void sendInteger(const T& int_var) {
-        uint32_t num = static_cast<T>(int_var);
+        uint8_t num = static_cast<T>(int_var);
         skt << num;
     }
 
     template<class T>
     T receiveInteger() {
-        uint32_t num;
+        uint8_t num;
         skt >> num;
         return static_cast<T>(num);
     }

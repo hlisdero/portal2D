@@ -3,7 +3,6 @@
 
 int main() {
     ActiveSocket skt("localhost", "8080");
-    skt.connect();
     Interface<ViewEvent, WorldEvent> interface(std::move(skt));
     BlockingQueue<ViewEvent>& view_event_queue = interface.getSendQueue();
     BlockingQueue<WorldEvent>& world_event_queue = interface.getReceiveQueue();
@@ -33,5 +32,7 @@ int main() {
     if (world_event.state == STATE_DISABLED) {
         std::cout << "Estado correcto!" << std::endl;
     }
+
+    interface.closeWait();
     return 0;
 }

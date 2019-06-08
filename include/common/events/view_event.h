@@ -7,8 +7,8 @@
 enum ViewEventType {
     INVALID = 0,
     QUIT = 1,
-    KEYBOARD,
-    MOUSE,
+    KEYBOARD = 2,
+    MOUSE = 3,
 };
 
 class ViewEvent {
