@@ -1,7 +1,7 @@
 #include "server/entities/player.h"
 
 PlayerEntity::PlayerEntity() :
-	Entity(TYPE_PLAYER, 0, 0, 0) {
+	TeleportableEntity(TYPE_PLAYER, 0, 0, 0) {
 	for(int i = 0; i < PORTALS_NB; i++) {
 		portals[i] = nullptr;
 	}
@@ -13,10 +13,6 @@ PlayerEntity::~PlayerEntity() {
 			delete portals[i];
 		}
 	}
-}
-
-bool PlayerEntity::waitingForResetPosition() {
-	return resetPosition;
 }
 
 PortalEntity * PlayerEntity::getPortal(PortalColor color) {
@@ -66,54 +62,7 @@ void PlayerEntity::handleFloorContact(b2Contact * contact, bool) {
 
 void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool inContact) {
 	handleFloorContact(contact, inContact);
-
-	switch(other->getType()) {
-		case TYPE_PORTAL: 
-			if(inContact) {
-				goThroughPortal(other->as<PortalEntity>());
-			} else if(goingTroughPortal > 0) {
-				goingTroughPortal--;	
-			}
-			break;
-		default:
-			break;
-	}
-}
-
-void PlayerEntity::goThroughPortal(PortalEntity * inPortal) {
-	// Do not go through the portal if already going through the portal
-	if(goingTroughPortal > 0) {
-		return;
-	}
-
-	PortalEntity * outPortal = inPortal->getTwin();
-
-	if(outPortal != nullptr) {
-		float rotation =  outPortal->getRotationRad() - (PI + inPortal->getRotationRad());
-		const b2Vec2 & inVelocity = getBody()->GetLinearVelocity();
-
-		// Apply rotation to velocity
-		b2Vec2 outVelocity(
-			inVelocity.x * cos(rotation) - inVelocity.y * sin(rotation),
-			inVelocity.x * sin(rotation) + inVelocity.y * cos(rotation)
-			);
-
-		b2Vec2 outVector = outPortal->getOutVector();
-
-		// Avoid beeing trapped in portals
-		outVelocity += outVector;
-
-		outVector *= 0.1;
-
-		// Update player velocity and position
-		getBody()->SetLinearVelocity(outVelocity);
-
-		resetPosition = true;
-		setX(outPortal->getX() + outVector.x);
-		setY(outPortal->getY() + outVector.y);
-		goingTroughPortal = 2;
-		hasMovedInTheAir = true;
-	}
+	TeleportableEntity::handleContactWith(other, contact, inContact);
 }
 
 void PlayerEntity::keyDown(const MoveDirection direction) {
@@ -148,11 +97,6 @@ void PlayerEntity::applyImpulseToCenter(const float vx, const float vy) {
 }
 
 void PlayerEntity::applyMovement() {
-	if(resetPosition) {
-		getBody()->SetTransform(b2Vec2(getX(), getY()), 0);
-		resetPosition = false;
-	}
-
 	// - If on the floor
 	// 		- allowed to move in both direction,
 	//  	- when the keyboard is released, the player

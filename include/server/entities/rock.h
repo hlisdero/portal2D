@@ -2,9 +2,9 @@
 #define ROCK_ENTITY_H
 
 #include "common/entities/entity.h"
-#include "server/entities/attributes/body_linked.h"
+#include "server/entities/attributes/teleportable_entity.h"
 
-class RockEntity :  public Entity, public BodyLinked {
+class RockEntity :  public TeleportableEntity {
 public:
 	// TODO add rock type
 	RockEntity(YAML::Node yaml);

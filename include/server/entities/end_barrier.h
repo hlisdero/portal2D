@@ -7,7 +7,7 @@
 #include "server/entities/attributes/handle_contact.h"
 #include "server/physics/end_zone.h"
 
-class EndBarrierEntity :  public Entity, public BodyLinked, public HandleContact {
+class EndBarrierEntity :  public Entity, public HandleContact {
 public:
 	EndBarrierEntity(YAML::Node yaml, EndZone & endZone);
 

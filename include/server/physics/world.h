@@ -32,7 +32,7 @@ public:
 
     void updatePhysics();
 
-	const std::vector<Entity*> getDynamicEntities() const;
+	const std::vector<Entity*>& getDynamicEntities() const;
 
 	int getPlayersCount();
 
@@ -46,7 +46,12 @@ private:
 
 	std::vector<PlayerEntity*> players;
 
+	// TODO maybe update with methods instead of b2World.getEntities()
+	std::vector<Entity*> dynamicEntities;
+
 	ContactListener contactListener;
+	
+    void updateDynamics();
 };
 
 #endif  // WORLD_H

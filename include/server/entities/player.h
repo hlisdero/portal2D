@@ -9,11 +9,11 @@
 #include "common/entities/entity.h"
 #include "server/entities/portal.h"
 #include "server/entities/attributes/body_linked.h"
-#include "server/entities/attributes/handle_contact.h"
+#include "server/entities/attributes/teleportable_entity.h"
 
 #define PORTALS_NB 2
 
-class PlayerEntity :  public Entity, public BodyLinked, public HandleContact {
+class PlayerEntity :  public TeleportableEntity {
 public:
 	PlayerEntity();
 
@@ -40,9 +40,6 @@ private:
 	MoveDirection moveDirection = NONE;
 
 	PortalEntity * portals[PORTALS_NB];
-
-	bool resetPosition = false;
-	int goingTroughPortal = 0;
 
 	void applyImpulseToCenter(float vx, float vy);
 
