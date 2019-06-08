@@ -12,7 +12,8 @@
 
 class Client {
 public:
-    Client(float world_width, float world_height);
+    Client(const std::string& hostname, const std::string& port,
+           float world_width, float world_height);
 
     Client(const Client&) = delete;
     Client& operator=(const Client&) = delete;

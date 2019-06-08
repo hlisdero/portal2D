@@ -1,7 +1,7 @@
 #ifndef WORLD_EVENT_H
 #define WORLD_EVENT_H
 
-#include "common/entities/entity.h"
+#include "common/entities/entities_types.h"
 #include "common/objects/position.h"
 #include "common/objects/state.h"
 

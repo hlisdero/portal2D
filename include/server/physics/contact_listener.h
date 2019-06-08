@@ -3,7 +3,7 @@
 
 #include "Box2D/Box2D.h"
 
-#include "common/entities/entity.h"
+#include "server/entities/entity.h"
 
 #define CONTACT_THRESHOLD 0.01
 

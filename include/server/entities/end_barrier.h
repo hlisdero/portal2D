@@ -1,7 +1,7 @@
 #ifndef END_BARRIER_ENTITY_H
 #define END_BARRIER_ENTITY_H
 
-#include "common/entities/entity.h"
+#include "server/entities/entity.h"
 #include "server/entities/player.h"
 #include "server/entities/attributes/body_linked.h"
 #include "server/entities/attributes/handle_contact.h"

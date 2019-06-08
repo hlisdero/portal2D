@@ -79,14 +79,6 @@ void WorldView::createEntity(size_t id, EntityType type, const Position& positio
     }
 }
 
-void WorldView::createEntities(const std::vector<Entity*>& entities) {
-    for (const auto& entity : entities) {
-        Position position(entity->getX(), entity->getY(), entity->getRotationDeg());
-        size_t id(entity->getId());
-        createEntity(id, entity->getType(), position);
-    }
-}
-
 void WorldView::updatePosition(size_t index, const Position& position) {
     checkValidIndex(index);
     view_objects[index]->updatePosition(position);

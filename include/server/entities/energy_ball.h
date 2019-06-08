@@ -1,7 +1,7 @@
 #ifndef ENERGY_BALL_ENTITY_H
 #define ENERGY_BALL_ENTITY_H
 
-#include "common/entities/entity.h"
+#include "server/entities/entity.h"
 #include "server/entities/attributes/body_linked.h"
 
 // TODO load from file

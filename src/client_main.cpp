@@ -1,11 +1,15 @@
 #include <iostream>
 #include <stdexcept>
 #include "client/client.h"
+#include "client/login/login.h"
 
-int main() {
+int main(int argc, char *argv[]) {
     try {
-        // World size in meter 53.32 x 40
-        Client client(53.32, 40);
+        Login login;
+        login.run(argc, argv);  // Comentar para usar defaults
+
+        // Tamaño del mundo en metros 53.32 x 40
+        Client client(login.getHostname(), login.getPort(), 53.32, 40);
         client.run();
         return 0;
     } catch(std::runtime_error err) {
