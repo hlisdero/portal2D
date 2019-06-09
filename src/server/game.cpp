@@ -14,6 +14,7 @@ void Game::addPlayer(PlayerEntity* player) {
 	if(status == WAITING_FOR_PLAYERS
 		&& world.getPlayersCount() >= map.getMinPlayers()) {
 		status = IN_PROGRESS;
+		// TODO notify client
 	}
 }
 
@@ -22,11 +23,6 @@ void Game::createPortal(PlayerEntity& player, ClickDirection& direction) {
 }
 
 void Game::update() {
-	// Check victory
-	if(map.getEndZone().getNumberOfPlayersInZone()
-		>= map.getMinPlayers() - 1) {
-		status = VICTORY;
-	}
 	// TODO Check defeat
 
 	// Update contacts => generate events
@@ -63,6 +59,10 @@ void Game::processGameEvents() {
 				break;
 			case PORTALS_RESET:
 				event.entity->as<PlayerEntity>()->resetPortals(world.getb2World());
+				// TODO notify client
+				break;
+			case GAME_STATUS_CHANGE:
+				status = event.status;
 				// TODO notify client
 				break;
 			default:

@@ -9,13 +9,7 @@
 #include "server/physics/world.h"
 #include "server/events/event_creator.h"
 #include "server/events/game_event_creator.h"
-
-enum GameStatus {
-	WAITING_FOR_PLAYERS,
-	IN_PROGRESS,
-	VICTORY,
-	DEFEAT
-};
+#include "server/objects/game_status.h"
 
 class Game {
 private:

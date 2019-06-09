@@ -21,3 +21,8 @@ void GameEventCreator::addSetActiveEntity(Entity * entity, bool active) {
 	GameEvent event(entity, active);
 	queue.push(event);
 }
+
+void GameEventCreator::addGameStateChange(GameStatus status) {
+	GameEvent event(status);
+	queue.push(event);
+}

@@ -26,7 +26,6 @@ public:
 	const std::vector<Entity*> & getStaticEntities() const;
 	const std::vector<Entity*> & getDynamicEntities() const;
 
-	EndZone & getEndZone();
 	b2Vec2 & getSpawn();
 	int getMinPlayers();
 

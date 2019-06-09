@@ -14,6 +14,8 @@ public:
 	void addSetActiveEntity(Entity * entity, bool active);
 	void addPortalsReset(Entity * entity);
 
+	void addGameStateChange(GameStatus status); 
+
 private:
 	SafeQueue<GameEvent>& queue;
 };
