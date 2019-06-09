@@ -4,14 +4,17 @@
 #define PORTALS_NB 2
 
 #include <cmath>
+#include <vector>
 
 #include "Box2D/Box2D.h"
 
 #include "common/objects/move_direction.h"
+#include "common/objects/portal_color.h"
 #include "server/entities/entity.h"
 #include "server/entities/portal.h"
 #include "server/entities/attributes/body_linked.h"
 #include "server/entities/attributes/teleportable_entity.h"
+#include "server/events/game_event_creator.h"
 
 class PlayerEntity;
 
@@ -20,7 +23,7 @@ class PlayerEntity;
 
 class PlayerEntity :  public TeleportableEntity {
 public:
-	PlayerEntity();
+	PlayerEntity(GameEventCreator & gameEventCreator);
 
 	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 
@@ -29,6 +32,7 @@ public:
 
 	PortalEntity * getPortal(PortalColor color);
 	void setPortal(PortalColor color, PortalEntity * portal);
+	void resetPortals(b2World & world);
 
 	void applyMovement();
 
@@ -43,7 +47,7 @@ private:
 	MoveDirection moveDirection = NONE;
 
 	PortalEntity * portals[PORTALS_NB];
-	RockEntity * carriedRock;
+	RockEntity * carriedRock = nullptr;
 
 	void applyImpulseToCenter(float vx, float vy);
 

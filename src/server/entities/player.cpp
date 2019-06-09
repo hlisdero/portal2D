@@ -2,8 +2,8 @@
 
 #include "server/entities/rock.h"
 
-PlayerEntity::PlayerEntity() :
-	TeleportableEntity(TYPE_PLAYER, 0, 0, 0) {
+PlayerEntity::PlayerEntity(GameEventCreator& gameEventCreator) :
+	TeleportableEntity(TYPE_PLAYER, 0, 0, 0, gameEventCreator) {
 	for(int i = 0; i < PORTALS_NB; i++) {
 		portals[i] = nullptr;
 	}
@@ -28,6 +28,17 @@ void PlayerEntity::setPortal(PortalColor color, PortalEntity * portal) {
 		portal->setTwin(twin);
 	}
 	portals[color] = portal;
+}
+
+void PlayerEntity::resetPortals(b2World & world) {
+	for(int i = 0; i < PORTALS_NB; i++) {
+		if(portals[i] != nullptr) {
+			world.DestroyBody(portals[i]->getBody());
+			delete portals[i];
+			
+			portals[i] = nullptr;
+		}
+	}
 }
 
 void PlayerEntity::handleFloorContact(b2Contact * contact, bool) {
@@ -67,13 +78,20 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 	TeleportableEntity::handleContactWith(other, contact, inContact);
 
 	if(inContact && other->getType() == TYPE_ROCK) {
-		// TODO: only work when outside of the contacts events
-		// grabRock(other->as<RockEntity>());
+		grabRock(other->as<RockEntity>());
+	} else if(other->getType() == TYPE_ENERGY_BAR 
+		|| other->getType() == TYPE_END_BARRIER) {
+		gameEventCreator.addPortalsReset(this);
+
+		if(carriedRock != nullptr) {
+			carriedRock->respawn();
+			releaseRock();
+		}
 	}
 }
 
 void PlayerEntity::grabRock(RockEntity* rock) {
-	if(rock->getHolder() == nullptr) {
+	if(rock->getHolder() == nullptr && carriedRock == nullptr) {
 		carriedRock = rock;
 		rock->grab(this);
 	}

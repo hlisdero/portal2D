@@ -4,7 +4,7 @@ Server::Server(const char * mapName, ActiveSocket skt) :
 	interface(std::move(skt)),
     eventCreator(interface.getSendQueue()),
     game(mapName, eventCreator) {
-	game.addPlayer(&player);
+	game.addPlayer(&game.player);
     eventCreator.addEntityCreations(game.getStaticEntities());
     eventCreator.addEntityCreations(game.getDynamicEntities());
 }
@@ -24,7 +24,7 @@ void Server::processQueue() {
         if (event.type == KEYBOARD) {
             movePlayer(event.direction, event.pressed);
         } else if (event.type == MOUSE) {
-            game.createPortal(player, event.click_direction);
+            game.createPortal(game.player, event.click_direction);
         } else if (event.type == QUIT) {
             quit = true;
         }
@@ -34,8 +34,8 @@ void Server::processQueue() {
 
 void Server::movePlayer(const MoveDirection direction, const bool pressed) {
 	if (pressed) {
-		player.keyDown(direction);
+		game.player.keyDown(direction);
 	} else {
-		player.keyUp(direction);
+		game.player.keyUp(direction);
 	}
 }

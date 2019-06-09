@@ -17,10 +17,11 @@
 #include "server/entities/end_barrier.h"
 #include "server/physics/end_zone.h"
 #include "server/entities/utils/door_logica.h"
+#include "server/events/game_event_creator.h"
 
 class Map {
 public:
-	Map(const char * mapName);
+	Map(const char * mapName, GameEventCreator & gameEventCreator);
 
 	const std::vector<Entity*> & getStaticEntities() const;
 	const std::vector<Entity*> & getDynamicEntities() const;
@@ -39,6 +40,8 @@ private:
 	std::vector<Entity*> dynamicEntities;
 
 	EndZone endZone;
+
+	GameEventCreator& gameEventCreator;
 
 	void loadSettings(YAML::Node yaml);
 	void loadEntities(YAML::Node yaml);

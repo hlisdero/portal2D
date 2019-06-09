@@ -1,6 +1,6 @@
 #include "server/entities/portal.h"
 
-PortalEntity::PortalEntity(const float x, const float y, const b2Vec2 & outVector, const PortalColor color) : Entity(TYPE_PORTAL, x, y, getRotationFromNormal(outVector)), WithState(color), outVector(outVector) {}
+PortalEntity::PortalEntity(const float x, const float y, const b2Vec2 & outVector, const PortalColor color) : Entity(TYPE_PORTAL, x, y, getRotationFromNormal(outVector)), outVector(outVector), color(color) {}
 
 PortalEntity * PortalEntity::getTwin() {
 	return this->twin;

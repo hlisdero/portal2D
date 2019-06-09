@@ -31,10 +31,13 @@ public:
     void createPortal(PlayerEntity& player, ClickDirection& direction);
 
     void updatePhysics();
+    void updateDynamics();
 
 	const std::vector<Entity*>& getDynamicEntities() const;
 
 	int getPlayersCount();
+
+	b2World & getb2World();
 
 private:
 	b2World world;
@@ -50,8 +53,6 @@ private:
 	std::vector<Entity*> dynamicEntities;
 
 	ContactListener contactListener;
-	
-    void updateDynamics();
 };
 
 #endif  // WORLD_H

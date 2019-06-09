@@ -1,5 +1,9 @@
 #include "server/entities/attributes/teleportable_entity.h"
 
+TeleportableEntity::TeleportableEntity(EntityType type, float x, float y, 
+	float rotation, GameEventCreator & gameEventCreator) : 
+	Entity(type, x, y, rotation), gameEventCreator(gameEventCreator) {}
+
 void TeleportableEntity::handleContactWith(Entity * other, b2Contact *, bool inContact) {
 	if(other->getType() != TYPE_PORTAL) {
 		return;
@@ -44,28 +48,24 @@ void TeleportableEntity::goThroughPortal(PortalEntity * inPortal) {
 		// Update player velocity and position
 		getBody()->SetLinearVelocity(outVelocity);
 
-		resetPosition = true;
-		setX(outPortal->getX() + outVector.x);
-		setY(outPortal->getY() + outVector.y);
 		goingTroughPortal = 2;
+		teleportTo(outPortal->getX() + outVector.x, 
+			outPortal->getY() + outVector.y);
 	}
 }
 
-bool TeleportableEntity::applyPositionReset() {
-	if(resetPosition) {
-		getBody()->SetTransform(b2Vec2(getX(), getY()), 0);
-		resetPosition = false;
-
-		return true;
-	}
-
-	return false;
+void TeleportableEntity::teleportTo(float x, float y) {
+	setX(x);
+	setY(y);
+	teleporting = true;
+	gameEventCreator.addTeleportation(this);	
 }
 
-bool TeleportableEntity::isMarkedForPositionReset() {
-	return resetPosition;
+void TeleportableEntity::teleport() {
+	getBody()->SetTransform(b2Vec2(getX(), getY()), 0);
+	teleporting = false;
 }
 
-void TeleportableEntity::markForPositionReset() {
-	resetPosition = true;
+bool TeleportableEntity::isTeleporting() {
+	return teleporting;
 }

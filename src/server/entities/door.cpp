@@ -1,17 +1,19 @@
 #include "server/entities/door.h"
 
-DoorEntity::DoorEntity(float x, float y, float rotation, DoorLogicaPtr logica) :
+DoorEntity::DoorEntity(float x, float y, float rotation, DoorLogicaPtr logica, GameEventCreator & gameEventCreator) :
     Entity(TYPE_GATE, x, y, rotation),
-    WithState(STATE_CLOSED),
-    logica(std::move(logica)) {}
+    WithState(STATE_CLOSED, gameEventCreator),
+    logica(std::move(logica)),
+    gameEventCreator(gameEventCreator) {}
 
 void DoorEntity::updateState() {
-	bool new_state = this->logica->value();
-	setState(new_state? STATE_OPEN : STATE_CLOSED);
+	State oldValue = getState();
+	State newState = this->logica->value() ? STATE_OPEN : STATE_CLOSED;
+	setState(newState);
 
-	b2Filter filter;
-	filter.maskBits = (new_state == STATE_OPEN) ? 0x0000 : 0xFFFF;
-	this->getBody()->GetFixtureList()->SetFilterData(filter);
+	if(oldValue != newState) {
+		gameEventCreator.addSetActiveEntity(this, (newState == STATE_CLOSED));
+	}
 }
 
 void DoorEntity::attachBody(b2Body * body) {

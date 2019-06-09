@@ -7,6 +7,8 @@
 #include "server/events/event_creator.h"
 #include "server/entities/player.h"
 #include "server/physics/world.h"
+#include "server/events/event_creator.h"
+#include "server/events/game_event_creator.h"
 
 enum GameStatus {
 	WAITING_FOR_PLAYERS,
@@ -16,7 +18,22 @@ enum GameStatus {
 };
 
 class Game {
+private:
+	// std::vector<Client/Player>
+
+	GameStatus status = WAITING_FOR_PLAYERS;
+
+	SafeQueue<GameEvent> eventsQueue;
+	GameEventCreator gameEventCreator;
+
+	Map map;
+	World world;
+	EventCreator& eventCreator;
+
 public:
+	// TODO remove temp
+	PlayerEntity player;
+
 	Game(const char* mapName, EventCreator& eventCreator);
 
 	void addPlayer(PlayerEntity* player);
@@ -27,16 +44,7 @@ public:
     const std::vector<Entity*>& getStaticEntities() const;
     const std::vector<Entity*>& getDynamicEntities() const;
 
-	// void addEvent();
-	void processEvent();
-
-private:
-	// std::vector<Client/Player>
-
-	GameStatus status = WAITING_FOR_PLAYERS;
-	Map map;
-	World world;
-	EventCreator& eventCreator;
+	void processGameEvents();
 };
 
 #endif  // GAME_H

@@ -13,7 +13,7 @@ public:
 
     void addEntityCreation(Entity* entity);
     void addPositionUpdate(Entity* entity);
-    void addStateUpdate(Entity* entity, WithState* state_entity);
+    void addStateUpdate(Entity* entity);
 
     // Métodos para vectores
     void addEntityCreations(const std::vector<Entity*>& entities);

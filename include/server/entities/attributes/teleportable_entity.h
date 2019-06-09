@@ -5,23 +5,28 @@
 #include "server/entities/portal.h"
 #include "server/entities/attributes/body_linked.h"
 #include "server/entities/attributes/handle_contact.h"
+#include "server/events/game_event_creator.h"
 
 class TeleportableEntity : public HandleContact, public BodyLinked, public Entity {
 public:
-	using Entity::Entity;
+	TeleportableEntity(EntityType type, float x, float y, float rotation,
+		GameEventCreator & gameEventCreator);
 
     virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 
     bool isGoingThroughPortal();
 
-    void markForPositionReset();
-    bool isMarkedForPositionReset();
+    bool isTeleporting();
+    void teleport();
 
-    bool applyPositionReset();
+protected:
+	GameEventCreator& gameEventCreator;
+
+	void teleportTo(float x, float y);
 
 private:
 	int goingTroughPortal = 0;
-	bool resetPosition = false;
+	bool teleporting = false;
 
 	void goThroughPortal(PortalEntity * inPortal);
 };
