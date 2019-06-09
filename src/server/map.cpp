@@ -103,7 +103,7 @@ Entity * Map::createEntity(YAML::Node yaml) {
 			entity = new EndBarrierEntity(x, y, rotation, endZone);
 			break;
 		case TYPE_ROCK:
-			entity = new RockEntity(x, y, rotation);
+			entity = new RockEntity(x, y, rotation, gameEventCreator);
 			break;
 		default:
 			throw std::runtime_error("Unsupported entity type");

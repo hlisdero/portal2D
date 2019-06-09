@@ -67,13 +67,12 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 	TeleportableEntity::handleContactWith(other, contact, inContact);
 
 	if(inContact && other->getType() == TYPE_ROCK) {
-		// TODO: only work when outside of the contacts events
-		// grabRock(other->as<RockEntity>());
+		grabRock(other->as<RockEntity>());
 	}
 }
 
 void PlayerEntity::grabRock(RockEntity* rock) {
-	if(rock->getHolder() == nullptr) {
+	if(rock->getHolder() == nullptr && carriedRock == nullptr) {
 		carriedRock = rock;
 		rock->grab(this);
 	}
