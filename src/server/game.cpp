@@ -42,10 +42,12 @@ const std::vector<Entity*>& Game::getDynamicEntities() const {
 }
 
 void Game::processGameEvents() {
-	// std::vector<GameEvent> events = eventsQueue.popAll();
-	// for(GameEvent event : events) {
-	// 	// TODO
-	// }
+	std::vector<GameEvent> events = eventsQueue.popAll();
+	for(GameEvent event : events) {
+		if(event.type == ENTITY_STATE_UPDATE) {
+			// TODO
+		}
+	}
 
 	eventCreator.addPositionUpdates(world.getDynamicEntities());
 

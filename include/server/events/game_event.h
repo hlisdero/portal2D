@@ -6,7 +6,8 @@
 #include "common/objects/state.h"
 
 enum GameEventType {
-    INVALID_GE = 0
+    INVALID_GE = 0,
+    ENTITY_STATE_UPDATE
 };
 
 class GameEvent {
