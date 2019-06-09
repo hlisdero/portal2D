@@ -19,10 +19,10 @@ public:
 	PlayerEntity* getHolder();
 
 	void respawn();
+	
 private:
 	PlayerEntity* holder = nullptr;
 	b2Vec2 initialPosition;
-	GameEventCreator & gameEventCreator;
 };
 
 #endif  // ROCK_ENTITY_H

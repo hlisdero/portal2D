@@ -20,13 +20,13 @@ public:
     void teleport();
 
 protected:
+	GameEventCreator& gameEventCreator;
+
 	void teleportTo(float x, float y);
 
 private:
 	int goingTroughPortal = 0;
 	bool teleporting = false;
-
-	GameEventCreator& gameEventCreator;
 
 	void goThroughPortal(PortalEntity * inPortal);
 };

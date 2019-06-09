@@ -1,7 +1,7 @@
 #include "server/entities/rock.h"
 
 RockEntity::RockEntity(float x, float y, float rotation, GameEventCreator & gameEventCreator) :
-	TeleportableEntity(TYPE_ROCK, x, y, rotation, gameEventCreator), initialPosition(x, y), gameEventCreator(gameEventCreator) {}
+	TeleportableEntity(TYPE_ROCK, x, y, rotation, gameEventCreator), initialPosition(x, y) {}
 
 void RockEntity::grab(PlayerEntity * player) {
 	// Disable body while keeping fixture created for future use.
