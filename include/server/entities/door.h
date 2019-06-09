@@ -23,8 +23,10 @@ public:
 	virtual void attachBody(b2Body * body) override;
 
 	void attach(subscribablesMap & subscribables);
+	
 private:
 	DoorLogicaPtr logica;
+	GameEventCreator & gameEventCreator;
 };
 
 #endif  // DOOR_ENTITY_H

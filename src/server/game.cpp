@@ -44,8 +44,15 @@ const std::vector<Entity*>& Game::getDynamicEntities() const {
 void Game::processGameEvents() {
 	std::vector<GameEvent> events = eventsQueue.popAll();
 	for(GameEvent event : events) {
-		if(event.type == ENTITY_STATE_UPDATE) {
-			eventCreator.addStateUpdate(event.entity);
+		switch(event.type) {
+			case ENTITY_STATE_UPDATE:
+				eventCreator.addStateUpdate(event.entity);
+				break;
+			case ENTITY_SET_ACTIVE:
+				event.entity->as<BodyLinked>()->getBody()->SetActive(event.active);
+				break;
+			default:
+				throw std::runtime_error("Unsupported game event type");
 		}
 	}
 
