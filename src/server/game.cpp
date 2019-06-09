@@ -4,7 +4,8 @@ Game::Game(const char* mapName, EventCreator& eventCreator) :
 	gameEventCreator(eventsQueue),
 	map(mapName, gameEventCreator),
 	world(map, eventCreator),
-	eventCreator(eventCreator) {}
+	eventCreator(eventCreator),
+	player(gameEventCreator) {}
 
 void Game::addPlayer(PlayerEntity* player) {
 	world.createPlayer(player);

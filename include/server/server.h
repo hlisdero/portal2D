@@ -28,7 +28,6 @@ private:
     Interface<WorldEvent, ViewEvent> interface;
 	EventCreator eventCreator;
 	Game game;
-	PlayerEntity player;
     bool quit = false;
 
     void movePlayer(const MoveDirection direction, const bool pressed);
