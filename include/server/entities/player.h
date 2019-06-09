@@ -14,6 +14,7 @@
 #include "server/entities/portal.h"
 #include "server/entities/attributes/body_linked.h"
 #include "server/entities/attributes/teleportable_entity.h"
+#include "server/events/game_event_creator.h"
 
 class PlayerEntity;
 
@@ -22,7 +23,7 @@ class PlayerEntity;
 
 class PlayerEntity :  public TeleportableEntity {
 public:
-	PlayerEntity();
+	PlayerEntity(GameEventCreator & gameEventCreator);
 
 	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 

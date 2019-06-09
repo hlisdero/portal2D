@@ -3,7 +3,12 @@
 GameEventCreator::GameEventCreator(SafeQueue<GameEvent>& queue) : queue(queue) {}
 
 void GameEventCreator::addStateUpdate(Entity * entity) {
-	GameEvent event(entity);
+	GameEvent event(ENTITY_STATE_UPDATE, entity);
+	queue.push(event);
+}
+
+void GameEventCreator::addTeleportation(Entity * entity) {
+	GameEvent event(ENTITY_TELEPORT, entity);
 	queue.push(event);
 }
 

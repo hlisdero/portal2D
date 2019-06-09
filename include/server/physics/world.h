@@ -31,6 +31,7 @@ public:
     void createPortal(PlayerEntity& player, ClickDirection& direction);
 
     void updatePhysics();
+    void updateDynamics();
 
 	const std::vector<Entity*>& getDynamicEntities() const;
 
@@ -50,8 +51,6 @@ private:
 	std::vector<Entity*> dynamicEntities;
 
 	ContactListener contactListener;
-	
-    void updateDynamics();
 };
 
 #endif  // WORLD_H

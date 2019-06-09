@@ -28,9 +28,15 @@ void Game::update() {
 	}
 	// TODO Check defeat
 
+	// Update contacts => generate events
 	world.updatePhysics();
-
+	// With events, do things => change position, state,...
 	processGameEvents();
+
+	// With new position, update entity position
+	world.updateDynamics();
+	// Then, send the new positions
+	eventCreator.addPositionUpdates(world.getDynamicEntities());
 }
 
 const std::vector<Entity*>& Game::getStaticEntities() const {
@@ -51,12 +57,13 @@ void Game::processGameEvents() {
 			case ENTITY_SET_ACTIVE:
 				event.entity->as<BodyLinked>()->getBody()->SetActive(event.active);
 				break;
+			case ENTITY_TELEPORT:
+				event.entity->as<TeleportableEntity>()->teleport();
+				break;
 			default:
 				throw std::runtime_error("Unsupported game event type");
 		}
 	}
-
-	eventCreator.addPositionUpdates(world.getDynamicEntities());
 
 	// if player join
 	//	createPlayer

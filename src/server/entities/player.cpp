@@ -2,8 +2,8 @@
 
 #include "server/entities/rock.h"
 
-PlayerEntity::PlayerEntity() :
-	TeleportableEntity(TYPE_PLAYER, 0, 0, 0) {
+PlayerEntity::PlayerEntity(GameEventCreator& gameEventCreator) :
+	TeleportableEntity(TYPE_PLAYER, 0, 0, 0, gameEventCreator) {
 	for(int i = 0; i < PORTALS_NB; i++) {
 		portals[i] = nullptr;
 	}

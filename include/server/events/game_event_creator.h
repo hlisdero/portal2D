@@ -10,6 +10,7 @@ public:
 	GameEventCreator(SafeQueue<GameEvent>& queue);
 
 	void addStateUpdate(Entity* entity);
+	void addTeleportation(Entity * entity);
 	void addSetActiveEntity(Entity * entity, bool active);
 
 private:
