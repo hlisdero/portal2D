@@ -30,58 +30,68 @@ const ViewObjectCreator& WorldView::getObjectCreator() const {
     return object_creator;
 }
 
-void WorldView::createEntity(size_t id, EntityType type, const Position& position) {
+void WorldView::createEntity(size_t index, EntityType type, const Position& position) {
     switch (type) {
         case TYPE_STONE_BLOCK:
-            object_creator.createStoneBlock(id, position);
+            object_creator.createStoneBlock(index, position);
             break;
         case TYPE_METAL_BLOCK:
-            object_creator.createMetalBlock(id, position);
+            object_creator.createMetalBlock(index, position);
             break;
         case TYPE_METAL_DIAG_BLOCK:
-            object_creator.createDiagonalMetalBlock(id, position);
+            object_creator.createDiagonalMetalBlock(index, position);
             break;
         case TYPE_ACID:
-            object_creator.createAcid(id, position);
+            object_creator.createAcid(index, position);
             break;
         case TYPE_GATE:
-            object_creator.createGate(id, position);
+            object_creator.createGate(index, position);
             break;
         case TYPE_ENERGY_BAR:
-            object_creator.createEnergyBar(id, position);
+            object_creator.createEnergyBar(index, position);
             break;
         case TYPE_ENERGY_EMITTER:
-            object_creator.createEnergyEmitter(id, position);
+            object_creator.createEnergyEmitter(index, position);
             break;
         case TYPE_ENERGY_RECEIVER:
-            object_creator.createEnergyReceiver(id, position);
+            object_creator.createEnergyReceiver(index, position);
             break;
         case TYPE_BUTTON:
-            object_creator.createButton(id, position);
+            object_creator.createButton(index, position);
             break;
         case TYPE_PORTAL:
-            object_creator.createPortal(id, position);
+            object_creator.createPortal(index, position);
             break;
         case TYPE_END_BARRIER:
-            object_creator.createEndBarrier(id, position);
+            object_creator.createEndBarrier(index, position);
             break;
         case TYPE_ROCK:
-            object_creator.createRock(id, position);
+            object_creator.createRock(index, position);
             break;
         case TYPE_PLAYER:
-            createPlayerWithCamera(id, position);
+            createPlayerWithCamera(index, position);
             break;
         case TYPE_ENERGY_BALL:
-            object_creator.createEnergyBall(id, position);
+            object_creator.createEnergyBall(index, position);
             break;
         default:
             throw std::runtime_error("Error: EntityType inválido");
     }
 }
 
+void WorldView::destroyEntity(size_t index) {
+    checkValidIndex(index);
+    delete view_objects[index];
+}
+
 void WorldView::updatePosition(size_t index, const Position& position) {
     checkValidIndex(index);
     view_objects[index]->updatePosition(position);
+}
+
+void WorldView::updateState(size_t index, const State& state) {
+    checkValidIndex(index);
+    view_objects[index]->updateState(state);
 }
 
 void WorldView::update() {

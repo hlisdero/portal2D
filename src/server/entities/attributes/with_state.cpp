@@ -1,16 +1,11 @@
 #include "server/entities/attributes/with_state.h"
 
 WithState::WithState(const State state) : state(state) {}
-WithState::WithState(const bool state) : state(state) {}
 
-bool WithState::getState() const {
-	return this->state;
+const State& WithState::getState() const {
+	return state;
 }
 
-void WithState::setState(const State state) {
-	this->setState((bool) state);
-}
-
-void WithState::setState(const bool state) {
-	this->state = state;
+void WithState::setState(const State& new_state) {
+	state = new_state;
 }

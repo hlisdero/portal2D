@@ -22,14 +22,22 @@ void Client::run() {
 void Client::processQueue() {
     BlockingQueue<WorldEvent>& queue = interface.getReceiveQueue();
     std::vector<WorldEvent> events = queue.popAll();
-    for (const auto& event : events) {
-        if (event.type == POSITION_UPDATE) {
-            view.updatePosition(event.id, event.position);
-        } else if (event.type == ENTITY_CREATION) {
-            view.createEntity(event.id, event.entity_type, event.position);
-        }
+    for (const WorldEvent& event : events) {
+        processEvent(event);
     }
     view.update();
+}
+
+void Client::processEvent(const WorldEvent& event) {
+    if (event.type == POSITION_UPDATE) {
+        view.updatePosition(event.id, event.position);
+    } else if (event.type == STATE_UPDATE) {
+        view.updateState(event.id, event.state);
+    } else if (event.type == ENTITY_CREATION) {
+        view.createEntity(event.id, event.entity_type, event.position);
+    } else if (event.type == ENTITY_DESTRUCTION) {
+        view.destroyEntity(event.id);
+    }
 }
 
 void Client::sendQuitSignal() {

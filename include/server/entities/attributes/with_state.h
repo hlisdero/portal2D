@@ -7,15 +7,12 @@
 class WithState {
 public:
 	WithState(const State state);
-	// TODO replace bool by int?
-	WithState(const bool state);
 
-	bool getState() const;
-	void setState(const State state);
-	virtual void setState(const bool state);
+	const State& getState() const;
+	void setState(const State& new_state);
 
 private:
-	bool state;
+	State state = STATE_DEFAULT;
 };
 
 #endif  // WITH_STATE_H
