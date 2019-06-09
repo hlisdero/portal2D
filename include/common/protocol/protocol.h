@@ -24,7 +24,7 @@ private:
 
     template<class T>
     void sendInteger(const T& int_var) {
-        uint8_t num = static_cast<T>(int_var);
+        uint8_t num = static_cast<uint8_t>(int_var);
         skt << num;
     }
 
