@@ -1,14 +1,14 @@
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef TEST_BUTTON_H
+#define TEST_BUTTON_H
 
 #include "client/objects/drawable.h"
 #include "client/texture/sprite.h"
 #include "client/event/mouse_handler.h"
 #include "client/event/mouse_event.h"
 
-class Button : public MouseHandler, public Drawable {
+class TestButton : public MouseHandler, public Drawable {
 public:
-    Button(const Texture& texture, int x, int y);
+    TestButton(const Texture& texture, int x, int y);
 
     virtual const Texture& getTexture() override;
     int getX() const override;
@@ -26,4 +26,4 @@ private:
     int y;
 };
 
-#endif  // BUTTON_H
+#endif  // TEST_BUTTON_H
