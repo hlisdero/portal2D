@@ -27,6 +27,7 @@ private:
     WorldView view;
 
     void processQueue();
+    void processEvent(const WorldEvent& event);
     void sendQuitSignal();
 };
 

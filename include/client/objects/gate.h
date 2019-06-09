@@ -2,7 +2,7 @@
 #define GATE_H
 
 #include "client/objects/drawable_box2D.h"
-#include "client/texture/animation.h"
+#include "client/texture/finite_animation.h"
 #include "client/texture/sprite.h"
 
 class Gate : public DrawableBox2D {
@@ -13,12 +13,9 @@ public:
     virtual const Texture& getTexture();
     virtual SDL_Rect* getClip();
 
-    void open();
-
 private:
     Sprite sprite;
-    Animation animation;
-    bool open_flag = false;
+    FiniteAnimation animation;
 };
 
 #endif  // GATE_H

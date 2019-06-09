@@ -6,11 +6,11 @@ DoorEntity::DoorEntity(float x, float y, float rotation, DoorLogicaPtr logica) :
     logica(std::move(logica)) {}
 
 void DoorEntity::updateState() {
-	bool newState = this->logica->value();
-	this->setState(newState);
+	bool new_state = this->logica->value();
+	setState(new_state? STATE_OPEN : STATE_CLOSED);
 
 	b2Filter filter;
-	filter.maskBits = (newState == STATE_OPENED) ? 0x0000 : 0xFFFF;
+	filter.maskBits = (new_state == STATE_OPEN) ? 0x0000 : 0xFFFF;
 	this->getBody()->GetFixtureList()->SetFilterData(filter);
 }
 

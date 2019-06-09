@@ -38,6 +38,14 @@ double DrawableBox2D::currentY() const {
     return position.y;
 }
 
+const State& DrawableBox2D::getState() const {
+    return state;
+}
+
 void DrawableBox2D::updatePosition(const Position& new_position) {
     position = new_position;
+}
+
+void DrawableBox2D::updateState(const State& new_state) {
+    state = new_state;
 }

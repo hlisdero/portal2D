@@ -2,6 +2,8 @@
 #define STATE_H
 
 enum State {
+    STATE_DEFAULT = 0,
+
 	// EnergyReceiver, Button
 	STATE_DISABLED = 0,
 	STATE_ENABLED,
@@ -12,7 +14,7 @@ enum State {
 
 	// Door
 	STATE_CLOSED = 0,
-	STATE_OPENED
+	STATE_OPEN
 };
 typedef enum State PortalColor;
 

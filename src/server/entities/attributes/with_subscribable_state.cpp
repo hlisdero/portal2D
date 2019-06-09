@@ -4,11 +4,11 @@ void WithSubscribableState::subscribe(DoorEntity * door) {
 	this->subscribers.insert(door);
 }
 
-void WithSubscribableState::setState(const bool state) {
+void WithSubscribableState::setState(const State& state) {
 	WithState::setState(state);
 
 	// notify subscribers
-	for(auto subscriber : this->subscribers) {
+	for (auto subscriber : this->subscribers) {
 		subscriber->updateState();
 	}
 }
