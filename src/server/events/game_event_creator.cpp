@@ -2,6 +2,7 @@
 
 GameEventCreator::GameEventCreator(SafeQueue<GameEvent>& queue) : queue(queue) {}
 
-void GameEventCreator::addUpdateStateEvent(Entity*, const State) {
-
+void GameEventCreator::addStateUpdate(Entity * entity) {
+	GameEvent event(entity);
+	queue.push(event);
 }

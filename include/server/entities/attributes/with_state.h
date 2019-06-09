@@ -10,7 +10,7 @@ public:
 	WithState(const State state, GameEventCreator & gameEventCreator);
 
 	const State& getState() const;
-	void setState(const State& new_state);
+	virtual void setState(const State& new_state);
 
 private:
 	State state = STATE_DEFAULT;

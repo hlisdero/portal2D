@@ -9,7 +9,7 @@ class GameEventCreator {
 public:
 	GameEventCreator(SafeQueue<GameEvent>& queue);
 
-	void addUpdateStateEvent(Entity* entity, const State state);
+	void addStateUpdate(Entity* entity);
 
 private:
 	SafeQueue<GameEvent>& queue;

@@ -15,7 +15,7 @@ public:
 
 	void subscribe(DoorEntity * door);
 
-	void setState(const State& state);
+	virtual void setState(const State& state) override;
 
 private:
 	std::unordered_set<DoorEntity*> subscribers;

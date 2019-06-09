@@ -45,7 +45,7 @@ void Game::processGameEvents() {
 	std::vector<GameEvent> events = eventsQueue.popAll();
 	for(GameEvent event : events) {
 		if(event.type == ENTITY_STATE_UPDATE) {
-			// TODO
+			eventCreator.addStateUpdate(event.entity);
 		}
 	}
 

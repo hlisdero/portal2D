@@ -7,8 +7,10 @@ const State& WithState::getState() const {
 }
 
 void WithState::setState(const State& newState) {
-	if(newState != state) {
-		gameEventCreator.addUpdateStateEvent((Entity*)this, newState);
-	}
+	bool hasChanged = (state != newState);
 	state = newState;
+
+	if(hasChanged) {
+		gameEventCreator.addStateUpdate(dynamic_cast<Entity*>(this));
+	}
 }

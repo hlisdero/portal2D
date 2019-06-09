@@ -10,7 +10,7 @@ class SafeQueue {
 public:
     void push(const T& event) {
         std::lock_guard<std::mutex> lock(mutex);
-        events.push(events);
+        events.push(event);
     }
 
     std::vector<T> popAll() {

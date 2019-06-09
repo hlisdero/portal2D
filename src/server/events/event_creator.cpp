@@ -14,8 +14,8 @@ void EventCreator::addPositionUpdate(Entity* entity) {
     queue.push(event);
 }
 
-void EventCreator::addStateUpdate(Entity* entity, WithState* state_entity) {
-    WorldEvent event(entity->getId(), state_entity->getState());
+void EventCreator::addStateUpdate(Entity* entity) {
+    WorldEvent event(entity->getId(), entity->as<WithState>()->getState());
     queue.push(event);
 }
 
