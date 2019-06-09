@@ -3,12 +3,13 @@
 
 #include "yaml-cpp/yaml.h"
 #include "common/objects/state.h"
+#include "server/events/game_event_creator.h"
 
 class WithState {
 public:
-	WithState(const State state);
+	WithState(const State state, GameEventCreator & gameEventCreator);
 	// TODO replace bool by int?
-	WithState(const bool state);
+	WithState(const bool state, GameEventCreator & gameEventCreator);
 
 	bool getState() const;
 	void setState(const State state);
@@ -16,6 +17,7 @@ public:
 
 private:
 	bool state;
+	GameEventCreator & gameEventCreator;
 };
 
 #endif  // WITH_STATE_H

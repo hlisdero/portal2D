@@ -1,6 +1,7 @@
 #include "server/map.h"
 
-Map::Map(const char * mapName) {
+Map::Map(const char * mapName, GameEventCreator & gameEventCreator) : 
+	gameEventCreator(gameEventCreator) {
 	YAML::Node file = YAML::LoadFile(mapName);
     loadSettings(file);
 	loadEntities(file);
@@ -87,16 +88,16 @@ Entity * Map::createEntity(YAML::Node yaml) {
 			entity = new Entity(type, x, y, rotation);
 			break;
 		case TYPE_GATE:
-            entity = new DoorEntity(x, y, rotation, loadDoorLogica(yaml["logica"]));
+            entity = new DoorEntity(x, y, rotation, loadDoorLogica(yaml["logica"]), gameEventCreator);
 			break;
 		case TYPE_ENERGY_EMITTER:
 			entity = new EnergyEmittorEntity(x, y, rotation);
 			break;
 		case TYPE_ENERGY_RECEIVER:
-			entity = new EnergyReceiverEntity(x, y, rotation);
+			entity = new EnergyReceiverEntity(x, y, rotation, gameEventCreator);
 			break;
 		case TYPE_BUTTON:
-			entity = new ButtonEntity(x, y, rotation);
+			entity = new ButtonEntity(x, y, rotation, gameEventCreator);
 			break;
 		case TYPE_END_BARRIER:
 			entity = new EndBarrierEntity(x, y, rotation, endZone);

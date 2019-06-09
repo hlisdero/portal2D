@@ -1,7 +1,8 @@
 #include "server/game.h"
 
 Game::Game(const char* mapName, EventCreator& eventCreator) :
-	map(mapName),
+	gameEventCreator(eventsQueue),
+	map(mapName, gameEventCreator),
 	world(map, eventCreator),
 	eventCreator(eventCreator) {}
 
@@ -28,7 +29,8 @@ void Game::update() {
 	// TODO Check defeat
 
 	world.updatePhysics();
-	eventCreator.addPositionUpdates(world.getDynamicEntities());
+
+	processGameEvents();
 }
 
 const std::vector<Entity*>& Game::getStaticEntities() const {
@@ -39,7 +41,14 @@ const std::vector<Entity*>& Game::getDynamicEntities() const {
 	return world.getDynamicEntities();
 }
 
-void Game::processEvent() {
+void Game::processGameEvents() {
+	// std::vector<GameEvent> events = eventsQueue.popAll();
+	// for(GameEvent event : events) {
+	// 	// TODO
+	// }
+
+	eventCreator.addPositionUpdates(world.getDynamicEntities());
+
 	// if player join
 	//	createPlayer
 	// if playerCount > map.getRequiredPlayersCount(): status= In progress

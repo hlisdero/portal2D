@@ -9,7 +9,7 @@
 
 class EnergyReceiverEntity : public Entity, public WithSubscribableState, public HandleContact {
 public:
-    EnergyReceiverEntity(float x, float y, float rotation);
+    EnergyReceiverEntity(float x, float y, float rotation, GameEventCreator& gameEventCreator);
 
 	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 };

@@ -16,7 +16,7 @@ typedef std::map<std::string, WithSubscribableState*> subscribablesMap;
 
 class DoorEntity : public Entity, public BodyLinked, public WithState {
 public:
-    DoorEntity(float x, float y, float rotation, DoorLogicaPtr logica);
+    DoorEntity(float x, float y, float rotation, DoorLogicaPtr logica, GameEventCreator& gameEventCreator);
 
 	void updateState();
 
