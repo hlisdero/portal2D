@@ -5,6 +5,6 @@ EnergyReceiverEntity::EnergyReceiverEntity(float x, float y, float rotation, Gam
 
 void EnergyReceiverEntity::handleContactWith(Entity * other, b2Contact *, bool) {
 	if(other->getType() == TYPE_ENERGY_BALL) {
-		this->setState(STATE_ENABLED);
+		setState(STATE_ENABLED);
 	}
 }

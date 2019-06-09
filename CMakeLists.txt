@@ -8,7 +8,7 @@ file(GLOB_RECURSE server_sources ${PROJECT_SOURCE_DIR}/src/server/*)
 file(GLOB_RECURSE common_sources ${PROJECT_SOURCE_DIR}/src/common/*)
 
 set(test_sources
-    test/button.cpp test/character.cpp test/key_detector.cpp
+    test/test_button.cpp test/character.cpp test/key_detector.cpp
     test/test_animation.cpp test/test_keyboard.cpp test/test_main.cpp
     test/test_mouse.cpp test/test_sound.cpp test/test_view_player_block.cpp)
 

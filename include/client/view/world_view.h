@@ -26,9 +26,11 @@ public:
 
     const ViewObjectCreator& getObjectCreator() const;
 
-    void createEntity(size_t id, EntityType type, const Position& initial);
+    void createEntity(size_t index, EntityType type, const Position& initial);
+    void destroyEntity(size_t index);
 
     void updatePosition(size_t index, const Position& position);
+    void updateState(size_t index, const State& state);
 
     void update();
 

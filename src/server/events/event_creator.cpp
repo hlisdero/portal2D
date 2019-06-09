@@ -14,14 +14,8 @@ void EventCreator::addPositionUpdate(Entity* entity) {
     queue.push(event);
 }
 
-void EventCreator::addButtonStateUpdate(ButtonEntity* entity) {
-    State state;
-    if (entity->getState()) {
-        state = STATE_DISABLED;
-    } else {
-        state = STATE_ENABLED;
-    }
-    WorldEvent event(entity->getId(), state);
+void EventCreator::addStateUpdate(Entity* entity, WithState* state_entity) {
+    WorldEvent event(entity->getId(), state_entity->getState());
     queue.push(event);
 }
 
