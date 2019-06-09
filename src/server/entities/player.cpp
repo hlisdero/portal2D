@@ -79,7 +79,8 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 
 	if(inContact && other->getType() == TYPE_ROCK) {
 		grabRock(other->as<RockEntity>());
-	} else if(other->getType() == TYPE_ENERGY_BAR) {
+	} else if(other->getType() == TYPE_ENERGY_BAR 
+		|| other->getType() == TYPE_END_BARRIER) {
 		gameEventCreator.addPortalsReset(this);
 
 		if(carriedRock != nullptr) {
