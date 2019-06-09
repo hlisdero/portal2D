@@ -5,9 +5,10 @@
 
 class Button : public Block {
 public:
-    Button(const Size& size, const Position& initial, const WorldViewSettings& settings, const Texture& texture);
+    Button(const Size& size, const Position& initial,
+           const WorldViewSettings& settings, const Texture& texture);
 
-    void toggleState();
+    virtual SDL_Rect* getClip() override;
 };
 
 #endif  // BUTTON_H
