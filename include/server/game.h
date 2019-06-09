@@ -25,7 +25,7 @@ public:
 	void update();
 
     const std::vector<Entity*>& getStaticEntities() const;
-    const std::vector<Entity*> getDynamicEntities() const;
+    const std::vector<Entity*>& getDynamicEntities() const;
 
 	// void addEvent();
 	void processEvent();

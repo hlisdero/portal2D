@@ -15,7 +15,7 @@ World::World(Map& map, EventCreator& eventCreator) :
 		bodyFactory.createBody(staticEntities[i]);
 	}
 
-	const std::vector<Entity*> & dynamicEntities = map.getDynamicEntities();
+	dynamicEntities = map.getDynamicEntities();
 	for(uint i = 0; i < dynamicEntities.size(); i++) {
 		bodyFactory.createBody(dynamicEntities[i]);
 	}
@@ -23,6 +23,8 @@ World::World(Map& map, EventCreator& eventCreator) :
 
 void World::createPlayer(PlayerEntity * player) {
 	players.push_back(player);
+	// TODO maybe reimplement
+	dynamicEntities.push_back(player);
 
 	b2Vec2 & spawn = map.getSpawn();
 	player->setX(spawn.x);
@@ -66,6 +68,10 @@ void World::createPortal(PlayerEntity& player, ClickDirection& direction) {
 }
 
 void World::updatePhysics() {
+	for(uint i = 0; i < players.size(); i++) {
+		players[i]->applyMovement();
+	}
+
 	// TODO change to constantes
 	float32 timeStep = 1.0f / 60.0f;
 	int32 velocityIterations = 6;
@@ -73,31 +79,42 @@ void World::updatePhysics() {
 
 	world.Step(timeStep, velocityIterations, positionIterations);
 
-	for(uint i = 0; i < players.size(); i++) {
-		players[i]->applyMovement();
-	}
+	updateDynamics();
 }
 
-const std::vector<Entity*> World::getDynamicEntities() const {
+void World::updateDynamics() {
 	const b2Body * body = world.GetBodyList();
 
-	std::vector<Entity*> entities;
+	dynamicEntities.clear();
 
 	while(body != nullptr) {
 		Entity * entity = (Entity *) body->GetUserData();
 
 		if(entity->getType() >= DYNAMIC_ENTITY_START) {
-			const b2Vec2 position = body->GetPosition();
-			entity->setX(position.x);
-			entity->setY(position.y);
+			if(!entity->as<TeleportableEntity>()->applyPositionReset()) {
+				b2Vec2 position = body->GetPosition();
 
-			entities.push_back(entity);
+				// Set grabed rock to holder position 
+				if(entity->getType() == TYPE_ROCK) {
+					PlayerEntity* rockHolder = entity->as<RockEntity>()->getHolder();
+					if(rockHolder != nullptr) {
+						position = rockHolder->getBody()->GetPosition();
+					}
+				}
+
+				entity->setX(position.x);
+				entity->setY(position.y);
+			}
+
+			dynamicEntities.push_back(entity);
 		}
 
 		body = body->GetNext();
 	}
+}
 
-	return std::move(entities);
+const std::vector<Entity*>& World::getDynamicEntities() const {
+	return dynamicEntities;
 }
 
 int World::getPlayersCount() {

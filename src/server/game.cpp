@@ -35,8 +35,8 @@ const std::vector<Entity*>& Game::getStaticEntities() const {
 	return map.getStaticEntities();
 }
 
-const std::vector<Entity*> Game::getDynamicEntities() const {
-	return std::move(world.getDynamicEntities());
+const std::vector<Entity*>& Game::getDynamicEntities() const {
+	return world.getDynamicEntities();
 }
 
 void Game::processEvent() {

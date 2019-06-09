@@ -94,28 +94,10 @@ b2PolygonShape BodyFactory::createShape(Entity * entity) {
 }
 
 void BodyFactory::attachBody(Entity * entity, b2Body * body) {
-	// TODO find a better way?
-	switch(entity->getType()) {
-		case TYPE_PLAYER:
-			entity->as<PlayerEntity>()->attachBody(body);
-			break;
-		case TYPE_ROCK:
-			entity->as<RockEntity>()->attachBody(body);
-			break;
-		case TYPE_PORTAL:
-			entity->as<PortalEntity>()->attachBody(body);
-			break;
-		case TYPE_END_BARRIER:
-			entity->as<EndBarrierEntity>()->attachBody(body);
-			break;
-		case TYPE_ENERGY_BALL:
-			entity->as<EnergyBallEntity>()->attachBody(body);
-			break;
-		case TYPE_GATE:
-			entity->as<DoorEntity>()->attachBody(body);
-			break;
-		default:
-			break;
+	if(entity->getType() >= DYNAMIC_ENTITY_START ||
+		entity->getType() == TYPE_GATE ||
+		entity->getType() == TYPE_PORTAL) {
+		entity->as<BodyLinked>()->attachBody(body);
 	}
 }
 
