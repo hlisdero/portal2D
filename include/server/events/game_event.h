@@ -10,7 +10,8 @@ enum GameEventType {
     ENTITY_SET_ACTIVE,
     ENTITY_TELEPORT,
     PORTALS_RESET,
-    GAME_STATUS_CHANGE
+    GAME_STATUS_CHANGE,
+    KILL_PLAYER
 };
 
 class GameEvent {

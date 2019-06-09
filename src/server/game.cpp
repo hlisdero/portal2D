@@ -3,7 +3,7 @@
 Game::Game(const char* mapName, EventCreator& eventCreator) :
 	gameEventCreator(eventsQueue),
 	map(mapName, gameEventCreator),
-	world(map, eventCreator),
+	world(map, eventCreator, gameEventCreator),
 	eventCreator(eventCreator),
 	player(gameEventCreator) {}
 
@@ -23,8 +23,6 @@ void Game::createPortal(PlayerEntity& player, ClickDirection& direction) {
 }
 
 void Game::update() {
-	// TODO Check defeat
-
 	// Update contacts => generate events
 	world.updatePhysics();
 	// With events, do things => change position, state,...
@@ -65,15 +63,12 @@ void Game::processGameEvents() {
 				status = event.status;
 				// TODO notify client
 				break;
+			case KILL_PLAYER:
+				world.killPlayer(event.entity->as<PlayerEntity>());
+				// TODO notify client
+				break;
 			default:
 				throw std::runtime_error("Unsupported game event type");
 		}
 	}
-
-	// if player join
-	//	createPlayer
-	// if playerCount > map.getRequiredPlayersCount(): status= In progress
-
-	// if player move
-	//	move player
 }

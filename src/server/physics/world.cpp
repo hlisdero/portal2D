@@ -3,11 +3,12 @@
 #include "server/physics/portal_ray_cast_callback.h"
 
 // Initialize the world with the gravity vector
-World::World(Map& map, EventCreator& eventCreator) :
+World::World(Map& map, EventCreator& eventCreator, GameEventCreator & gameEventCreator) :
 	world(b2Vec2(0.0f, -10.0f)),
 	bodyFactory(world),
 	map(map),
-	eventCreator(eventCreator) {
+	eventCreator(eventCreator),
+	gameEventCreator(gameEventCreator) {
 	world.SetContactListener(&contactListener);
 
 	const std::vector<Entity*> & staticEntities = map.getStaticEntities();
@@ -31,6 +32,25 @@ void World::createPlayer(PlayerEntity * player) {
 	player->setY(spawn.y);
 
 	bodyFactory.createBody(player);
+}
+
+void World::killPlayer(PlayerEntity * player) {
+	auto it = players.begin();
+
+	while(it != players.end() && *it != player) {
+		it++;
+	}
+
+	if(it != players.end()) {
+		players.erase(it);
+		world.DestroyBody(player->getBody());
+
+		if(players.size() < map.getMinPlayers()) {
+			gameEventCreator.addGameStateChange(DEFEAT);
+		}
+	} else {
+		throw std::runtime_error("Impossible to delete non existing player");
+	}
 }
 
 void World::createPortal(PlayerEntity& player, ClickDirection& direction) {
@@ -113,7 +133,7 @@ const std::vector<Entity*>& World::getDynamicEntities() const {
 	return dynamicEntities;
 }
 
-int World::getPlayersCount() {
+size_t World::getPlayersCount() {
 	return players.size();
 }
 

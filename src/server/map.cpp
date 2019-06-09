@@ -20,12 +20,12 @@ b2Vec2 & Map::getSpawn() {
 	return spawn;
 }
 
-int Map::getMinPlayers() {
+size_t Map::getMinPlayers() {
 	return minPlayers;
 }
 
 void Map::loadSettings(YAML::Node yaml) {
-	minPlayers = yaml["min-players"].as<int>();
+	minPlayers = yaml["min-players"].as<size_t>();
 
 	YAML::Node spawn = yaml["spawn"];
 	this->spawn.x = spawn["x"].as<float>();

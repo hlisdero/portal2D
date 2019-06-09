@@ -12,6 +12,7 @@
 #include "server/entities/utils/body_factory.h"
 #include "server/physics/contact_listener.h"
 #include "server/events/event_creator.h"
+#include "server/events/game_event_creator.h"
 
 /*
 	y
@@ -25,9 +26,10 @@
 
 class World {
 public:
-	explicit World(Map& map, EventCreator& eventCreator);
+	explicit World(Map& map, EventCreator& eventCreator, GameEventCreator & gameEventCreator);
 
     void createPlayer(PlayerEntity* player);
+    void killPlayer(PlayerEntity* player);
     void createPortal(PlayerEntity& player, ClickDirection& direction);
 
     void updatePhysics();
@@ -35,7 +37,7 @@ public:
 
 	const std::vector<Entity*>& getDynamicEntities() const;
 
-	int getPlayersCount();
+	size_t getPlayersCount();
 
 	b2World & getb2World();
 
@@ -44,6 +46,7 @@ private:
 	BodyFactory bodyFactory;
 	Map& map;
 	EventCreator& eventCreator;
+	GameEventCreator& gameEventCreator;
 
     bool portal_color = false;
 

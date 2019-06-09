@@ -26,3 +26,8 @@ void GameEventCreator::addGameStateChange(GameStatus status) {
 	GameEvent event(status);
 	queue.push(event);
 }
+
+void GameEventCreator::addKillPlayer(Entity * entity) {
+	GameEvent event(KILL_PLAYER, entity);
+	queue.push(event);
+}

@@ -77,16 +77,26 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 	handleFloorContact(contact, inContact);
 	TeleportableEntity::handleContactWith(other, contact, inContact);
 
-	if(inContact && other->getType() == TYPE_ROCK) {
-		grabRock(other->as<RockEntity>());
-	} else if(other->getType() == TYPE_ENERGY_BAR 
-		|| other->getType() == TYPE_END_BARRIER) {
-		gameEventCreator.addPortalsReset(this);
+	switch(other->getType()) {
+		case TYPE_ROCK:
+			if(inContact) {
+				grabRock(other->as<RockEntity>());
+			}
+			break;
+		case TYPE_ENERGY_BAR:
+		case TYPE_END_BARRIER:
+			gameEventCreator.addPortalsReset(this);
 
-		if(carriedRock != nullptr) {
-			carriedRock->respawn();
-			releaseRock();
-		}
+			if(carriedRock != nullptr) {
+				carriedRock->respawn();
+				releaseRock();
+			}
+			break;
+		case TYPE_ACID:
+			gameEventCreator.addKillPlayer(this);
+			break;
+		default:
+			break;
 	}
 }
 

@@ -15,6 +15,8 @@ public:
 	void addPortalsReset(Entity * entity);
 
 	void addGameStateChange(GameStatus status); 
+	
+	void addKillPlayer(Entity* entity); 
 
 private:
 	SafeQueue<GameEvent>& queue;
