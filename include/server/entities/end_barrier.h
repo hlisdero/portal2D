@@ -1,6 +1,8 @@
 #ifndef END_BARRIER_ENTITY_H
 #define END_BARRIER_ENTITY_H
 
+#include <map>
+
 #include "server/entities/entity.h"
 #include "server/entities/player.h"
 #include "server/entities/attributes/body_linked.h"

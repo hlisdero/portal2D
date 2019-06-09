@@ -4,10 +4,12 @@
 #define PORTALS_NB 2
 
 #include <cmath>
+#include <vector>
 
 #include "Box2D/Box2D.h"
 
 #include "common/objects/move_direction.h"
+#include "common/objects/portal_color.h"
 #include "server/entities/entity.h"
 #include "server/entities/portal.h"
 #include "server/entities/attributes/body_linked.h"

@@ -1,11 +1,11 @@
 #ifndef PORTAL_ENTITY_H
 #define PORTAL_ENTITY_H
 
+#include "common/objects/portal_color.h"
 #include "server/entities/entity.h"
-#include "server/entities/attributes/with_state.h"
 #include "server/entities/attributes/body_linked.h"
 
-class PortalEntity :  public Entity, public WithState, public BodyLinked {
+class PortalEntity :  public Entity, public BodyLinked {
 public:
 	PortalEntity(const float x, const float y, const b2Vec2 & normal, const PortalColor color);
 
@@ -19,6 +19,7 @@ public:
 private:
 	PortalEntity * twin = nullptr;
 	b2Vec2 outVector;
+	PortalColor color;
 
 	static float getRotationFromNormal(const b2Vec2 & normal);
 };
