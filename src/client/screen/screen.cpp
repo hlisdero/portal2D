@@ -18,6 +18,33 @@ const size_t& Screen::getHeight() const {
     return window.height;
 }
 
+void Screen::handle(const SDL_Event& event) {
+    switch (event.window.event) {
+        case SDL_WINDOWEVENT_SIZE_CHANGED:
+            window.width = event.window.data1;
+            window.height = event.window.data2;
+            update();
+            break;
+        case SDL_WINDOWEVENT_EXPOSED:
+            update();
+            break;
+        case SDL_WINDOWEVENT_MINIMIZED:
+            window.minimized = true;
+            break;
+        case SDL_WINDOWEVENT_MAXIMIZED:
+        case SDL_WINDOWEVENT_RESTORED:
+            window.minimized = false;
+            break;
+    }
+}
+
+void Screen::handle(const KeyboardEvent& event) {
+    if (!event.pressed || event.key != SDLK_p) {
+        return;
+    }
+    window.toggleFullscreen();
+}
+
 void Screen::clear() {
     renderer.clear();
 }
@@ -84,6 +111,9 @@ void Screen::resetViewport() {
 }
 
 void Screen::update() {
+    if (window.minimized) {
+        return;
+    }
     if (camera) {
         camera->center();
     }

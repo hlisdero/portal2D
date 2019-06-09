@@ -6,7 +6,7 @@
 
 class Background : public Drawable {
 public:
-    Background(size_t width, size_t height, const Texture& texture);
+    Background(const size_t& width, const size_t& height, const Texture& texture);
 
     virtual const Texture& getTexture() override;
     virtual int getX() const override;
@@ -16,8 +16,8 @@ public:
     virtual SDL_Rect* getClip() override;
 
 private:
-    size_t width;
-    size_t height;
+    const size_t& width;
+    const size_t& height;
     const Texture& texture;
     SDL_Rect clip;
 };

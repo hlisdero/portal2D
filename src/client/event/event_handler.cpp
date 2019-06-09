@@ -12,10 +12,17 @@ void EventHandler::add(MouseHandler* mouse_handler) {
     mouse_handlers.push_back(mouse_handler);
 }
 
+void EventHandler::add(WindowEventHandler* new_window_event_handler) {
+    window_event_handler = new_window_event_handler;
+}
+
 void EventHandler::poll() {
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
             quit_flag = true;
+        }
+        if (isWindowEvent(event) && window_event_handler) {
+            window_event_handler->handle(event);
         }
         if (isKeyboardEvent(event)) {
             KeyboardEvent keyboard_event(event);
@@ -38,6 +45,10 @@ void EventHandler::broadcast(MouseEvent event) const {
     for (auto &handler : mouse_handlers) {
         handler->handle(event);
     }
+}
+
+bool EventHandler::isWindowEvent(SDL_Event event) const {
+    return event.type == SDL_WINDOWEVENT;
 }
 
 bool EventHandler::isKeyboardEvent(SDL_Event event) const {

@@ -1,6 +1,6 @@
 #include "client/objects/background.h"
 
-Background::Background(size_t width, size_t height, const Texture& texture) :
+Background::Background(const size_t& width, const size_t& height, const Texture& texture) :
     width(width), height(height), texture(texture) {
     clip = {0, 0, (int) width, (int) height};
 }
@@ -26,5 +26,6 @@ int Background::getHeight() const {
 }
 
 SDL_Rect* Background::getClip() {
+    clip = {0, 0, (int) width, (int) height};
     return &clip;
 }

@@ -17,9 +17,12 @@ public:
 
     const size_t& getScreenWidth() const;
     const size_t& getScreenHeight() const;
+
     const double& getRatio() const;
+
     size_t getLevelWidth() const;
     size_t getLevelHeight() const;
+
     const TextureLoader& getTextureLoader() const;
 
     void changeRatioCameraMode();

@@ -2,12 +2,14 @@
 
 WorldView::WorldView(float world_width, float world_height, BlockingQueue<ViewEvent>& queue) :
     event_manager(queue),
-    screen(screen_width, screen_height),
+    screen(1024, 768),
     settings(screen.getWidth(), screen.getHeight(), world_width, world_height, screen.getTextureCreator()),
-    background(screen_width, screen_height, settings.getTextureLoader()["Background"]),
+    background(settings.getScreenWidth(), settings.getScreenHeight(), settings.getTextureLoader()["Background"]),
     object_creator(view_objects, settings) {
     event_manager.addHandler((KeyboardHandler*) &sound_manager);
     event_manager.addHandler((MouseHandler*) &sound_manager);
+    event_manager.addHandler((WindowEventHandler*) &screen);
+    event_manager.addHandler((KeyboardHandler*) &screen);
 }
 
 WorldView::~WorldView() {

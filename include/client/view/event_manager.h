@@ -18,6 +18,7 @@ public:
 
     void addHandler(KeyboardHandler* keyboard_handler);
     void addHandler(MouseHandler* mouse_handler);
+    void addHandler(WindowEventHandler* window_event_handler);
 
     void pollEvents();
     bool quit() const;

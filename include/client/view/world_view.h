@@ -35,8 +35,6 @@ public:
     void update();
 
 private:
-    const size_t screen_width = 1024;
-    const size_t screen_height = 768;
     EventManager event_manager;
     SoundManager sound_manager;
     Screen screen;

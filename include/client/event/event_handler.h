@@ -7,6 +7,7 @@
 #include "client/event/keyboard_event.h"
 #include "client/event/keyboard_handler.h"
 #include "client/event/mouse_handler.h"
+#include "client/event/window_event_handler.h"
 
 class EventHandler {
 public:
@@ -21,6 +22,7 @@ public:
 
     void add(KeyboardHandler* keyboard_handler);
     void add(MouseHandler* mouse_handler);
+    void add(WindowEventHandler* window_event_handler);
 
     void poll();
 
@@ -29,10 +31,12 @@ private:
     SDL_Event event;
     std::vector<KeyboardHandler*> keyboard_handlers;
     std::vector<MouseHandler*> mouse_handlers;
+    WindowEventHandler* window_event_handler = nullptr;
 
     void broadcast(KeyboardEvent event) const;
     void broadcast(MouseEvent event) const;
 
+    bool isWindowEvent(SDL_Event event) const;
     bool isKeyboardEvent(SDL_Event event) const;
     bool isMouseEvent(SDL_Event event) const;
 };

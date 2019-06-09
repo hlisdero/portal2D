@@ -9,8 +9,10 @@
 #include "client/screen/camera.h"
 #include "client/texture/texture_creator.h"
 #include "client/texture/color.h"
+#include "client/event/window_event_handler.h"
+#include "client/event/keyboard_handler.h"
 
-class Screen {
+class Screen : public WindowEventHandler, public KeyboardHandler {
 public:
     explicit Screen(size_t width = DEFAULT_SCREEN_WIDTH,
                     size_t height = DEFAULT_SCREEN_HEIGHT);
@@ -24,6 +26,9 @@ public:
 
     const size_t& getWidth() const;
     const size_t& getHeight() const;
+
+    virtual void handle(const SDL_Event& event) override;
+    virtual void handle(const KeyboardEvent& event) override;
 
     void clear();
 

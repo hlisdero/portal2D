@@ -15,6 +15,10 @@ void EventManager::addHandler(MouseHandler* mouse_handler) {
     event_handler.add(mouse_handler);
 }
 
+void EventManager::addHandler(WindowEventHandler* window_event_handler) {
+    event_handler.add(window_event_handler);
+}
+
 void EventManager::pollEvents() {
     event_handler.poll();
 }

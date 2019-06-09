@@ -19,8 +19,12 @@ public:
 
     SDL_Window* get() const;
 
-    const size_t width;
-    const size_t height;
+    void toggleFullscreen();
+
+    size_t width;
+    size_t height;
+    bool minimized = false;
+    bool fullscreen = false;
 
 private:
     SDL_Window* window = nullptr;

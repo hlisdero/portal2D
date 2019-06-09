@@ -21,7 +21,8 @@ Window::Window(size_t width, size_t height) : width(width), height(height) {
     }
 
     window = SDL_CreateWindow("Portal2D", SDL_WINDOWPOS_UNDEFINED,
-                    SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN );
+                    SDL_WINDOWPOS_UNDEFINED, width, height,
+                    SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if (!window) {
         std::string error_message("Error al crear la ventana: ");
         error_message += std::string(SDL_GetError());
@@ -38,4 +39,15 @@ Window::~Window() {
 
 SDL_Window* Window::get() const {
     return window;
+}
+
+void Window::toggleFullscreen() {
+    if (fullscreen) {
+        SDL_SetWindowFullscreen(window, SDL_FALSE);
+        fullscreen = false;
+    } else {
+        SDL_SetWindowFullscreen(window, SDL_TRUE);
+        fullscreen = true;
+        minimized = false;
+    }
 }
