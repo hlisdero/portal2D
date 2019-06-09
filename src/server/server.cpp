@@ -22,7 +22,7 @@ void Server::processQueue() {
     std::vector<ViewEvent> events = queue.popAll();
     for (auto& event : events) {
         if (event.type == KEYBOARD) {
-            movePlayer(event.direction, event.pressed);
+            game.movePlayer(event.direction, event.pressed);
         } else if (event.type == MOUSE) {
             game.createPortal(game.player, event.click_direction);
         } else if (event.type == QUIT) {
@@ -30,12 +30,4 @@ void Server::processQueue() {
         }
     }
     game.update();
-}
-
-void Server::movePlayer(const MoveDirection direction, const bool pressed) {
-	if (pressed) {
-		game.player.keyDown(direction);
-	} else {
-		game.player.keyUp(direction);
-	}
 }

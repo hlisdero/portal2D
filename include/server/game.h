@@ -37,6 +37,7 @@ public:
 	Game(const char* mapName, EventCreator& eventCreator);
 
 	void addPlayer(PlayerEntity* player);
+    void movePlayer(const MoveDirection direction, const bool pressed);
 	void createPortal(PlayerEntity& player, ClickDirection& direction);
 
 	void update();

@@ -17,6 +17,14 @@ void Game::addPlayer(PlayerEntity* player) {
 	}
 }
 
+void Game::movePlayer(const MoveDirection direction, const bool pressed) {
+    if (pressed) {
+        player.keyDown(direction);
+    } else {
+        player.keyUp(direction);
+    }
+}
+
 void Game::createPortal(PlayerEntity& player, ClickDirection& direction) {
 	world.createPortal(player, direction);
 }
