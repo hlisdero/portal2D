@@ -25,6 +25,10 @@
 #define PORTAL_REACH 30.0f
 #define GRAVITY -10.0f
 
+#define TIME_STEP 1.0f / 60.0f
+#define VELOCITY_ITERATIONS 6
+#define POSITION_ITERATIONS 2
+
 class World {
 public:
 	explicit World(Map& map, GameEventCreator & gameEventCreator);
@@ -58,6 +62,8 @@ private:
 	std::vector<Entity*> dynamicEntities;
 
 	ContactListener contactListener;
+
+	void updateEntityPosition(const b2Body * body);
 };
 
 #endif  // WORLD_H

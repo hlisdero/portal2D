@@ -1,10 +1,10 @@
 #include "server/map.h"
 
 Map::Map(const char * mapName, GameEventCreator & gameEventCreator) : 
-	endZone(gameEventCreator), gameEventCreator(gameEventCreator) {
+	endZone(gameEventCreator) {
 	YAML::Node file = YAML::LoadFile(mapName);
     loadSettings(file);
-	loadEntities(file);
+	loadEntities(file, gameEventCreator);
 	endZone.setNumberOfPlayersForVictory(minPlayers - 1);
 }
 
@@ -32,14 +32,14 @@ void Map::loadSettings(YAML::Node yaml) {
 	this->spawn.y = spawn["y"].as<float>();
 }
 
-void Map::loadEntities(YAML::Node yaml) {
+void Map::loadEntities(YAML::Node yaml, GameEventCreator & gameEventCreator) {
 	YAML::Node entities = yaml["entities"];
 
 	std::map<std::string, WithSubscribableState*> subscribables;
 	std::vector<DoorEntity*> doors;
 
 	for(uint i = 0; i < entities.size(); i++) {
-		Entity * entity = createEntity(entities[i]);
+		Entity * entity = createEntity(entities[i], gameEventCreator);
 
 		if(entity->getType() < DYNAMIC_ENTITY_START) {
 			staticEntities.push_back(entity);
@@ -68,7 +68,7 @@ void Map::loadEntities(YAML::Node yaml) {
 	}
 }
 
-Entity * Map::createEntity(YAML::Node yaml) {
+Entity * Map::createEntity(YAML::Node yaml, GameEventCreator & gameEventCreator) {
 	std::string type_string = yaml["type"].as<std::string>();
 
 	Entity* entity = nullptr;

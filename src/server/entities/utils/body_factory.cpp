@@ -15,8 +15,7 @@ b2BodyDef BodyFactory::createBodyDef(Entity * entity) {
 	b2BodyDef bodyDef;
 
 	bodyDef.angle = entity->getRotationRad();
-	
-	bodyDef.position.Set(entity->getX(), entity->getY());
+	bodyDef.position = entity->getPosition();
 
 	if(entity->getType() == TYPE_PLAYER
 		|| entity->getType() == TYPE_ROCK) {
@@ -142,8 +141,7 @@ void BodyFactory::createBody(Entity * entity) {
 
 	// Set shape center to entity for client-side use
 	const b2Vec2 & center = fixture->GetAABB(0).GetCenter();
-	entity->setX(center.x);
-	entity->setY(center.y);
+	entity->setPosition(center);
 	
 	body->SetUserData(entity);
 	attachBody(entity, body);

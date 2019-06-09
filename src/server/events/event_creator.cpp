@@ -3,13 +3,15 @@
 EventCreator::EventCreator(BlockingQueue<WorldEvent>& queue) : queue(queue) {}
 
 void EventCreator::addEntityCreation(Entity* entity) {
-    Position position(entity->getX(), entity->getY(), entity->getRotationDeg());
+    const b2Vec2 & entityPos = entity->getPosition();
+    Position position(entityPos.x, entityPos.y, entity->getRotationDeg());
     WorldEvent event(entity->getId(), entity->getType(), position);
     queue.push(event);
 }
 
 void EventCreator::addPositionUpdate(Entity* entity) {
-    Position position(entity->getX(), entity->getY(), entity->getRotationDeg());
+    const b2Vec2 & entityPos = entity->getPosition();
+    Position position(entityPos.x, entityPos.y, entity->getRotationDeg());
     WorldEvent event(entity->getId(), position);
     queue.push(event);
 }

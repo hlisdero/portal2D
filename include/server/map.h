@@ -40,11 +40,9 @@ private:
 
 	EndZone endZone;
 
-	GameEventCreator& gameEventCreator;
-
 	void loadSettings(YAML::Node yaml);
-	void loadEntities(YAML::Node yaml);
-	Entity * createEntity(YAML::Node yaml);
+	void loadEntities(YAML::Node yaml, GameEventCreator & gameEventCreator);
+	Entity * createEntity(YAML::Node yaml, GameEventCreator & gameEventCreator);
 
     EntityType getEntityType(std::string str);
 };

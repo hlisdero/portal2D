@@ -32,8 +32,6 @@ PlayerEntity * World::createPlayer() {
 	bodyFactory.createBody(newPlayer);
 
 	players.push_back(newPlayer);
-	// TODO maybe reimplement
-	dynamicEntities.push_back(newPlayer);
 
 	return newPlayer;
 }
@@ -74,7 +72,7 @@ void World::createPortal(PlayerEntity * player, ClickDirection& direction, Event
 
 		PortalEntity * portal = player->getPortal(color);
 		if(portal != nullptr) {
-			portal->move(callback.m_point.x, callback.m_point.y, callback.m_normal);
+			portal->move(callback.m_point, callback.m_normal);
 			eventCreator.addPositionUpdate(portal);
 		} else {
 			portal = new PortalEntity(callback.m_point.x, callback.m_point.y, callback.m_normal, color);
@@ -94,12 +92,7 @@ void World::updatePhysics() {
 		players[i]->applyMovement();
 	}
 
-	// TODO change to constantes
-	float32 timeStep = 1.0f / 60.0f;
-	int32 velocityIterations = 6;
-	int32 positionIterations = 2;
-
-	world.Step(timeStep, velocityIterations, positionIterations);
+	world.Step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 }
 
 void World::updateDynamics() {
@@ -108,27 +101,30 @@ void World::updateDynamics() {
 	dynamicEntities.clear();
 
 	while(body != nullptr) {
-		Entity * entity = (Entity *) body->GetUserData();
-
-		if(entity->getType() >= DYNAMIC_ENTITY_START) {
-			b2Vec2 position = body->GetPosition();
-
-			// Set grabed rock to holder position 
-			if(entity->getType() == TYPE_ROCK) {
-				PlayerEntity* rockHolder = entity->as<RockEntity>()->getHolder();
-				if(rockHolder != nullptr) {
-					position = rockHolder->getBody()->GetPosition();
-				}
-			}
-
-			entity->setX(position.x);
-			entity->setY(position.y);
-
-			dynamicEntities.push_back(entity);
-		}
-
+		updateEntityPosition(body);
 		body = body->GetNext();
 	}
+}
+
+void World::updateEntityPosition(const b2Body * body) {
+	Entity * entity = (Entity *) body->GetUserData();
+
+	if(entity->getType() < DYNAMIC_ENTITY_START) {
+		return;
+	}
+
+	b2Vec2 position = body->GetPosition();
+
+	// Set grabed rock to holder position 
+	if(entity->getType() == TYPE_ROCK) {
+		PlayerEntity* rockHolder = entity->as<RockEntity>()->getHolder();
+		if(rockHolder != nullptr) {
+			position = rockHolder->getBody()->GetPosition();
+		}
+	}
+
+	entity->setPosition(position);
+	dynamicEntities.push_back(entity);
 }
 
 const std::vector<Entity*>& World::getDynamicEntities() const {

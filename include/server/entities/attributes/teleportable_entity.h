@@ -22,7 +22,7 @@ public:
 protected:
 	GameEventCreator& gameEventCreator;
 
-	void teleportTo(float x, float y);
+	void teleportTo(const b2Vec2 & position);
 
 private:
 	int goingTroughPortal = 0;

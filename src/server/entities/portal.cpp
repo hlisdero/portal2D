@@ -14,10 +14,10 @@ const b2Vec2 & PortalEntity::getOutVector() const {
 	return this->outVector;
 }
 
-void PortalEntity::move(const float newX, const float newY, const b2Vec2 & outVector) {
-	this->getBody()->SetTransform(b2Vec2(newX, newY), 0);
-	this->setX(newX);
-	this->setY(newY);
+void PortalEntity::move(const b2Vec2 newPosition, const b2Vec2 & outVector) {
+	this->getBody()->SetTransform(newPosition, 0);
+	this->setPosition(newPosition);
+	
 	this->outVector = outVector;
 	this->setRotationDeg(getRotationFromNormal(outVector));
 }

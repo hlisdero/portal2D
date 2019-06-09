@@ -49,20 +49,18 @@ void TeleportableEntity::goThroughPortal(PortalEntity * inPortal) {
 		getBody()->SetLinearVelocity(outVelocity);
 
 		goingTroughPortal = 2;
-		teleportTo(outPortal->getX() + outVector.x, 
-			outPortal->getY() + outVector.y);
+		teleportTo(outVector + outPortal->getPosition());
 	}
 }
 
-void TeleportableEntity::teleportTo(float x, float y) {
-	setX(x);
-	setY(y);
+void TeleportableEntity::teleportTo(const b2Vec2 & position) {
+	setPosition(position);
 	teleporting = true;
 	gameEventCreator.addTeleportation(this);	
 }
 
 void TeleportableEntity::teleport() {
-	getBody()->SetTransform(b2Vec2(getX(), getY()), 0);
+	getBody()->SetTransform(getPosition(), 0);
 	teleporting = false;
 }
 

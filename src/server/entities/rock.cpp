@@ -30,5 +30,5 @@ PlayerEntity* RockEntity::getHolder() {
 
 void RockEntity::respawn() {
 	getBody()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
-	teleportTo(initialPosition.x, initialPosition.y);
+	teleportTo(initialPosition);
 }

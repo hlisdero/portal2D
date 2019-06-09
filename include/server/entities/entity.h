@@ -1,6 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include "Box2D/Box2D.h"
 #include "common/entities/entities_types.h"
 
 #define PI 3.1415926f
@@ -11,10 +12,8 @@ public:
 
 	virtual ~Entity() = default;
 
-	float getX() const;
-	float getY() const;
-    void setX(float x);
-    void setY(float y);
+	const b2Vec2 & getPosition() const;
+	void setPosition(const b2Vec2 & position);
 
 	float getRotationRad() const;
 	float getRotationDeg() const;
@@ -32,8 +31,7 @@ public:
 
 private:
 	EntityType type;
-	float x;
-	float y;
+	b2Vec2 position;
 	float rotation;
 	// TODO uint ?
 	int id = 0;

@@ -1,22 +1,14 @@
 #include "server/entities/entity.h"
 
 Entity::Entity(EntityType type, float x, float y, float rotation) :
-    type(type), x(x), y(y), rotation(rotation) {}
+    type(type), position(x, y), rotation(rotation) {}
 
-float Entity::getX() const {
-    return x;
+const b2Vec2 & Entity::getPosition() const {
+    return position;
 }
 
-float Entity::getY() const {
-    return y;
-}
-
-void Entity::setX(float x) {
-    this->x = x;
-}
-
-void Entity::setY(float y) {
-    this->y = y;
+void Entity::setPosition(const b2Vec2 & newPosition) {
+    position = newPosition;
 }
 
 float Entity::getRotationDeg() const {
