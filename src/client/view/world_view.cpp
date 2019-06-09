@@ -6,7 +6,8 @@ WorldView::WorldView(float world_width, float world_height, BlockingQueue<ViewEv
     settings(screen.getWidth(), screen.getHeight(), world_width, world_height, screen.getTextureCreator()),
     background(screen_width, screen_height, settings.getTextureLoader()["Background"]),
     object_creator(view_objects, settings) {
-    event_manager.addHandler(&sound_manager);
+    event_manager.addHandler((KeyboardHandler*) &sound_manager);
+    event_manager.addHandler((MouseHandler*) &sound_manager);
 }
 
 WorldView::~WorldView() {

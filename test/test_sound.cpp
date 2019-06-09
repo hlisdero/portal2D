@@ -15,7 +15,7 @@ TEST_CASE("Sound Integration Test", "[modules][sound]") {
     // sound_manager.addSoundEffect("../test/data/scratch.wav");
 
     EventHandler event_handler;
-    event_handler.add(&sound_manager);
+    event_handler.add((MouseHandler*) &sound_manager);
 
     while (!event_handler.quit()) {
         event_handler.poll();

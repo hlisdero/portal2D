@@ -14,6 +14,7 @@ SoundManager::SoundManager() {
     }
 
     addMusic("../data/sounds/soundtrack.mp3");
+    addSoundEffect("../data/sounds/portal_creation.wav");
     playMusic(0);
 }
 
@@ -68,6 +69,15 @@ void SoundManager::handle(const KeyboardEvent& event) {
     }
     if (event.key == SDLK_m) {
         toggleMusic(0);
+    }
+}
+
+void SoundManager::handle(const MouseEvent& event) {
+    if (event.motion) {
+        return;
+    }
+    if (event.pressed) {
+        playSoundEffect(0);
     }
 }
 

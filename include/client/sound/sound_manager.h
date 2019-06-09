@@ -7,8 +7,9 @@
 #include "client/sound/sound_effect.h"
 #include "client/sound/music.h"
 #include "client/event/keyboard_handler.h"
+#include "client/event/mouse_handler.h"
 
-class SoundManager : public KeyboardHandler {
+class SoundManager : public KeyboardHandler, public MouseHandler {
 public:
     explicit SoundManager();
 
@@ -28,6 +29,7 @@ public:
     void haltMusic();
 
     virtual void handle(const KeyboardEvent& event) override;
+    virtual void handle(const MouseEvent& event) override;
 
 private:
     std::vector<SoundEffect> sound_effects;

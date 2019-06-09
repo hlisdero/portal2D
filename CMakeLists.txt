@@ -60,6 +60,9 @@ target_include_directories(server PRIVATE ${PROJECT_SOURCE_DIR}/include/)
 target_compile_options(server PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
 target_link_libraries(server "-pthread" ${BOX2D_LIBRARIES} ${YAML_CPP_LIBRARIES})
 
+# Game
+add_custom_target(game DEPENDS client server)
+
 # Interface-Test
 # Client
 add_executable(interface-test-client ${test_interface_client_sources})
