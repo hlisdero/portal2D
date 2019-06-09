@@ -12,6 +12,7 @@ public:
 	void addStateUpdate(Entity* entity);
 	void addTeleportation(Entity * entity);
 	void addSetActiveEntity(Entity * entity, bool active);
+	void addPortalsReset(Entity * entity);
 
 private:
 	SafeQueue<GameEvent>& queue;

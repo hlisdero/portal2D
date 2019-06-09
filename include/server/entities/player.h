@@ -32,6 +32,7 @@ public:
 
 	PortalEntity * getPortal(PortalColor color);
 	void setPortal(PortalColor color, PortalEntity * portal);
+	void resetPortals(b2World & world);
 
 	void applyMovement();
 
@@ -46,7 +47,7 @@ private:
 	MoveDirection moveDirection = NONE;
 
 	PortalEntity * portals[PORTALS_NB];
-	RockEntity * carriedRock;
+	RockEntity * carriedRock = nullptr;
 
 	void applyImpulseToCenter(float vx, float vy);
 

@@ -13,6 +13,8 @@ public:
 	// TODO add rock type
 	RockEntity(float x, float y, float rotation, GameEventCreator & GameEventCreator);
 
+	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
+
 	void grab(PlayerEntity * player);
 	void release();
 

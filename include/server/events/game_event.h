@@ -7,7 +7,8 @@ enum GameEventType {
     INVALID_GE = 0,
     ENTITY_STATE_UPDATE,
     ENTITY_SET_ACTIVE,
-    ENTITY_TELEPORT
+    ENTITY_TELEPORT,
+    PORTALS_RESET
 };
 
 class GameEvent {

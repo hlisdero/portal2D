@@ -61,6 +61,10 @@ void Game::processGameEvents() {
 			case ENTITY_TELEPORT:
 				event.entity->as<TeleportableEntity>()->teleport();
 				break;
+			case PORTALS_RESET:
+				event.entity->as<PlayerEntity>()->resetPortals(world.getb2World());
+				// TODO notify client
+				break;
 			default:
 				throw std::runtime_error("Unsupported game event type");
 		}

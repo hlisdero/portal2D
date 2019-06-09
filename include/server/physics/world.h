@@ -37,6 +37,8 @@ public:
 
 	int getPlayersCount();
 
+	b2World & getb2World();
+
 private:
 	b2World world;
 	BodyFactory bodyFactory;

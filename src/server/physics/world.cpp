@@ -116,3 +116,7 @@ const std::vector<Entity*>& World::getDynamicEntities() const {
 int World::getPlayersCount() {
 	return players.size();
 }
+
+b2World & World::getb2World() {
+	return world;
+}

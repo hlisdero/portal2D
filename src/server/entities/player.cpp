@@ -30,6 +30,17 @@ void PlayerEntity::setPortal(PortalColor color, PortalEntity * portal) {
 	portals[color] = portal;
 }
 
+void PlayerEntity::resetPortals(b2World & world) {
+	for(int i = 0; i < PORTALS_NB; i++) {
+		if(portals[i] != nullptr) {
+			world.DestroyBody(portals[i]->getBody());
+			delete portals[i];
+			
+			portals[i] = nullptr;
+		}
+	}
+}
+
 void PlayerEntity::handleFloorContact(b2Contact * contact, bool) {
 	b2WorldManifold worldManifold;
 	contact->GetWorldManifold(&worldManifold);
@@ -68,6 +79,13 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 
 	if(inContact && other->getType() == TYPE_ROCK) {
 		grabRock(other->as<RockEntity>());
+	} else if(other->getType() == TYPE_ENERGY_BAR) {
+		gameEventCreator.addPortalsReset(this);
+
+		if(carriedRock != nullptr) {
+			carriedRock->respawn();
+			releaseRock();
+		}
 	}
 }
 

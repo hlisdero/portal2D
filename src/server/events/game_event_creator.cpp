@@ -12,6 +12,11 @@ void GameEventCreator::addTeleportation(Entity * entity) {
 	queue.push(event);
 }
 
+void GameEventCreator::addPortalsReset(Entity * entity) {
+	GameEvent event(PORTALS_RESET, entity);
+	queue.push(event);
+}
+
 void GameEventCreator::addSetActiveEntity(Entity * entity, bool active) {
 	GameEvent event(entity, active);
 	queue.push(event);
