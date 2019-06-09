@@ -23,12 +23,11 @@ class PlayerEntity;
 
 class PlayerEntity :  public TeleportableEntity {
 public:
-	PlayerEntity(GameEventCreator & gameEventCreator);
+	PlayerEntity(b2Vec2 position, GameEventCreator & gameEventCreator);
 
 	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 
-	void keyDown(const MoveDirection direction);
-	void keyUp(const MoveDirection direction);
+	void move(const MoveDirection direction, bool pressed);
 
 	PortalEntity * getPortal(PortalColor color);
 	void setPortal(PortalColor color, PortalEntity * portal);

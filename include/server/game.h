@@ -26,12 +26,12 @@ private:
 
 public:
 	// TODO remove temp
-	PlayerEntity player;
+	PlayerEntity* player;
 
 	Game(const char* mapName, EventCreator& eventCreator);
 
-	void addPlayer(PlayerEntity* player);
-	void createPortal(PlayerEntity& player, ClickDirection& direction);
+	void addPlayer();
+	void createPortal(PlayerEntity* player, ClickDirection& direction);
 
 	void update();
 

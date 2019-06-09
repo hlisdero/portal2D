@@ -2,8 +2,8 @@
 
 #include "server/entities/rock.h"
 
-PlayerEntity::PlayerEntity(GameEventCreator& gameEventCreator) :
-	TeleportableEntity(TYPE_PLAYER, 0, 0, 0, gameEventCreator) {
+PlayerEntity::PlayerEntity(b2Vec2 position, GameEventCreator& gameEventCreator) :
+	TeleportableEntity(TYPE_PLAYER, position.x, position.y, 0, gameEventCreator) {
 	for(int i = 0; i < PORTALS_NB; i++) {
 		portals[i] = nullptr;
 	}
@@ -112,26 +112,24 @@ void PlayerEntity::releaseRock() {
 	carriedRock = nullptr;
 }
 
-void PlayerEntity::keyDown(const MoveDirection direction) {
-	switch(direction) {
-		// If on the floor, jump
-		case UP:
-			if(floorsContacts.size() > 0) {
-				// TODO load speed from file
-				applyImpulseToCenter(0.0f, 5.0f);
-			}
-			break;
-		case LEFT:
-		case RIGHT:
-			moveDirection = direction;
-			break;
-		default:
-			break;
-	}
-}
-
-void PlayerEntity::keyUp(const MoveDirection direction) {
-	if(moveDirection == direction) {
+void PlayerEntity::move(const MoveDirection direction, bool pressed) {
+	if(pressed) {
+		switch(direction) {
+			// If on the floor, jump
+			case UP:
+				if(floorsContacts.size() > 0) {
+					// TODO load speed from file
+					applyImpulseToCenter(0.0f, 5.0f);
+				}
+				break;
+			case LEFT:
+			case RIGHT:
+				moveDirection = direction;
+				break;
+			default:
+				break;
+		}
+	} else if(moveDirection == direction) {
 		moveDirection = NONE;
 	}
 }

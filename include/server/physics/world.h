@@ -23,14 +23,15 @@
 */
 
 #define PORTAL_REACH 30.0f
+#define GRAVITY -10.0f
 
 class World {
 public:
-	explicit World(Map& map, EventCreator& eventCreator, GameEventCreator & gameEventCreator);
+	explicit World(Map& map, GameEventCreator & gameEventCreator);
 
-    void createPlayer(PlayerEntity* player);
+    PlayerEntity * createPlayer();
     void killPlayer(PlayerEntity* player);
-    void createPortal(PlayerEntity& player, ClickDirection& direction);
+    void createPortal(PlayerEntity* player, ClickDirection& direction, EventCreator& eventCreator);
 
     void updatePhysics();
     void updateDynamics();
@@ -41,15 +42,16 @@ public:
 
 	b2World & getb2World();
 
+	~World();
+
 private:
 	b2World world;
 	BodyFactory bodyFactory;
-	Map& map;
-	EventCreator& eventCreator;
 	GameEventCreator& gameEventCreator;
 
     bool portal_color = false;
 
+    const b2Vec2 & playerSpawn;
 	std::vector<PlayerEntity*> players;
 
 	// TODO maybe update with methods instead of b2World.getEntities()

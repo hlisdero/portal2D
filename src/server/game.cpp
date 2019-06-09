@@ -3,12 +3,12 @@
 Game::Game(const char* mapName, EventCreator& eventCreator) :
 	gameEventCreator(eventsQueue),
 	map(mapName, gameEventCreator),
-	world(map, eventCreator, gameEventCreator),
-	eventCreator(eventCreator),
-	player(gameEventCreator) {}
+	world(map, gameEventCreator),
+	eventCreator(eventCreator) {}
 
-void Game::addPlayer(PlayerEntity* player) {
-	world.createPlayer(player);
+void Game::addPlayer() {
+	// TODO give to client
+	player = world.createPlayer();
 
 	// TODO Check in progress (enough player to play)
 	if(status == WAITING_FOR_PLAYERS
@@ -18,8 +18,8 @@ void Game::addPlayer(PlayerEntity* player) {
 	}
 }
 
-void Game::createPortal(PlayerEntity& player, ClickDirection& direction) {
-	world.createPortal(player, direction);
+void Game::createPortal(PlayerEntity * player, ClickDirection& direction) {
+	world.createPortal(player, direction, eventCreator);
 }
 
 void Game::update() {
@@ -65,6 +65,10 @@ void Game::processGameEvents() {
 				break;
 			case KILL_PLAYER:
 				world.killPlayer(event.entity->as<PlayerEntity>());
+
+				if(world.getPlayersCount() < map.getMinPlayers()) {
+					gameEventCreator.addGameStateChange(DEFEAT);
+				}
 				// TODO notify client
 				break;
 			default:

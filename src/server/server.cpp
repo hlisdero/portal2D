@@ -4,7 +4,8 @@ Server::Server(const char * mapName, ActiveSocket skt) :
 	interface(std::move(skt)),
     eventCreator(interface.getSendQueue()),
     game(mapName, eventCreator) {
-	game.addPlayer(&game.player);
+        
+	game.addPlayer();
     eventCreator.addEntityCreations(game.getStaticEntities());
     eventCreator.addEntityCreations(game.getDynamicEntities());
 }
@@ -33,9 +34,5 @@ void Server::processQueue() {
 }
 
 void Server::movePlayer(const MoveDirection direction, const bool pressed) {
-	if (pressed) {
-		game.player.keyDown(direction);
-	} else {
-		game.player.keyUp(direction);
-	}
+	game.player->move(direction, pressed);
 }

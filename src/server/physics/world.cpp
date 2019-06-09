@@ -3,12 +3,11 @@
 #include "server/physics/portal_ray_cast_callback.h"
 
 // Initialize the world with the gravity vector
-World::World(Map& map, EventCreator& eventCreator, GameEventCreator & gameEventCreator) :
-	world(b2Vec2(0.0f, -10.0f)),
+World::World(Map& map, GameEventCreator & gameEventCreator) :
+	world(b2Vec2(0.0f, GRAVITY)),
 	bodyFactory(world),
-	map(map),
-	eventCreator(eventCreator),
-	gameEventCreator(gameEventCreator) {
+	gameEventCreator(gameEventCreator),
+	playerSpawn(map.getSpawn()) {
 	world.SetContactListener(&contactListener);
 
 	const std::vector<Entity*> & staticEntities = map.getStaticEntities();
@@ -22,16 +21,21 @@ World::World(Map& map, EventCreator& eventCreator, GameEventCreator & gameEventC
 	}
 }
 
-void World::createPlayer(PlayerEntity * player) {
-	players.push_back(player);
+World::~World() {
+	for(PlayerEntity * player : players) {
+		delete player;
+	}
+}
+
+PlayerEntity * World::createPlayer() {
+	PlayerEntity * newPlayer = new PlayerEntity(playerSpawn, gameEventCreator);
+	bodyFactory.createBody(newPlayer);
+
+	players.push_back(newPlayer);
 	// TODO maybe reimplement
-	dynamicEntities.push_back(player);
+	dynamicEntities.push_back(newPlayer);
 
-	b2Vec2 & spawn = map.getSpawn();
-	player->setX(spawn.x);
-	player->setY(spawn.y);
-
-	bodyFactory.createBody(player);
+	return newPlayer;
 }
 
 void World::killPlayer(PlayerEntity * player) {
@@ -43,22 +47,20 @@ void World::killPlayer(PlayerEntity * player) {
 
 	if(it != players.end()) {
 		players.erase(it);
+		delete player;
 		world.DestroyBody(player->getBody());
-
-		if(players.size() < map.getMinPlayers()) {
-			gameEventCreator.addGameStateChange(DEFEAT);
-		}
 	} else {
 		throw std::runtime_error("Impossible to delete non existing player");
 	}
 }
 
-void World::createPortal(PlayerEntity& player, ClickDirection& direction) {
+void World::createPortal(PlayerEntity * player, ClickDirection& direction, EventCreator & eventCreator) {
+	// TODO remove
     portal_color = !portal_color;
     PortalColor color = portal_color ? COLOR_BLUE: COLOR_ORANGE;
 
     b2Vec2 dir_vec(direction.x, direction.y);
-	const b2Vec2 & origin = player.getBody()->GetPosition();
+	const b2Vec2 & origin = player->getBody()->GetPosition();
 	b2Vec2 end = origin + (PORTAL_REACH * dir_vec);
 
 	PortalRayCastCallback callback;
@@ -70,7 +72,7 @@ void World::createPortal(PlayerEntity& player, ClickDirection& direction) {
 
 		// create a portal
 
-		PortalEntity * portal = player.getPortal(color);
+		PortalEntity * portal = player->getPortal(color);
 		if(portal != nullptr) {
 			portal->move(callback.m_point.x, callback.m_point.y, callback.m_normal);
 			eventCreator.addPositionUpdate(portal);
@@ -79,7 +81,7 @@ void World::createPortal(PlayerEntity& player, ClickDirection& direction) {
 
 
 			bodyFactory.createBody(portal);
-			player.setPortal(color, portal);
+			player->setPortal(color, portal);
 
 			eventCreator.addEntityCreation(portal);
 		}
