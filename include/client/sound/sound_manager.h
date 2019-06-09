@@ -26,7 +26,9 @@ public:
     void playSoundEffect(size_t index);
     void playMusic(size_t index);
     void toggleMusic(size_t index);
-    void haltMusic();
+
+    int setMusicVolume(int volume);
+    int getCurrentMusicVolume() const;
 
     virtual void handle(const KeyboardEvent& event) override;
     virtual void handle(const MouseEvent& event) override;

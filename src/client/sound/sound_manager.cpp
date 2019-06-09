@@ -59,8 +59,12 @@ void SoundManager::toggleMusic(size_t index) {
     }
 }
 
-void SoundManager::haltMusic() {
-    Mix_HaltMusic();
+int SoundManager::setMusicVolume(int volume) {
+    return Mix_VolumeMusic(volume);
+}
+
+int SoundManager::getCurrentMusicVolume() const {
+    return Mix_VolumeMusic(-1);
 }
 
 void SoundManager::handle(const KeyboardEvent& event) {
@@ -69,6 +73,10 @@ void SoundManager::handle(const KeyboardEvent& event) {
     }
     if (event.key == SDLK_m) {
         toggleMusic(0);
+    } else if (event.key == SDLK_COMMA) {
+        setMusicVolume(getCurrentMusicVolume() - 20);
+    } else if (event.key == SDLK_PERIOD) {
+        setMusicVolume(getCurrentMusicVolume() + 20);
     }
 }
 
