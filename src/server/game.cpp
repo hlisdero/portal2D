@@ -12,12 +12,8 @@ Game::Game(const std::string& map_name, ClientManager& client_manager) :
 
 size_t Game::createPlayer() {
     PlayerEntity * player = world.createPlayer();
-
     event_creator.addEntityCreation(player);
-    // Send immediately to every client but 
-    // most importantly to the current client who need it to attach its camera
     client_manager.broadcast();
-
     return player->getId();
 }
 
@@ -29,6 +25,10 @@ void Game::init() {
     event_creator.addEntityCreations(map.getStaticEntities());
     event_creator.addEntityCreations(world.getDynamicEntities());
     client_manager.broadcast();
+
+    for (size_t i = 0; i < getMinPlayers(); ++i) {
+        client_manager.addSelectPlayer(i, createPlayer());
+    }
 }
 
 void Game::run() {
@@ -109,7 +109,8 @@ void Game::processQueue() {
         } else if (event.type == MOUSE) {
             world.createPortal(player, event.click_direction, event_creator);
         } else if (event.type == QUIT) {
-            quit = true;
+            // Un jugador se fue y ya fue desconectado
+            // Qué hacemos con el mundo?
         }
     }
 }

@@ -45,5 +45,6 @@ void Client::sendQuitSignal() {
     BlockingQueue<ViewEvent>& queue = interface.getSendQueue();
     ViewEvent quit_event;
     quit_event.type = QUIT;
+    quit_event.player_id = view.getPlayerIndex();
     queue.push(quit_event);
 }

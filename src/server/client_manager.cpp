@@ -28,11 +28,23 @@ void ClientManager::addSelectPlayer(int client_index, int player_index) {
 }
 
 void ClientManager::joinInputQueues() {
-    for (const auto& client : clients) {
-        std::vector<ViewEvent> events = client->getReceiveQueue().popAll();
+    bool delete_flag = false;
+    size_t index = clients.size();
+
+    for (size_t i = 0; i < clients.size(); ++i) {
+        std::vector<ViewEvent> events = clients[i]->getReceiveQueue().popAll();
         for (const auto& event : events) {
             view_events.push(event);
+            if (event.type == QUIT) {
+                delete_flag = true;
+                index = i;
+                break;  // Siguiente cliente
+            }
         }
+    }
+    if (delete_flag) {
+        delete clients[index];
+        clients.erase(clients.begin() + index);
     }
 }
 

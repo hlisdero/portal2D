@@ -25,6 +25,7 @@ public:
     bool quit() const;
 
     const ViewObjectCreator& getObjectCreator() const;
+    int getPlayerIndex() const;
 
     void createEntity(size_t index, EntityType type, const Position& initial);
     void destroyEntity(size_t index);

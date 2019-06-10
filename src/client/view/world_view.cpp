@@ -33,6 +33,13 @@ const ViewObjectCreator& WorldView::getObjectCreator() const {
     return object_creator;
 }
 
+int WorldView::getPlayerIndex() const {
+    if (!main_player) {
+        return -1;
+    }
+    return main_player->getIndex();
+}
+
 void WorldView::createEntity(size_t index, EntityType type, const Position& position) {
     switch (type) {
         case TYPE_STONE_BLOCK:
