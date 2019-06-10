@@ -23,6 +23,7 @@ public:
 
 private: 
 	EnergyEmitterEntity & owner;
+	bool justEmitted = true;
 };
 
 #endif  // ENERGY_BALL_ENTITY_H

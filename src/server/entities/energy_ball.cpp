@@ -10,14 +10,22 @@ EnergyBallEntity::EnergyBallEntity(const float intialX, const float intialY,
 void EnergyBallEntity::handleContactWith(Entity * other, b2Contact * contact, bool inContact) {
 	TeleportableEntity::handleContactWith(other, contact, inContact);
 
-	if(other->getType() >= DYNAMIC_ENTITY_START) {
+	if(isGoingThroughPortal() ||
+		other->getType() >= DYNAMIC_ENTITY_START ||
+		other->getType() == TYPE_PORTAL ||
+		other->getType() == TYPE_ENERGY_BAR) {
+		return;
+	}
+
+	if(other == &owner && justEmitted) {
+		justEmitted = inContact;
 		return;
 	}
 
 	if(other->getType() == TYPE_ENERGY_RECEIVER) {
 		other->as<EnergyReceiverEntity>()->setState(STATE_ENABLED);
-
-		owner.setNoBall();
-		gameEventCreator.addBallDestruction(this);
 	}
+
+	owner.setNoBall();
+	gameEventCreator.addBallDestruction(this);
 }
