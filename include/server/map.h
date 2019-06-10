@@ -9,25 +9,25 @@
 #include <vector>
 
 #include "server/entities/entity.h"
-#include "server/entities/door.h"
-#include "server/entities/energy_emittor.h"
+#include "server/entities/gate.h"
+#include "server/entities/energy_emitter.h"
 #include "server/entities/energy_receiver.h"
 #include "server/entities/button.h"
 #include "server/entities/rock.h"
 #include "server/entities/end_barrier.h"
 #include "server/physics/end_zone.h"
-#include "server/entities/utils/door_logica.h"
+#include "server/entities/utils/gate_logica.h"
 #include "server/events/game_event_creator.h"
 
 class Map {
 public:
-	Map(const char * mapName, GameEventCreator & gameEventCreator);
+	Map(const std::string& map_name, GameEventCreator & gameEventCreator);
 
 	const std::vector<Entity*> & getStaticEntities() const;
 	const std::vector<Entity*> & getDynamicEntities() const;
 
 	b2Vec2 & getSpawn();
-	size_t getMinPlayers();
+	size_t getMinPlayers() const;
 
 	~Map();
 

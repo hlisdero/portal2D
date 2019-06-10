@@ -2,44 +2,47 @@
 #define GAME_H
 
 #include <vector>
-
+#include <queue>
+#include <string>
+#include <stdexcept>
+#include "common/clock_loop.h"
+#include "server/client_manager.h"
 #include "server/map.h"
 #include "server/events/event_creator.h"
 #include "server/entities/player.h"
 #include "server/physics/world.h"
-#include "server/events/event_creator.h"
 #include "server/events/game_event_creator.h"
 #include "server/objects/game_status.h"
 
 class Game {
-private:
-	// std::vector<Client/Player>
-
-	GameStatus status = WAITING_FOR_PLAYERS;
-
-	SafeQueue<GameEvent> eventsQueue;
-	GameEventCreator gameEventCreator;
-
-	Map map;
-	World world;
-	EventCreator& eventCreator;
-
 public:
-	// TODO remove temp
-	PlayerEntity* player;
+	Game(const std::string& map_name, ClientManager& client_manager);
 
-	Game(const char* mapName, EventCreator& eventCreator);
+    int getPlayerId() const;
+    size_t getMinPlayers() const;
 
-	void addPlayer();
-    void movePlayer(const MoveDirection direction, const bool pressed);
-	void createPortal(PlayerEntity* player, ClickDirection& direction);
-
+    void init();
+    void run();
 	void update();
 
-    const std::vector<Entity*>& getStaticEntities() const;
-    const std::vector<Entity*>& getDynamicEntities() const;
+private:
+    std::queue<WorldEvent>& world_events;
+    std::queue<ViewEvent>& view_events;
+    ClientManager& client_manager;
+    EventCreator event_creator;
+    bool quit = false;
+    int player_id;
 
-	void processGameEvents();
+    // Lo anterior
+	SafeQueue<GameEvent> eventsQueue;
+	GameEventCreator gameEventCreator;
+    Map map;
+    World world;
+    PlayerEntity* player = nullptr;
+
+    void processGameEvents();
+    void processQueue();
+    int findPlayerId();
 };
 
 #endif  // GAME_H

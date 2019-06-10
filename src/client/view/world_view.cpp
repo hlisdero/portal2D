@@ -72,7 +72,7 @@ void WorldView::createEntity(size_t index, EntityType type, const Position& posi
             object_creator.createRock(index, position);
             break;
         case TYPE_PLAYER:
-            createPlayerWithCamera(index, position);
+            object_creator.createPlayer(index, position);
             break;
         case TYPE_ENERGY_BALL:
             object_creator.createEnergyBall(index, position);
@@ -83,18 +83,24 @@ void WorldView::createEntity(size_t index, EntityType type, const Position& posi
 }
 
 void WorldView::destroyEntity(size_t index) {
-    checkValidIndex(index);
-    delete view_objects[index];
+    delete view_objects.at(index);
 }
 
 void WorldView::updatePosition(size_t index, const Position& position) {
-    checkValidIndex(index);
-    view_objects[index]->updatePosition(position);
+    view_objects.at(index)->updatePosition(position);
 }
 
 void WorldView::updateState(size_t index, const State& state) {
-    checkValidIndex(index);
-    view_objects[index]->updateState(state);
+    view_objects.at(index)->updateState(state);
+}
+
+void WorldView::selectPlayer(size_t index) {
+    Player* player = static_cast<Player*>(view_objects.at(index));
+    screen.createCamera(settings.getLevelWidth(), settings.getLevelHeight(), *player);
+    main_player = new MainPlayer(index, *player, screen.getCamera(), event_manager.getQueue());
+    event_manager.addHandler((KeyboardHandler*) main_player);
+    event_manager.addHandler((MouseHandler*) main_player);
+    settings.changeRatioCameraMode();
 }
 
 void WorldView::update() {
@@ -102,7 +108,6 @@ void WorldView::update() {
     screen.clear();
     screen.render(background);
     renderObjects();
-
     screen.update();
 }
 
@@ -110,19 +115,4 @@ void WorldView::renderObjects() {
     for (const auto& object : view_objects) {
         screen.render(*object.second);
     }
-}
-
-void WorldView::checkValidIndex(size_t index) {
-    if (view_objects[index] == nullptr) {
-        throw std::runtime_error("Error: Índice de objeto en la vista inválido");
-    }
-}
-
-void WorldView::createPlayerWithCamera(size_t id, const Position& position) {
-    const Player& player = object_creator.createPlayer(id, position);
-    screen.createCamera(settings.getLevelWidth(), settings.getLevelHeight(), player);
-    main_player = new MainPlayer(player, screen.getCamera(), event_manager.getQueue());
-    event_manager.addHandler((KeyboardHandler*) main_player);
-    event_manager.addHandler((MouseHandler*) main_player);
-    settings.changeRatioCameraMode();
 }

@@ -1,42 +1,42 @@
-#ifndef DOOR_LOGICA_H
-#define DOOR_LOGICA_H
+#ifndef GATE_LOGIC_H
+#define GATE_LOGIC_H
 
 #include <string>
 #include <memory>
 
-class DoorLogica;
-typedef std::unique_ptr<DoorLogica> DoorLogicaPtr;
+class GateLogica;
+typedef std::unique_ptr<GateLogica> GateLogicaPtr;
 
 #include "server/entities/attributes/with_subscribable_state.h"
 
-class DoorLogica {
+class GateLogica {
 public:
 	virtual bool value() const = 0;
-	virtual void attach(DoorEntity * door, subscribablesMap & subscribables) = 0;
+	virtual void attach(GateEntity * gate, subscribablesMap & subscribables) = 0;
 };
 
-class Value_DL : public DoorLogica {
+class Value_DL : public GateLogica {
 public:
 	explicit Value_DL(YAML::Node yaml);
 
 	virtual bool value() const override;
-	virtual void attach(DoorEntity * door, subscribablesMap & subscribables) override;
+	virtual void attach(GateEntity * gate, subscribablesMap & subscribables) override;
 
 private:
 	std::string subscribableName;
 	WithSubscribableState * subscribable;
 };
 
-class Double_DL : public DoorLogica {
+class Double_DL : public GateLogica {
 public:
 	Double_DL(YAML::Node yaml);
 
 	virtual bool value() const = 0;
-	virtual void attach(DoorEntity * door, subscribablesMap & subscribables) override;
+	virtual void attach(GateEntity * gate, subscribablesMap & subscribables) override;
 
 protected:
-	DoorLogicaPtr logicaA;
-	DoorLogicaPtr logicaB;
+	GateLogicaPtr logicaA;
+	GateLogicaPtr logicaB;
 };
 
 class Or_DL : public Double_DL {
@@ -53,17 +53,17 @@ public:
 	virtual bool value() const override;
 };
 
-class Not_DL : public DoorLogica {
+class Not_DL : public GateLogica {
 public:
 	explicit Not_DL(YAML::Node yaml );
 
 	virtual bool value() const override;
-	virtual void attach(DoorEntity * door, subscribablesMap & subscribables) override;
+	virtual void attach(GateEntity * gate, subscribablesMap & subscribables) override;
 
 private:
-	DoorLogicaPtr logica;
+	GateLogicaPtr logica;
 };
 
-DoorLogicaPtr loadDoorLogica(YAML::Node yaml);
+GateLogicaPtr loadGateLogica(YAML::Node yaml);
 
-#endif  // DOOR_LOGICA_H
+#endif  // GATE_LOGIC_H

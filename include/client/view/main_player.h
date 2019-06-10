@@ -13,14 +13,15 @@
 
 class MainPlayer : public KeyboardHandler, public MouseHandler {
 public:
-    MainPlayer(const Player& player, const Camera& camera, BlockingQueue<ViewEvent>& queue);
+    MainPlayer(size_t index, const Player& player, const Camera& camera, BlockingQueue<ViewEvent>& queue);
 
     virtual void handle(const KeyboardEvent& event) override;
 
     virtual void handle(const MouseEvent& event) override;
 
 private:
-    const Player& player;
+    size_t index;
+    const DrawableBox2D& player;
     const Camera& camera;
     BlockingQueue<ViewEvent>& queue;
 

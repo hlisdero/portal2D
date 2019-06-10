@@ -31,6 +31,7 @@ public:
 
     void updatePosition(size_t index, const Position& position);
     void updateState(size_t index, const State& state);
+    void selectPlayer(size_t index);
 
     void update();
 
@@ -45,8 +46,6 @@ private:
     ViewObjectCreator object_creator;
 
     void renderObjects();
-    void checkValidIndex(size_t index);
-    void createPlayerWithCamera(size_t id, const Position& position);
 };
 
 #endif  // WORLD_VIEW_H

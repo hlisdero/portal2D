@@ -8,7 +8,7 @@ enum State {
 	STATE_DISABLED = 0,
 	STATE_ENABLED,
 
-	// Door
+	// Gate
 	STATE_CLOSED = 0,
 	STATE_OPEN
 };

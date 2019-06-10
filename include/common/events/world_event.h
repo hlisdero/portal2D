@@ -11,6 +11,7 @@ enum WorldEventType {
 	ENTITY_DESTRUCTION = 2,
     POSITION_UPDATE = 3,
     STATE_UPDATE = 4,
+    SELECT_PLAYER
 };
 
 class WorldEvent {

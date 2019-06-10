@@ -13,7 +13,6 @@ void Client::run() {
             break;
         }
         processQueue();
-
         clock.waitNextLoop();
     }
     sendQuitSignal();
@@ -37,6 +36,8 @@ void Client::processEvent(const WorldEvent& event) {
         view.createEntity(event.id, event.entity_type, event.position);
     } else if (event.type == ENTITY_DESTRUCTION) {
         view.destroyEntity(event.id);
+    } else if (event.type == SELECT_PLAYER) {
+        view.selectPlayer(event.id);
     }
 }
 

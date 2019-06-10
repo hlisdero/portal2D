@@ -1,9 +1,9 @@
-#ifndef DOOR_ENTITY_H
-#define DOOR_ENTITY_H
+#ifndef GATE_ENTITY_H
+#define GATE_ENTITY_H
 
-#include "Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
 
-class DoorEntity;
+class GateEntity;
 
 #include "server/entities/entity.h"
 #include "server/entities/attributes/body_linked.h"
@@ -12,21 +12,21 @@ class DoorEntity;
 
 typedef std::map<std::string, WithSubscribableState*> subscribablesMap;
 
-#include "server/entities/utils/door_logica.h"
+#include "server/entities/utils/gate_logica.h"
 
-class DoorEntity : public Entity, public BodyLinked, public WithState {
+class GateEntity : public Entity, public BodyLinked, public WithState {
 public:
-    DoorEntity(float x, float y, float rotation, DoorLogicaPtr logica, GameEventCreator& gameEventCreator);
+    GateEntity(float x, float y, float rotation, GateLogicaPtr logica, GameEventCreator& gameEventCreator);
 
 	void updateState();
 
 	virtual void attachBody(b2Body * body) override;
 
 	void attach(subscribablesMap & subscribables);
-	
+
 private:
-	DoorLogicaPtr logica;
+	GateLogicaPtr logica;
 	GameEventCreator & gameEventCreator;
 };
 
-#endif  // DOOR_ENTITY_H
+#endif  // GATE_ENTITY_H

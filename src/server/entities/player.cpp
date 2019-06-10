@@ -35,7 +35,7 @@ void PlayerEntity::resetPortals(b2World & world) {
 		if(portals[i] != nullptr) {
 			world.DestroyBody(portals[i]->getBody());
 			delete portals[i];
-			
+
 			portals[i] = nullptr;
 		}
 	}
@@ -112,8 +112,8 @@ void PlayerEntity::releaseRock() {
 	carriedRock = nullptr;
 }
 
-void PlayerEntity::move(const MoveDirection direction, bool pressed) {
-	if(pressed) {
+void PlayerEntity::move(const MoveDirection& direction, bool pressed) {
+	if (pressed) {
 		switch(direction) {
 			// If on the floor, jump
 			case UP:

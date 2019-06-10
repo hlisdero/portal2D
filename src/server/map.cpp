@@ -1,8 +1,8 @@
 #include "server/map.h"
 
-Map::Map(const char * mapName, GameEventCreator & gameEventCreator) : 
+Map::Map(const std::string& map_name, GameEventCreator & gameEventCreator) :
 	endZone(gameEventCreator), gameEventCreator(gameEventCreator) {
-	YAML::Node file = YAML::LoadFile(mapName);
+	YAML::Node file = YAML::LoadFile(map_name);
     loadSettings(file);
 	loadEntities(file);
 	endZone.setNumberOfPlayersForVictory(minPlayers - 1);
@@ -20,7 +20,7 @@ b2Vec2 & Map::getSpawn() {
 	return spawn;
 }
 
-size_t Map::getMinPlayers() {
+size_t Map::getMinPlayers() const {
 	return minPlayers;
 }
 
@@ -36,7 +36,7 @@ void Map::loadEntities(YAML::Node yaml) {
 	YAML::Node entities = yaml["entities"];
 
 	std::map<std::string, WithSubscribableState*> subscribables;
-	std::vector<DoorEntity*> doors;
+	std::vector<GateEntity*> gates;
 
 	for(uint i = 0; i < entities.size(); i++) {
 		Entity * entity = createEntity(entities[i]);
@@ -59,12 +59,12 @@ void Map::loadEntities(YAML::Node yaml) {
 		}
 
 		if(entity->getType() == TYPE_GATE) {
-			doors.push_back(entity->as<DoorEntity>());
+			gates.push_back(entity->as<GateEntity>());
 		}
 	}
 
-	for(DoorEntity * door : doors) {
-		door->attach(subscribables);
+	for(GateEntity * gate : gates) {
+		gate->attach(subscribables);
 	}
 }
 
@@ -85,10 +85,10 @@ Entity * Map::createEntity(YAML::Node yaml) {
 			entity = new Entity(type, x, y, rotation);
 			break;
 		case TYPE_GATE:
-            entity = new DoorEntity(x, y, rotation, loadDoorLogica(yaml["logica"]), gameEventCreator);
+            entity = new GateEntity(x, y, rotation, loadGateLogica(yaml["logica"]), gameEventCreator);
 			break;
 		case TYPE_ENERGY_EMITTER:
-			entity = new EnergyEmittorEntity(x, y, rotation);
+			entity = new EnergyEmitterEntity(x, y, rotation);
 			break;
 		case TYPE_ENERGY_RECEIVER:
 			entity = new EnergyReceiverEntity(x, y, rotation, gameEventCreator);
