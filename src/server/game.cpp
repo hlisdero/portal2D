@@ -8,9 +8,8 @@ Game::Game(const std::string& map_name, ClientManager& client_manager) :
 
 	gameEventCreator(eventsQueue),
 	map(map_name, gameEventCreator),
-	world(map, event_creator),
-	player(gameEventCreator) {
-    world.createPlayer(&player);
+	world(map, gameEventCreator) {
+    player = world.createPlayer();
 
     // Solución temporal
     player_id = findPlayerId();
@@ -20,7 +19,7 @@ int Game::getPlayerId() const {
     return player_id;
 }
 
-int Game::getMinPlayers() const {
+size_t Game::getMinPlayers() const {
     return map.getMinPlayers();
 }
 
@@ -74,7 +73,7 @@ void Game::processGameEvents() {
 				// TODO notify client
 				break;
 			case GAME_STATUS_CHANGE:
-				status = event.status;
+				// status = event.status;
 				// TODO notify client
 				break;
 			case KILL_PLAYER:
@@ -96,9 +95,9 @@ void Game::processQueue() {
         ViewEvent event = view_events.front();
         view_events.pop();
         if (event.type == KEYBOARD) {
-            player.move(event.direction, event.pressed);
+            player->move(event.direction, event.pressed);
         } else if (event.type == MOUSE) {
-            world.createPortal(player, event.click_direction);
+            world.createPortal(player, event.click_direction, event_creator);
         } else if (event.type == QUIT) {
             quit = true;
         }

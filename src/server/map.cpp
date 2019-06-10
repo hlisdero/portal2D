@@ -20,7 +20,7 @@ b2Vec2 & Map::getSpawn() {
 	return spawn;
 }
 
-size_t Map::getMinPlayers() {
+size_t Map::getMinPlayers() const {
 	return minPlayers;
 }
 

@@ -1,12 +1,12 @@
 #ifndef ROCK_ENTITY_H
 #define ROCK_ENTITY_H
 
-class RockEntity;
-
 #include "server/entities/entity.h"
 #include "server/entities/player.h"
 #include "server/entities/attributes/teleportable_entity.h"
 #include "server/events/game_event_creator.h"
+
+class PlayerEntity;
 
 class RockEntity :  public TeleportableEntity {
 public:
@@ -21,7 +21,7 @@ public:
 	PlayerEntity* getHolder();
 
 	void respawn();
-	
+
 private:
 	PlayerEntity* holder = nullptr;
 	b2Vec2 initialPosition;

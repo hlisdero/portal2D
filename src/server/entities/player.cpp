@@ -112,8 +112,8 @@ void PlayerEntity::releaseRock() {
 	carriedRock = nullptr;
 }
 
-void PlayerEntity::move(const MoveDirection direction, bool pressed) {
-	if(pressed) {
+void PlayerEntity::move(const MoveDirection& direction, bool pressed) {
+	if (pressed) {
 		switch(direction) {
 			// If on the floor, jump
 			case UP:
@@ -132,14 +132,6 @@ void PlayerEntity::move(const MoveDirection direction, bool pressed) {
 	} else if(moveDirection == direction) {
 		moveDirection = NONE;
 	}
-}
-
-void PlayerEntity::move(const MoveDirection& direction, bool pressed) {
-    if (pressed) {
-        keyDown(direction);
-    } else {
-        keyUp(direction);
-    }
 }
 
 void PlayerEntity::applyImpulseToCenter(const float vx, const float vy) {

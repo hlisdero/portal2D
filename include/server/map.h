@@ -27,7 +27,7 @@ public:
 	const std::vector<Entity*> & getDynamicEntities() const;
 
 	b2Vec2 & getSpawn();
-	size_t getMinPlayers();
+	size_t getMinPlayers() const;
 
 	~Map();
 

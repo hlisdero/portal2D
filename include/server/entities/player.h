@@ -6,20 +6,18 @@
 #include <cmath>
 #include <vector>
 
-#include "Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
 
 #include "common/objects/move_direction.h"
 #include "common/objects/portal_color.h"
 #include "server/entities/entity.h"
 #include "server/entities/portal.h"
+#include "server/entities/rock.h"
 #include "server/entities/attributes/body_linked.h"
 #include "server/entities/attributes/teleportable_entity.h"
 #include "server/events/game_event_creator.h"
 
-class PlayerEntity;
-
-#include "server/entities/rock.h"
-
+class RockEntity;
 
 class PlayerEntity :  public TeleportableEntity {
 public:
@@ -27,9 +25,7 @@ public:
 
 	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 
-	void move(const MoveDirection direction, bool pressed);
-
-    void move(const MoveDirection& direction, bool pressed);
+	void move(const MoveDirection& direction, bool pressed);
 
 	PortalEntity * getPortal(PortalColor color);
 	void setPortal(PortalColor color, PortalEntity * portal);

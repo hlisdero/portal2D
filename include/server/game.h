@@ -38,7 +38,7 @@ private:
 	GameEventCreator gameEventCreator;
     Map map;
     World world;
-    PlayerEntity player;
+    PlayerEntity* player = nullptr;
 
     void processGameEvents();
     void processQueue();
