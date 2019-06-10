@@ -12,6 +12,7 @@
 #include "server/entities/utils/body_factory.h"
 #include "server/physics/contact_listener.h"
 #include "server/events/event_creator.h"
+#include "server/events/game_event_creator.h"
 
 /*
 	y
@@ -22,31 +23,35 @@
 */
 
 #define PORTAL_REACH 30.0f
+#define GRAVITY -10.0f
 
 class World {
 public:
-	explicit World(Map& map, EventCreator& eventCreator);
+	explicit World(Map& map, GameEventCreator & gameEventCreator);
 
-    void createPlayer(PlayerEntity* player);
-    void createPortal(PlayerEntity& player, ClickDirection& direction);
+    PlayerEntity * createPlayer();
+    void killPlayer(PlayerEntity* player);
+    void createPortal(PlayerEntity* player, ClickDirection& direction, EventCreator& eventCreator);
 
     void updatePhysics();
     void updateDynamics();
 
 	const std::vector<Entity*>& getDynamicEntities() const;
 
-	int getPlayersCount();
+	size_t getPlayersCount();
 
 	b2World & getb2World();
+
+	~World();
 
 private:
 	b2World world;
 	BodyFactory bodyFactory;
-	Map& map;
-	EventCreator& eventCreator;
+	GameEventCreator& gameEventCreator;
 
     bool portal_color = false;
 
+    const b2Vec2 & playerSpawn;
 	std::vector<PlayerEntity*> players;
 
 	// TODO maybe update with methods instead of b2World.getEntities()

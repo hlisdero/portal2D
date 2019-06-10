@@ -1,10 +1,11 @@
 #include "server/map.h"
 
-Map::Map(const std::string& map_name, GameEventCreator& gameEventCreator) :
-	gameEventCreator(gameEventCreator) {
+Map::Map(const std::string& map_name, GameEventCreator & gameEventCreator) :
+	endZone(gameEventCreator), gameEventCreator(gameEventCreator) {
 	YAML::Node file = YAML::LoadFile(map_name);
     loadSettings(file);
 	loadEntities(file);
+	endZone.setNumberOfPlayersForVictory(minPlayers - 1);
 }
 
 const std::vector<Entity*> & Map::getStaticEntities() const {
@@ -15,20 +16,16 @@ const std::vector<Entity*> & Map::getDynamicEntities() const {
 	return dynamicEntities;
 }
 
-EndZone & Map::getEndZone() {
-	return endZone;
-}
-
 b2Vec2 & Map::getSpawn() {
 	return spawn;
 }
 
-int Map::getMinPlayers() const {
+size_t Map::getMinPlayers() {
 	return minPlayers;
 }
 
 void Map::loadSettings(YAML::Node yaml) {
-	minPlayers = yaml["min-players"].as<int>();
+	minPlayers = yaml["min-players"].as<size_t>();
 
 	YAML::Node spawn = yaml["spawn"];
 	this->spawn.x = spawn["x"].as<float>();

@@ -1,0 +1,12 @@
+#ifndef GAME_STATUS_H
+#define GAME_STATUS_H
+
+enum GameStatus {
+	INVALID_STATUS,
+	WAITING_FOR_PLAYERS,
+	IN_PROGRESS,
+	VICTORY,
+	DEFEAT
+};
+
+#endif

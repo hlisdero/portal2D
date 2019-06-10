@@ -14,6 +14,10 @@ public:
 	void addSetActiveEntity(Entity * entity, bool active);
 	void addPortalsReset(Entity * entity);
 
+	void addGameStateChange(GameStatus status); 
+	
+	void addKillPlayer(Entity* entity); 
+
 private:
 	SafeQueue<GameEvent>& queue;
 };

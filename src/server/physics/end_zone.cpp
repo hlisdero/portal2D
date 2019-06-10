@@ -1,9 +1,9 @@
 #include "server/physics/end_zone.h"
 
-#include <iostream>
+EndZone::EndZone(GameEventCreator & gameEventCreator) : gameEventCreator(gameEventCreator) {}
 
-int EndZone::getNumberOfPlayersInZone() {
-	return this->playersInZone.size();
+void EndZone::setNumberOfPlayersForVictory(size_t newPlayersForVictory) {
+	playersForVictory = newPlayersForVictory;
 }
 
 void EndZone::playerWentTroughBarrier(PlayerEntity * player) {
@@ -14,5 +14,7 @@ void EndZone::playerWentTroughBarrier(PlayerEntity * player) {
 		this->playersInZone.erase(iterator.first);
 	}
 
-	std::cout << "Players arrived : " << getNumberOfPlayersInZone() << std::endl;
+	if(playersInZone.size() >= playersForVictory) {
+		gameEventCreator.addGameStateChange(VICTORY);
+	}
 }

@@ -12,13 +12,14 @@
 #include "server/entities/player.h"
 #include "server/physics/world.h"
 #include "server/events/game_event_creator.h"
+#include "server/objects/game_status.h"
 
 class Game {
 public:
 	Game(const std::string& map_name, ClientManager& client_manager);
 
     int getPlayerId() const;
-    int getMinPlayers() const;
+    size_t getMinPlayers() const;
 
     void init();
     void run();

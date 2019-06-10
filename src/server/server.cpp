@@ -8,7 +8,7 @@ Server::Server(const std::string& map_name) :
 }
 
 void Server::run() {
-    int players = 0;
+    size_t players = 0;
     while (players < game.getMinPlayers()) {
         ActiveSocket skt = passive_skt.accept();
         client_manager.addClient(std::move(skt));

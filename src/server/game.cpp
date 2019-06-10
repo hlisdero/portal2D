@@ -73,17 +73,22 @@ void Game::processGameEvents() {
 				event.entity->as<PlayerEntity>()->resetPortals(world.getb2World());
 				// TODO notify client
 				break;
+			case GAME_STATUS_CHANGE:
+				status = event.status;
+				// TODO notify client
+				break;
+			case KILL_PLAYER:
+				world.killPlayer(event.entity->as<PlayerEntity>());
+
+				if(world.getPlayersCount() < map.getMinPlayers()) {
+					gameEventCreator.addGameStateChange(DEFEAT);
+				}
+				// TODO notify client
+				break;
 			default:
 				throw std::runtime_error("Unsupported game event type");
 		}
 	}
-
-	// if player join
-	//	createPlayer
-	// if playerCount > map.getRequiredPlayersCount(): status= In progress
-
-	// if player move
-	//	move player
 }
 
 void Game::processQueue() {

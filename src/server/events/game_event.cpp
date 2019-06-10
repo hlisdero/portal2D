@@ -5,3 +5,6 @@ GameEvent::GameEvent(GameEventType type, Entity * entity) :
 
 GameEvent::GameEvent(Entity * entity, bool active) : 
 	type(ENTITY_SET_ACTIVE), entity(entity), active(active) {}
+
+GameEvent::GameEvent(GameStatus status) : 
+	type(GAME_STATUS_CHANGE), status(status) {}
