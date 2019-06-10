@@ -22,8 +22,8 @@ World::World(Map& map, GameEventCreator & gameEventCreator) :
 }
 
 World::~World() {
-	for(PlayerEntity * player : players) {
-		delete player;
+	for(auto& player : players) {
+		delete player.second;
 	}
 }
 
@@ -31,27 +31,19 @@ PlayerEntity * World::createPlayer() {
 	PlayerEntity * newPlayer = new PlayerEntity(playerSpawn, gameEventCreator);
 	bodyFactory.createBody(newPlayer);
 
-	players.push_back(newPlayer);
-	// TODO maybe reimplement
-	dynamicEntities.push_back(newPlayer);
+	players[newPlayer->getId()] = newPlayer;
 
 	return newPlayer;
 }
 
+PlayerEntity * World::getPlayerById(size_t playerId) {
+	return players.at(playerId);
+}
+
 void World::killPlayer(PlayerEntity * player) {
-	auto it = players.begin();
-
-	while(it != players.end() && *it != player) {
-		it++;
-	}
-
-	if(it != players.end()) {
-		players.erase(it);
-		delete player;
-		world.DestroyBody(player->getBody());
-	} else {
-		throw std::runtime_error("Impossible to delete non existing player");
-	}
+	players.erase(player->getId());
+	delete player;
+	world.DestroyBody(player->getBody());
 }
 
 void World::createPortal(PlayerEntity * player, ClickDirection& direction, EventCreator & eventCreator) {
@@ -90,8 +82,8 @@ void World::createPortal(PlayerEntity * player, ClickDirection& direction, Event
 }
 
 void World::updatePhysics() {
-	for(uint i = 0; i < players.size(); i++) {
-		players[i]->applyMovement();
+	for(auto& player : players) {
+		player.second->applyMovement();
 	}
 
 	// TODO change to constantes

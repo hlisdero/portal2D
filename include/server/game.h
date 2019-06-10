@@ -18,7 +18,7 @@ class Game {
 public:
 	Game(const std::string& map_name, ClientManager& client_manager);
 
-    int getPlayerId() const;
+    size_t createPlayer();
     size_t getMinPlayers() const;
 
     void init();
@@ -31,18 +31,15 @@ private:
     ClientManager& client_manager;
     EventCreator event_creator;
     bool quit = false;
-    int player_id;
 
     // Lo anterior
 	SafeQueue<GameEvent> eventsQueue;
 	GameEventCreator gameEventCreator;
     Map map;
     World world;
-    PlayerEntity* player = nullptr;
 
     void processGameEvents();
     void processQueue();
-    int findPlayerId();
 };
 
 #endif  // GAME_H

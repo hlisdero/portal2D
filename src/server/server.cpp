@@ -15,6 +15,11 @@ void Server::run() {
         ++players;
     }
     game.init();
-    client_manager.addSelectPlayer(0, game.getPlayerId());
+
+    for(size_t i = 0; i < players; i++) {
+        client_manager.addSelectPlayer(i, game.createPlayer());
+    }
+    client_manager.broadcast();
+
     game.run();
 }

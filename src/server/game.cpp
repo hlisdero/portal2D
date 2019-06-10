@@ -8,15 +8,17 @@ Game::Game(const std::string& map_name, ClientManager& client_manager) :
 
 	gameEventCreator(eventsQueue),
 	map(map_name, gameEventCreator),
-	world(map, gameEventCreator) {
-    player = world.createPlayer();
+	world(map, gameEventCreator) {}
 
-    // Solución temporal
-    player_id = findPlayerId();
-}
+size_t Game::createPlayer() {
+    PlayerEntity * player = world.createPlayer();
 
-int Game::getPlayerId() const {
-    return player_id;
+    event_creator.addEntityCreation(player);
+    // Send immediately to every client but 
+    // most importantly to the current client who need it to attach its camera
+    client_manager.broadcast();
+
+    return player->getId();
 }
 
 size_t Game::getMinPlayers() const {
@@ -94,6 +96,9 @@ void Game::processQueue() {
     while (!view_events.empty()) {
         ViewEvent event = view_events.front();
         view_events.pop();
+
+        PlayerEntity * player = world.getPlayerById(event.player_id);
+
         if (event.type == KEYBOARD) {
             player->move(event.direction, event.pressed);
         } else if (event.type == MOUSE) {
@@ -102,14 +107,4 @@ void Game::processQueue() {
             quit = true;
         }
     }
-}
-
-int Game::findPlayerId() {
-    auto entities = world.getDynamicEntities();
-    for (const auto& entity : entities) {
-        if (entity->getType() == TYPE_PLAYER) {
-            return entity->getId();
-        }
-    }
-    throw std::runtime_error("Error: PlayerEntity no encontrado!");
 }

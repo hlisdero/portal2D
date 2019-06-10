@@ -30,6 +30,9 @@ public:
 	explicit World(Map& map, GameEventCreator & gameEventCreator);
 
     PlayerEntity * createPlayer();
+    PlayerEntity * getPlayerById(size_t id);
+
+
     void killPlayer(PlayerEntity* player);
     void createPortal(PlayerEntity* player, ClickDirection& direction, EventCreator& eventCreator);
 
@@ -52,7 +55,7 @@ private:
     bool portal_color = false;
 
     const b2Vec2 & playerSpawn;
-	std::vector<PlayerEntity*> players;
+	std::map<size_t, PlayerEntity*> players;
 
 	// TODO maybe update with methods instead of b2World.getEntities()
 	std::vector<Entity*> dynamicEntities;
