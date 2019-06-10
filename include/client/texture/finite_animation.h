@@ -11,6 +11,8 @@ public:
 
     void reset();
 
+    bool finished() const;
+
 private:
     int slowdown = 7;
 

@@ -22,3 +22,7 @@ void FiniteAnimation::next() {
 void FiniteAnimation::reset() {
     setClip(0);
 }
+
+bool FiniteAnimation::finished() const {
+    return (getClipNumber() == (size()-1));
+}

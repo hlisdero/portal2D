@@ -1,6 +1,6 @@
 #include "client/view/main_player.h"
 
-MainPlayer::MainPlayer(size_t index, const DrawableBox2D& player,
+MainPlayer::MainPlayer(size_t index, Player& player,
                        const Camera& camera, BlockingQueue<ViewEvent>& queue) :
     index(index), player(player), camera(camera), queue(queue) {}
 
@@ -29,6 +29,14 @@ void MainPlayer::handle(const MouseEvent& event) {
     double y = event.y - player_y;
     ClickDirection click_direction(x/sqrt(x*x + y*y), -y/sqrt(x*x + y*y));
     queue.push(ViewEvent(index, click_direction));
+}
+
+void MainPlayer::startDeathAnimation() {
+    player.startDeathAnimation();
+}
+
+bool MainPlayer::finishedDeathAnimation() const {
+    return player.finishedDeathAnimation();
 }
 
 MoveDirection MainPlayer::processMoveDirection(const KeyboardEvent& event) const {

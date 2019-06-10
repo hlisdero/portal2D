@@ -13,16 +13,19 @@
 
 class MainPlayer : public KeyboardHandler, public MouseHandler {
 public:
-    MainPlayer(size_t index, const DrawableBox2D& player, const Camera& camera, BlockingQueue<ViewEvent>& queue);
+    MainPlayer(size_t index, Player& player, const Camera& camera, BlockingQueue<ViewEvent>& queue);
 
     size_t getIndex() const;
 
     virtual void handle(const KeyboardEvent& event) override;
     virtual void handle(const MouseEvent& event) override;
 
+    void startDeathAnimation();
+    bool finishedDeathAnimation() const;
+
 private:
     size_t index;
-    const DrawableBox2D& player;
+    Player& player;
     const Camera& camera;
     BlockingQueue<ViewEvent>& queue;
 

@@ -96,7 +96,6 @@ void WorldView::destroyEntity(size_t index) {
         screen.destroyCamera();
         settings.changeRatioScreenMode();
     }
-
     delete view_objects.at(index);
     view_objects.erase(index);
 }
@@ -110,8 +109,9 @@ void WorldView::updateState(size_t index, const State& state) {
 }
 
 void WorldView::selectPlayer(size_t index) {
-    screen.createCamera(settings.getLevelWidth(), settings.getLevelHeight(), *view_objects.at(index));
-    main_player = new MainPlayer(index, *view_objects.at(index), screen.getCamera(), event_manager.getQueue());
+    Player* player = static_cast<Player*>(view_objects.at(index));
+    screen.createCamera(settings.getLevelWidth(), settings.getLevelHeight(), *player);
+    main_player = new MainPlayer(index, *player, screen.getCamera(), event_manager.getQueue());
     event_manager.addHandler((KeyboardHandler*) main_player);
     event_manager.addHandler((MouseHandler*) main_player);
     settings.changeRatioCameraMode();
