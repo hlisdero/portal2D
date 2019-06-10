@@ -18,6 +18,8 @@ public:
 
     bool isTeleporting();
     void teleport();
+    
+	virtual ~TeleportableEntity() = default;
 
 protected:
 	GameEventCreator& gameEventCreator;

@@ -11,9 +11,9 @@ void EnergyEmitterEntity::setNoBall() {
 	this->hasABall_ = false;
 }
 
-EnergyBallEntity * EnergyEmitterEntity::emit() {
+EnergyBallEntity * EnergyEmitterEntity::emit(GameEventCreator & gameEventCreator) {
 	this->hasABall_ = true;
-	// TODO
-	// return new EnergyBallEntity(this->getX(), this->getY(), this->getRotationDeg());
-	return nullptr;
+
+	return new EnergyBallEntity(this->getX(), this->getY(), 
+		this->getRotationDeg(), gameEventCreator, *this);
 }

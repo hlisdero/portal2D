@@ -1,10 +1,7 @@
 #include "server/physics/contact_listener.h"
 
-#include "server/entities/player.h"
-#include "server/entities/rock.h"
-#include "server/entities/energy_receiver.h"
-#include "server/entities/button.h"
-#include "server/entities/end_barrier.h"
+#include "server/entities/attributes/teleportable_entity.h"
+#include "server/entities/attributes/handle_contact.h"
 
 void ContactListener::BeginContact(b2Contact * contact) {
 	handleContact(contact, true);
@@ -15,18 +12,21 @@ void ContactListener::EndContact(b2Contact * contact) {
 }
 
 void ContactListener::handleContact(b2Contact * contact, bool inContact) {
-	Entity * userDataA = static_cast<Entity*>(
+	Entity * entityA = static_cast<Entity*>(
 		contact->GetFixtureA()->GetBody()->GetUserData());
-	Entity * userDataB = static_cast<Entity*>(
+	Entity * entityB = static_cast<Entity*>(
 		contact->GetFixtureB()->GetBody()->GetUserData());
 
-	broadcastContact(userDataA, userDataB, contact, inContact);
-	broadcastContact(userDataB, userDataA, contact, inContact);
+	if(entityA == nullptr || entityB == nullptr) {
+		return;
+	}
+
+	broadcastContact(entityA, entityB, contact, inContact);
+	broadcastContact(entityB, entityA, contact, inContact);
 }
 
 void ContactListener::broadcastContact(Entity * entityA, Entity * entityB, b2Contact * contact, bool inContact) {
 	if(entityA->getType() >= DYNAMIC_ENTITY_START || 
-		entityA->getType() == TYPE_ENERGY_RECEIVER ||
 		entityA->getType() == TYPE_BUTTON ||
 		entityA->getType() == TYPE_END_BARRIER) {
 		entityA->as<HandleContact>()->handleContactWith(entityB, contact, inContact);

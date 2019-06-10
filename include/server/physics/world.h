@@ -2,6 +2,7 @@
 #define WORLD_H
 
 #include <vector>
+#include <chrono>
 
 #include "Box2D/Box2D.h"
 
@@ -25,6 +26,8 @@
 #define PORTAL_REACH 30.0f
 #define GRAVITY -10.0f
 
+#define EMITTER_INTERVAL 5
+
 class World {
 public:
 	explicit World(Map& map, GameEventCreator & gameEventCreator);
@@ -32,11 +35,12 @@ public:
     PlayerEntity * createPlayer();
     PlayerEntity * getPlayerById(size_t id);
 
+    void destroyEntity(BodyLinked * entity);
 
     void killPlayer(PlayerEntity* player);
     void createPortal(PlayerEntity* player, ClickDirection& direction, EventCreator& eventCreator);
 
-    void updatePhysics();
+    void updatePhysics(EventCreator & eventCreator);
     void updateDynamics();
 
 	const std::vector<Entity*>& getDynamicEntities() const;
@@ -59,6 +63,11 @@ private:
 
 	// TODO maybe update with methods instead of b2World.getEntities()
 	std::vector<Entity*> dynamicEntities;
+
+	std::vector<EnergyEmitterEntity*> energyEmitters;
+
+	std::chrono::system_clock::time_point nextEmit = std::chrono::system_clock::now();
+	std::chrono::duration<int> emitterInterval;
 
 	ContactListener contactListener;
 };

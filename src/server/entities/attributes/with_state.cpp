@@ -1,6 +1,6 @@
 #include "server/entities/attributes/with_state.h"
 
-WithState::WithState(const State state, GameEventCreator & gameEventCreator) : state(state), gameEventCreator(gameEventCreator) {}
+WithState::WithState(const State state, GameEventCreator & gameEventCreator) : gameEventCreator(gameEventCreator), state(state) {}
 
 const State& WithState::getState() const {
 	return state;

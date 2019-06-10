@@ -7,12 +7,17 @@ World::World(Map& map, GameEventCreator & gameEventCreator) :
 	world(b2Vec2(0.0f, GRAVITY)),
 	bodyFactory(world),
 	gameEventCreator(gameEventCreator),
-	playerSpawn(map.getSpawn()) {
+	playerSpawn(map.getSpawn()),
+	emitterInterval(EMITTER_INTERVAL) {
 	world.SetContactListener(&contactListener);
 
 	const std::vector<Entity*> & staticEntities = map.getStaticEntities();
-	for(uint i = 0; i < staticEntities.size(); i++) {
-		bodyFactory.createBody(staticEntities[i]);
+	for(auto & staticEntity : staticEntities) {
+		bodyFactory.createBody(staticEntity);
+
+		if(staticEntity->getType() == TYPE_ENERGY_EMITTER) {
+			energyEmitters.push_back(staticEntity->as<EnergyEmitterEntity>());
+		}
 	}
 
 	dynamicEntities = map.getDynamicEntities();
@@ -42,8 +47,14 @@ PlayerEntity * World::getPlayerById(size_t playerId) {
 
 void World::killPlayer(PlayerEntity * player) {
 	players.erase(player->getId());
-	world.DestroyBody(player->getBody());
-	delete player;
+	destroyEntity(player);
+}
+
+void World::destroyEntity(BodyLinked * entity) {
+	b2Body * body = entity->getBody();
+	body->SetUserData(nullptr);
+	world.DestroyBody(body);
+	delete entity;
 }
 
 void World::createPortal(PlayerEntity * player, ClickDirection& direction, EventCreator & eventCreator) {
@@ -81,9 +92,21 @@ void World::createPortal(PlayerEntity * player, ClickDirection& direction, Event
 	}
 }
 
-void World::updatePhysics() {
+void World::updatePhysics(EventCreator & eventCreator) {
 	for(auto& player : players) {
 		player.second->applyMovement();
+	}
+
+	auto now = std::chrono::system_clock::now();
+	if(nextEmit < now) {
+		for(auto & energyEmitter : energyEmitters) {
+			if(!energyEmitter->hasABall()) {
+				Entity * entity = energyEmitter->emit(gameEventCreator);
+				bodyFactory.createBody(entity);
+				eventCreator.addEntityCreation(entity);
+			}
+		}
+		nextEmit = now + emitterInterval;
 	}
 
 	// TODO change to constantes

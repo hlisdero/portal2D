@@ -47,7 +47,7 @@ void Game::update() {
 	// TODO Check defeat
 
 	// Update contacts => generate events
-	world.updatePhysics();
+	world.updatePhysics(event_creator);
 	// With events, do things => change position, state,...
 	processGameEvents();
 
@@ -86,6 +86,10 @@ void Game::processGameEvents() {
 					gameEventCreator.addGameStateChange(DEFEAT);
 				}
 				// TODO notify client
+				break;
+			case ENERGY_BALL_DESTRUCTION:
+				event_creator.addEntityDestruction(event.entity);
+				world.destroyEntity(event.entity->as<BodyLinked>());
 				break;
 			default:
 				throw std::runtime_error("Unsupported game event type");

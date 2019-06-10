@@ -23,7 +23,8 @@ b2BodyDef BodyFactory::createBodyDef(Entity * entity) {
 		bodyDef.type = b2_dynamicBody;
 		bodyDef.fixedRotation = true;
 	} else if(entity->getType() == TYPE_ENERGY_BALL) {
-		bodyDef.type = b2_kinematicBody;
+		bodyDef.type = b2_dynamicBody;
+		bodyDef.gravityScale = 0.0f;
 	} else {
 		bodyDef.type = b2_staticBody;
 	}
@@ -113,7 +114,8 @@ b2FixtureDef BodyFactory::createFixtureDef(Entity * entity,
 		fixtureDef.filter.categoryBits = 0x0001;
 		fixtureDef.filter.maskBits = 0xFFFD;
 	} else if(entity->getType() == TYPE_ENERGY_BAR ||
-		entity->getType() == TYPE_END_BARRIER) {
+		entity->getType() == TYPE_END_BARRIER ||
+		entity->getType() == TYPE_ENERGY_BALL) {
 		fixtureDef.isSensor = true;
 		// TODO util ?
 		// fixtureDef.filter.categoryBits = 0x0002;

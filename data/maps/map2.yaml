@@ -241,7 +241,11 @@ entities:
         y: 6.0
         rotation: 90.0
         logica:
-            value: "button"
+            or:
+                a:
+                    value: "receiver"
+                b:  
+                    value: "button"
     -
         type: TYPE_STONE_BLOCK
         x: 9.0

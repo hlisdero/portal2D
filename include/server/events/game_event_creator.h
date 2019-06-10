@@ -13,6 +13,7 @@ public:
 	void addTeleportation(Entity * entity);
 	void addSetActiveEntity(Entity * entity, bool active);
 	void addPortalsReset(Entity * entity);
+	void addBallDestruction(Entity * entity);
 
 	void addGameStateChange(GameStatus status); 
 	

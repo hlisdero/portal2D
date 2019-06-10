@@ -17,6 +17,11 @@ void GameEventCreator::addPortalsReset(Entity * entity) {
 	queue.push(event);
 }
 
+void GameEventCreator::addBallDestruction(Entity * entity) {
+	GameEvent event(ENERGY_BALL_DESTRUCTION, entity);
+	queue.push(event);
+}
+
 void GameEventCreator::addSetActiveEntity(Entity * entity, bool active) {
 	GameEvent event(entity, active);
 	queue.push(event);

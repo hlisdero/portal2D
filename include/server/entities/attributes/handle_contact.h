@@ -7,6 +7,8 @@
 class HandleContact {
 public:
     virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) = 0;
+
+	virtual ~HandleContact() = default;
 };
 
 #endif

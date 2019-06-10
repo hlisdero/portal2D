@@ -8,6 +8,8 @@ public:
 	virtual void attachBody(b2Body * body);
 	virtual b2Body * getBody();
 
+	virtual ~BodyLinked() = default;
+
 private:
 	b2Body * body;
 };

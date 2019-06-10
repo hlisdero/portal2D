@@ -11,7 +11,8 @@ enum GameEventType {
     ENTITY_TELEPORT,
     PORTALS_RESET,
     GAME_STATUS_CHANGE,
-    KILL_PLAYER
+    KILL_PLAYER,
+    ENERGY_BALL_DESTRUCTION
 };
 
 class GameEvent {

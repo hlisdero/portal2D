@@ -16,6 +16,8 @@ public:
 	void subscribe(GateEntity * gate);
 
 	virtual void setState(const State& state) override;
+	
+	virtual ~WithSubscribableState() = default;
 
 private:
 	std::unordered_set<GateEntity*> subscribers;

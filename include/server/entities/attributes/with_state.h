@@ -11,10 +11,14 @@ public:
 
 	const State& getState() const;
 	virtual void setState(const State& new_state);
+	
+	virtual ~WithState() = default;
+
+protected:
+	GameEventCreator & gameEventCreator;
 
 private:
 	State state = STATE_DEFAULT;
-	GameEventCreator & gameEventCreator;
 };
 
 #endif  // WITH_STATE_H

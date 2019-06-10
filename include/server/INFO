@@ -81,7 +81,8 @@ EndBarrier -> Player
 
 Rock -> Acid
 
-EnergyReceiver -> EnergyBall
+EnergyBall -> Static block
+EnergyBall -> EnergyReceiver
 
 Button -> Player
 Button -> Rock
@@ -90,8 +91,7 @@ Button -> Rock
 maybe:
 Player -> MapBorder
 Rock -> MapBorder
-EnergyBall -> MapBorder
-EnergyBall -> EnergyReceiver
+
 
 ================
 
