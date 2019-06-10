@@ -13,6 +13,7 @@ public:
 	EventCreator(std::queue<WorldEvent>& queue);
 
     void addEntityCreation(Entity* entity);
+    void addEntityDestruction(Entity* entity);
     void addPositionUpdate(Entity* entity);
     void addStateUpdate(Entity* entity);
 

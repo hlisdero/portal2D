@@ -42,8 +42,8 @@ PlayerEntity * World::getPlayerById(size_t playerId) {
 
 void World::killPlayer(PlayerEntity * player) {
 	players.erase(player->getId());
-	delete player;
 	world.DestroyBody(player->getBody());
+	delete player;
 }
 
 void World::createPortal(PlayerEntity * player, ClickDirection& direction, EventCreator & eventCreator) {

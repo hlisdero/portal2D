@@ -71,7 +71,7 @@ void Game::processGameEvents() {
 				event.entity->as<TeleportableEntity>()->teleport();
 				break;
 			case PORTALS_RESET:
-				event.entity->as<PlayerEntity>()->resetPortals(world.getb2World());
+				event.entity->as<PlayerEntity>()->resetPortals(world.getb2World(), event_creator);
 				// TODO notify client
 				break;
 			case GAME_STATUS_CHANGE:
@@ -79,6 +79,7 @@ void Game::processGameEvents() {
 				// TODO notify client
 				break;
 			case KILL_PLAYER:
+				event_creator.addEntityDestruction(event.entity);
 				world.killPlayer(event.entity->as<PlayerEntity>());
 
 				if(world.getPlayersCount() < map.getMinPlayers()) {

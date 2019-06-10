@@ -84,6 +84,9 @@ void WorldView::createEntity(size_t index, EntityType type, const Position& posi
 
 void WorldView::destroyEntity(size_t index) {
     delete view_objects.at(index);
+    view_objects.erase(index);
+
+    // TODO Main player delete => camera delete
 }
 
 void WorldView::updatePosition(size_t index, const Position& position) {

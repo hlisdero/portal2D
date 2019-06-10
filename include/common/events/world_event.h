@@ -18,6 +18,7 @@ class WorldEvent {
 public:
     explicit WorldEvent() = default;
     WorldEvent(int id, EntityType type, const Position& position);
+    WorldEvent(int id);
 	WorldEvent(int id, const Position& position);
     WorldEvent(int id, const State& state);
 

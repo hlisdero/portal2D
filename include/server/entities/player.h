@@ -16,6 +16,7 @@
 #include "server/entities/attributes/body_linked.h"
 #include "server/entities/attributes/teleportable_entity.h"
 #include "server/events/game_event_creator.h"
+#include "server/events/event_creator.h"
 
 class RockEntity;
 
@@ -29,7 +30,7 @@ public:
 
 	PortalEntity * getPortal(PortalColor color);
 	void setPortal(PortalColor color, PortalEntity * portal);
-	void resetPortals(b2World & world);
+	void resetPortals(b2World & world, EventCreator & eventCreator);
 
 	void applyMovement();
 

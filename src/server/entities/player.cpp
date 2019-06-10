@@ -30,9 +30,10 @@ void PlayerEntity::setPortal(PortalColor color, PortalEntity * portal) {
 	portals[color] = portal;
 }
 
-void PlayerEntity::resetPortals(b2World & world) {
+void PlayerEntity::resetPortals(b2World & world, EventCreator & eventCreator) {
 	for(int i = 0; i < PORTALS_NB; i++) {
 		if(portals[i] != nullptr) {
+			eventCreator.addEntityDestruction(portals[i]);
 			world.DestroyBody(portals[i]->getBody());
 			delete portals[i];
 

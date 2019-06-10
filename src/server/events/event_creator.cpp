@@ -8,6 +8,11 @@ void EventCreator::addEntityCreation(Entity* entity) {
     queue.push(event);
 }
 
+void EventCreator::addEntityDestruction(Entity* entity) {
+    WorldEvent event(entity->getId());
+    queue.push(event);
+}
+
 void EventCreator::addPositionUpdate(Entity* entity) {
     Position position(entity->getX(), entity->getY(), entity->getRotationDeg());
     WorldEvent event(entity->getId(), position);
