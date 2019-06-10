@@ -9,7 +9,7 @@ int main(/*int argc, char *argv[]*/) {
         Login login;
         // login.run(argc, argv);
         // Tamaño del mundo en metros 53.32 x 40
-        Client client(login.getHostname(), login.getPort(), 53.32, 40);
+        Client client(login.getHostname(), login.getPort(), 17.78, 13.33);
         client.run();
         return 0;
     } catch (std::runtime_error err) {

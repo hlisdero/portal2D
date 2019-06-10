@@ -1,6 +1,6 @@
 #include "client/view/main_player.h"
 
-MainPlayer::MainPlayer(size_t index, const Player& player,
+MainPlayer::MainPlayer(size_t index, const DrawableBox2D& player,
                        const Camera& camera, BlockingQueue<ViewEvent>& queue) :
     index(index), player(player), camera(camera), queue(queue) {}
 

@@ -36,5 +36,9 @@ const TextureLoader& WorldViewSettings::getTextureLoader() const {
 }
 
 void WorldViewSettings::changeRatioCameraMode() {
-    pixel_per_meter = 3*pixel_per_meter*level_width/screen_width;
+    pixel_per_meter = pixel_per_meter*level_width/screen_width;
+}
+
+void WorldViewSettings::changeRatioScreenMode() {
+    pixel_per_meter = screen_width / world_size.x;
 }

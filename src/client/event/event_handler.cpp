@@ -20,6 +20,7 @@ void EventHandler::remove(KeyboardHandler* keyboard_handler) {
     for (size_t i = 0; i < keyboard_handlers.size(); ++i) {
         if (keyboard_handlers[i] == keyboard_handler) {
             keyboard_handlers.erase(keyboard_handlers.begin() + i);
+            return;
         }
     }
     throw std::runtime_error("Error: KeyboardHandler para eliminar inválido");
@@ -29,6 +30,7 @@ void EventHandler::remove(MouseHandler* mouse_handler) {
     for (size_t i = 0; i < mouse_handlers.size(); ++i) {
         if (mouse_handlers[i] == mouse_handler) {
             mouse_handlers.erase(mouse_handlers.begin() + i);
+            return;
         }
     }
     throw std::runtime_error("Error: MouseHandler para eliminar inválido");

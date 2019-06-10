@@ -124,12 +124,17 @@ const TextureCreator& Screen::getTextureCreator() const {
     return texture_creator;
 }
 
+void Screen::createCamera(int level_width, int level_height, const DrawableBox2D& drawable) {
+    camera = new Camera(getWidth(), getHeight(), level_width, level_height, drawable);
+}
+
 const Camera& Screen::getCamera() const {
     return *camera;
 }
 
-void Screen::createCamera(int level_width, int level_height, const DrawableBox2D& drawable) {
-    camera = new Camera(getWidth(), getHeight(), level_width, level_height, drawable);
+void Screen::destroyCamera() {
+    delete camera;
+    camera = nullptr;
 }
 
 void Screen::makeRelativeToCamera(SDL_Rect& rect) {
