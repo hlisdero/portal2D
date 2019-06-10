@@ -29,8 +29,6 @@ private:
 	EventCreator eventCreator;
 	Game game;
     bool quit = false;
-
-    void movePlayer(const MoveDirection direction, const bool pressed);
 };
 
 #endif  // SERVER_H

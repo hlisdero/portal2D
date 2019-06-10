@@ -22,6 +22,10 @@ void Game::createPortal(PlayerEntity * player, ClickDirection& direction) {
 	world.createPortal(player, direction, eventCreator);
 }
 
+void Game::movePlayer(const MoveDirection direction, const bool pressed) {
+	player->move(direction, pressed);
+}
+
 void Game::update() {
 	// Update contacts => generate events
 	world.updatePhysics();
