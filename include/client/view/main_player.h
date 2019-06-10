@@ -15,8 +15,9 @@ class MainPlayer : public KeyboardHandler, public MouseHandler {
 public:
     MainPlayer(size_t index, const Player& player, const Camera& camera, BlockingQueue<ViewEvent>& queue);
 
-    virtual void handle(const KeyboardEvent& event) override;
+    size_t getIndex() const;
 
+    virtual void handle(const KeyboardEvent& event) override;
     virtual void handle(const MouseEvent& event) override;
 
 private:

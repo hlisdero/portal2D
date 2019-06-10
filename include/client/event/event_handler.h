@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <vector>
+#include <stdexcept>
 #include "client/event/mouse_event.h"
 #include "client/event/keyboard_event.h"
 #include "client/event/keyboard_handler.h"
@@ -23,6 +24,10 @@ public:
     void add(KeyboardHandler* keyboard_handler);
     void add(MouseHandler* mouse_handler);
     void add(WindowEventHandler* window_event_handler);
+
+    void remove(KeyboardHandler* keyboard_handler);
+    void remove(MouseHandler* mouse_handler);
+    void removeWindowEventHandler();
 
     void poll();
 

@@ -12,6 +12,10 @@ void MainPlayer::handle(const KeyboardEvent& event) {
     }
 }
 
+size_t MainPlayer::getIndex() const {
+    return index;
+}
+
 void MainPlayer::handle(const MouseEvent& event) {
     if (!event.pressed || event.motion ||
          event.x == 0 || event.y == 0) {

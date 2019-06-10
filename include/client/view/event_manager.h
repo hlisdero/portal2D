@@ -20,6 +20,10 @@ public:
     void addHandler(MouseHandler* mouse_handler);
     void addHandler(WindowEventHandler* window_event_handler);
 
+    void removeHandler(KeyboardHandler* keyboard_handler);
+    void removeHandler(MouseHandler* mouse_handler);
+    void removeWindowEventHandler();
+
     void pollEvents();
     bool quit() const;
 
