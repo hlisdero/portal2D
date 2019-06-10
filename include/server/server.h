@@ -9,7 +9,7 @@
 
 class Server {
 public:
-	Server(const std::string& map_name);
+	explicit Server(const std::string& map_name);
 
     Server(const Server&) = delete;
     Server& operator=(const Server&) = delete;
