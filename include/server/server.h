@@ -22,7 +22,6 @@ private:
     ClientManager client_manager;
 	Game game;
     PassiveSocket passive_skt;
-    bool quit = false;
 };
 
 #endif  // SERVER_H
