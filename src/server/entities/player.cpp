@@ -35,7 +35,7 @@ void PlayerEntity::resetPortals(b2World & world) {
 		if(portals[i] != nullptr) {
 			world.DestroyBody(portals[i]->getBody());
 			delete portals[i];
-			
+
 			portals[i] = nullptr;
 		}
 	}
@@ -79,7 +79,7 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 
 	if(inContact && other->getType() == TYPE_ROCK) {
 		grabRock(other->as<RockEntity>());
-	} else if(other->getType() == TYPE_ENERGY_BAR 
+	} else if(other->getType() == TYPE_ENERGY_BAR
 		|| other->getType() == TYPE_END_BARRIER) {
 		gameEventCreator.addPortalsReset(this);
 
@@ -124,6 +124,14 @@ void PlayerEntity::keyUp(const MoveDirection direction) {
 	if(moveDirection == direction) {
 		moveDirection = NONE;
 	}
+}
+
+void PlayerEntity::move(const MoveDirection& direction, bool pressed) {
+    if (pressed) {
+        keyDown(direction);
+    } else {
+        keyUp(direction);
+    }
 }
 
 void PlayerEntity::applyImpulseToCenter(const float vx, const float vy) {

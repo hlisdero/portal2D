@@ -1,33 +1,20 @@
 #include "server/server.h"
 
-Server::Server(const char * mapName, ActiveSocket skt) :
-	interface(std::move(skt)),
-    eventCreator(interface.getSendQueue()),
-    game(mapName, eventCreator) {
-	game.addPlayer(&game.player);
-    eventCreator.addEntityCreations(game.getStaticEntities());
-    eventCreator.addEntityCreations(game.getDynamicEntities());
+Server::Server(const std::string& map_name) :
+    game(map_name, client_manager),
+    passive_skt("8080") {
+    passive_skt.bind();
+    passive_skt.listen();
 }
 
 void Server::run() {
-    ClockLoop<60> clock;
-    while (!quit) {
-        processQueue();
-        clock.waitNextLoop();
+    int players = 0;
+    while (players < game.getMinPlayers()) {
+        ActiveSocket skt = passive_skt.accept();
+        client_manager.addClient(std::move(skt));
+        ++players;
     }
-}
-
-void Server::processQueue() {
-    BlockingQueue<ViewEvent>& queue = interface.getReceiveQueue();
-    std::vector<ViewEvent> events = queue.popAll();
-    for (auto& event : events) {
-        if (event.type == KEYBOARD) {
-            game.movePlayer(event.direction, event.pressed);
-        } else if (event.type == MOUSE) {
-            game.createPortal(game.player, event.click_direction);
-        } else if (event.type == QUIT) {
-            quit = true;
-        }
-    }
-    game.update();
+    game.init();
+    client_manager.addSelectPlayer(0, game.getPlayerId());
+    game.run();
 }

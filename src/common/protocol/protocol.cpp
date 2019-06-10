@@ -4,6 +4,7 @@ Protocol::Protocol(ActiveSocket skt) : skt(std::move(skt)) {}
 
 void Protocol::send(const ViewEvent& event) {
     sendInteger<ViewEventType>(event.type);
+    sendInteger<int>(event.player_id);
     sendInteger<MoveDirection>(event.direction);
     sendBoolean(event.pressed);
     sendBoolean(event.repeat);
@@ -20,6 +21,7 @@ void Protocol::send(const WorldEvent& event) {
 
 void Protocol::receive(ViewEvent& event) {
     event.type = receiveInteger<ViewEventType>();
+    event.player_id = receiveInteger<int>();
     event.direction = receiveInteger<MoveDirection>();
     event.pressed = receiveBoolean();
     event.repeat = receiveBoolean();

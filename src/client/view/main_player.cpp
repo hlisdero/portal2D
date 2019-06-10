@@ -1,13 +1,14 @@
 #include "client/view/main_player.h"
 
-MainPlayer::MainPlayer(const Player& player, const Camera& camera, BlockingQueue<ViewEvent>& queue) :
-    player(player), camera(camera), queue(queue) {}
+MainPlayer::MainPlayer(size_t index, const Player& player,
+                       const Camera& camera, BlockingQueue<ViewEvent>& queue) :
+    index(index), player(player), camera(camera), queue(queue) {}
 
 void MainPlayer::handle(const KeyboardEvent& event) {
     MoveDirection direction = processMoveDirection(event);
 
     if (direction != NONE) {
-        queue.push(ViewEvent(direction, event.pressed, event.repeat));
+        queue.push(ViewEvent(index, direction, event.pressed, event.repeat));
     }
 }
 
@@ -23,7 +24,7 @@ void MainPlayer::handle(const MouseEvent& event) {
     double x = event.x - player_x;
     double y = event.y - player_y;
     ClickDirection click_direction(x/sqrt(x*x + y*y), -y/sqrt(x*x + y*y));
-    queue.push(ViewEvent(click_direction));
+    queue.push(ViewEvent(index, click_direction));
 }
 
 MoveDirection MainPlayer::processMoveDirection(const KeyboardEvent& event) const {

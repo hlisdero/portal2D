@@ -1,40 +1,48 @@
 #include "server/game.h"
 
-Game::Game(const char* mapName, EventCreator& eventCreator) :
+Game::Game(const std::string& map_name, ClientManager& client_manager) :
+    world_events(client_manager.getSendQueue()),
+    view_events(client_manager.getReceiveQueue()),
+    client_manager(client_manager),
+    event_creator(world_events),
+
 	gameEventCreator(eventsQueue),
-	map(mapName, gameEventCreator),
-	world(map, eventCreator),
-	eventCreator(eventCreator),
-	player(gameEventCreator) {}
+	map(map_name, gameEventCreator),
+	world(map, event_creator),
+	player(gameEventCreator) {
+    world.createPlayer(&player);
 
-void Game::addPlayer(PlayerEntity* player) {
-	world.createPlayer(player);
-
-	// TODO Check in progress (enough player to play)
-	if(status == WAITING_FOR_PLAYERS
-		&& world.getPlayersCount() >= map.getMinPlayers()) {
-		status = IN_PROGRESS;
-	}
+    // Solución temporal
+    player_id = findPlayerId();
 }
 
-void Game::movePlayer(const MoveDirection direction, const bool pressed) {
-    if (pressed) {
-        player.keyDown(direction);
-    } else {
-        player.keyUp(direction);
+int Game::getPlayerId() const {
+    return player_id;
+}
+
+int Game::getMinPlayers() const {
+    return map.getMinPlayers();
+}
+
+void Game::init() {
+    event_creator.addEntityCreations(map.getStaticEntities());
+    event_creator.addEntityCreations(world.getDynamicEntities());
+    client_manager.broadcast();
+}
+
+void Game::run() {
+    ClockLoop<60> clock;
+    while (!quit) {
+        client_manager.joinInputQueues();
+        processQueue();
+        update();
+        client_manager.broadcast();
+        clock.waitNextLoop();
     }
-}
-
-void Game::createPortal(PlayerEntity& player, ClickDirection& direction) {
-	world.createPortal(player, direction);
 }
 
 void Game::update() {
 	// Check victory
-	if(map.getEndZone().getNumberOfPlayersInZone()
-		>= map.getMinPlayers() - 1) {
-		status = VICTORY;
-	}
 	// TODO Check defeat
 
 	// Update contacts => generate events
@@ -45,15 +53,7 @@ void Game::update() {
 	// With new position, update entity position
 	world.updateDynamics();
 	// Then, send the new positions
-	eventCreator.addPositionUpdates(world.getDynamicEntities());
-}
-
-const std::vector<Entity*>& Game::getStaticEntities() const {
-	return map.getStaticEntities();
-}
-
-const std::vector<Entity*>& Game::getDynamicEntities() const {
-	return world.getDynamicEntities();
+	event_creator.addPositionUpdates(world.getDynamicEntities());
 }
 
 void Game::processGameEvents() {
@@ -61,7 +61,7 @@ void Game::processGameEvents() {
 	for(GameEvent event : events) {
 		switch(event.type) {
 			case ENTITY_STATE_UPDATE:
-				eventCreator.addStateUpdate(event.entity);
+				event_creator.addStateUpdate(event.entity);
 				break;
 			case ENTITY_SET_ACTIVE:
 				event.entity->as<BodyLinked>()->getBody()->SetActive(event.active);
@@ -84,4 +84,28 @@ void Game::processGameEvents() {
 
 	// if player move
 	//	move player
+}
+
+void Game::processQueue() {
+    while (!view_events.empty()) {
+        ViewEvent event = view_events.front();
+        view_events.pop();
+        if (event.type == KEYBOARD) {
+            player.move(event.direction, event.pressed);
+        } else if (event.type == MOUSE) {
+            world.createPortal(player, event.click_direction);
+        } else if (event.type == QUIT) {
+            quit = true;
+        }
+    }
+}
+
+int Game::findPlayerId() {
+    auto entities = world.getDynamicEntities();
+    for (const auto& entity : entities) {
+        if (entity->getType() == TYPE_PLAYER) {
+            return entity->getId();
+        }
+    }
+    throw std::runtime_error("Error: PlayerEntity no encontrado!");
 }

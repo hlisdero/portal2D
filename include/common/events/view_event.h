@@ -14,10 +14,11 @@ enum ViewEventType {
 class ViewEvent {
 public:
     explicit ViewEvent() = default;
-    ViewEvent(MoveDirection direction, bool pressed, bool repeat);
-    ViewEvent(ClickDirection click_direction);
+    ViewEvent(int player_id, MoveDirection direction, bool pressed, bool repeat);
+    ViewEvent(int player_id, ClickDirection click_direction);
 
     ViewEventType type = INVALID;
+    int player_id = -1;
     MoveDirection direction = NONE;
     bool pressed = false;
     bool repeat = false;

@@ -1,7 +1,7 @@
 #include "server/entities/attributes/with_subscribable_state.h"
 
-void WithSubscribableState::subscribe(DoorEntity * door) {
-	this->subscribers.insert(door);
+void WithSubscribableState::subscribe(GateEntity * gate) {
+	this->subscribers.insert(gate);
 }
 
 void WithSubscribableState::setState(const State& state) {

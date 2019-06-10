@@ -5,7 +5,7 @@
 
 class WithSubscribableState;
 
-#include "server/entities/door.h"
+#include "server/entities/gate.h"
 #include "server/entities/attributes/with_state.h"
 
 class WithSubscribableState : public WithState {
@@ -13,12 +13,12 @@ public:
 	// inherit constructors
 	using WithState::WithState;
 
-	void subscribe(DoorEntity * door);
+	void subscribe(GateEntity * gate);
 
 	virtual void setState(const State& state) override;
 
 private:
-	std::unordered_set<DoorEntity*> subscribers;
+	std::unordered_set<GateEntity*> subscribers;
 };
 
 #endif  // WITH_SUBSCRIBABLE_STATE_H

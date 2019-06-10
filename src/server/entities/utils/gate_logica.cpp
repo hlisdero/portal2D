@@ -1,4 +1,4 @@
-#include "server/entities/utils/door_logica.h"
+#include "server/entities/utils/gate_logica.h"
 
 #include <string>
 
@@ -7,9 +7,9 @@ Value_DL::Value_DL(YAML::Node yaml) :
 	subscribableName(yaml.as<std::string>()) {}
 
 Double_DL::Double_DL(YAML::Node yaml) : 
-	logicaA(loadDoorLogica(yaml["a"])), logicaB(loadDoorLogica(yaml["b"])) {}
+	logicaA(loadGateLogica(yaml["a"])), logicaB(loadGateLogica(yaml["b"])) {}
 
-Not_DL::Not_DL(YAML::Node yaml) : logica(loadDoorLogica(yaml)) {}
+Not_DL::Not_DL(YAML::Node yaml) : logica(loadGateLogica(yaml)) {}
 
 // Values
 bool Value_DL::value() const {
@@ -29,27 +29,27 @@ bool Not_DL::value() const {
 }
 
 // Attach
-void Value_DL::attach(DoorEntity * door, subscribablesMap & subscribables) {
+void Value_DL::attach(GateEntity * gate, subscribablesMap & subscribables) {
 	try {
 		this->subscribable = subscribables.at(this->subscribableName);
-		this->subscribable->subscribe(door);
+		this->subscribable->subscribe(gate);
 	} catch(...) {
-		throw std::runtime_error("Impossible to attach door logica");
+		throw std::runtime_error("Impossible to attach gate logica");
 	}
 }
 
-void Double_DL::attach(DoorEntity * door, subscribablesMap & subscribables) {
-	this->logicaA->attach(door, subscribables);
-	this->logicaB->attach(door, subscribables);
+void Double_DL::attach(GateEntity * gate, subscribablesMap & subscribables) {
+	this->logicaA->attach(gate, subscribables);
+	this->logicaB->attach(gate, subscribables);
 }
 
-void Not_DL::attach(DoorEntity * door, subscribablesMap & subscribables) {
-	this->logica->attach(door, subscribables);
+void Not_DL::attach(GateEntity * gate, subscribablesMap & subscribables) {
+	this->logica->attach(gate, subscribables);
 }
 
 // Load
-DoorLogicaPtr loadDoorLogica(YAML::Node yaml) {
-	DoorLogica * logica;
+GateLogicaPtr loadGateLogica(YAML::Node yaml) {
+	GateLogica * logica;
 
 	if(yaml["value"]) {
 		logica = new Value_DL(yaml["value"]);
@@ -60,8 +60,8 @@ DoorLogicaPtr loadDoorLogica(YAML::Node yaml) {
 	} else if(yaml["not"]) {
 		logica = new Not_DL(yaml["not"]);
 	} else {
-		throw std::runtime_error("Unsupported door logica type");
+		throw std::runtime_error("Unsupported gate logica type");
 	}
 
-	return DoorLogicaPtr(logica);
+	return GateLogicaPtr(logica);
 }

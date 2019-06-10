@@ -30,6 +30,8 @@ public:
 	void keyDown(const MoveDirection direction);
 	void keyUp(const MoveDirection direction);
 
+    void move(const MoveDirection& direction, bool pressed);
+
 	PortalEntity * getPortal(PortalColor color);
 	void setPortal(PortalColor color, PortalEntity * portal);
 	void resetPortals(b2World & world);

@@ -1,6 +1,6 @@
 #include "server/events/event_creator.h"
 
-EventCreator::EventCreator(BlockingQueue<WorldEvent>& queue) : queue(queue) {}
+EventCreator::EventCreator(std::queue<WorldEvent>& queue) : queue(queue) {}
 
 void EventCreator::addEntityCreation(Entity* entity) {
     Position position(entity->getX(), entity->getY(), entity->getRotationDeg());

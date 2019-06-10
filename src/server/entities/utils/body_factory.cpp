@@ -1,6 +1,6 @@
 #include "server/entities/utils/body_factory.h"
 
-#include "server/entities/door.h"
+#include "server/entities/gate.h"
 #include "server/entities/end_barrier.h"
 #include "server/entities/energy_ball.h"
 #include "server/entities/player.h"
