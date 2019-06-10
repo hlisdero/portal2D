@@ -18,3 +18,7 @@ void FiniteAnimation::next() {
         setClip(getClipNumber() + 1);   // Next
     }
 }
+
+void FiniteAnimation::reset() {
+    setClip(0);
+}

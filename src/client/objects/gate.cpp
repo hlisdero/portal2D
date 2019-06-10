@@ -25,6 +25,7 @@ SDL_Rect* Gate::getClip() {
     if (getState() == STATE_OPEN) {
         return animation.getClip();
     } else {
+        animation.reset();
         return sprite.getClip();
     }
 }
