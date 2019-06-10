@@ -8,8 +8,8 @@ int main(/*int argc, char *argv[]*/) {
     try {
         Login login;
         // login.run(argc, argv);
-        // Tamaño del mundo en metros 53.32 x 40
-        Client client(login.getHostname(), login.getPort(), 17.78, 13.33);
+        // Tamaño del mundo en metros 13,335 x 10,00125
+        Client client(login.getHostname(), login.getPort(), 13.335, 10.00125);
         client.run();
         return 0;
     } catch (std::runtime_error err) {

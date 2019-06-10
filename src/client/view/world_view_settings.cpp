@@ -6,8 +6,8 @@ WorldViewSettings::WorldViewSettings(const size_t& screen_width, const size_t& s
     screen_width(screen_width), screen_height(screen_height),
     world_size(world_width, world_height),
     pixel_per_meter(screen_width/world_width),
-    level_width(1920),
-    level_height(1440),
+    level_width(1440),
+    level_height(1080),
     textures(texture_creator) {
 }
 
