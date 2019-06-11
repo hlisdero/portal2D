@@ -42,7 +42,8 @@ PlayerEntity * World::createPlayer() {
 }
 
 PlayerEntity * World::getPlayerById(size_t playerId) {
-	return players.at(playerId);
+	auto it = players.find(playerId);
+	return (it == players.end()) ? nullptr : it->second;
 }
 
 void World::killPlayer(PlayerEntity * player) {
