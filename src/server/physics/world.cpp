@@ -76,7 +76,7 @@ bool World::isPortalAllowed(PortalRayCastCallback & raycast) {
 	edgeA += raycast.m_point;
 	edgeB += raycast.m_point;
 
-	PortalAABBCallback creationQuery(edgeA, edgeB);
+	PortalAABBCallback creationQuery(edgeA, edgeB, raycast.m_normal, raycast.entity);
 	world.QueryAABB(&creationQuery, aabb);
 	return creationQuery.isOk();
 }

@@ -2,8 +2,8 @@
 
 #include "server/entities/player.h"
 
-PortalAABBCallback::PortalAABBCallback(b2Vec2 edgeA, b2Vec2 edgeB) :
-	edgeA(std::move(edgeA)), edgeB(std::move(edgeB)) {}
+PortalAABBCallback::PortalAABBCallback(b2Vec2 edgeA, b2Vec2 edgeB, b2Vec2 & normal, Entity * centerEntity) :
+	edgeA(std::move(edgeA)), edgeB(std::move(edgeB)), orientation(getPortalOrientation(normal)), centerEntity(centerEntity) {}
 
 bool PortalAABBCallback::ReportFixture(b2Fixture* fixture) {
 	Entity* entity = static_cast<Entity*>(
@@ -27,8 +27,34 @@ bool PortalAABBCallback::ReportFixture(b2Fixture* fixture) {
 }
 
 bool PortalAABBCallback::isPointOk(Entity* entity) {
-	return entity->getType() == TYPE_METAL_BLOCK ||
-			entity->getType() == TYPE_METAL_DIAG_BLOCK;
+	if(entity->getType() != TYPE_METAL_BLOCK && 
+		entity->getType() != TYPE_METAL_DIAG_BLOCK) {
+		return false;
+	}
+
+	if(orientation == HORIZONTAL 
+		&& entity->getY() == centerEntity->getY()) {
+		return true;
+	} else if (orientation == VERTICAL 
+		&& entity->getX() == centerEntity->getX()) {
+		return true;
+	// Else if diagonal
+	} else if(entity->getType() == TYPE_METAL_DIAG_BLOCK 
+			&& entity->getRotationDeg() == centerEntity->getRotationDeg()) {
+		return true;
+	}
+
+	return false;
+}
+
+PortalOrientation PortalAABBCallback::getPortalOrientation(b2Vec2 & normal) {
+	if(normal.x == 0) {
+		return HORIZONTAL;
+	} else if(normal.y == 0) {
+		return VERTICAL;
+	} else {
+		return DIAGONAL;
+	}
 }
 
 bool PortalAABBCallback::isOk() {
