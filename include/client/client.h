@@ -24,6 +24,7 @@ public:
 private:
     Interface<ViewEvent, WorldEvent> interface;
     WorldView view;
+    bool quit = false;
 
     void processQueue();
     void processEvent(const WorldEvent& event);
