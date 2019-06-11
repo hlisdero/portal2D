@@ -82,6 +82,7 @@ void Game::processGameEvents() {
 				event_creator.addEndGame();
 				break;
 			case KILL_PLAYER:
+				event.entity->as<PlayerEntity>()->resetPortals(world.getb2World(), event_creator);
 				event_creator.addEntityDestruction(event.entity);
 				world.killPlayer(event.entity->as<PlayerEntity>());
 
