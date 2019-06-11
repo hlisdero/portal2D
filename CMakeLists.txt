@@ -75,6 +75,8 @@ target_include_directories(interface-test-server PRIVATE ${PROJECT_SOURCE_DIR}/i
 target_compile_options(interface-test-server PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
 target_link_libraries(interface-test-server "-pthread")
 
+add_custom_target(interface-test DEPENDS interface-test-client interface-test-server)
+
 # View Test
 add_executable(view-test ${test_sources} ${client_sources} ${common_sources})
 target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/include/)
