@@ -86,11 +86,12 @@ void Game::processGameEvents() {
 				event_creator.addEntityDestruction(event.entity);
 				world.killPlayer(event.entity->as<PlayerEntity>());
 
-				if(world.getPlayersCount() < map.getMinPlayers() - 1) {
+				if(world.getPlayersCount() == 0 ||
+					world.getPlayersCount() < map.getMinPlayers() - 1) {
 					gameEventCreator.addGameStateChange(DEFEAT);
 				}
 				// TODO notify client
-				//event_creator.addEntityDestruction(event.entity);
+				// event_creator.addEntityDestruction(event.entity);
 				break;
 			case ENERGY_BALL_DESTRUCTION:
 				event_creator.addEntityDestruction(event.entity);
