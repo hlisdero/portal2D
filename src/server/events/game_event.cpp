@@ -8,3 +8,6 @@ GameEvent::GameEvent(Entity * entity, bool active) :
 
 GameEvent::GameEvent(GameStatus status) : 
 	type(GAME_STATUS_CHANGE), status(status) {}
+
+GameEvent::GameEvent(size_t playerCount) : 
+	type(POTENTIAL_VICTORY), playerCount(playerCount) {}

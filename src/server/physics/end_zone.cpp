@@ -3,7 +3,7 @@
 EndZone::EndZone(GameEventCreator & gameEventCreator) : gameEventCreator(gameEventCreator) {}
 
 void EndZone::setNumberOfPlayersForVictory(size_t newPlayersForVictory) {
-	playersForVictory = newPlayersForVictory;
+	minPlayersForVictory = newPlayersForVictory;
 }
 
 void EndZone::playerWentTroughBarrier(PlayerEntity * player) {
@@ -14,7 +14,7 @@ void EndZone::playerWentTroughBarrier(PlayerEntity * player) {
 		this->playersInZone.erase(iterator.first);
 	}
 
-	if(playersInZone.size() >= playersForVictory) {
-		gameEventCreator.addGameStateChange(VICTORY);
+	if(playersInZone.size() >= minPlayersForVictory) {
+		gameEventCreator.addPotentialVictory(playersInZone.size());
 	}
 }

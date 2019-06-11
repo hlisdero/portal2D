@@ -15,7 +15,7 @@ public:
 	void playerWentTroughBarrier(PlayerEntity * player);
 
 private:
-	size_t playersForVictory = 1;
+	size_t minPlayersForVictory = 1;
 	std::unordered_set<PlayerEntity*> playersInZone;
 	GameEventCreator & gameEventCreator;
 };

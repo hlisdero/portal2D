@@ -9,6 +9,11 @@
 #include "server/entities/attributes/handle_contact.h"
 #include "server/physics/end_zone.h"
 
+enum EndBarrierSide {
+	SIDE_A = 0,
+	SIDE_B
+};
+
 class EndBarrierEntity :  public Entity, public HandleContact {
 public:
 	EndBarrierEntity(float x, float y, float rotation, EndZone & endZone);
@@ -17,7 +22,9 @@ public:
 
 private:
 	EndZone & endZone;
-	std::map<PlayerEntity*, b2Vec2> contacts;
+	std::map<PlayerEntity*, EndBarrierSide> contacts;
+
+	EndBarrierSide getSide(b2Vec2 position);
 };
 
 #endif  // END_BARRIER_ENTITY_H

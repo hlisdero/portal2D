@@ -36,3 +36,8 @@ void GameEventCreator::addKillPlayer(Entity * entity) {
 	GameEvent event(KILL_PLAYER, entity);
 	queue.push(event);
 }
+
+void GameEventCreator::addPotentialVictory(size_t playerCount) {
+	GameEvent event(playerCount);
+	queue.push(event);
+}

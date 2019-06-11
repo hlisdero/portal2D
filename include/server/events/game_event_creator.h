@@ -16,6 +16,8 @@ public:
 	void addBallDestruction(Entity * entity);
 
 	void addGameStateChange(GameStatus status); 
+
+	void addPotentialVictory(size_t playerCount); 
 	
 	void addKillPlayer(Entity* entity); 
 

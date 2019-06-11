@@ -3,28 +3,39 @@
 EndBarrierEntity::EndBarrierEntity(float x, float y, float rotation, EndZone & endZone) :
     Entity(TYPE_END_BARRIER, x, y, rotation), endZone(endZone) {}
 
-void EndBarrierEntity::handleContactWith(Entity * entity, b2Contact * contact, bool inContact) {
+EndBarrierSide EndBarrierEntity::getSide(b2Vec2 position) {
+	float delta;
+	if(getRotationDeg() == 0) {
+		delta = position.x - getX();
+	} else if(getRotationDeg() == 90) {
+		delta = position.y - getY();
+	} else {
+		throw std::runtime_error("Unsupported end barrier orientation");
+	}
+
+	return delta > 0 ? SIDE_A : SIDE_B;
+}
+
+void EndBarrierEntity::handleContactWith(Entity * entity, b2Contact *, bool newContact) {
 
 	if(entity->getType() == TYPE_PLAYER) {
 		PlayerEntity * player = entity->as<PlayerEntity>();
 
-		b2WorldManifold manifold;
-		contact->GetWorldManifold(&manifold);
-
-		if(inContact) {
-			this->contacts[player] = manifold.normal;
+		if(newContact) {
+			this->contacts[player] = getSide(player->getBody()->GetPosition());
 		} else {
 			auto iterator = this->contacts.find(player);
 
 			if(iterator != this->contacts.end()) {
-				if(iterator->second ==
-					-1 * manifold.normal) {
-					// Player went through
+				EndBarrierSide newSide = getSide(player->getBody()->GetPosition());
+
+				// If: Player went through (newSide != oldSide)
+				if(newSide != iterator->second) {
 					endZone.playerWentTroughBarrier(player);
-				} else {
-					// Player went the other way
-					this->contacts.erase(iterator);
 				}
+				// Else: Player went the other way
+
+				this->contacts.erase(iterator);
 			}
 		}
 	}

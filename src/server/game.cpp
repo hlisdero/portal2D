@@ -71,6 +71,11 @@ void Game::processGameEvents() {
 				event.entity->as<PlayerEntity>()->resetPortals(world.getb2World(), event_creator);
 				// TODO notify client
 				break;
+			case POTENTIAL_VICTORY:
+				if(world.getPlayersCount() == event.playerCount) {
+					gameEventCreator.addGameStateChange(VICTORY);
+				}
+				break;
 			case GAME_STATUS_CHANGE:
 				// TODO use status
 				quit = true;
@@ -80,7 +85,7 @@ void Game::processGameEvents() {
 				event_creator.addEntityDestruction(event.entity);
 				world.killPlayer(event.entity->as<PlayerEntity>());
 
-				if(world.getPlayersCount() < map.getMinPlayers()) {
+				if(world.getPlayersCount() < map.getMinPlayers() - 1) {
 					gameEventCreator.addGameStateChange(DEFEAT);
 				}
 				// TODO notify client
