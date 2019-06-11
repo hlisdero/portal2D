@@ -6,7 +6,7 @@ Client::Client(const std::string& hostname, const std::string& port) :
 
 void Client::run() {
     ClockLoop<60> clock;
-    while (true) {
+    while (!quit) {
         view.pollEvents();
         if (view.quit()) {
             break;
@@ -37,6 +37,8 @@ void Client::processEvent(const WorldEvent& event) {
         view.destroyEntity(event.id);
     } else if (event.type == SELECT_PLAYER) {
         view.selectPlayer(event.id);
+    } else if (event.type == END_GAME) {
+        quit = true;
     }
 }
 
