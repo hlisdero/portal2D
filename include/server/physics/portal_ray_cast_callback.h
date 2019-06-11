@@ -2,6 +2,7 @@
 #define PORTAL_RAY_CAST_CALLBACK_H
 
 #include "Box2D/Box2D.h"
+#include "server/entities/entity.h"
 
 class PortalRayCastCallback : public b2RayCastCallback
 {
@@ -12,7 +13,7 @@ public:
 	bool hit = false;
 	b2Vec2 m_point;
 	b2Vec2 m_normal;
-	b2Body * body;
+	Entity * entity;
 };
 
 #endif

@@ -150,3 +150,15 @@ void BodyFactory::createBody(Entity * entity) {
 	body->SetUserData(entity);
 	attachBody(entity, body);
 }
+
+b2AABB BodyFactory::createPortalAABB(b2Vec2 & position, float rotation) {
+	b2PolygonShape shape;
+	auto & portalSettings = entitiesSettings[TYPE_PORTAL];
+	b2Vec2 offset(portalSettings[X_OFFSET], portalSettings[Y_OFFSET]);
+	setBlockShape(shape, portalSettings, offset);
+
+	b2AABB aabb;
+	shape.ComputeAABB(&aabb, b2Transform(position, b2Rot(rotation)), 0);
+
+	return std::move(aabb);
+}

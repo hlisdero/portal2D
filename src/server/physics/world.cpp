@@ -1,6 +1,7 @@
 #include "server/physics/world.h"
 
-#include "server/physics/portal_ray_cast_callback.h"
+#include "common/entities/entities_settings.h"
+#include "server/physics/portal_aabb_callback.h"
 
 // Initialize the world with the gravity vector
 World::World(Map& map, GameEventCreator & gameEventCreator) :
@@ -58,6 +59,28 @@ void World::destroyEntity(BodyLinked * entity) {
 	delete entity;
 }
 
+bool World::isPortalAllowed(PortalRayCastCallback & raycast) {
+	if(raycast.entity->getType() != TYPE_METAL_BLOCK &&
+			raycast.entity->getType() != TYPE_METAL_DIAG_BLOCK) {
+		return false;
+	}
+
+	double rotation = atan2(raycast.m_normal.y, raycast.m_normal.x);
+
+	b2AABB aabb = bodyFactory.createPortalAABB(raycast.m_point, rotation);
+
+	b2Vec2 edgeA(-1 * sin(rotation), cos(rotation));
+	edgeA *= PORTAL_SENSIBILITY * entitiesSettings[TYPE_PORTAL][HALF_HEIGHT];
+	b2Vec2 edgeB = -1 * edgeA;
+
+	edgeA += raycast.m_point;
+	edgeB += raycast.m_point;
+
+	PortalAABBCallback creationQuery(edgeA, edgeB);
+	world.QueryAABB(&creationQuery, aabb);
+	return creationQuery.isOk();
+}
+
 void World::createPortal(PlayerEntity * player, ClickDirection& direction, EventCreator & eventCreator) {
 	// TODO remove
     portal_color = !portal_color;
@@ -71,11 +94,8 @@ void World::createPortal(PlayerEntity * player, ClickDirection& direction, Event
 
 	world.RayCast(&callback, origin, end);
 
-	if(callback.hit) {
-		// TODO check if possible to create a portal
-
+	if(callback.hit && isPortalAllowed(callback)) {
 		// create a portal
-
 		PortalEntity * portal = player->getPortal(color);
 		if(portal != nullptr) {
 			portal->move(callback.m_point.x, callback.m_point.y, callback.m_normal);
@@ -89,7 +109,8 @@ void World::createPortal(PlayerEntity * player, ClickDirection& direction, Event
 
 			eventCreator.addEntityCreation(portal);
 		}
-
+	} else {
+		// TODO send "error" to client
 	}
 }
 

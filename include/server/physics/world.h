@@ -11,9 +11,10 @@
 #include "server/map.h"
 #include "server/entities/player.h"
 #include "server/entities/utils/body_factory.h"
-#include "server/physics/contact_listener.h"
 #include "server/events/event_creator.h"
 #include "server/events/game_event_creator.h"
+#include "server/physics/contact_listener.h"
+#include "server/physics/portal_ray_cast_callback.h"
 
 /*
 	y
@@ -24,6 +25,8 @@
 */
 
 #define PORTAL_REACH 30.0f
+#define PORTAL_SENSIBILITY 0.8
+
 #define GRAVITY -10.0f
 
 #define EMITTER_INTERVAL 5
@@ -70,6 +73,8 @@ private:
 	std::chrono::duration<int> emitterInterval;
 
 	ContactListener contactListener;
+
+	bool isPortalAllowed(PortalRayCastCallback & callback);
 };
 
 #endif  // WORLD_H

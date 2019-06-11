@@ -11,6 +11,8 @@ public:
 
 	void createBody(Entity * Entity);
 
+	b2AABB createPortalAABB(b2Vec2 & position, float rotation);
+
 private:
 	b2World & world;
 	int nextDynamicEntityId = 0;
