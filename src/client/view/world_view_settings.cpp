@@ -1,11 +1,10 @@
 #include "client/view/world_view_settings.h"
 
 WorldViewSettings::WorldViewSettings(const size_t& screen_width, const size_t& screen_height,
-                                     float world_width, float world_height,
                                      const TextureCreator& texture_creator) :
     screen_width(screen_width), screen_height(screen_height),
-    world_size(world_width, world_height),
-    pixel_per_meter(screen_width/world_width),
+    world_size(13.335, 10.00125),   // Tamaño del mundo en metros
+    pixel_per_meter(screen_width/world_size.x),
     level_width(1440),
     level_height(1080),
     textures(texture_creator) {

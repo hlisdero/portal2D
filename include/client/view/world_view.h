@@ -12,7 +12,7 @@
 
 class WorldView {
 public:
-    WorldView(float world_width, float world_height, BlockingQueue<ViewEvent>& queue);
+    WorldView(BlockingQueue<ViewEvent>& queue);
 
     WorldView(const WorldView&) = delete;
     WorldView& operator=(const WorldView&) = delete;

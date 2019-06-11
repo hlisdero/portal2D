@@ -8,7 +8,7 @@
 
 TEST_CASE("Player and Block Test", "[view]") {
     BlockingQueue<ViewEvent> queue;
-    WorldView view(13.33, 10, queue);
+    WorldView view(queue);
     EventHandler event_handler;
 
     size_t player_index = 0;

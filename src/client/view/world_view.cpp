@@ -1,9 +1,9 @@
 #include "client/view/world_view.h"
 
-WorldView::WorldView(float world_width, float world_height, BlockingQueue<ViewEvent>& queue) :
+WorldView::WorldView(BlockingQueue<ViewEvent>& queue) :
     event_manager(queue),
     screen(1024, 768),
-    settings(screen.getWidth(), screen.getHeight(), world_width, world_height, screen.getTextureCreator()),
+    settings(screen.getWidth(), screen.getHeight(), screen.getTextureCreator()),
     background(settings.getScreenWidth(), settings.getScreenHeight(), settings.getTextureLoader()["Background"]),
     object_creator(view_objects, settings) {
     event_manager.addHandler((KeyboardHandler*) &sound_manager);

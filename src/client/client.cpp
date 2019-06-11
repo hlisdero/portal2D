@@ -1,9 +1,8 @@
 #include "client/client.h"
 
-Client::Client(const std::string& hostname, const std::string& port,
-               float world_width, float world_height) :
+Client::Client(const std::string& hostname, const std::string& port) :
     interface(std::move(ActiveSocket(hostname, port))),
-    view(world_width, world_height, interface.getSendQueue()) {}
+    view(interface.getSendQueue()) {}
 
 void Client::run() {
     ClockLoop<60> clock;
