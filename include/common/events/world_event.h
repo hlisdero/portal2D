@@ -7,16 +7,18 @@
 
 enum WorldEventType {
     INVALID_WE = 0,
-    ENTITY_CREATION = 1,
-	ENTITY_DESTRUCTION = 2,
-    POSITION_UPDATE = 3,
-    STATE_UPDATE = 4,
-    SELECT_PLAYER
+    ENTITY_CREATION,
+	ENTITY_DESTRUCTION,
+    POSITION_UPDATE,
+    STATE_UPDATE,
+    SELECT_PLAYER,
+    END_GAME
 };
 
 class WorldEvent {
 public:
     explicit WorldEvent() = default;
+    WorldEvent(WorldEventType type);
     WorldEvent(int id, EntityType type, const Position& position);
     explicit WorldEvent(int id);
 	WorldEvent(int id, const Position& position);

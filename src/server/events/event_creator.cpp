@@ -35,3 +35,8 @@ void EventCreator::addPositionUpdates(const std::vector<Entity*>& entities) {
         addPositionUpdate(entity);
     }
 }
+
+void EventCreator::addEndGame() {
+    WorldEvent event(END_GAME);
+    queue.push(event);
+}

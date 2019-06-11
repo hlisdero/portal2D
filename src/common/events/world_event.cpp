@@ -1,5 +1,7 @@
 #include "common/events/world_event.h"
 
+WorldEvent::WorldEvent(WorldEventType type) : type(type) {}
+
 WorldEvent::WorldEvent(int id, EntityType type, const Position& position) :
     type(ENTITY_CREATION), id(id), entity_type(type), position(position) {}
 

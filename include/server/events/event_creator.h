@@ -17,6 +17,8 @@ public:
     void addPositionUpdate(Entity* entity);
     void addStateUpdate(Entity* entity);
 
+    void addEndGame();
+
     // Métodos para vectores
     void addEntityCreations(const std::vector<Entity*>& entities);
     void addPositionUpdates(const std::vector<Entity*>& entities);

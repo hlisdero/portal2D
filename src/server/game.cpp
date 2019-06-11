@@ -43,9 +43,6 @@ void Game::run() {
 }
 
 void Game::update() {
-	// Check victory
-	// TODO Check defeat
-
 	// Update contacts => generate events
 	world.updatePhysics(event_creator);
 	// With events, do things => change position, state,...
@@ -75,8 +72,9 @@ void Game::processGameEvents() {
 				// TODO notify client
 				break;
 			case GAME_STATUS_CHANGE:
-				// status = event.status;
-				// TODO notify client
+				// TODO use status
+				quit = true;
+				event_creator.addEndGame();
 				break;
 			case KILL_PLAYER:
 				event_creator.addEntityDestruction(event.entity);
@@ -86,6 +84,7 @@ void Game::processGameEvents() {
 					gameEventCreator.addGameStateChange(DEFEAT);
 				}
 				// TODO notify client
+				//event_creator.addEntityDestruction(event.entity);
 				break;
 			case ENERGY_BALL_DESTRUCTION:
 				event_creator.addEntityDestruction(event.entity);
@@ -102,20 +101,19 @@ void Game::processQueue() {
         ViewEvent event = view_events.front();
         view_events.pop();
 
-        if (event.type == QUIT) {
-            // TODO Un jugador se fue y ya fue desconectado
-            // Qué hacemos con el mundo?
-        } else {
-	        PlayerEntity * player = world.getPlayerById(event.player_id);
+        PlayerEntity * player = world.getPlayerById(event.player_id);
 
-	        // If player is alive
-	        if(player != nullptr) {
-		        if (event.type == KEYBOARD) {
-		            player->move(event.direction, event.pressed);
-		        } else if (event.type == MOUSE) {
-		            world.createPortal(player, event.click_direction, event_creator);
-		        }
-		    }
-		}
+        // If player is alive
+        if(player != nullptr) {
+	        if (event.type == KEYBOARD) {
+	            player->move(event.direction, event.pressed);
+	        } else if (event.type == MOUSE) {
+	            world.createPortal(player, event.click_direction, event_creator);
+	        } else if (event.type == QUIT) {
+	            // TODO Un jugador se fue y ya fue desconectado
+	            // Qué hacemos con el mundo?
+	        	gameEventCreator.addKillPlayer(player);
+	        }
+	    }
     }
 }
