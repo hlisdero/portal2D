@@ -49,7 +49,8 @@ void ContactListener::handlePreSolve(b2Fixture * fixtureA, b2Fixture * fixtureB,
 
 	if(entityA->getType() >= DYNAMIC_ENTITY_START && entityA->as<TeleportableEntity>()->isTeleporting()) {
 		contact->SetEnabled(false);	
-	} else if(entityA->getType() == TYPE_PLAYER) {
+	} else if(entityA->getType() == TYPE_PLAYER ||
+		entityA->getType() == TYPE_ROCK) {
 		b2WorldManifold worldManifold;
 		contact->GetWorldManifold(&worldManifold);
 
