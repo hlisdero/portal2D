@@ -1,6 +1,7 @@
 #include "server/physics/contact_listener.h"
 
 #include "server/entities/attributes/teleportable_entity.h"
+#include "server/entities/portal.h"
 #include "server/entities/attributes/handle_contact.h"
 #include "server/objects/server_settings.h"
 extern ServerSettings SETTINGS;
@@ -47,7 +48,10 @@ void ContactListener::handlePreSolve(b2Fixture * fixtureA, b2Fixture * fixtureB,
 	Entity * entityA = static_cast<Entity*>(
 		fixtureA->GetBody()->GetUserData());
 
-	if(entityA->getType() >= DYNAMIC_ENTITY_START && entityA->as<TeleportableEntity>()->isTeleporting()) {
+	if(entityA->getType() == TYPE_PORTAL
+		&& entityA->as<PortalEntity>()->getTwin() == nullptr) {
+		contact->SetEnabled(false);
+	} else if(entityA->getType() >= DYNAMIC_ENTITY_START && entityA->as<TeleportableEntity>()->isTeleporting()) {
 		contact->SetEnabled(false);	
 	} else if(entityA->getType() == TYPE_PLAYER ||
 		entityA->getType() == TYPE_ROCK) {
