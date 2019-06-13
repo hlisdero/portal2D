@@ -28,6 +28,7 @@ ServerSettings::ServerSettings(const char * filename) {
 
 	// player
 	PLAYER_SPEED = yaml["player_speed"].as<float>();
+	PLAYER_AIR_SPEED = yaml["player_air_speed"].as<float>();
 	PLAYER_JUMP_IMPULSE = yaml["player_jump_impulse"].as<float>();
 	VERTICAL_VECTOR_LIMIT = yaml["vertical_vector_limit"].as<float>();
 }

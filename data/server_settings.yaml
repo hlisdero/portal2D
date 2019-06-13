@@ -6,13 +6,14 @@ port: "8080"
 # interval, in seconds, between each intent to fire an energy ball
 energy_emitter_fire_interval: 5
 
-energy_ball_speed: 2.0
+energy_ball_speed: 1.0
 
 ### Player settings
 player_speed: 3.0
+player_air_speed: 2.0
 
 # player jump force
-player_jump_impulse: 3.0
+player_jump_impulse: 5.0
 
 # maximum possible distance to create a portal
 portal_reach: 70.0

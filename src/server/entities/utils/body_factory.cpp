@@ -116,15 +116,11 @@ b2FixtureDef BodyFactory::createFixtureDef(Entity * entity,
 		0.0f : SETTINGS.DYNAMIC_BODY_DENSITY;
 
 	if(entity->getType() == TYPE_PLAYER) {
-		fixtureDef.filter.categoryBits = 0x0001;
-		fixtureDef.filter.maskBits = 0xFFFD;
+		fixtureDef.friction = 0;
 	} else if(entity->getType() == TYPE_ENERGY_BAR ||
 		entity->getType() == TYPE_END_BARRIER ||
 		entity->getType() == TYPE_ENERGY_BALL) {
 		fixtureDef.isSensor = true;
-		// TODO util ?
-		// fixtureDef.filter.categoryBits = 0x0002;
-		// fixtureDef.filter.maskBits = 0xFFFF;
 	}
 
 	return std::move(fixtureDef);

@@ -44,24 +44,24 @@ void PlayerEntity::resetPortals(b2World & world, EventCreator & eventCreator) {
 	}
 }
 
-void PlayerEntity::handleFloorContact(b2Contact * contact, bool) {
+void PlayerEntity::handleFloorContact(b2Contact * contact, bool newContact) {
 	b2WorldManifold worldManifold;
 	contact->GetWorldManifold(&worldManifold);
 
-	bool oldContact = false;
+	bool savedContact = false;
 
 	auto it = floorsContacts.begin();
-	while(!oldContact && it != floorsContacts.end()) {
-		oldContact = (*it == contact);
+	while(!savedContact && it != floorsContacts.end()) {
+		savedContact = (*it == contact);
 
-		if(oldContact) {
+		if(savedContact) {
 			floorsContacts.erase(it);
 		}
 
 		it++;
 	}
 
-	if(!oldContact) {
+	if(!savedContact) {
 		if(contact->GetFixtureA()->GetBody()->GetUserData() == this) {
 			if(worldManifold.normal.y < -1 * SETTINGS.VERTICAL_VECTOR_LIMIT) {
 				floorsContacts.push_back(contact);
@@ -71,8 +71,8 @@ void PlayerEntity::handleFloorContact(b2Contact * contact, bool) {
 		}
 	}
 
-	if(floorsContacts.size() > 0) {
-		hasMovedInTheAir = false;
+	if(newContact && floorsContacts.size() > 0) {
+		inTheAir = false;
 	}
 }
 
@@ -120,9 +120,15 @@ void PlayerEntity::move(const MoveDirection& direction, bool pressed) {
 		switch(direction) {
 			// If on the floor, jump
 			case UP:
-				if(floorsContacts.size() > 0) {
-					// TODO load speed from file
-					applyImpulseToCenter(0.0f, SETTINGS.PLAYER_JUMP_IMPULSE);
+				if(!inTheAir) {
+					b2Vec2 velocity = getBody()->GetLinearVelocity();
+
+					velocity.x = std::min(velocity.x, SETTINGS.PLAYER_AIR_SPEED);
+					velocity.x = std::max(velocity.x, -1 * SETTINGS.PLAYER_AIR_SPEED);
+
+					velocity.y = SETTINGS.PLAYER_JUMP_IMPULSE;
+					getBody()->SetLinearVelocity(velocity);
+					inTheAir = true;
 				}
 				break;
 			case LEFT:
@@ -145,32 +151,25 @@ void PlayerEntity::applyImpulseToCenter(const float vx, const float vy) {
 }
 
 void PlayerEntity::applyMovement() {
-	// - If on the floor
-	// 		- allowed to move in both direction,
-	//  	- when the keyboard is released, the player
-	//			stop moving imediatly
-	// - If not on the floor
-	// 		- can move one time in one of the two direction
-	//		- after, the player will continue his movement
-	//			(no resistance in the air)
-	if(floorsContacts.size() == 0) {
-		if(hasMovedInTheAir || moveDirection == NONE) {
+	float speed = SETTINGS.PLAYER_SPEED;
+
+	if(inTheAir) {
+		if(moveDirection == NONE) {
 			return;
-		} else {
-			hasMovedInTheAir = true;
 		}
+
+		speed = SETTINGS.PLAYER_AIR_SPEED;
 	}
 
 	b2Vec2 velocity = getBody()->GetLinearVelocity();
 
-	// TODO load speed from file
 	float targetVelocity;
 	switch(moveDirection) {
 		case RIGHT:
-			targetVelocity = SETTINGS.PLAYER_SPEED;
+			targetVelocity = speed;
 			break;
 		case LEFT:
-			targetVelocity = -1 * SETTINGS.PLAYER_SPEED;
+			targetVelocity = -1 * speed;
 			break;
 		default:
 			targetVelocity = 0.0f;

@@ -33,6 +33,7 @@ public:
 
 	// player
 	float PLAYER_SPEED = 5.0f;
+	float PLAYER_AIR_SPEED;
 	float PLAYER_JUMP_IMPULSE = 5.0f;
 	float VERTICAL_VECTOR_LIMIT = 0.707;
 };

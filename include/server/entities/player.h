@@ -40,8 +40,7 @@ public:
 
 private:
 	std::vector<b2Contact *> floorsContacts;
-	// This allow for better gameplay experience
-	bool hasMovedInTheAir = false;
+	bool inTheAir = true;
 	MoveDirection moveDirection = NONE;
 
 	PortalEntity * portals[PORTALS_NB];
