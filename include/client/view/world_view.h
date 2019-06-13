@@ -9,6 +9,7 @@
 #include "client/view/main_player.h"
 #include "client/view/view_object_creator.h"
 #include "client/view/world_view_settings.h"
+#include "common/objects/size.h"
 
 class WorldView {
 public:
@@ -35,6 +36,8 @@ public:
     void selectPlayer(size_t index);
 
     void update();
+
+    void setWorldSize(const Size & size);
 
 private:
     EventManager event_manager;

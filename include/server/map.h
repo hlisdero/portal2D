@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 
+#include "common/objects/size.h"
 #include "server/entities/entity.h"
 #include "server/entities/gate.h"
 #include "server/entities/energy_emitter.h"
@@ -29,6 +30,8 @@ public:
 	b2Vec2 & getSpawn();
 	size_t getMinPlayers() const;
 
+	const Size & getSize() const;
+
 	~Map();
 
 private:
@@ -40,6 +43,13 @@ private:
 
 	EndZone endZone;
 
+	float minX = -1;
+	float minY;
+	float maxX;
+	float maxY;
+
+	Size size = {0,0};
+
 	GameEventCreator& gameEventCreator;
 
 	void loadSettings(YAML::Node yaml);
@@ -47,6 +57,8 @@ private:
 	Entity * createEntity(YAML::Node yaml);
 
     EntityType getEntityType(std::string str);
+    void initMapDimensions(float x, float y);
+    void updateMapDimensions(float x, float y);
 };
 
 #endif  // MAP_H

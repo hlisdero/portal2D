@@ -25,6 +25,7 @@ size_t Game::getMinPlayers() const {
 }
 
 void Game::init() {
+    event_creator.addWorldSize(map.getSize());
     event_creator.addEntityCreations(map.getStaticEntities());
     event_creator.addEntityCreations(world.getDynamicEntities());
     client_manager.broadcast();

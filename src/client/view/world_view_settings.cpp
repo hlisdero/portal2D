@@ -41,3 +41,8 @@ void WorldViewSettings::changeRatioCameraMode() {
 void WorldViewSettings::changeRatioScreenMode() {
     pixel_per_meter = screen_width / world_size.x;
 }
+
+void WorldViewSettings::setWorldSize(const Size & size) {
+    world_size = size;
+    changeRatioScreenMode();
+}

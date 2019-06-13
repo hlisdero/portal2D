@@ -28,6 +28,8 @@ public:
     void changeRatioCameraMode();
     void changeRatioScreenMode();
 
+    void setWorldSize(const Size & size);
+
 private:
     const size_t& screen_width;
     const size_t& screen_height;

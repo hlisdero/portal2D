@@ -40,6 +40,10 @@ int WorldView::getPlayerIndex() const {
     return main_player->getIndex();
 }
 
+void WorldView::setWorldSize(const Size & size) {
+    settings.setWorldSize(size);
+}
+
 void WorldView::createEntity(size_t index, EntityType type, const Position& position) {
     switch (type) {
         case TYPE_STONE_BLOCK:

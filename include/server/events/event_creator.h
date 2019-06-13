@@ -19,9 +19,12 @@ public:
 
     void addEndGame();
 
+    void addWorldSize(const Size & size);
+
     // Métodos para vectores
     void addEntityCreations(const std::vector<Entity*>& entities);
     void addPositionUpdates(const std::vector<Entity*>& entities);
+
 
 private:
 	std::queue<WorldEvent>& queue;

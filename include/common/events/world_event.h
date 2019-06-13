@@ -4,6 +4,7 @@
 #include "common/entities/entities_types.h"
 #include "common/objects/position.h"
 #include "common/objects/state.h"
+#include "common/objects/size.h"
 
 enum WorldEventType {
     INVALID_WE = 0,
@@ -12,7 +13,8 @@ enum WorldEventType {
     POSITION_UPDATE,
     STATE_UPDATE,
     SELECT_PLAYER,
-    END_GAME
+    END_GAME,
+    WORLD_SIZE
 };
 
 class WorldEvent {
@@ -23,6 +25,7 @@ public:
     explicit WorldEvent(int id);
 	WorldEvent(int id, const Position& position);
     WorldEvent(int id, const State& state);
+    WorldEvent(const Size & size);
 
 	WorldEventType type = INVALID_WE;
     int id = -1;
