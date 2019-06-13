@@ -47,6 +47,7 @@ void TeleportableEntity::goThroughPortal(PortalEntity * inPortal) {
 			outVelocity += outVector;
 		}
 
+		// Add 10% of the out portal vector to move outside of the portal
 		outVector *= 0.1;
 
 		// Update player velocity and position

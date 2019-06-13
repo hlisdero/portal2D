@@ -42,3 +42,11 @@ void Entity::setId(const int id) {
 int Entity::getId() const {
     return id;
 }
+
+bool Entity::isDestroyed() {
+    return destroyed;
+}
+
+void Entity::destroy() {
+    destroyed = true;
+}

@@ -25,6 +25,9 @@ public:
 	void setId(const int id);
 	int getId() const;
 
+	bool isDestroyed();
+	void destroy();
+
 	template <class T>
 	T * as() {
 		return dynamic_cast<T*>(this);
@@ -37,6 +40,7 @@ private:
 	float rotation;
 	// TODO uint ?
 	int id = 0;
+	bool destroyed = false;
 };
 
 #endif  // ENTITY_H

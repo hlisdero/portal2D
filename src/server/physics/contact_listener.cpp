@@ -20,7 +20,8 @@ void ContactListener::handleContact(b2Contact * contact, bool inContact) {
 	Entity * entityB = static_cast<Entity*>(
 		contact->GetFixtureB()->GetBody()->GetUserData());
 
-	if(entityA == nullptr || entityB == nullptr) {
+	if(entityA == nullptr || entityB == nullptr ||
+		entityA->isDestroyed() || entityB->isDestroyed()) {
 		return;
 	}
 

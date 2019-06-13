@@ -7,8 +7,8 @@ EnergyBallEntity::EnergyBallEntity(const float intialX, const float intialY,
 	TeleportableEntity(TYPE_ENERGY_BALL, intialX, intialY, 
 		angle, gameEventCreator), owner(owner) {}
 
-void EnergyBallEntity::handleContactWith(Entity * other, b2Contact * contact, bool inContact) {
-	TeleportableEntity::handleContactWith(other, contact, inContact);
+void EnergyBallEntity::handleContactWith(Entity * other, b2Contact * contact, bool newContact) {
+	TeleportableEntity::handleContactWith(other, contact, newContact);
 
 	if(isGoingThroughPortal() ||
 		other->getType() >= DYNAMIC_ENTITY_START ||
@@ -18,7 +18,11 @@ void EnergyBallEntity::handleContactWith(Entity * other, b2Contact * contact, bo
 	}
 
 	if(other == &owner && justEmitted) {
-		justEmitted = inContact;
+		justEmitted = newContact;
+		return;
+	}
+
+	if(!newContact) {
 		return;
 	}
 
@@ -28,4 +32,5 @@ void EnergyBallEntity::handleContactWith(Entity * other, b2Contact * contact, bo
 
 	owner.setNoBall();
 	gameEventCreator.addBallDestruction(this);
+	destroy();
 }
