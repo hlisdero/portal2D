@@ -4,7 +4,7 @@
 #define PORTALS_NB 2
 
 #include <cmath>
-#include <vector>
+#include <unordered_set>
 
 #include <Box2D/Box2D.h>
 
@@ -39,7 +39,7 @@ public:
 	virtual ~PlayerEntity() override;
 
 private:
-	std::vector<b2Contact *> floorsContacts;
+	std::unordered_set<b2Contact *> floorsContacts;
 	bool inTheAir = true;
 	MoveDirection moveDirection = NONE;
 

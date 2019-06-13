@@ -45,34 +45,16 @@ void PlayerEntity::resetPortals(b2World & world, EventCreator & eventCreator) {
 }
 
 void PlayerEntity::handleFloorContact(b2Contact * contact, bool newContact) {
-	b2WorldManifold worldManifold;
-	contact->GetWorldManifold(&worldManifold);
+	if(newContact) {
+		b2WorldManifold worldManifold;
+		contact->GetWorldManifold(&worldManifold);
 
-	bool savedContact = false;
-
-	auto it = floorsContacts.begin();
-	while(!savedContact && it != floorsContacts.end()) {
-		savedContact = (*it == contact);
-
-		if(savedContact) {
-			floorsContacts.erase(it);
+		if(abs(worldManifold.normal.y) > SETTINGS.VERTICAL_VECTOR_LIMIT) {
+			floorsContacts.insert(contact);
+			inTheAir = false;
 		}
-
-		it++;
-	}
-
-	if(!savedContact) {
-		if(contact->GetFixtureA()->GetBody()->GetUserData() == this) {
-			if(worldManifold.normal.y < -1 * SETTINGS.VERTICAL_VECTOR_LIMIT) {
-				floorsContacts.push_back(contact);
-			}
-		} else if(worldManifold.normal.y > SETTINGS.VERTICAL_VECTOR_LIMIT) {
-			floorsContacts.push_back(contact);
-		}
-	}
-
-	if(newContact && floorsContacts.size() > 0) {
-		inTheAir = false;
+	} else {
+		floorsContacts.erase(contact);
 	}
 }
 
