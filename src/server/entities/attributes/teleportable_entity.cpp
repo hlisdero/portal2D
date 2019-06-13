@@ -12,12 +12,12 @@ void TeleportableEntity::handleContactWith(Entity * other, b2Contact *, bool inC
 	if(inContact) {
 		goThroughPortal(other->as<PortalEntity>());
 	} else if(isGoingThroughPortal()) {
-		goingTroughPortal--;	
+		portalsToGoThrough--;	
 	}
 }
 
 bool TeleportableEntity::isGoingThroughPortal() {
-	return goingTroughPortal > 0;
+	return portalsToGoThrough > 0;
 }
 
 void TeleportableEntity::goThroughPortal(PortalEntity * inPortal) {
@@ -52,7 +52,7 @@ void TeleportableEntity::goThroughPortal(PortalEntity * inPortal) {
 		// Update player velocity and position
 		getBody()->SetLinearVelocity(outVelocity);
 
-		goingTroughPortal = 2;
+		portalsToGoThrough = 2;
 		teleportTo(outPortal->getX() + outVector.x, 
 			outPortal->getY() + outVector.y);
 	}

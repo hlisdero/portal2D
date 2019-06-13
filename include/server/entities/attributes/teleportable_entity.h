@@ -27,7 +27,7 @@ protected:
 	void teleportTo(float x, float y);
 
 private:
-	int goingTroughPortal = 0;
+	int portalsToGoThrough = 0;
 	bool teleporting = false;
 
 	void goThroughPortal(PortalEntity * inPortal);

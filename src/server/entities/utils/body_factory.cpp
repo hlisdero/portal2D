@@ -11,6 +11,8 @@ extern ServerSettings SETTINGS;
 
 #include "common/entities/entities_settings.h"
 
+#define DISABLE_GRAVITY 0.0f;
+
 BodyFactory::BodyFactory(b2World & world) : world(world) {}
 
 b2BodyDef BodyFactory::createBodyDef(Entity * entity) {
@@ -26,7 +28,7 @@ b2BodyDef BodyFactory::createBodyDef(Entity * entity) {
 		bodyDef.fixedRotation = true;
 	} else if(entity->getType() == TYPE_ENERGY_BALL) {
 		bodyDef.type = b2_dynamicBody;
-		bodyDef.gravityScale = 0.0f;
+		bodyDef.gravityScale = DISABLE_GRAVITY;
 	} else {
 		bodyDef.type = b2_staticBody;
 	}
