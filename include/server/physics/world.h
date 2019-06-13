@@ -24,13 +24,6 @@
 	*------ > x
 */
 
-#define PORTAL_REACH 30.0f
-#define PORTAL_SENSIBILITY 0.8
-
-#define GRAVITY -10.0f
-
-#define EMITTER_INTERVAL 5
-
 class World {
 public:
 	explicit World(Map& map, GameEventCreator & gameEventCreator);

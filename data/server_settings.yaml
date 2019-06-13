@@ -1,0 +1,41 @@
+### Server settings
+# server listening port
+port: "8080"
+
+### Entities settings
+# interval, in seconds, between each intent to fire an energy ball
+energy_emitter_fire_interval: 5
+
+energy_ball_speed: 2.0
+
+### Player settings
+player_speed: 3.0
+
+# player jump force
+player_jump_impulse: 3.0
+
+# maximum possible distance to create a portal
+portal_reach: 70.0
+
+# Size of the edge checks ]0;1]
+# 1 = the portal needs to be on the center of the metal block
+# < 1, the portal can go beyond the edge of the metal block
+portal_sensibility: 0.8 
+
+### Physics settings
+# Box2D settings
+velocity_iterations: 6
+position_iterations: 2
+
+gravity: -10.0
+
+# Mass in kg/m2 of a dynamic body (player, rock)
+dynamic_body_density: 1.0
+
+# If abs(vector.y) > {vertical_vector_limit}
+# then the vector is more vertical than horizontal
+vertical_vector_limit: 0.707
+
+# Vertical distance between two entities to consider touching
+# Allows to cancel horizontal collision stops.
+contact_threshold: 0.01

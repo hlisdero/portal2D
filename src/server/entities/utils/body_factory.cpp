@@ -6,6 +6,8 @@
 #include "server/entities/player.h"
 #include "server/entities/portal.h"
 #include "server/entities/rock.h"
+#include "server/objects/server_settings.h"
+extern ServerSettings SETTINGS;
 
 #include "common/entities/entities_settings.h"
 
@@ -108,7 +110,8 @@ b2FixtureDef BodyFactory::createFixtureDef(Entity * entity,
 	b2FixtureDef fixtureDef;
 
 	fixtureDef.shape = shape;
-	fixtureDef.density = (bodyDef.type == b2_staticBody) ? 0.0f : 1.0f;
+	fixtureDef.density = (bodyDef.type == b2_staticBody) ? 
+		0.0f : SETTINGS.DYNAMIC_BODY_DENSITY;
 
 	if(entity->getType() == TYPE_PLAYER) {
 		fixtureDef.filter.categoryBits = 0x0001;
@@ -135,7 +138,7 @@ void BodyFactory::createBody(Entity * entity) {
 
 	if(entity->getType() == TYPE_ENERGY_BALL) {
 		body->SetLinearVelocity(
-			b2Vec2(ENERGY_BALL_SPEED, 0.0f));
+			b2Vec2(SETTINGS.ENERGY_BALL_SPEED, 0.0f));
 	}
 
 	// "Attach" shape to body

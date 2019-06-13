@@ -1,6 +1,8 @@
 #include "server/entities/player.h"
 
 #include "server/entities/rock.h"
+#include "server/objects/server_settings.h"
+extern ServerSettings SETTINGS;
 
 PlayerEntity::PlayerEntity(b2Vec2 position, GameEventCreator& gameEventCreator) :
 	TeleportableEntity(TYPE_PLAYER, position.x, position.y, 0, gameEventCreator) {
@@ -61,10 +63,10 @@ void PlayerEntity::handleFloorContact(b2Contact * contact, bool) {
 
 	if(!oldContact) {
 		if(contact->GetFixtureA()->GetBody()->GetUserData() == this) {
-			if(worldManifold.normal.y < -0.707) {
+			if(worldManifold.normal.y < -1 * SETTINGS.VERTICAL_VECTOR_LIMIT) {
 				floorsContacts.push_back(contact);
 			}
-		} else if(worldManifold.normal.y > 0.707) {
+		} else if(worldManifold.normal.y > SETTINGS.VERTICAL_VECTOR_LIMIT) {
 			floorsContacts.push_back(contact);
 		}
 	}
@@ -120,7 +122,7 @@ void PlayerEntity::move(const MoveDirection& direction, bool pressed) {
 			case UP:
 				if(floorsContacts.size() > 0) {
 					// TODO load speed from file
-					applyImpulseToCenter(0.0f, 5.0f);
+					applyImpulseToCenter(0.0f, SETTINGS.PLAYER_JUMP_IMPULSE);
 				}
 				break;
 			case LEFT:
@@ -165,10 +167,10 @@ void PlayerEntity::applyMovement() {
 	float targetVelocity;
 	switch(moveDirection) {
 		case RIGHT:
-			targetVelocity = 5.0f;
+			targetVelocity = SETTINGS.PLAYER_SPEED;
 			break;
 		case LEFT:
-			targetVelocity = -5.0f;
+			targetVelocity = -1 * SETTINGS.PLAYER_SPEED;
 			break;
 		default:
 			targetVelocity = 0.0f;

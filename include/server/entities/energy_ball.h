@@ -4,13 +4,11 @@
 #include "server/entities/entity.h"
 #include "server/entities/attributes/teleportable_entity.h"
 #include "server/events/game_event_creator.h"
+#include "server/objects/server_settings.h"
 
 class EnergyBallEntity;
 
 #include "server/entities/energy_emitter.h"
-
-// TODO load from file
-#define ENERGY_BALL_SPEED 2.0f
 
 class EnergyBallEntity :  public TeleportableEntity {
 public:

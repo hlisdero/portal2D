@@ -5,8 +5,6 @@
 
 #include "server/entities/entity.h"
 
-#define CONTACT_THRESHOLD 0.01
-
 class ContactListener : public b2ContactListener {
 private:
     virtual void BeginContact(b2Contact* contact) override;

@@ -2,6 +2,8 @@
 
 #include "server/entities/attributes/teleportable_entity.h"
 #include "server/entities/attributes/handle_contact.h"
+#include "server/objects/server_settings.h"
+extern ServerSettings SETTINGS;
 
 void ContactListener::BeginContact(b2Contact * contact) {
 	handleContact(contact, true);
@@ -52,7 +54,7 @@ void ContactListener::handlePreSolve(b2Fixture * fixtureA, b2Fixture * fixtureB,
 		contact->GetWorldManifold(&worldManifold);
 
 		// If it's horizontal direction and if the vertical distance is less than the threshold
-		if(manifold->localNormal.y == 0 && abs(fixtureA->GetAABB(0).lowerBound.y - fixtureB->GetAABB(0).upperBound.y) < CONTACT_THRESHOLD) {
+		if(manifold->localNormal.y == 0 && abs(fixtureA->GetAABB(0).lowerBound.y - fixtureB->GetAABB(0).upperBound.y) < SETTINGS.CONTACT_THRESHOLD) {
 			contact->SetEnabled(false);
 		}
 	}

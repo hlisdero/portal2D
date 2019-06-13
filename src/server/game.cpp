@@ -1,5 +1,8 @@
 #include "server/game.h"
 
+#include "server/objects/server_settings.h"
+extern ServerSettings SETTINGS;
+
 Game::Game(const std::string& map_name, ClientManager& client_manager) :
     world_events(client_manager.getSendQueue()),
     view_events(client_manager.getReceiveQueue()),
@@ -32,7 +35,7 @@ void Game::init() {
 }
 
 void Game::run() {
-    ClockLoop<60> clock;
+    ClockLoop<LOOPS_PER_SECOND> clock;
     while (!quit) {
         client_manager.joinInputQueues();
         processQueue();

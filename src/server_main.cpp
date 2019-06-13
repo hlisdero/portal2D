@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+
 #include "server/server.h"
 
 int main(int argc, char *argv[]) {

@@ -1,8 +1,11 @@
 #include "server/server.h"
 
+#include "server/objects/server_settings.h"
+extern ServerSettings SETTINGS;
+
 Server::Server(const std::string& map_name) :
     game(map_name, client_manager),
-    passive_skt("8080") {
+    passive_skt(SETTINGS.PORT) {
     passive_skt.bind();
     passive_skt.listen();
 }

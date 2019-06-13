@@ -2,14 +2,16 @@
 
 #include "common/entities/entities_settings.h"
 #include "server/physics/portal_aabb_callback.h"
+#include "server/objects/server_settings.h"
+extern ServerSettings SETTINGS;
 
 // Initialize the world with the gravity vector
 World::World(Map& map, GameEventCreator & gameEventCreator) :
-	world(b2Vec2(0.0f, GRAVITY)),
+	world(b2Vec2(0.0f, SETTINGS.GRAVITY)),
 	bodyFactory(world),
 	gameEventCreator(gameEventCreator),
 	playerSpawn(map.getSpawn()),
-	emitterInterval(EMITTER_INTERVAL) {
+	emitterInterval(SETTINGS.ENERGY_EMITTER_INTERVAL) {
 	world.SetContactListener(&contactListener);
 
 	const std::vector<Entity*> & staticEntities = map.getStaticEntities();
@@ -70,7 +72,7 @@ bool World::isPortalAllowed(PortalRayCastCallback & raycast) {
 	b2AABB aabb = bodyFactory.createPortalAABB(raycast.m_point, rotation);
 
 	b2Vec2 edgeA(-1 * sin(rotation), cos(rotation));
-	edgeA *= PORTAL_SENSIBILITY * entitiesSettings[TYPE_PORTAL][HALF_HEIGHT];
+	edgeA *= SETTINGS.PORTAL_SENSIBILITY * entitiesSettings[TYPE_PORTAL][HALF_HEIGHT];
 	b2Vec2 edgeB = -1 * edgeA;
 
 	edgeA += raycast.m_point;
@@ -88,7 +90,7 @@ void World::createPortal(PlayerEntity * player, ClickDirection& direction, Event
 
     b2Vec2 dir_vec(direction.x, direction.y);
 	const b2Vec2 & origin = player->getBody()->GetPosition();
-	b2Vec2 end = origin + (PORTAL_REACH * dir_vec);
+	b2Vec2 end = origin + (SETTINGS.PORTAL_REACH * dir_vec);
 
 	PortalRayCastCallback callback;
 
@@ -131,12 +133,7 @@ void World::updatePhysics(EventCreator & eventCreator) {
 		nextEmit = now + emitterInterval;
 	}
 
-	// TODO change to constantes
-	float32 timeStep = 1.0f / 60.0f;
-	int32 velocityIterations = 6;
-	int32 positionIterations = 2;
-
-	world.Step(timeStep, velocityIterations, positionIterations);
+	world.Step(SETTINGS.TIME_STEP, SETTINGS.VELOCITY_ITERATIONS, SETTINGS.POSITION_ITERATIONS);
 }
 
 void World::updateDynamics() {
