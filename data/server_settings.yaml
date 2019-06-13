@@ -1,4 +1,7 @@
+###
 ### Server settings
+###
+
 # server listening port
 port: "8080"
 
@@ -8,7 +11,10 @@ energy_emitter_fire_interval: 5
 
 energy_ball_speed: 1.0
 
+###
 ### Player settings
+###
+
 player_speed: 3.0
 player_air_speed: 2.0
 
@@ -23,11 +29,18 @@ portal_reach: 70.0
 # < 1, the portal can go beyond the edge of the metal block
 portal_sensibility: 0.8 
 
+# Max fall speed m/s
+max_fall_speed: 10.0
+
+###
 ### Physics settings
+###
+
 # Box2D settings
 velocity_iterations: 6
 position_iterations: 2
 
+# Vertical vector gravity m/s
 gravity: -10.0
 
 # Mass in kg/m2 of a dynamic body (player, rock)

@@ -10,32 +10,33 @@ public:
 	explicit ServerSettings(const char * filename);
 
 	// server
-	std::string PORT = "8080";
+	std::string PORT;
 	
 	// body factory
-	float ENERGY_BALL_SPEED = 2.0f;
-	float DYNAMIC_BODY_DENSITY = 1.0f;
+	float ENERGY_BALL_SPEED;
+	float DYNAMIC_BODY_DENSITY;
 
 	// contact_listener 
-	double CONTACT_THRESHOLD = 0.01;
+	double CONTACT_THRESHOLD;
 
 	// world
 	float TIME_STEP = 1.0f / LOOPS_PER_SECOND; // Not loaded from file
-	int VELOCITY_ITERATIONS = 6;
-	int POSITION_ITERATIONS = 2;
+	int VELOCITY_ITERATIONS;
+	int POSITION_ITERATIONS;
 
-	float GRAVITY = -10.0f;
+	float GRAVITY;
 
-	float PORTAL_REACH = 30.0f;
-	double PORTAL_SENSIBILITY = 0.8; 
+	float PORTAL_REACH;
+	double PORTAL_SENSIBILITY;
 
-	int ENERGY_EMITTER_INTERVAL = 5;
+	int ENERGY_EMITTER_INTERVAL;
 
 	// player
-	float PLAYER_SPEED = 5.0f;
+	float PLAYER_SPEED;
 	float PLAYER_AIR_SPEED;
-	float PLAYER_JUMP_IMPULSE = 5.0f;
-	float VERTICAL_VECTOR_LIMIT = 0.707;
+	float PLAYER_JUMP_IMPULSE;
+	float VERTICAL_VECTOR_LIMIT;
+	float MAX_FALL_SPEED;
 };
 
 #endif

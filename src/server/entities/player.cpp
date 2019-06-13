@@ -133,6 +133,13 @@ void PlayerEntity::applyImpulseToCenter(const float vx, const float vy) {
 }
 
 void PlayerEntity::applyMovement() {
+	b2Vec2 velocity = getBody()->GetLinearVelocity();
+	if(velocity.y < SETTINGS.MAX_FALL_SPEED) {
+		velocity.y = SETTINGS.MAX_FALL_SPEED;
+		getBody()->SetLinearVelocity(velocity);
+	}
+
+
 	float speed = SETTINGS.PLAYER_SPEED;
 
 	if(inTheAir) {
@@ -142,8 +149,6 @@ void PlayerEntity::applyMovement() {
 
 		speed = SETTINGS.PLAYER_AIR_SPEED;
 	}
-
-	b2Vec2 velocity = getBody()->GetLinearVelocity();
 
 	float targetVelocity;
 	switch(moveDirection) {

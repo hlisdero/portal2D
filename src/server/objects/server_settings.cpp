@@ -31,6 +31,7 @@ ServerSettings::ServerSettings(const char * filename) {
 	PLAYER_AIR_SPEED = yaml["player_air_speed"].as<float>();
 	PLAYER_JUMP_IMPULSE = yaml["player_jump_impulse"].as<float>();
 	VERTICAL_VECTOR_LIMIT = yaml["vertical_vector_limit"].as<float>();
+	MAX_FALL_SPEED = -1 * yaml["max_fall_speed"].as<float>();
 }
 
 ServerSettings SETTINGS("../data/server_settings.yaml");
