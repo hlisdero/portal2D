@@ -3,8 +3,6 @@
 
 #include "common/entities/entities_types.h"
 
-#define PI 3.1415926f
-
 class Entity {
 public:
 	Entity(EntityType type, float x, float y, float rotation);

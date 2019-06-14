@@ -17,11 +17,11 @@ public:
 
 	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 
-	void notifyOwner();
-
 private: 
 	EnergyEmitterEntity & owner;
 	bool justEmitted = true;
+
+	void evaluateCollision(b2Contact * contact);
 };
 
 #endif  // ENERGY_BALL_ENTITY_H

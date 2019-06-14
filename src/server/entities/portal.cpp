@@ -1,6 +1,10 @@
 #include "server/entities/portal.h"
 
-PortalEntity::PortalEntity(const float x, const float y, const b2Vec2 & outVector, const PortalColor color) : Entity(TYPE_PORTAL, x, y, getRotationFromNormal(outVector)), outVector(outVector), color(color) {}
+#include "server/objects/math.h"
+
+PortalEntity::PortalEntity(const float x, const float y, const b2Vec2 & outVector, const PortalColor color) :
+	Entity(TYPE_PORTAL, x, y, Math::getRotationDegFromNormal(outVector)),
+	outVector(outVector), color(color) {}
 
 PortalEntity * PortalEntity::getTwin() {
 	return this->twin;
@@ -19,11 +23,5 @@ void PortalEntity::move(const float newX, const float newY, const b2Vec2 & outVe
 	this->setX(newX);
 	this->setY(newY);
 	this->outVector = outVector;
-	this->setRotationDeg(getRotationFromNormal(outVector));
-}
-
-float PortalEntity::getRotationFromNormal(const b2Vec2 & outVector) {
-	float angleRad = atan2(outVector.y, outVector.x);
-
-	return angleRad * 180 / PI;
+	this->setRotationDeg(Math::getRotationDegFromNormal(outVector));
 }

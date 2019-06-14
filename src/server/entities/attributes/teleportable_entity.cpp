@@ -1,5 +1,7 @@
 #include "server/entities/attributes/teleportable_entity.h"
 
+#include "server/objects/math.h"
+
 TeleportableEntity::TeleportableEntity(EntityType type, float x, float y, 
 	float rotation, GameEventCreator & gameEventCreator) : 
 	Entity(type, x, y, rotation), gameEventCreator(gameEventCreator) {}
@@ -29,14 +31,11 @@ void TeleportableEntity::goThroughPortal(PortalEntity * inPortal) {
 	PortalEntity * outPortal = inPortal->getTwin();
 
 	if(outPortal != nullptr) {
-		float rotation =  outPortal->getRotationRad() - (PI + inPortal->getRotationRad());
+		float rotation =  outPortal->getRotationRad() - (Math::PI + inPortal->getRotationRad());
 		const b2Vec2 & inVelocity = getBody()->GetLinearVelocity();
 
 		// Apply rotation to velocity
-		b2Vec2 outVelocity(
-			inVelocity.x * cos(rotation) - inVelocity.y * sin(rotation),
-			inVelocity.x * sin(rotation) + inVelocity.y * cos(rotation)
-			);
+		b2Vec2 outVelocity = Math::rotateVectorBy(rotation, inVelocity);
 
 		b2Vec2 outVector = outPortal->getOutVector();
 

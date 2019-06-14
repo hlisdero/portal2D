@@ -1,5 +1,7 @@
 #include "server/entities/entity.h"
 
+#include "server/objects/math.h"
+
 Entity::Entity(EntityType type, float x, float y, float rotation) :
     type(type), x(x), y(y), rotation(rotation) {}
 
@@ -24,7 +26,7 @@ float Entity::getRotationDeg() const {
 }
 
 float Entity::getRotationRad() const {
-    return rotation * PI / 180.0;
+    return Math::degToRad(rotation);
 }
 
 void Entity::setRotationDeg(float rotation) {
