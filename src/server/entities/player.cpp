@@ -17,6 +17,10 @@ PlayerEntity::~PlayerEntity() {
 			delete portals[i];
 		}
 	}
+
+	if(carriedRock != nullptr) {
+		carriedRock->release();
+	}
 }
 
 PortalEntity * PlayerEntity::getPortal(PortalColor color) {
