@@ -40,7 +40,7 @@ void TeleportableEntity::goThroughPortal(PortalEntity * inPortal) {
 		b2Vec2 outVector = outPortal->getOutVector();
 
 		if(getType() == TYPE_ENERGY_BALL) {
-			setRotationDeg(outPortal->getRotationDeg());
+			setRotationDeg(Math::getRotationDegFromNormal(outVelocity));
 		} else {
 			// Avoid beeing trapped in portals
 			outVelocity += outVector;

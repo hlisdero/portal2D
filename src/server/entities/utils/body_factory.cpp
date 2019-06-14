@@ -6,6 +6,7 @@
 #include "server/entities/player.h"
 #include "server/entities/portal.h"
 #include "server/entities/rock.h"
+#include "server/objects/math.h"
 #include "server/objects/server_settings.h"
 extern ServerSettings SETTINGS;
 
@@ -135,8 +136,9 @@ void BodyFactory::createBody(Entity * entity) {
 	b2Body * body = this->world.CreateBody(&bodyDef);
 
 	if(entity->getType() == TYPE_ENERGY_BALL) {
-		body->SetLinearVelocity(
-			b2Vec2(SETTINGS.ENERGY_BALL_SPEED, 0.0f));
+		b2Vec2 direction = Math::vectorFromRotation(entity->getRotationRad());
+		direction *= SETTINGS.ENERGY_BALL_SPEED;
+		body->SetLinearVelocity(direction);
 	}
 
 	// "Attach" shape to body

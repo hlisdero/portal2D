@@ -15,8 +15,8 @@ public:
     void setY(float y);
 
 	float getRotationRad() const;
-	float getRotationDeg() const;
-    void setRotationDeg(float angleDegrees);
+	int getRotationDeg() const;
+    void setRotationDeg(int angleDegrees);
 
 	EntityType getType() const;
 
@@ -35,7 +35,7 @@ private:
 	EntityType type;
 	float x;
 	float y;
-	float rotation;
+	int rotation;
 	// TODO uint ?
 	int id = 0;
 	bool destroyed = false;

@@ -21,7 +21,7 @@ void Entity::setY(float y) {
     this->y = y;
 }
 
-float Entity::getRotationDeg() const {
+int Entity::getRotationDeg() const {
     return rotation;
 }
 
@@ -29,7 +29,7 @@ float Entity::getRotationRad() const {
     return Math::degToRad(rotation);
 }
 
-void Entity::setRotationDeg(float rotation) {
+void Entity::setRotationDeg(int rotation) {
     this->rotation = rotation;
 }
 
