@@ -6,7 +6,9 @@ RockEntity::RockEntity(float x, float y, float rotation, GameEventCreator & game
 void RockEntity::handleContactWith(Entity * other, b2Contact * contact, bool inContact) {
 	TeleportableEntity::handleContactWith(other, contact, inContact);
 
-	if(inContact && (other->getType() == TYPE_ENERGY_BAR ||
+	if(inContact &&
+		(other->getType() == TYPE_ENERGY_BAR ||
+		other->getType() == TYPE_ACID ||
 		other->getType() == TYPE_END_BARRIER)) {
 		respawn();
 	}
