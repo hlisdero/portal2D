@@ -2,7 +2,7 @@
 
 WorldView::WorldView(BlockingQueue<ViewEvent>& queue) :
     event_manager(queue),
-    screen(1024, 768),
+    screen(1152, 864),
     camera_manager(screen),
     settings(screen.getWidth(), screen.getHeight(), screen.getTextureCreator()),
     background(settings.getScreenWidth(), settings.getScreenHeight(), settings.getTextureLoader()["Background"]),
@@ -115,7 +115,6 @@ void WorldView::selectPlayer(size_t index) {
     main_player = new MainPlayer(index, *player, screen.getCamera(), event_manager.getQueue());
     event_manager.addHandler((KeyboardHandler*) main_player);
     event_manager.addHandler((MouseHandler*) main_player);
-    settings.changeRatioCameraMode();
 }
 
 void WorldView::update() {

@@ -21,8 +21,6 @@ public:
 
     const TextureLoader& getTextureLoader() const;
 
-    void changeRatioCameraMode();
-
 private:
     const size_t& screen_width;
     const size_t& screen_height;
