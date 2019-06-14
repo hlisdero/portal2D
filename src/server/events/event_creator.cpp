@@ -2,11 +2,6 @@
 
 EventCreator::EventCreator(std::queue<WorldEvent>& queue) : queue(queue) {}
 
-void EventCreator::addWorldSize(const Size & size) {
-    WorldEvent event(size);
-    queue.push(event);
-}
-
 void EventCreator::addEntityCreation(Entity* entity) {
     Position position(entity->getX(), entity->getY(), entity->getRotationDeg());
     WorldEvent event(entity->getId(), entity->getType(), position);

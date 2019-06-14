@@ -14,18 +14,16 @@ enum WorldEventType {
     STATE_UPDATE,
     SELECT_PLAYER,
     END_GAME,
-    WORLD_SIZE
 };
 
 class WorldEvent {
 public:
     explicit WorldEvent() = default;
-    WorldEvent(WorldEventType type);
+    explicit WorldEvent(WorldEventType type);
     WorldEvent(int id, EntityType type, const Position& position);
     explicit WorldEvent(int id);
 	WorldEvent(int id, const Position& position);
     WorldEvent(int id, const State& state);
-    WorldEvent(const Size & size);
 
 	WorldEventType type = INVALID_WE;
     int id = -1;

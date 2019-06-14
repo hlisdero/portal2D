@@ -3,6 +3,7 @@
 WorldView::WorldView(BlockingQueue<ViewEvent>& queue) :
     event_manager(queue),
     screen(1024, 768),
+    camera_manager(screen),
     settings(screen.getWidth(), screen.getHeight(), screen.getTextureCreator()),
     background(settings.getScreenWidth(), settings.getScreenHeight(), settings.getTextureLoader()["Background"]),
     object_creator(view_objects, settings) {
@@ -38,10 +39,6 @@ int WorldView::getPlayerIndex() const {
         return -1;
     }
     return main_player->getIndex();
-}
-
-void WorldView::setWorldSize(const Size & size) {
-    settings.setWorldSize(size);
 }
 
 void WorldView::createEntity(size_t index, EntityType type, const Position& position) {
@@ -84,6 +81,7 @@ void WorldView::createEntity(size_t index, EntityType type, const Position& posi
             break;
         case TYPE_PLAYER:
             object_creator.createPlayer(index, position);
+            camera_manager.add(index, view_objects[index]);
             break;
         case TYPE_ENERGY_BALL:
             object_creator.createEnergyBall(index, position);
@@ -94,11 +92,10 @@ void WorldView::createEntity(size_t index, EntityType type, const Position& posi
 }
 
 void WorldView::destroyEntity(size_t index) {
+    camera_manager.remove(index);
     if (index == main_player->getIndex()) {
         event_manager.removeHandler((KeyboardHandler*) main_player);
         event_manager.removeHandler((MouseHandler*) main_player);
-        screen.destroyCamera();
-        settings.changeRatioScreenMode();
     }
     delete view_objects.at(index);
     view_objects.erase(index);
@@ -114,7 +111,7 @@ void WorldView::updateState(size_t index, const State& state) {
 
 void WorldView::selectPlayer(size_t index) {
     Player* player = static_cast<Player*>(view_objects.at(index));
-    screen.createCamera(*player);
+    camera_manager.select(index);
     main_player = new MainPlayer(index, *player, screen.getCamera(), event_manager.getQueue());
     event_manager.addHandler((KeyboardHandler*) main_player);
     event_manager.addHandler((MouseHandler*) main_player);

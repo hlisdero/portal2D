@@ -33,8 +33,6 @@ void Client::processEvent(const WorldEvent& event) {
         view.updateState(event.id, event.state);
     } else if (event.type == ENTITY_CREATION) {
         view.createEntity(event.id, event.entity_type, event.position);
-    } else if (event.type == WORLD_SIZE) {
-        view.setWorldSize(Size(event.position.x, event.position.y));
     } else if (event.type == ENTITY_DESTRUCTION) {
         view.destroyEntity(event.id);
     } else if (event.type == SELECT_PLAYER) {

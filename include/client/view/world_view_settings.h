@@ -3,7 +3,6 @@
 
 #include "client/texture/texture_creator.h"
 #include "client/texture/texture_loader.h"
-#include "common/objects/size.h"
 
 class WorldViewSettings {
 public:
@@ -23,14 +22,10 @@ public:
     const TextureLoader& getTextureLoader() const;
 
     void changeRatioCameraMode();
-    void changeRatioScreenMode();
-
-    void setWorldSize(const Size & size);
 
 private:
     const size_t& screen_width;
     const size_t& screen_height;
-    Size world_size;
     double pixel_per_meter;
 
     TextureLoader textures;

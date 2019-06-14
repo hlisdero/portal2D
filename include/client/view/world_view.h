@@ -3,8 +3,10 @@
 
 #include <map>
 #include <stdexcept>
+#include <algorithm>
 #include "client/screen/screen.h"
 #include "client/sound/sound_manager.h"
+#include "client/view/camera_manager.h"
 #include "client/view/event_manager.h"
 #include "client/view/main_player.h"
 #include "client/view/view_object_creator.h"
@@ -37,17 +39,16 @@ public:
 
     void update();
 
-    void setWorldSize(const Size & size);
-
 private:
     EventManager event_manager;
     SoundManager sound_manager;
     Screen screen;
+    CameraManager camera_manager;
     WorldViewSettings settings;
     Background background;
     std::map<size_t, DrawableBox2D*> view_objects;
-    MainPlayer * main_player = nullptr;
     ViewObjectCreator object_creator;
+    MainPlayer * main_player = nullptr;
 
     void renderObjects();
 };
