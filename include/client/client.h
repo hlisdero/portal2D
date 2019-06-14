@@ -1,8 +1,6 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include <vector>
-#include <stdexcept>
 #include "common/clock_loop.h"
 #include "common/socket/active_socket.h"
 #include "common/protocol/interface.h"
