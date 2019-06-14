@@ -23,6 +23,8 @@ void RockEntity::grab(PlayerEntity * player) {
 
 void RockEntity::release() {
 	gameEventCreator.addSetActiveEntity(this, true);
+	setX(holder->getX());
+	setY(holder->getY());
 	holder = nullptr;
 }
 
