@@ -20,9 +20,6 @@ public:
 
     const double& getRatio() const;
 
-    size_t getLevelWidth() const;
-    size_t getLevelHeight() const;
-
     const TextureLoader& getTextureLoader() const;
 
     void changeRatioCameraMode();
@@ -35,8 +32,6 @@ private:
     const size_t& screen_height;
     Size world_size;
     double pixel_per_meter;
-    size_t level_width;
-    size_t level_height;
 
     TextureLoader textures;
 };
