@@ -7,8 +7,8 @@ Map::Map(const std::string& map_name, GameEventCreator & gameEventCreator) :
     loadSettings(file);
 	
 	loadEntities(file);
-	size.x = maxX - minX + 1;
-	size.y = maxY - minY + 1;
+	size.x = maxX - minX + 2;
+	size.y = maxY - minY + 2;
 
 	endZone.setNumberOfPlayersForVictory(minPlayers - 1);
 }
