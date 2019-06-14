@@ -124,8 +124,8 @@ const TextureCreator& Screen::getTextureCreator() const {
     return texture_creator;
 }
 
-void Screen::createCamera(int level_width, int level_height, const DrawableBox2D& drawable) {
-    camera = new Camera(getWidth(), getHeight(), level_width, level_height, drawable);
+void Screen::createCamera(const DrawableBox2D& drawable) {
+    camera = new Camera(getWidth(), getHeight(), drawable);
 }
 
 const Camera& Screen::getCamera() const {

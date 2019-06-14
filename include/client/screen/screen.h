@@ -60,7 +60,7 @@ public:
 
     const TextureCreator& getTextureCreator() const;
 
-    void createCamera(int level_width, int level_height, const DrawableBox2D& drawable);
+    void createCamera(const DrawableBox2D& drawable);
     const Camera& getCamera() const;
     void destroyCamera();
     void makeRelativeToCamera(SDL_Rect& rect);

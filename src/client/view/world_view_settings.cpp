@@ -5,8 +5,6 @@ WorldViewSettings::WorldViewSettings(const size_t& screen_width, const size_t& s
     screen_width(screen_width), screen_height(screen_height),
     world_size(200.335, 200.00125),   // Tamaño del mundo en metros
     pixel_per_meter(50),
-    level_width(1440),
-    level_height(1080),
     textures(texture_creator) {
 }
 
@@ -22,20 +20,12 @@ const double& WorldViewSettings::getRatio() const {
     return pixel_per_meter;
 }
 
-size_t WorldViewSettings::getLevelWidth() const {
-    return level_width;
-}
-
-size_t WorldViewSettings::getLevelHeight() const {
-    return level_height;
-}
-
 const TextureLoader& WorldViewSettings::getTextureLoader() const {
     return textures;
 }
 
 void WorldViewSettings::changeRatioCameraMode() {
-    pixel_per_meter = pixel_per_meter*level_width/screen_width;
+    pixel_per_meter = 100;
 }
 
 void WorldViewSettings::changeRatioScreenMode() {
