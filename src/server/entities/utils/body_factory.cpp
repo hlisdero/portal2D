@@ -58,6 +58,20 @@ void BodyFactory::setButtonShape(b2PolygonShape & shape, const float * entitySet
 	shape.Set(points, 4);
 }
 
+void BodyFactory::setDiamondShape(b2PolygonShape & shape, const float * entitySettings, b2Vec2 & offset) {
+	b2Vec2 points[4];
+	points[0].Set(-1 * entitySettings[HALF_WIDTH], 0);
+	points[1].Set(0, entitySettings[HALF_HEIGHT]);
+	points[2].Set(entitySettings[HALF_WIDTH], 0);
+	points[3].Set(0, -1 * entitySettings[HALF_HEIGHT]);
+
+	for(b2Vec2 & point : points) {
+		point += offset;
+	}
+
+	shape.Set(points, 4);
+}
+
 void BodyFactory::setDiagBlockShape(b2PolygonShape & shape, const float * entitySettings, b2Vec2 & offset) {
 	b2Vec2 points[3];
 	points[0].Set(-1 * entitySettings[HALF_WIDTH], 
@@ -92,6 +106,8 @@ b2PolygonShape BodyFactory::createShape(Entity * entity) {
 		setDiagBlockShape(shape, entitySettings, offset);
 	} else if(entity->getType() == TYPE_BUTTON) {
 		setButtonShape(shape, entitySettings, offset);
+	} else if(entity->getType() == TYPE_ENERGY_BALL) {
+		setDiamondShape(shape, entitySettings, offset);
 	} else {
 		setBlockShape(shape, entitySettings, offset);
 	}

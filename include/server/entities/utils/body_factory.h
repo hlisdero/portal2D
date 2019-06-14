@@ -27,6 +27,9 @@ private:
 	void setButtonShape(b2PolygonShape & shape, 
 		const float * entitySettings, b2Vec2 & offset);
 
+	void setDiamondShape(b2PolygonShape & shape, 
+		const float * entitySettings, b2Vec2 & offset);
+
 	void setBlockShape(b2PolygonShape & shape, 
 		const float * entitySettings, b2Vec2 & offset);
 
