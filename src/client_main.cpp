@@ -4,10 +4,10 @@
 #include "client/client.h"
 #include "client/login/login.h"
 
-int main(int argc, char *argv[]) {
+int main(/*int argc, char *argv[]*/) {
     try {
         Login login;
-        login.run(argc, argv);
+        // login.run(argc, argv);
         Client client(login.getHostname(), login.getPort());
         client.run();
         return 0;
