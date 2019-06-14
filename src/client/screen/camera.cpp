@@ -8,8 +8,8 @@ Camera::Camera(int width, int height,
 }
 
 void Camera::center() {
-    position.x = drawable.getX() - position.w / 2;
-    position.y = drawable.getY() - position.h / 2;
+    position.x = drawable.getX() + drawable.getWidth()/2 - position.w / 2;
+    position.y = drawable.getY() + drawable.getHeight()/2 - position.h / 2;
 
     if (position.x < 0) {
         position.x = 0;
