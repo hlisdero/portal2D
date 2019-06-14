@@ -1,8 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <SDL2/SDL.h>
-#include <cmath>
 #include "client/objects/drawable_box2D.h"
 #include "client/texture/animation.h"
 #include "client/texture/finite_animation.h"
