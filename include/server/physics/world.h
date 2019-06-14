@@ -68,6 +68,7 @@ private:
 	ContactListener contactListener;
 
 	bool isPortalAllowed(PortalRayCastCallback & callback);
+	bool isPortalPositionAllowed(PortalRayCastCallback & raycast);
 };
 
 #endif  // WORLD_H

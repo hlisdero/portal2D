@@ -2,6 +2,7 @@
 
 #include "common/entities/entities_settings.h"
 #include "server/physics/portal_aabb_callback.h"
+#include "server/objects/math.h"
 #include "server/objects/server_settings.h"
 extern ServerSettings SETTINGS;
 
@@ -61,12 +62,7 @@ void World::destroyEntity(BodyLinked * entity) {
 	delete entity;
 }
 
-bool World::isPortalAllowed(PortalRayCastCallback & raycast) {
-	if(raycast.entity->getType() != TYPE_METAL_BLOCK &&
-			raycast.entity->getType() != TYPE_METAL_DIAG_BLOCK) {
-		return false;
-	}
-
+bool World::isPortalPositionAllowed(PortalRayCastCallback & raycast) {
 	double rotation = atan2(raycast.m_normal.y, raycast.m_normal.x);
 
 	b2AABB aabb = bodyFactory.createPortalAABB(raycast.m_point, rotation);
@@ -80,7 +76,25 @@ bool World::isPortalAllowed(PortalRayCastCallback & raycast) {
 
 	PortalAABBCallback creationQuery(edgeA, edgeB, raycast.m_normal, raycast.entity);
 	world.QueryAABB(&creationQuery, aabb);
+
 	return creationQuery.isOk();
+}
+
+bool World::isPortalAllowed(PortalRayCastCallback & raycast) {
+	if(raycast.entity->getType() != TYPE_METAL_BLOCK &&
+			raycast.entity->getType() != TYPE_METAL_DIAG_BLOCK) {
+		return false;
+	}
+
+	if(!isPortalPositionAllowed(raycast)) {
+
+		// Try with assisted center
+		Math::toEdgeMiddle(raycast.m_point, raycast.m_normal);
+
+		return isPortalPositionAllowed(raycast);
+	}
+
+	return true;
 }
 
 void World::createPortal(PlayerEntity * player, ClickDirection& direction, EventCreator & eventCreator) {
