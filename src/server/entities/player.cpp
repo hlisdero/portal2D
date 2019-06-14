@@ -81,6 +81,7 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 				releaseRock();
 			}
 			break;
+		case TYPE_ENERGY_BALL:
 		case TYPE_ACID:
 			gameEventCreator.addKillPlayer(this);
 			break;
