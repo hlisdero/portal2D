@@ -3,6 +3,7 @@
 
 #include <map>
 #include <stdexcept>
+#include <algorithm>
 #include "client/screen/screen.h"
 
 class CameraManager {

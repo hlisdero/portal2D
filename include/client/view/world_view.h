@@ -3,7 +3,6 @@
 
 #include <map>
 #include <stdexcept>
-#include <algorithm>
 #include "client/screen/screen.h"
 #include "client/sound/sound_manager.h"
 #include "client/view/camera_manager.h"
