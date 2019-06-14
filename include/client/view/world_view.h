@@ -10,7 +10,6 @@
 #include "client/view/main_player.h"
 #include "client/view/view_object_creator.h"
 #include "client/view/world_view_settings.h"
-#include "common/objects/size.h"
 
 class WorldView {
 public:
