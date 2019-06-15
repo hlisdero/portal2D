@@ -72,8 +72,8 @@ void ViewObjectCreator::createRock(size_t index, const Position& initial) const 
     view_objects[index] = rock;
 }
 
-void ViewObjectCreator::createPortal(size_t index, const Position& initial) const {
-    Portal* portal = new Portal(getSize(TYPE_PORTAL), initial, settings, textures["FX"]);
+void ViewObjectCreator::createPortal(size_t index, const Position& initial, PortalColor color) const {
+    Portal* portal = new Portal(getSize(TYPE_PORTAL), initial, settings, textures["Custom"], color);
     view_objects[index] = portal;
 }
 

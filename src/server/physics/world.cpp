@@ -123,7 +123,7 @@ void World::createPortal(PlayerEntity * player, ClickDirection& direction, Event
 			bodyFactory.createBody(portal);
 			player->setPortal(color, portal);
 
-			eventCreator.addEntityCreation(portal);
+			eventCreator.addPortalCreation(portal);
 		}
 	} else {
 		// TODO send "error" to client

@@ -14,6 +14,7 @@ enum WorldEventType {
     STATE_UPDATE,
     SELECT_PLAYER,
     END_GAME,
+    PORTAL_CREATION
 };
 
 class WorldEvent {
@@ -23,6 +24,7 @@ public:
     WorldEvent(int id, EntityType type, const Position& position);
     explicit WorldEvent(int id);
 	WorldEvent(int id, const Position& position);
+    WorldEvent(int id, const Position& position, const State & state);
     WorldEvent(int id, const State& state);
 
 	WorldEventType type = INVALID_WE;

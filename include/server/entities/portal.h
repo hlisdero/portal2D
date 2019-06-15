@@ -16,6 +16,8 @@ public:
 
 	const b2Vec2 & getOutVector() const;
 
+	PortalColor getColor() const;
+
 private:
 	PortalEntity * twin = nullptr;
 	b2Vec2 outVector;

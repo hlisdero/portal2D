@@ -70,9 +70,6 @@ void WorldView::createEntity(size_t index, EntityType type, const Position& posi
         case TYPE_BUTTON:
             object_creator.createButton(index, position);
             break;
-        case TYPE_PORTAL:
-            object_creator.createPortal(index, position);
-            break;
         case TYPE_END_BARRIER:
             object_creator.createEndBarrier(index, position);
             break;
@@ -89,6 +86,10 @@ void WorldView::createEntity(size_t index, EntityType type, const Position& posi
         default:
             throw std::runtime_error("Error: EntityType inválido");
     }
+}
+
+void WorldView::createPortal(size_t index, const Position& position, PortalColor color) {
+    object_creator.createPortal(index, position, color);
 }
 
 void WorldView::destroyEntity(size_t index) {

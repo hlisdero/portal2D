@@ -9,6 +9,7 @@
 #include "common/entities/entities_settings.h"
 #include "common/objects/position.h"
 #include "common/objects/size.h"
+#include "common/objects/portal_color.h"
 
 class ViewObjectCreator {
 public:
@@ -33,7 +34,7 @@ public:
     void createEnergyEmitter(size_t index, const Position& initial) const;
     void createEnergyReceiver(size_t index, const Position& initial) const;
     void createRock(size_t index, const Position& initial) const;
-    void createPortal(size_t index, const Position& initial) const;
+    void createPortal(size_t index, const Position& initial, PortalColor color) const;
 
 private:
     std::map<size_t, DrawableBox2D*>& view_objects;

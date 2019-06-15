@@ -33,6 +33,9 @@ void Client::processEvent(const WorldEvent& event) {
         view.updateState(event.id, event.state);
     } else if (event.type == ENTITY_CREATION) {
         view.createEntity(event.id, event.entity_type, event.position);
+    } else if (event.type == PORTAL_CREATION) {
+        view.createPortal(event.id, event.position, 
+            event.state ? COLOR_BLUE : COLOR_ORANGE);
     } else if (event.type == ENTITY_DESTRUCTION) {
         view.destroyEntity(event.id);
     } else if (event.type == SELECT_PLAYER) {

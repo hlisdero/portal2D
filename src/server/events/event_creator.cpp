@@ -8,6 +8,13 @@ void EventCreator::addEntityCreation(Entity* entity) {
     queue.push(event);
 }
 
+void EventCreator::addPortalCreation(PortalEntity* entity) {
+    Position position(entity->getX(), entity->getY(), entity->getRotationDeg());
+    WorldEvent event(entity->getId(), position, entity->getColor() ? 
+        STATE_DISABLED : STATE_ENABLED);
+    queue.push(event);
+}
+
 void EventCreator::addEntityDestruction(Entity* entity) {
     WorldEvent event(entity->getId());
     queue.push(event);
