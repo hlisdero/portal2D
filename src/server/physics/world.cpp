@@ -97,10 +97,8 @@ bool World::isPortalAllowed(PortalRayCastCallback & raycast) {
 	return true;
 }
 
-void World::createPortal(PlayerEntity * player, ClickDirection& direction, EventCreator & eventCreator) {
-	// TODO remove
-    portal_color = !portal_color;
-    PortalColor color = portal_color ? COLOR_BLUE: COLOR_ORANGE;
+void World::createPortal(PlayerEntity * player, PortalColor color, 
+	ClickDirection& direction, EventCreator & eventCreator) {
 
     b2Vec2 dir_vec(direction.x, direction.y);
 	const b2Vec2 & origin = player->getBody()->GetPosition();

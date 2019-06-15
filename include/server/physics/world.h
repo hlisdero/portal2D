@@ -34,7 +34,8 @@ public:
     void destroyEntity(BodyLinked * entity);
 
     void killPlayer(PlayerEntity* player);
-    void createPortal(PlayerEntity* player, ClickDirection& direction, EventCreator& eventCreator);
+    void createPortal(PlayerEntity* player, PortalColor color,
+    	ClickDirection& direction, EventCreator& eventCreator);
 
     void updatePhysics(EventCreator & eventCreator);
     void updateDynamics();
@@ -51,8 +52,6 @@ private:
 	b2World world;
 	BodyFactory bodyFactory;
 	GameEventCreator& gameEventCreator;
-
-    bool portal_color = false;
 
     const b2Vec2 & playerSpawn;
 	std::map<size_t, PlayerEntity*> players;

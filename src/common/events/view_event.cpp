@@ -5,5 +5,7 @@ ViewEvent::ViewEvent(int player_id, MoveDirection direction,
     type(KEYBOARD), player_id(player_id),
     direction(direction), pressed(pressed), repeat(repeat) {}
 
-ViewEvent::ViewEvent(int player_id, ClickDirection click_direction) :
-    type(MOUSE), player_id(player_id), click_direction(click_direction) {}
+ViewEvent::ViewEvent(int player_id, 
+	ClickDirection click_direction, ClickButton button) :
+    type(MOUSE), player_id(player_id), 
+    click_direction(click_direction), button(button) {}

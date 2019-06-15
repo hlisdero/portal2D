@@ -21,6 +21,20 @@ void MainPlayer::handle(const MouseEvent& event) {
          event.x == 0 || event.y == 0) {
         return;
     }
+
+    ClickButton button = BUTTON_INVALID;
+    if(event.button == SDL_BUTTON_LEFT) {
+        button = BUTTON_LEFT;
+    } else if(event.button == SDL_BUTTON_MIDDLE) {
+        button = BUTTON_MIDDLE;
+    } else if(event.button == SDL_BUTTON_RIGHT) {
+        button = BUTTON_RIGHT;
+    } 
+
+    if(button == BUTTON_INVALID) {
+        return;
+    }
+
     int player_x = player.getX() + player.getWidth()/2 - camera.position.x;
     int player_y = player.getY() + player.getHeight()/2 - camera.position.y;
 
@@ -28,7 +42,8 @@ void MainPlayer::handle(const MouseEvent& event) {
     double x = event.x - player_x;
     double y = event.y - player_y;
     ClickDirection click_direction(x/sqrt(x*x + y*y), -y/sqrt(x*x + y*y));
-    queue.push(ViewEvent(index, click_direction));
+
+    queue.push(ViewEvent(index, click_direction, button));
 }
 
 void MainPlayer::startDeathAnimation() {

@@ -10,6 +10,7 @@ MouseEvent::MouseEvent(const SDL_Event& event) {
         case SDL_MOUSEBUTTONDOWN:
             motion = false;
             pressed = true;
+            button = event.button.button;
             break;
         case SDL_MOUSEBUTTONUP:
             motion = false;

@@ -118,7 +118,15 @@ void Game::processQueue() {
 	        if (event.type == KEYBOARD) {
 	            player->move(event.direction, event.pressed);
 	        } else if (event.type == MOUSE) {
-	            world.createPortal(player, event.click_direction, event_creator);
+	        	if(event.button == BUTTON_MIDDLE) {
+	        		// pin
+	        	} else {
+	        		PortalColor color = (event.button == BUTTON_LEFT) ? 
+	        			COLOR_BLUE : COLOR_ORANGE;
+
+	           		world.createPortal(player, color,
+	           			event.click_direction, event_creator);
+	           	}
 	        } else if (event.type == QUIT) {
 	            // TODO Un jugador se fue y ya fue desconectado
 	            // Qué hacemos con el mundo?

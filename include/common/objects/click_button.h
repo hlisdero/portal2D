@@ -1,0 +1,11 @@
+#ifndef CLICK_BUTTON_H
+#define CLICK_BUTTON_H
+
+enum ClickButton {
+	BUTTON_INVALID,
+	BUTTON_LEFT,
+	BUTTON_RIGHT,
+	BUTTON_MIDDLE
+};
+
+#endif  // CLICK_BUTTON_H
