@@ -19,7 +19,7 @@ PlayerEntity::~PlayerEntity() {
 	}
 
 	if(carriedRock != nullptr) {
-		carriedRock->release();
+		carriedRock->release(NONE);
 	}
 }
 
@@ -79,7 +79,7 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 			gameEventCreator.addPortalsReset(this);
 
 			if(carriedRock != nullptr) {
-				carriedRock->release();
+				carriedRock->release(NONE);
 				carriedRock->respawn();
 				carriedRock = nullptr;
 			}
@@ -95,7 +95,7 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 
 void PlayerEntity::grabReleaseRock() {
 	if(carriedRock != nullptr) {
-		carriedRock->release();
+		carriedRock->release(lastDirection);
 		carriedRock = nullptr;
 	} else if(rockInContact != nullptr && rockInContact->getHolder() == nullptr) {
 		carriedRock = rockInContact;
@@ -122,6 +122,7 @@ void PlayerEntity::move(const MoveDirection& direction, bool pressed) {
 			case LEFT:
 			case RIGHT:
 				moveDirection = direction;
+				lastDirection = direction;
 				break;
 			default:
 				break;

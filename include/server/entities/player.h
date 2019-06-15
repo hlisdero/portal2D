@@ -44,6 +44,7 @@ private:
 	std::unordered_set<b2Contact *> floorsContacts;
 	bool inTheAir = true;
 	MoveDirection moveDirection = NONE;
+	MoveDirection lastDirection = RIGHT;
 
 	PortalEntity * portals[PORTALS_NB];
 	RockEntity * carriedRock = nullptr;

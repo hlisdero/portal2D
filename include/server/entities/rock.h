@@ -16,7 +16,7 @@ public:
 	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 
 	void grab(PlayerEntity * player);
-	void release();
+	void release(MoveDirection direction);
 
 	PlayerEntity* getHolder();
 

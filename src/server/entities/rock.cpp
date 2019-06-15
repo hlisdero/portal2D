@@ -21,10 +21,28 @@ void RockEntity::grab(PlayerEntity * player) {
 	holder = player;
 }
 
-void RockEntity::release() {
-	gameEventCreator.addSetActiveEntity(this, true);
-	teleportTo(holder->getX(), holder->getY());
+void RockEntity::release(MoveDirection direction) {
+	float newX = holder->getX();
+
+	if(direction != NONE) {
+		float holderVelocityX = holder->getBody()->GetLinearVelocity().x;
+
+		if(holderVelocityX != 0) {
+			direction = holderVelocityX > 0 ? RIGHT : LEFT;
+		}
+
+		if(direction == RIGHT) {
+			newX = holder->getX()+1.0;
+		} else {
+			newX = holder->getX()-1.0;
+		}
+	}
+
+	getBody()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+	teleportTo(newX, holder->getY());
+	
 	holder = nullptr;
+	gameEventCreator.addSetActiveEntity(this, true);
 }
 
 PlayerEntity* RockEntity::getHolder() {
