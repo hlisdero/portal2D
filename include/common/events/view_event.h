@@ -21,6 +21,7 @@ public:
     ViewEvent(int player_id, MoveDirection direction, bool pressed, bool repeat);
     ViewEvent(int player_id, ClickDirection click_direction, PortalColor color);
     ViewEvent(int player_id, ClickDirection click_direction);
+    ViewEvent(int player_id, ViewEventType type);
 
     ViewEventType type = INVALID;
     int player_id = -1;

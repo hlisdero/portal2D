@@ -14,3 +14,6 @@ ViewEvent::ViewEvent(int player_id,
 	ClickDirection click_direction) :
     type(PIN_TOOL), player_id(player_id), 
     click_direction(click_direction) {}
+
+ViewEvent::ViewEvent(int player_id, ViewEventType type) : 
+	type(type), player_id(player_id) {}

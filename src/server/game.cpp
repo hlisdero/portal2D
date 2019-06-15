@@ -115,15 +115,26 @@ void Game::processQueue() {
 
 		// If player is alive
 		if(player != nullptr) {
-			if (event.type == MOVE) {
+			switch(event.type) {
+			case MOVE:
 				player->move(event.direction, event.pressed);
-			} else if (event.type == PIN_TOOL) {
+				break;
+			case RESET_PORTALS:
+				player->resetPortals(world.getb2World(), event_creator);
+				break;
+			case PIN_TOOL:
 				// TODO pin tool
-			} else if (event.type == MOUSE) {
+				break;
+			case MOUSE:
 				world.createPortal(player, event.color,
 					event.click_direction, event_creator);
-			} else if (event.type == QUIT) {
+				break;
+			case QUIT:
 				gameEventCreator.addKillPlayer(player);
+				break;
+			default:
+				throw std::runtime_error("Unsupported view event type");
+				break;
 			}
 		}
 	}
