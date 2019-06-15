@@ -77,8 +77,9 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 			gameEventCreator.addPortalsReset(this);
 
 			if(carriedRock != nullptr) {
+				carriedRock->release();
 				carriedRock->respawn();
-				releaseRock();
+				carriedRock = nullptr;
 			}
 			break;
 		case TYPE_ENERGY_BALL:
