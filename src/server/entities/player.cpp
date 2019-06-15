@@ -69,7 +69,9 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 	switch(other->getType()) {
 		case TYPE_ROCK:
 			if(inContact) {
-				grabRock(other->as<RockEntity>());
+				rockInContact = other->as<RockEntity>();
+			} else {
+				rockInContact = nullptr;
 			}
 			break;
 		case TYPE_ENERGY_BAR:
@@ -91,16 +93,14 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 	}
 }
 
-void PlayerEntity::grabRock(RockEntity* rock) {
-	if(rock->getHolder() == nullptr && carriedRock == nullptr) {
-		carriedRock = rock;
-		rock->grab(this);
+void PlayerEntity::grabReleaseRock() {
+	if(carriedRock != nullptr) {
+		carriedRock->release();
+		carriedRock = nullptr;
+	} else if(rockInContact != nullptr && rockInContact->getHolder() == nullptr) {
+		carriedRock = rockInContact;
+		rockInContact->grab(this);
 	}
-}
-
-void PlayerEntity::releaseRock() {
-	carriedRock->release();
-	carriedRock = nullptr;
 }
 
 void PlayerEntity::move(const MoveDirection& direction, bool pressed) {

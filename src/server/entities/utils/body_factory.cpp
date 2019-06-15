@@ -138,6 +138,9 @@ b2FixtureDef BodyFactory::createFixtureDef(Entity * entity,
 		entity->getType() == TYPE_END_BARRIER ||
 		entity->getType() == TYPE_ENERGY_BALL) {
 		fixtureDef.isSensor = true;
+	} else if(entity->getType() == TYPE_ROCK) {
+		fixtureDef.friction = 1;
+		fixtureDef.restitution = 0;
 	}
 
 	return std::move(fixtureDef);

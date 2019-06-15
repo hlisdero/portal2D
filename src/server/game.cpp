@@ -122,6 +122,9 @@ void Game::processQueue() {
 			case RESET_PORTALS:
 				player->resetPortals(world.getb2World(), event_creator);
 				break;
+			case GRAB_RELEASE_ROCK:
+				player->grabReleaseRock();
+				break;
 			case PIN_TOOL:
 				// TODO pin tool
 				break;

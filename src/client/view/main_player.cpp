@@ -9,8 +9,12 @@ void MainPlayer::handle(const KeyboardEvent& event) {
 
     if (direction != NONE) {
         queue.push(ViewEvent(index, direction, event.pressed, event.repeat));
-    } else if(event.key == SDLK_r) {
+    } else if(event.pressed) {
+        if(event.key == SDLK_r) {
         queue.push(ViewEvent(index, RESET_PORTALS));
+        } else if(event.key == SDLK_e) {
+            queue.push(ViewEvent(index, GRAB_RELEASE_ROCK));
+        }
     }
 }
 

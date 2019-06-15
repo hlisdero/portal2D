@@ -32,6 +32,8 @@ public:
 	void setPortal(PortalColor color, PortalEntity * portal);
 	void resetPortals(b2World & world, EventCreator & eventCreator);
 
+	void grabReleaseRock();
+
 	void applyMovement();
 
 	void handleFloorContact(b2Contact * contact, bool isBegin);
@@ -45,11 +47,9 @@ private:
 
 	PortalEntity * portals[PORTALS_NB];
 	RockEntity * carriedRock = nullptr;
+	RockEntity * rockInContact = nullptr;
 
 	void applyImpulseToCenter(float vx, float vy);
-
-	void grabRock(RockEntity* rock);
-	void releaseRock();
 };
 
 #endif  // PLAYER_ENTITY_H
