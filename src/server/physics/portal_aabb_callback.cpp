@@ -9,10 +9,6 @@ bool PortalAABBCallback::ReportFixture(b2Fixture* fixture) {
 	Entity* entity = static_cast<Entity*>(
 			fixture->GetBody()->GetUserData());
 
-	if(entity->getType() == TYPE_PORTAL) {
-		return true;
-	}
-
 	if(fixture->TestPoint(edgeA)) {
 		edgeAInTheAir = false;
 		isValid = isPointOk(entity);
