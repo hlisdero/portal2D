@@ -16,3 +16,8 @@ SDL_Rect* Button::getClip() {
     }
     return sprite.getClip();
 }
+
+const char * Button::updateState(const State& new_state) {
+    DrawableBox2D::updateState(new_state);
+    return (getState() == STATE_ENABLED) ? "button_on" : "button_off";
+}

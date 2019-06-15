@@ -42,10 +42,12 @@ const State& DrawableBox2D::getState() const {
     return state;
 }
 
-void DrawableBox2D::updatePosition(const Position& new_position) {
+const char * DrawableBox2D::updatePosition(const Position& new_position) {
     position = new_position;
+    return nullptr;
 }
 
-void DrawableBox2D::updateState(const State& new_state) {
+const char * DrawableBox2D::updateState(const State& new_state) {
     state = new_state;
+    return nullptr;
 }

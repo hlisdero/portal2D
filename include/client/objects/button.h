@@ -9,6 +9,8 @@ public:
            const WorldViewSettings& settings, const Texture& texture);
 
     virtual SDL_Rect* getClip() override;
+
+    virtual const char * updateState(const State& new_state) override;
 };
 
 #endif  // BUTTON_H

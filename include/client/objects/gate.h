@@ -13,6 +13,8 @@ public:
     virtual const Texture& getTexture();
     virtual SDL_Rect* getClip();
 
+    virtual const char * updateState(const State& new_state) override;
+
 private:
     Sprite sprite;
     FiniteAnimation animation;

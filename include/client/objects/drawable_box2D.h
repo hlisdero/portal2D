@@ -26,8 +26,8 @@ public:
 
     const State& getState() const;
 
-    virtual void updatePosition(const Position& new_position);
-    virtual void updateState(const State& new_state);
+    virtual const char * updatePosition(const Position& new_position);
+    virtual const char * updateState(const State& new_state);
 
     virtual ~DrawableBox2D() = default;
 

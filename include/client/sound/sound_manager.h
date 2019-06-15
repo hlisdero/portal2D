@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include <SDL2/SDL.h>
 #include "client/sound/sound_effect.h"
 #include "client/sound/music.h"
@@ -20,10 +21,10 @@ public:
 
     ~SoundManager();
 
-    void addSoundEffect(const std::string& path);
+    void addSoundEffects();
     void addMusic(const std::string& path);
 
-    void playSoundEffect(size_t index);
+    void playSoundEffect(const char * name);
     void playMusic(size_t index);
     void toggleMusic(size_t index);
 
@@ -34,6 +35,7 @@ public:
     virtual void handle(const MouseEvent& event) override;
 
 private:
+    std::map<std::string, size_t> sound_effects_names;
     std::vector<SoundEffect> sound_effects;
     std::vector<Music> soundtrack;
 

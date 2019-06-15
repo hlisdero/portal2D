@@ -13,7 +13,7 @@ public:
     virtual SDL_Rect* getClip() override;
     virtual SDL_RendererFlip getFlipState() const override;
 
-    virtual void updatePosition(const Position& new_position) override;
+    virtual const char * updatePosition(const Position& new_position) override;
 
     void startDeathAnimation();
     bool finishedDeathAnimation() const;
@@ -31,7 +31,7 @@ private:
     SDL_RendererFlip flip_state = SDL_FLIP_NONE;
 
     void updateFlipState(const Position& new_position);
-    void updateAnimation(const Position& new_position);
+    const char * updateAnimation(const Position& new_position);
     bool isMovingHorizontally(const Position& new_position) const;
 };
 

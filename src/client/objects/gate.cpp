@@ -29,3 +29,8 @@ SDL_Rect* Gate::getClip() {
         return sprite.getClip();
     }
 }
+
+const char * Gate::updateState(const State& new_state) {
+    DrawableBox2D::updateState(new_state);
+    return "gate";
+}

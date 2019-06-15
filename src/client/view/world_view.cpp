@@ -103,11 +103,17 @@ void WorldView::destroyEntity(size_t index) {
 }
 
 void WorldView::updatePosition(size_t index, const Position& position) {
-    view_objects.at(index)->updatePosition(position);
+    const char * sound = view_objects.at(index)->updatePosition(position);
+    if(sound != nullptr) {
+        sound_manager.playSoundEffect(sound);
+    }
 }
 
 void WorldView::updateState(size_t index, const State& state) {
-    view_objects.at(index)->updateState(state);
+    const char * sound = view_objects.at(index)->updateState(state);
+    if(sound != nullptr) {
+        sound_manager.playSoundEffect(sound);
+    }
 }
 
 void WorldView::selectPlayer(size_t index) {

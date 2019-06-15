@@ -14,7 +14,8 @@ SoundManager::SoundManager() {
     }
 
     addMusic("../data/sounds/soundtrack.mp3");
-    addSoundEffect("../data/sounds/portal_creation.wav");
+    addSoundEffects();
+
     playMusic(0);
 }
 
@@ -24,17 +25,36 @@ SoundManager::~SoundManager() {
     SDL_QuitSubSystem(SDL_INIT_AUDIO);
 }
 
-void SoundManager::addSoundEffect(const std::string& path) {
-    sound_effects.emplace_back(path);
+void SoundManager::addSoundEffects() {
+    std::map<const char *, const char *> sounds;
+
+    sounds["portal_creation"] = "../data/sounds/portal_creation.wav";
+    sounds["button_on"] = "../data/sounds/button_on.wav";
+    sounds["button_off"] = "../data/sounds/button_off.wav";
+    sounds["gate"] = "../data/sounds/gate.wav";
+    sounds["player_run"] = "../data/sounds/player_run.wav";
+    sounds["player_land"] = "../data/sounds/player_land.wav";
+    sounds["player_jump"] = "../data/sounds/player_jump.wav";
+
+    int i = 0;
+    for(auto it : sounds) {
+        sound_effects.emplace_back(it.second);
+        sound_effects_names[std::string(it.first)] = i; 
+        i++;
+    }
+
+    Mix_AllocateChannels(i+1);
 }
 
 void SoundManager::addMusic(const std::string& path) {
     soundtrack.emplace_back(path);
 }
 
-void SoundManager::playSoundEffect(size_t index) {
-    checkValidIndexSoundEffect(index);
-    Mix_PlayChannel(-1, sound_effects[index].get(), 0);
+void SoundManager::playSoundEffect(const char * name) {
+    size_t i = sound_effects_names[std::string(name)];
+    if(!Mix_Playing(i)) {
+        Mix_PlayChannel(i, sound_effects[i].get(), 0);
+    }
 }
 
 void SoundManager::playMusic(size_t index) {
@@ -85,7 +105,7 @@ void SoundManager::handle(const MouseEvent& event) {
         return;
     }
     if (event.pressed) {
-        playSoundEffect(0);
+        playSoundEffect("portal_creation");
     }
 }
 
