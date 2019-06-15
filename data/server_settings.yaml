@@ -32,6 +32,12 @@ portal_sensibility: 0.8
 # Max fall speed m/s
 max_fall_speed: 10.0
 
+# maximum possible distance to grab a rock
+grab_reach: 0.5
+
+# distance rock to player when releasing a rock
+release_rock_distance: 0.5
+
 ###
 ### Physics settings
 ###

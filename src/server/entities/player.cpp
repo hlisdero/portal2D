@@ -1,6 +1,8 @@
 #include "server/entities/player.h"
 
 #include "server/entities/rock.h"
+#include "server/physics/grab_rock_callback.h"
+
 #include "server/objects/server_settings.h"
 extern ServerSettings SETTINGS;
 
@@ -9,6 +11,8 @@ PlayerEntity::PlayerEntity(b2Vec2 position, GameEventCreator& gameEventCreator) 
 	for(int i = 0; i < PORTALS_NB; i++) {
 		portals[i] = nullptr;
 	}
+
+	grabRockShape.m_radius = SETTINGS.GRAB_REACH;
 }
 
 PlayerEntity::~PlayerEntity() {
@@ -67,13 +71,6 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 	TeleportableEntity::handleContactWith(other, contact, inContact);
 
 	switch(other->getType()) {
-		case TYPE_ROCK:
-			if(inContact) {
-				rockInContact = other->as<RockEntity>();
-			} else {
-				rockInContact = nullptr;
-			}
-			break;
 		case TYPE_ENERGY_BAR:
 		case TYPE_END_BARRIER:
 			gameEventCreator.addPortalsReset(this);
@@ -93,13 +90,17 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 	}
 }
 
-void PlayerEntity::grabReleaseRock() {
+void PlayerEntity::grabReleaseRock(b2World & b2world) {
 	if(carriedRock != nullptr) {
 		carriedRock->release(lastDirection);
 		carriedRock = nullptr;
-	} else if(rockInContact != nullptr && rockInContact->getHolder() == nullptr) {
-		carriedRock = rockInContact;
-		rockInContact->grab(this);
+	} else {
+		RockEntity* rock = getRock(b2world);
+
+		if(rock != nullptr && rock->getHolder() == nullptr) {
+			carriedRock = rock;
+			rock->grab(this);
+		}
 	}
 }
 
@@ -172,4 +173,14 @@ void PlayerEntity::applyMovement() {
 
 	float velocityX = (targetVelocity - velocity.x);
 	applyImpulseToCenter(velocityX, 0.0f);
+}
+
+RockEntity * PlayerEntity::getRock(b2World & world) {
+	b2AABB aabb;
+	grabRockShape.ComputeAABB(&aabb, getBody()->GetTransform(), 0);
+
+	GrabRockCallback callback(getBody()->GetPosition());
+	world.QueryAABB(&callback, aabb);
+
+	return callback.rock;
 }

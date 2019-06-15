@@ -32,6 +32,10 @@ ServerSettings::ServerSettings(const char * filename) {
 	PLAYER_JUMP_IMPULSE = yaml["player_jump_impulse"].as<float>();
 	VERTICAL_VECTOR_LIMIT = yaml["vertical_vector_limit"].as<float>();
 	MAX_FALL_SPEED = -1 * yaml["max_fall_speed"].as<float>();
+	GRAB_REACH = yaml["grab_reach"].as<float>();
+
+	// rock
+	RELEASE_ROCK_DISTANCE = yaml["release_rock_distance"].as<float>();
 }
 
 ServerSettings SETTINGS("../data/server_settings.yaml");

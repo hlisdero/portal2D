@@ -1,5 +1,8 @@
 #include "server/entities/rock.h"
 
+#include "server/objects/server_settings.h"
+extern ServerSettings SETTINGS;
+
 RockEntity::RockEntity(float x, float y, float rotation, GameEventCreator & gameEventCreator) :
 	TeleportableEntity(TYPE_ROCK, x, y, rotation, gameEventCreator), initialPosition(x, y) {}
 
@@ -32,9 +35,9 @@ void RockEntity::release(MoveDirection direction) {
 		}
 
 		if(direction == RIGHT) {
-			newX = holder->getX()+1.0;
+			newX = holder->getX() + SETTINGS.RELEASE_ROCK_DISTANCE;
 		} else {
-			newX = holder->getX()-1.0;
+			newX = holder->getX() + -1 * SETTINGS.RELEASE_ROCK_DISTANCE;
 		}
 	}
 

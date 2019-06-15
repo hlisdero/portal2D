@@ -37,6 +37,10 @@ public:
 	float PLAYER_JUMP_IMPULSE;
 	float VERTICAL_VECTOR_LIMIT;
 	float MAX_FALL_SPEED;
+	float GRAB_REACH;
+
+	// rock
+	float RELEASE_ROCK_DISTANCE;
 };
 
 #endif
