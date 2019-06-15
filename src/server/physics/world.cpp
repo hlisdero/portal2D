@@ -164,6 +164,8 @@ void World::updateDynamics() {
 				PlayerEntity* rockHolder = entity->as<RockEntity>()->getHolder();
 				if(rockHolder != nullptr) {
 					position = rockHolder->getBody()->GetPosition();
+				} else {
+					entity->setRotationRad(body->GetAngle());
 				}
 			}
 

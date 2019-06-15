@@ -25,6 +25,8 @@ public:
 private:
 	PlayerEntity* holder = nullptr;
 	b2Vec2 initialPosition;
+
+	void resetVelocity();
 };
 
 #endif  // ROCK_ENTITY_H

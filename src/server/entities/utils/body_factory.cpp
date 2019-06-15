@@ -23,15 +23,16 @@ b2BodyDef BodyFactory::createBodyDef(Entity * entity) {
 	
 	bodyDef.position.Set(entity->getX(), entity->getY());
 
-	if(entity->getType() == TYPE_PLAYER
-		|| entity->getType() == TYPE_ROCK) {
+	if(entity->getType() >= DYNAMIC_ENTITY_START) {
 		bodyDef.type = b2_dynamicBody;
-		bodyDef.fixedRotation = true;
-	} else if(entity->getType() == TYPE_ENERGY_BALL) {
-		bodyDef.type = b2_dynamicBody;
-		bodyDef.gravityScale = DISABLE_GRAVITY;
 	} else {
 		bodyDef.type = b2_staticBody;
+	}
+
+	if(entity->getType() == TYPE_PLAYER) {
+		bodyDef.fixedRotation = true;
+	} else if(entity->getType() == TYPE_ENERGY_BALL) {
+		bodyDef.gravityScale = DISABLE_GRAVITY;
 	}
 
 	return std::move(bodyDef);

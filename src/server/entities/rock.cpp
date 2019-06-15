@@ -41,7 +41,7 @@ void RockEntity::release(MoveDirection direction) {
 		}
 	}
 
-	getBody()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+	resetVelocity();
 	teleportTo(newX, holder->getY());
 	
 	holder = nullptr;
@@ -52,7 +52,13 @@ PlayerEntity* RockEntity::getHolder() {
 	return holder;
 }
 
-void RockEntity::respawn() {
+void RockEntity::resetVelocity() {
 	getBody()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+	getBody()->SetAngularVelocity(0);
+
+}
+
+void RockEntity::respawn() {
+	resetVelocity();
 	teleportTo(initialPosition.x, initialPosition.y);
 }

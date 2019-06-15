@@ -17,6 +17,7 @@ public:
 	float getRotationRad() const;
 	int getRotationDeg() const;
     void setRotationDeg(int angleDegrees);
+    void setRotationRad(float angleRadians);
 
 	EntityType getType() const;
 

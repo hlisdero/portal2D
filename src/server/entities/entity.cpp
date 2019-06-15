@@ -33,6 +33,10 @@ void Entity::setRotationDeg(int rotation) {
     this->rotation = rotation;
 }
 
+void Entity::setRotationRad(float rotation) {
+    this->rotation = Math::radToDeg(rotation);
+}
+
 EntityType Entity::getType() const {
     return type;
 }
