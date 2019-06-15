@@ -9,7 +9,7 @@ void Protocol::send(const ViewEvent& event) {
     sendBoolean(event.pressed);
     sendBoolean(event.repeat);
     sendClickDirection(event.click_direction);
-    sendInteger<ClickButton>(event.button);
+    sendInteger<PortalColor>(event.color);
 }
 
 void Protocol::send(const WorldEvent& event) {
@@ -27,7 +27,7 @@ void Protocol::receive(ViewEvent& event) {
     event.pressed = receiveBoolean();
     event.repeat = receiveBoolean();
     event.click_direction = receiveClickDirection();
-    event.button = receiveInteger<ClickButton>();
+    event.color = receiveInteger<PortalColor>();
 }
 
 void Protocol::receive(WorldEvent& event) {

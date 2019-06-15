@@ -22,16 +22,9 @@ void MainPlayer::handle(const MouseEvent& event) {
         return;
     }
 
-    ClickButton button = BUTTON_INVALID;
-    if(event.button == SDL_BUTTON_LEFT) {
-        button = BUTTON_LEFT;
-    } else if(event.button == SDL_BUTTON_MIDDLE) {
-        button = BUTTON_MIDDLE;
-    } else if(event.button == SDL_BUTTON_RIGHT) {
-        button = BUTTON_RIGHT;
-    } 
-
-    if(button == BUTTON_INVALID) {
+    if(event.button != SDL_BUTTON_LEFT && 
+        event.button != SDL_BUTTON_RIGHT &&
+        event.button != SDL_BUTTON_MIDDLE) {
         return;
     }
 
@@ -43,7 +36,13 @@ void MainPlayer::handle(const MouseEvent& event) {
     double y = event.y - player_y;
     ClickDirection click_direction(x/sqrt(x*x + y*y), -y/sqrt(x*x + y*y));
 
-    queue.push(ViewEvent(index, click_direction, button));
+    if(event.button == SDL_BUTTON_MIDDLE) {
+        queue.push(ViewEvent(index, click_direction));
+    } else {
+        PortalColor color = 
+            (event.button == SDL_BUTTON_LEFT) ? COLOR_BLUE : COLOR_ORANGE;
+        queue.push(ViewEvent(index, click_direction, color));
+    }
 }
 
 void MainPlayer::startDeathAnimation() {

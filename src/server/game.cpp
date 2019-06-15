@@ -4,45 +4,45 @@
 extern ServerSettings SETTINGS;
 
 Game::Game(const std::string& map_name, ClientManager& client_manager) :
-    world_events(client_manager.getSendQueue()),
-    view_events(client_manager.getReceiveQueue()),
-    client_manager(client_manager),
-    event_creator(world_events),
+	world_events(client_manager.getSendQueue()),
+	view_events(client_manager.getReceiveQueue()),
+	client_manager(client_manager),
+	event_creator(world_events),
 
 	gameEventCreator(eventsQueue),
 	map(map_name, gameEventCreator),
 	world(map, gameEventCreator) {}
 
 size_t Game::createPlayer() {
-    PlayerEntity * player = world.createPlayer();
-    event_creator.addEntityCreation(player);
-    client_manager.broadcast();
-    return player->getId();
+	PlayerEntity * player = world.createPlayer();
+	event_creator.addEntityCreation(player);
+	client_manager.broadcast();
+	return player->getId();
 }
 
 size_t Game::getMinPlayers() const {
-    return map.getMinPlayers();
+	return map.getMinPlayers();
 }
 
 void Game::init() {
-    event_creator.addEntityCreations(map.getStaticEntities());
-    event_creator.addEntityCreations(world.getDynamicEntities());
-    client_manager.broadcast();
+	event_creator.addEntityCreations(map.getStaticEntities());
+	event_creator.addEntityCreations(world.getDynamicEntities());
+	client_manager.broadcast();
 
-    for (size_t i = 0; i < getMinPlayers(); ++i) {
-        client_manager.addSelectPlayer(i, createPlayer());
-    }
+	for (size_t i = 0; i < getMinPlayers(); ++i) {
+		client_manager.addSelectPlayer(i, createPlayer());
+	}
 }
 
 void Game::run() {
-    ClockLoop<LOOPS_PER_SECOND> clock;
-    while (!quit) {
-        client_manager.joinInputQueues();
-        processQueue();
-        update();
-        client_manager.broadcast();
-        clock.waitNextLoop();
-    }
+	ClockLoop<LOOPS_PER_SECOND> clock;
+	while (!quit) {
+		client_manager.joinInputQueues();
+		processQueue();
+		update();
+		client_manager.broadcast();
+		clock.waitNextLoop();
+	}
 }
 
 void Game::update() {
@@ -107,31 +107,24 @@ void Game::processGameEvents() {
 }
 
 void Game::processQueue() {
-    while (!view_events.empty()) {
-        ViewEvent event = view_events.front();
-        view_events.pop();
+	while (!view_events.empty()) {
+		ViewEvent event = view_events.front();
+		view_events.pop();
 
-        PlayerEntity * player = world.getPlayerById(event.player_id);
+		PlayerEntity * player = world.getPlayerById(event.player_id);
 
-        // If player is alive
-        if(player != nullptr) {
-	        if (event.type == KEYBOARD) {
-	            player->move(event.direction, event.pressed);
-	        } else if (event.type == MOUSE) {
-	        	if(event.button == BUTTON_MIDDLE) {
-	        		// pin
-	        	} else {
-	        		PortalColor color = (event.button == BUTTON_LEFT) ? 
-	        			COLOR_BLUE : COLOR_ORANGE;
-
-	           		world.createPortal(player, color,
-	           			event.click_direction, event_creator);
-	           	}
-	        } else if (event.type == QUIT) {
-	            // TODO Un jugador se fue y ya fue desconectado
-	            // Qué hacemos con el mundo?
-	        	gameEventCreator.addKillPlayer(player);
-	        }
-	    }
-    }
+		// If player is alive
+		if(player != nullptr) {
+			if (event.type == MOVE) {
+				player->move(event.direction, event.pressed);
+			} else if (event.type == PIN_TOOL) {
+				// TODO pin tool
+			} else if (event.type == MOUSE) {
+				world.createPortal(player, event.color,
+					event.click_direction, event_creator);
+			} else if (event.type == QUIT) {
+				gameEventCreator.addKillPlayer(player);
+			}
+		}
+	}
 }

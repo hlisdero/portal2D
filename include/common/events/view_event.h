@@ -3,20 +3,24 @@
 
 #include "common/objects/move_direction.h"
 #include "common/objects/click_direction.h"
-#include "common/objects/click_button.h"
+#include "common/objects/portal_color.h"
 
 enum ViewEventType {
     INVALID = 0,
-    QUIT = 1,
-    KEYBOARD = 2,
-    MOUSE = 3,
+    QUIT,
+    MOVE,
+    MOUSE,
+    PIN_TOOL,
+    RESET_PORTALS,
+    GRAB_RELEASE_ROCK
 };
 
 class ViewEvent {
 public:
     explicit ViewEvent() = default;
     ViewEvent(int player_id, MoveDirection direction, bool pressed, bool repeat);
-    ViewEvent(int player_id, ClickDirection click_direction, ClickButton button);
+    ViewEvent(int player_id, ClickDirection click_direction, PortalColor color);
+    ViewEvent(int player_id, ClickDirection click_direction);
 
     ViewEventType type = INVALID;
     int player_id = -1;
@@ -24,7 +28,7 @@ public:
     bool pressed = false;
     bool repeat = false;
     ClickDirection click_direction = {0, 0};
-    ClickButton button = BUTTON_INVALID;
+    PortalColor color = COLOR_BLUE;
 };
 
 #endif  // VIEW_EVENT_H

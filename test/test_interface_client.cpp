@@ -8,7 +8,7 @@ int main() {
     BlockingQueue<WorldEvent>& world_event_queue = interface.getReceiveQueue();
 
     ViewEvent event;
-    event.type = KEYBOARD;
+    event.type = MOVE;
     event.direction = UP;
     event.pressed = true;
     event.repeat = false;

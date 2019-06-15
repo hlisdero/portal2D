@@ -13,7 +13,7 @@ int main() {
     BlockingQueue<ViewEvent>& view_event_queue = interface.getReceiveQueue();
 
     ViewEvent event = view_event_queue.pop();
-    if (event.type == KEYBOARD) {
+    if (event.type == MOVE) {
         std::cout << "Tipo correcto!" << std::endl;
     }
     if (event.direction == UP) {
