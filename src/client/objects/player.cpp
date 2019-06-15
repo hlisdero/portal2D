@@ -79,7 +79,7 @@ void Player::updateAnimation(const Position& new_position) {
         current = &jump_fall;
     } else if (current == &jump_fall && (new_position.y - currentY()) < 0.01) {
         current = &jump_land;
-    } else if (current == &idle && isMovingHorizontally(new_position)) {
+    } else if ((current == &idle || current == &run) && isMovingHorizontally(new_position)) {
         current = &run;
     } else {
         current = &idle;
