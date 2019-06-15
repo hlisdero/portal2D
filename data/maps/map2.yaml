@@ -112,13 +112,18 @@ entities:
     -
         type: TYPE_ENERGY_EMITTER
         x: 0.0
-        y: 3.0
+        y: 4.0
         rotation: 0.0
     -
         type: TYPE_ENERGY_BAR
         x: 5.0
         y: 2.0
-        rotation: 90.0
+        rotation: 0.0
+    -
+        type: TYPE_ENERGY_BAR
+        x: 5.0
+        y: 3.0
+        rotation: 0.0
     -
         type: TYPE_ENERGY_RECEIVER
         name: "receiver"
@@ -134,11 +139,6 @@ entities:
         type: TYPE_METAL_BLOCK
         x: 0.0
         y: 2.0
-        rotation: 0.0
-    -
-        type: TYPE_METAL_BLOCK
-        x: 5.0
-        y: 3.0
         rotation: 0.0
     -
         type: TYPE_STONE_BLOCK
@@ -163,7 +163,7 @@ entities:
     -
         type: TYPE_METAL_BLOCK
         x: 0.0
-        y: 4.0
+        y: 3.0
         rotation: 0.0
     -
         type: TYPE_METAL_BLOCK

@@ -18,7 +18,7 @@ const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
 	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_METAL_DIAG_BLOCK
 	{0.0f, -0.40f, 0.5f, 0.15f},    // TYPE_ACID
 	{0.0f, -0.5f, 0.5f, 1.0f},      // TYPE_GATE
-	{0.0f, 0.0f, 0.5f, 0.05f},     // TYPE_ENERGY_BAR
+	{0.0f, 0.0f, 0.05f, 0.5f},     // TYPE_ENERGY_BAR
 	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENERGY_EMITTER
 	{0.0f, 0.0f, 0.5f, 0.5f},      // TYPE_ENERGY_RECEIVER
 	{0.0f, -0.4f, 0.5f, 0.10f},  // TYPE_BUTTON
