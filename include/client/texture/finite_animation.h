@@ -14,7 +14,7 @@ public:
     bool finished() const;
 
 private:
-    int slowdown = 7;
+    int slowdown = 14;
 
     void next();
 };

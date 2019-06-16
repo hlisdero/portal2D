@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include "client/screen/screen.h"
 #include "client/sound/sound_manager.h"
+#include "client/view/animation_manager.h"
 #include "client/view/camera_manager.h"
 #include "client/view/event_manager.h"
 #include "client/view/main_player.h"
@@ -44,6 +45,7 @@ private:
     Screen screen;
     CameraManager camera_manager;
     WorldViewSettings settings;
+    AnimationManager animation_manager;
     Background background;
     std::map<size_t, DrawableBox2D*> view_objects;
     ViewObjectCreator object_creator;
