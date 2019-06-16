@@ -3,7 +3,7 @@
 
 #include "common/objects/move_direction.h"
 #include "common/objects/click_direction.h"
-#include "common/objects/portal_color.h"
+#include "common/objects/state.h"
 
 enum ViewEventType {
     INVALID = 0,
@@ -19,7 +19,7 @@ class ViewEvent {
 public:
     explicit ViewEvent() = default;
     ViewEvent(int player_id, MoveDirection direction, bool pressed, bool repeat);
-    ViewEvent(int player_id, ClickDirection click_direction, PortalColor color);
+    ViewEvent(int player_id, ClickDirection click_direction, State color);
     ViewEvent(int player_id, ClickDirection click_direction);
     ViewEvent(int player_id, ViewEventType type);
 
@@ -29,7 +29,7 @@ public:
     bool pressed = false;
     bool repeat = false;
     ClickDirection click_direction = {0, 0};
-    PortalColor color = COLOR_BLUE;
+    State state = STATE_DEFAULT;
 };
 
 #endif  // VIEW_EVENT_H

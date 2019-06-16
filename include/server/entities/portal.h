@@ -1,7 +1,7 @@
 #ifndef PORTAL_ENTITY_H
 #define PORTAL_ENTITY_H
 
-#include "common/objects/portal_color.h"
+#include "server/objects/portal_color.h"
 #include "server/entities/entity.h"
 #include "server/entities/attributes/body_linked.h"
 

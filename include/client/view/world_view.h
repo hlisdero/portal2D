@@ -28,9 +28,8 @@ public:
     const ViewObjectCreator& getObjectCreator() const;
     int getPlayerIndex() const;
 
-    void createPortal(size_t index, const Position& position, PortalColor color);
-
-    void createEntity(size_t index, EntityType type, const Position& initial);
+    void createEntity(size_t index, EntityType type,
+                      const Position& initial, const State& state);
     void destroyEntity(size_t index);
 
     void updatePosition(size_t index, const Position& position);

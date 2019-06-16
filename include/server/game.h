@@ -40,6 +40,7 @@ private:
 
     void processGameEvents();
     void processQueue();
+    PortalColor stateToPortalColor(State state) const;
 };
 
 #endif  // GAME_H

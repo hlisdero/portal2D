@@ -10,6 +10,7 @@
 #include "common/events/view_event.h"
 #include "common/objects/move_direction.h"
 #include "common/objects/click_direction.h"
+#include "common/objects/state.h"
 
 class MainPlayer : public KeyboardHandler, public MouseHandler {
 public:
@@ -30,7 +31,7 @@ private:
     BlockingQueue<ViewEvent>& queue;
 
     MoveDirection processMoveDirection(const KeyboardEvent& event) const;
-    PortalColor pickPortalColor(uint8_t button) const;
+    State pickPortalColor(uint8_t button) const;
 };
 
 #endif  // MAIN_PLAYER_H

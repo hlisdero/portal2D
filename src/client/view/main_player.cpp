@@ -73,10 +73,10 @@ MoveDirection MainPlayer::processMoveDirection(const KeyboardEvent& event) const
     return direction;
 }
 
-PortalColor MainPlayer::pickPortalColor(uint8_t button) const {
+State MainPlayer::pickPortalColor(uint8_t button) const {
     if (button == SDL_BUTTON_LEFT) {
-        return COLOR_BLUE;
+        return PORTAL_COLOR_BLUE;
     } else {
-        return COLOR_ORANGE;
+        return PORTAL_COLOR_ORANGE;
     }
 }

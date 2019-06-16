@@ -113,32 +113,40 @@ void Game::processQueue() {
 
 		PlayerEntity * player = world.getPlayerById(event.player_id);
 
-		// If player is alive
-		if(player != nullptr) {
-			switch(event.type) {
-			case MOVE:
-				player->move(event.direction, event.pressed);
-				break;
-			case RESET_PORTALS:
-				player->resetPortals(world.getb2World(), event_creator);
-				break;
-			case GRAB_RELEASE_ROCK:
-				player->grabReleaseRock(world.getb2World());
-				break;
-			case PIN_TOOL:
-				// TODO pin tool
-				break;
-			case MOUSE:
-				world.createPortal(player, event.color,
-					event.click_direction, event_creator);
-				break;
-			case QUIT:
-				gameEventCreator.addKillPlayer(player);
-				break;
-			default:
-				throw std::runtime_error("Unsupported view event type");
-				break;
-			}
+        if (!player) {
+		    continue;
+        }
+		switch(event.type) {
+		case MOVE:
+			player->move(event.direction, event.pressed);
+			break;
+		case RESET_PORTALS:
+			player->resetPortals(world.getb2World(), event_creator);
+			break;
+		case GRAB_RELEASE_ROCK:
+			player->grabReleaseRock(world.getb2World());
+			break;
+		case PIN_TOOL:
+			// TODO pin tool
+			break;
+		case MOUSE:
+			world.createPortal(player, stateToPortalColor(event.state),
+                               event.click_direction, event_creator);
+			break;
+		case QUIT:
+			gameEventCreator.addKillPlayer(player);
+			break;
+		default:
+			throw std::runtime_error("Unsupported view event type");
+			break;
 		}
 	}
+}
+
+PortalColor Game::stateToPortalColor(State state) const {
+    if (state == PORTAL_COLOR_ORANGE) {
+        return COLOR_ORANGE;
+    } else {
+        return COLOR_BLUE;
+    }
 }

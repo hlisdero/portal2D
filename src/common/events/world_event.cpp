@@ -13,5 +13,6 @@ WorldEvent::WorldEvent(int id) :
 
 WorldEvent::WorldEvent(int id, const Position& position) :
     type(POSITION_UPDATE), id(id), position(position) {}
+
 WorldEvent::WorldEvent(int id, const State& state) :
     type(STATE_UPDATE), id(id), state(state) {}
