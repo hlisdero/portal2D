@@ -60,6 +60,7 @@ public:
 
     const TextureCreator& getTextureCreator() const;
 
+    void centerCamera();
     void createCamera(const DrawableBox2D& drawable);
     const Camera& getCamera() const;
     void destroyCamera();

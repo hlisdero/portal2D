@@ -110,12 +110,15 @@ void Screen::resetViewport() {
     renderer.setViewport(0, 0, window.width, window.height);
 }
 
+void Screen::centerCamera() {
+    if (camera) {
+        camera->center();
+    }
+}
+
 void Screen::update() {
     if (window.minimized) {
         return;
-    }
-    if (camera) {
-        camera->center();
     }
     renderer.renderPresent();
 }

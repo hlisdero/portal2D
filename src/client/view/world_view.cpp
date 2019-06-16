@@ -127,6 +127,7 @@ void WorldView::update() {
 }
 
 void WorldView::renderObjects() {
+    screen.centerCamera();
     for (const auto& object : view_objects) {
         screen.render(*object.second);
     }
