@@ -20,10 +20,11 @@ class WorldEvent {
 public:
     explicit WorldEvent() = default;
     explicit WorldEvent(WorldEventType type);
-    WorldEvent(int id, EntityType type, const Position& position, const State& state = STATE_DEFAULT);
+    WorldEvent(int id, EntityType type,
+               const Position& position, State state = STATE_DEFAULT);
     explicit WorldEvent(int id);
 	WorldEvent(int id, const Position& position);
-    WorldEvent(int id, const State& state);
+    WorldEvent(int id, State state);
 
 	WorldEventType type = INVALID_WE;
     int id = -1;

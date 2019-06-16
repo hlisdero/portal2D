@@ -6,12 +6,12 @@ ViewEvent::ViewEvent(int player_id, MoveDirection direction,
     direction(direction), pressed(pressed), repeat(repeat) {}
 
 ViewEvent::ViewEvent(int player_id,
-                     ClickDirection click_direction,
+                     const ClickDirection& click_direction,
                      State color) :
     type(MOUSE), player_id(player_id),
     click_direction(click_direction), state(color) {}
 
-ViewEvent::ViewEvent(int player_id, ClickDirection click_direction) :
+ViewEvent::ViewEvent(int player_id, const ClickDirection& click_direction) :
     type(PIN_TOOL), player_id(player_id),
     click_direction(click_direction) {}
 

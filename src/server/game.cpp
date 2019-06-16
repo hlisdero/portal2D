@@ -59,7 +59,7 @@ void Game::update() {
 
 void Game::processGameEvents() {
 	std::vector<GameEvent> events = eventsQueue.popAll();
-	for(GameEvent event : events) {
+	for (const GameEvent& event : events) {
 		switch(event.type) {
 			case ENTITY_STATE_UPDATE:
 				event_creator.addStateUpdate(event.entity);
@@ -143,7 +143,7 @@ void Game::processQueue() {
 	}
 }
 
-PortalColor Game::stateToPortalColor(State state) const {
+PortalColor Game::stateToPortalColor(const State& state) const {
     if (state == PORTAL_COLOR_ORANGE) {
         return COLOR_ORANGE;
     } else {

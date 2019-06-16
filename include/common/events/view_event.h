@@ -19,8 +19,8 @@ class ViewEvent {
 public:
     explicit ViewEvent() = default;
     ViewEvent(int player_id, MoveDirection direction, bool pressed, bool repeat);
-    ViewEvent(int player_id, ClickDirection click_direction, State color);
-    ViewEvent(int player_id, ClickDirection click_direction);
+    ViewEvent(int player_id, const ClickDirection& click_direction, State color);
+    ViewEvent(int player_id, const ClickDirection& click_direction);
     ViewEvent(int player_id, ViewEventType type);
 
     ViewEventType type = INVALID;
