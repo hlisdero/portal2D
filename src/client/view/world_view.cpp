@@ -84,6 +84,7 @@ void WorldView::createEntity(size_t index, EntityType type,
         case TYPE_PLAYER:
             object_creator.createPlayer(index, position);
             camera_manager.add(index, view_objects[index]);
+            animation_manager.addPlayer(index);
             break;
         case TYPE_ENERGY_BALL:
             object_creator.createEnergyBall(index, position);
@@ -95,11 +96,9 @@ void WorldView::createEntity(size_t index, EntityType type,
 
 void WorldView::destroyEntity(size_t index) {
     camera_manager.remove(index);
-    if (index == main_player->getIndex()) {
-        event_manager.removeHandler((KeyboardHandler*) main_player);
-        event_manager.removeHandler((MouseHandler*) main_player);
-        animation_manager.addPlayerDeath(*view_objects.at(index));
-    }
+    animation_manager.showPlayerDeath(index, *view_objects.at(index));
+    disableMainPlayer(index);
+    
     delete view_objects.at(index);
     view_objects.erase(index);
 }
@@ -134,4 +133,11 @@ void WorldView::renderObjects() {
         screen.render(*object.second);
     }
     animation_manager.render();
+}
+
+void WorldView::disableMainPlayer(size_t index) {
+    if (index == main_player->getIndex()) {
+        event_manager.removeHandler((KeyboardHandler*) main_player);
+        event_manager.removeHandler((MouseHandler*) main_player);
+    }
 }

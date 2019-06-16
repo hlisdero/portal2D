@@ -23,10 +23,18 @@ void AnimationManager::render() {
     for (size_t index : indexes) {
         delete animations.at(index);
         animations.erase(index);
+        players.erase(index);
     }
 }
 
-void AnimationManager::addPlayerDeath(const DrawableBox2D& drawable) {
+void AnimationManager::addPlayer(size_t index) {
+    players.insert(index);
+}
+
+void AnimationManager::showPlayerDeath(size_t index, const DrawableBox2D& drawable) {
+    if (!players.count(index)) {
+        return;
+    }
     FiniteAnimation death(textures["Player"]);
     for (int i = 0; i < 9; ++i) {
         death.addClip(1 + 174*i, 3447, 173, 202);
