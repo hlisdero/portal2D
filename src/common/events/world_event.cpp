@@ -2,11 +2,9 @@
 
 WorldEvent::WorldEvent(WorldEventType type) : type(type) {}
 
-WorldEvent::WorldEvent(int id, EntityType type, const Position& position) :
-    type(ENTITY_CREATION), id(id), entity_type(type), position(position) {}
-
-WorldEvent::WorldEvent(int id, const Position& position, const State & state) :
-    type(PORTAL_CREATION), id(id), position(position), state(state) {}
+WorldEvent::WorldEvent(int id, EntityType type,
+                       const Position& position, const State& state) :
+    type(ENTITY_CREATION), id(id), entity_type(type), position(position), state(state) {}
 
 WorldEvent::WorldEvent(int id) :
     type(ENTITY_DESTRUCTION), id(id) {}

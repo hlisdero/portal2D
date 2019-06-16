@@ -10,8 +10,7 @@ void EventCreator::addEntityCreation(Entity* entity) {
 
 void EventCreator::addPortalCreation(PortalEntity* entity) {
     Position position(entity->getX(), entity->getY(), entity->getRotationDeg());
-    WorldEvent event(entity->getId(), position, entity->getColor() ? 
-        STATE_DISABLED : STATE_ENABLED);
+    WorldEvent event(entity->getId(), TYPE_PORTAL, position, portalColorToState(entity->getColor()));
     queue.push(event);
 }
 
@@ -46,4 +45,12 @@ void EventCreator::addPositionUpdates(const std::vector<Entity*>& entities) {
 void EventCreator::addEndGame() {
     WorldEvent event(END_GAME);
     queue.push(event);
+}
+
+State EventCreator::portalColorToState(const PortalColor& color) const {
+    if (color == COLOR_ORANGE) {
+        return PORTAL_COLOR_ORANGE;
+    } else {
+        return PORTAL_COLOR_BLUE;
+    }
 }

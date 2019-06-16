@@ -26,6 +26,8 @@ public:
 
 private:
 	std::queue<WorldEvent>& queue;
+
+    State portalColorToState(const PortalColor& color) const;
 };
 
 #endif
