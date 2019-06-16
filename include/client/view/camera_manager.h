@@ -11,13 +11,14 @@ public:
     explicit CameraManager(Screen& screen);
 
     void add(size_t index, DrawableBox2D* drawable);
-    void remove(size_t index);
+    void removeAndReplace(size_t index);
 
     void select(size_t index);
 
 private:
     Screen& screen;
     std::map<size_t, DrawableBox2D*> drawables;
+    size_t currentIndex;
 };
 
 #endif  // CAMERA_MANAGER_H

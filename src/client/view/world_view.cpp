@@ -100,7 +100,8 @@ void WorldView::destroyEntity(size_t index) {
 }
 
 void WorldView::deleteEntity(size_t index) {
-    camera_manager.remove(index);
+    camera_manager.removeAndReplace(index);
+
     if (index == main_player->getIndex()) {
         event_manager.removeHandler((KeyboardHandler*) main_player);
         event_manager.removeHandler((MouseHandler*) main_player);
