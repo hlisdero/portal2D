@@ -50,6 +50,7 @@ private:
     MainPlayer * main_player = nullptr;
 
     void renderObjects();
+    void deleteEntity(size_t index);
 };
 
 #endif  // WORLD_VIEW_H

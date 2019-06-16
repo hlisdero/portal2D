@@ -18,6 +18,9 @@ public:
     void startDeathAnimation();
     bool finishedDeathAnimation() const;
 
+    virtual bool setDestroy() override;
+    virtual bool isFinished() override;
+
 private:
     Animation idle;
     Animation run;

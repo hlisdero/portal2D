@@ -93,11 +93,19 @@ void WorldView::createEntity(size_t index, EntityType type,
 }
 
 void WorldView::destroyEntity(size_t index) {
+    bool destroyNow = view_objects.at(index)->setDestroy();
+    if(destroyNow) {
+        deleteEntity(index);
+    }
+}
+
+void WorldView::deleteEntity(size_t index) {
     camera_manager.remove(index);
     if (index == main_player->getIndex()) {
         event_manager.removeHandler((KeyboardHandler*) main_player);
         event_manager.removeHandler((MouseHandler*) main_player);
     }
+
     delete view_objects.at(index);
     view_objects.erase(index);
 }
@@ -129,6 +137,11 @@ void WorldView::update() {
 void WorldView::renderObjects() {
     screen.centerCamera();
     for (const auto& object : view_objects) {
-        screen.render(*object.second);
+        auto & drawable = *object.second;
+        screen.render(drawable);
+
+        if(drawable.isFinished()) {
+            deleteEntity(object.first);
+        }
     }
 }

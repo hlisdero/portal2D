@@ -89,3 +89,12 @@ void Player::updateAnimation(const Position& new_position) {
 bool Player::isMovingHorizontally(const Position& new_position) const {
     return abs(new_position.x - currentX()) > 0.0001;
 }
+
+bool Player::setDestroy() {
+    current = &death;
+    return false;
+}
+
+bool Player::isFinished() {
+    return current == &death && static_cast<FiniteAnimation*>(current)->finished();
+}

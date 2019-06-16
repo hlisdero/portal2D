@@ -49,3 +49,11 @@ void DrawableBox2D::updatePosition(const Position& new_position) {
 void DrawableBox2D::updateState(const State& new_state) {
     state = new_state;
 }
+
+bool DrawableBox2D::setDestroy() {
+    return true;
+}
+
+bool DrawableBox2D::isFinished() {
+    return false;
+}

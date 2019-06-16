@@ -29,6 +29,9 @@ public:
     virtual void updatePosition(const Position& new_position);
     virtual void updateState(const State& new_state);
 
+    virtual bool setDestroy();
+    virtual bool isFinished();
+
     virtual ~DrawableBox2D() = default;
 
 private:
