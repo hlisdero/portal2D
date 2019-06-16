@@ -15,9 +15,6 @@ public:
 
     virtual void updatePosition(const Position& new_position) override;
 
-    void startDeathAnimation();
-    bool finishedDeathAnimation() const;
-
     virtual bool setDestroy() override;
     virtual bool isFinished() override;
 

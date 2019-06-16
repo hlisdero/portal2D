@@ -54,14 +54,6 @@ void Player::updatePosition(const Position& new_position) {
     DrawableBox2D::updatePosition(new_position);
 }
 
-void Player::startDeathAnimation() {
-    current = &death;
-}
-
-bool Player::finishedDeathAnimation() const {
-    return death.finished();
-}
-
 void Player::updateFlipState(const Position& new_position) {
     if (new_position.x > currentX()) {
         flip_state = SDL_FLIP_NONE;

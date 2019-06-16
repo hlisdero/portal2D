@@ -49,14 +49,6 @@ void MainPlayer::handle(const MouseEvent& event) {
     }
 }
 
-void MainPlayer::startDeathAnimation() {
-    player.startDeathAnimation();
-}
-
-bool MainPlayer::finishedDeathAnimation() const {
-    return player.finishedDeathAnimation();
-}
-
 MoveDirection MainPlayer::processMoveDirection(const KeyboardEvent& event) const {
     MoveDirection direction = NONE;
     switch (event.key) {
