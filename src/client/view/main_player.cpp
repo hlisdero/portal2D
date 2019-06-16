@@ -9,9 +9,9 @@ void MainPlayer::handle(const KeyboardEvent& event) {
 
     if (direction != NONE) {
         queue.push(ViewEvent(index, direction, event.pressed, event.repeat));
-    } else if(event.pressed) {
-        if(event.key == SDLK_r) {
-        queue.push(ViewEvent(index, RESET_PORTALS));
+    } else if (event.pressed) {
+        if (event.key == SDLK_r) {
+            queue.push(ViewEvent(index, RESET_PORTALS));
         } else if(event.key == SDLK_e) {
             queue.push(ViewEvent(index, GRAB_RELEASE_ROCK));
         }
@@ -28,9 +28,9 @@ void MainPlayer::handle(const MouseEvent& event) {
         return;
     }
 
-    if(event.button != SDL_BUTTON_LEFT && 
-        event.button != SDL_BUTTON_RIGHT &&
-        event.button != SDL_BUTTON_MIDDLE) {
+    if(event.button != SDL_BUTTON_LEFT &&
+       event.button != SDL_BUTTON_RIGHT &&
+       event.button != SDL_BUTTON_MIDDLE) {
         return;
     }
 
@@ -42,12 +42,10 @@ void MainPlayer::handle(const MouseEvent& event) {
     double y = event.y - player_y;
     ClickDirection click_direction(x/sqrt(x*x + y*y), -y/sqrt(x*x + y*y));
 
-    if(event.button == SDL_BUTTON_MIDDLE) {
+    if (event.button == SDL_BUTTON_MIDDLE) {
         queue.push(ViewEvent(index, click_direction));
     } else {
-        PortalColor color = 
-            (event.button == SDL_BUTTON_LEFT) ? COLOR_BLUE : COLOR_ORANGE;
-        queue.push(ViewEvent(index, click_direction, color));
+        queue.push(ViewEvent(index, click_direction, pickPortalColor(event.button)));
     }
 }
 
@@ -73,4 +71,12 @@ MoveDirection MainPlayer::processMoveDirection(const KeyboardEvent& event) const
             break;
     }
     return direction;
+}
+
+PortalColor MainPlayer::pickPortalColor(uint8_t button) const {
+    if (button == SDL_BUTTON_LEFT) {
+        return COLOR_BLUE;
+    } else {
+        return COLOR_ORANGE;
+    }
 }

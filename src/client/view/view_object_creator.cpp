@@ -13,17 +13,17 @@ const Player& ViewObjectCreator::createPlayer(size_t index, const Position& init
 }
 
 void ViewObjectCreator::createMetalBlock(size_t index, const Position& initial) const {
-    MetalBlock* block = new MetalBlock(getSize(TYPE_METAL_BLOCK), initial, settings, textures["Custom"]);
+    MetalBlock* block = new MetalBlock(getSize(TYPE_METAL_BLOCK), initial, settings, textures["Entities"]);
     view_objects[index] = block;
 }
 
 void ViewObjectCreator::createDiagonalMetalBlock(size_t index, const Position& initial) const {
-    DiagonalMetalBlock* block = new DiagonalMetalBlock(getSize(TYPE_METAL_DIAG_BLOCK), initial, settings, textures["Custom"]);
+    DiagonalMetalBlock* block = new DiagonalMetalBlock(getSize(TYPE_METAL_DIAG_BLOCK), initial, settings, textures["Entities"]);
     view_objects[index] = block;
 }
 
 void ViewObjectCreator::createStoneBlock(size_t index, const Position& initial) const {
-    StoneBlock* block = new StoneBlock(getSize(TYPE_STONE_BLOCK), initial, settings, textures["Block"]);
+    StoneBlock* block = new StoneBlock(getSize(TYPE_STONE_BLOCK), initial, settings, textures["Entities"]);
     view_objects[index] = block;
 }
 
@@ -33,7 +33,7 @@ void ViewObjectCreator::createAcid(size_t index, const Position& initial) const 
 }
 
 void ViewObjectCreator::createGate(size_t index, const Position& initial) const {
-    Gate* gate = new Gate(getSize(TYPE_GATE), initial, settings, textures["Custom"]);
+    Gate* gate = new Gate(getSize(TYPE_GATE), initial, settings, textures["Entities"]);
     view_objects[index] = gate;
 }
 
@@ -48,32 +48,32 @@ void ViewObjectCreator::createEnergyBall(size_t index, const Position& initial) 
 }
 
 void ViewObjectCreator::createEnergyBar(size_t index, const Position& initial) const {
-    EnergyBar* energy_bar = new EnergyBar(getSize(TYPE_ENERGY_BAR), initial, settings, textures["Custom"]);
+    EnergyBar* energy_bar = new EnergyBar(getSize(TYPE_ENERGY_BAR), initial, settings, textures["Entities"]);
     view_objects[index] = energy_bar;
 }
 
 void ViewObjectCreator::createEndBarrier(size_t index, const Position& initial) const {
-    EndBarrier* energy_bar = new EndBarrier(getSize(TYPE_END_BARRIER), initial, settings, textures["Custom"]);
+    EndBarrier* energy_bar = new EndBarrier(getSize(TYPE_END_BARRIER), initial, settings, textures["Entities"]);
     view_objects[index] = energy_bar;
 }
 
 void ViewObjectCreator::createEnergyEmitter(size_t index, const Position& initial) const {
-    EnergyEmitter* energy_emitter = new EnergyEmitter(getSize(TYPE_ENERGY_EMITTER), initial, settings, textures["Custom"]);
+    EnergyEmitter* energy_emitter = new EnergyEmitter(getSize(TYPE_ENERGY_EMITTER), initial, settings, textures["Entities"]);
     view_objects[index] = energy_emitter;
 }
 
 void ViewObjectCreator::createEnergyReceiver(size_t index, const Position& initial) const {
-    EnergyReceiver* energy_receiver = new EnergyReceiver(getSize(TYPE_ENERGY_RECEIVER), initial, settings, textures["Custom"]);
+    EnergyReceiver* energy_receiver = new EnergyReceiver(getSize(TYPE_ENERGY_RECEIVER), initial, settings, textures["Entities"]);
     view_objects[index] = energy_receiver;
 }
 
 void ViewObjectCreator::createRock(size_t index, const Position& initial) const {
-    Rock* rock = new Rock(getSize(TYPE_ROCK), initial, settings, textures["Custom"]);
+    Rock* rock = new Rock(getSize(TYPE_ROCK), initial, settings, textures["Entities"]);
     view_objects[index] = rock;
 }
 
 void ViewObjectCreator::createPortal(size_t index, const Position& initial, PortalColor color) const {
-    Portal* portal = new Portal(getSize(TYPE_PORTAL), initial, settings, textures["Custom"], color);
+    Portal* portal = new Portal(getSize(TYPE_PORTAL), initial, settings, textures["Entities"], color);
     view_objects[index] = portal;
 }
 

@@ -30,6 +30,7 @@ private:
     BlockingQueue<ViewEvent>& queue;
 
     MoveDirection processMoveDirection(const KeyboardEvent& event) const;
+    PortalColor pickPortalColor(uint8_t button) const;
 };
 
 #endif  // MAIN_PLAYER_H
