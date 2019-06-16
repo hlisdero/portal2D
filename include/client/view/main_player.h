@@ -21,6 +21,9 @@ public:
     virtual void handle(const KeyboardEvent& event) override;
     virtual void handle(const MouseEvent& event) override;
 
+    void startDeathAnimation();
+    bool finishedDeathAnimation() const;
+
 private:
     size_t index;
     Player& player;

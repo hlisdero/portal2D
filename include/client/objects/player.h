@@ -15,6 +15,9 @@ public:
 
     virtual void updatePosition(const Position& new_position) override;
 
+    void startDeathAnimation();
+    bool finishedDeathAnimation() const;
+
 private:
     Animation idle;
     Animation run;
@@ -22,6 +25,7 @@ private:
     FiniteAnimation jump_apex;
     FiniteAnimation jump_fall;
     Animation jump_land;
+    FiniteAnimation death;
     Animation* current;
 
     SDL_RendererFlip flip_state = SDL_FLIP_NONE;

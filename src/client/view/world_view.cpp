@@ -5,7 +5,6 @@ WorldView::WorldView(BlockingQueue<ViewEvent>& queue) :
     screen(1152, 864),
     camera_manager(screen),
     settings(screen.getWidth(), screen.getHeight(), screen.getTextureCreator()),
-    animation_manager(screen, settings),
     background(settings.getScreenWidth(), settings.getScreenHeight(), settings.getTextureLoader()["Background"]),
     object_creator(view_objects, settings) {
     event_manager.addHandler((KeyboardHandler*) &sound_manager);
@@ -98,7 +97,6 @@ void WorldView::destroyEntity(size_t index) {
     if (index == main_player->getIndex()) {
         event_manager.removeHandler((KeyboardHandler*) main_player);
         event_manager.removeHandler((MouseHandler*) main_player);
-        animation_manager.addPlayerDeath(*view_objects.at(index));
     }
     delete view_objects.at(index);
     view_objects.erase(index);
@@ -133,5 +131,4 @@ void WorldView::renderObjects() {
     for (const auto& object : view_objects) {
         screen.render(*object.second);
     }
-    animation_manager.render();
 }

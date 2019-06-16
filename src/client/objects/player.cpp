@@ -6,6 +6,7 @@ Player::Player(const Size& size, const Position& initial,
     idle(texture), run(texture),
     jump_rise(texture), jump_apex(texture),
     jump_fall(texture), jump_land(texture),
+    death(texture),
     current(&idle) {
 
     for (int i = 0; i < 7; ++i) {
@@ -29,6 +30,10 @@ Player::Player(const Size& size, const Position& initial,
     }
     jump_land.addClip(1, 635, 230, 199);
     jump_land.addClip(232, 635, 230, 199);
+
+    for (int i = 0; i < 9; ++i) {
+        death.addClip(1 + 174*i, 3447, 173, 202);
+    }
 }
 
 const Texture& Player::getTexture() {
@@ -47,6 +52,14 @@ void Player::updatePosition(const Position& new_position) {
     updateFlipState(new_position);
     updateAnimation(new_position);
     DrawableBox2D::updatePosition(new_position);
+}
+
+void Player::startDeathAnimation() {
+    current = &death;
+}
+
+bool Player::finishedDeathAnimation() const {
+    return death.finished();
 }
 
 void Player::updateFlipState(const Position& new_position) {
