@@ -2,7 +2,6 @@
 #define ANIMATION_MANAGER_H
 
 #include <map>
-#include <unordered_set>
 #include "client/screen/screen.h"
 #include "client/objects/animated_drawable.h"
 #include "client/objects/drawable_box2D.h"
@@ -21,18 +20,13 @@ public:
 
     void render();
 
-    void addPlayer(size_t index);
-    void showPlayerDeath(size_t index, const DrawableBox2D& drawable);
+    void addPlayerDeath(const DrawableBox2D& drawable);
 
 private:
     Screen& screen;
     const TextureLoader& textures;
     std::map<size_t, AnimatedDrawable*> animations;
     size_t current = 0;
-
-    std::unordered_set<size_t> players;
-
-
 
     void createAnimation(const DrawableBox2D& drawable, FiniteAnimation animation);
 };

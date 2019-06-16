@@ -52,7 +52,6 @@ private:
     MainPlayer * main_player = nullptr;
 
     void renderObjects();
-    void disableMainPlayer(size_t index);
 };
 
 #endif  // WORLD_VIEW_H
