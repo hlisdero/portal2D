@@ -18,7 +18,7 @@ public:
 private:
     Screen& screen;
     std::map<size_t, DrawableBox2D*> drawables;
-    size_t currentIndex;
+    size_t current_index;
 };
 
 #endif  // CAMERA_MANAGER_H

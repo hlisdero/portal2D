@@ -12,7 +12,7 @@ void CameraManager::removeAndReplace(size_t index) {
     }
     drawables.erase(index);
 
-    if(currentIndex == index) {
+    if (current_index == index) {
         screen.destroyCamera();
 
         if (!drawables.empty()) {
@@ -26,5 +26,5 @@ void CameraManager::select(size_t index) {
         throw std::runtime_error("Error: el objeto para crear la cámara no existe");
     }
     screen.createCamera(*drawables[index]);
-    currentIndex = index;
+    current_index = index;
 }
