@@ -47,8 +47,6 @@ void Client::processEvent(const WorldEvent& event) {
 
 void Client::sendQuitSignal() {
     BlockingQueue<ViewEvent>& queue = interface.getSendQueue();
-    ViewEvent quit_event;
-    quit_event.type = QUIT;
-    quit_event.player_id = view.getPlayerIndex();
+    ViewEvent quit_event(view.getPlayerIndex(), QUIT);
     queue.push(quit_event);
 }
