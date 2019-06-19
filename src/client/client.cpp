@@ -7,6 +7,9 @@ Client::Client(const std::string& hostname, const std::string& port) :
 void Client::run() {
     ClockLoop<60> clock;
     while (!quit) {
+        if (!interface.valid()) {
+            throw std::runtime_error("El servidor se ha desconectado inesperadamente");
+        }
         view.pollEvents();
         if (view.quit()) {
             break;
