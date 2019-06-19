@@ -38,6 +38,8 @@ public:
 
     void update();
 
+    void setVictory();
+
 private:
     EventManager event_manager;
     SoundManager sound_manager;
@@ -48,8 +50,11 @@ private:
     std::map<size_t, DrawableBox2D*> view_objects;
     ViewObjectCreator object_creator;
     MainPlayer * main_player = nullptr;
+    bool victory = false;
+    bool defeat = false;
 
     void renderObjects();
+    void renderTexture(const std::string& name);
     void deleteEntity(size_t index);
 };
 

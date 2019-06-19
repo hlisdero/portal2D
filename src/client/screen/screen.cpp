@@ -66,7 +66,7 @@ void Screen::render(Drawable& drawable) {
     renderer.render(texture.get(), src, &dst, drawable.getRotation(), drawable.getFlipState());
 }
 
-void Screen::render(Background background) {
+void Screen::render(Background& background) {
     SDL_Rect dst = {background.getX(), background.getY(), background.getWidth(), background.getHeight()};
     const Texture& texture = background.getTexture();
     SDL_Rect* src = background.getClip();

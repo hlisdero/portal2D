@@ -41,7 +41,8 @@ void Client::processEvent(const WorldEvent& event) {
     } else if (event.type == SELECT_PLAYER) {
         view.selectPlayer(event.id);
     } else if (event.type == END_GAME) {
-        quit = true;
+        view.setVictory();
+        // quit = true;
     }
 }
 

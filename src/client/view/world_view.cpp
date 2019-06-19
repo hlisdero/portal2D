@@ -93,22 +93,15 @@ void WorldView::createEntity(size_t index, EntityType type,
 }
 
 void WorldView::destroyEntity(size_t index) {
-    bool destroyNow = view_objects.at(index)->setDestroy();
-    if(destroyNow) {
-        deleteEntity(index);
-    }
-}
-
-void WorldView::deleteEntity(size_t index) {
-    camera_manager.removeAndReplace(index);
-
     if (index == main_player->getIndex()) {
         event_manager.removeHandler((KeyboardHandler*) main_player);
         event_manager.removeHandler((MouseHandler*) main_player);
     }
 
-    delete view_objects.at(index);
-    view_objects.erase(index);
+    bool destroyNow = view_objects.at(index)->setDestroy();
+    if (destroyNow) {
+        deleteEntity(index);
+    }
 }
 
 void WorldView::updatePosition(size_t index, const Position& position) {
@@ -132,17 +125,38 @@ void WorldView::update() {
     screen.clear();
     screen.render(background);
     renderObjects();
+    if (victory) {
+        renderTexture("Victory");
+    } else if (defeat) {
+        renderTexture("Defeat");
+    }
     screen.update();
+}
+
+void WorldView::setVictory() {
+    victory = true;
 }
 
 void WorldView::renderObjects() {
     screen.centerCamera();
     for (const auto& object : view_objects) {
-        auto & drawable = *object.second;
-        screen.render(drawable);
-
-        if(drawable.isFinished()) {
+        screen.render(*object.second);
+        if (object.second->isFinished()) {
             deleteEntity(object.first);
         }
     }
+}
+
+void WorldView::renderTexture(const std::string& name) {
+    const Texture& texture = settings.getTextureLoader()[name];
+    const Camera& camera = screen.getCamera();
+    int x = camera.position.x + camera.position.w/2;
+    int y = camera.position.y + camera.position.h/2;
+    screen.render(texture, x, y, 0.5);
+}
+
+void WorldView::deleteEntity(size_t index) {
+    camera_manager.removeAndReplace(index);
+    delete view_objects.at(index);
+    view_objects.erase(index);
 }

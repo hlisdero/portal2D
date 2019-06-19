@@ -32,9 +32,9 @@ public:
 
     void clear();
 
-    void render(const Texture& texture, int x, int y, double scale_factor = 1);
+    void render(const Texture& texture, int x = 0, int y = 0, double scale_factor = 1.0);
     void render(Drawable& drawable);
-    void render(Background background);
+    void render(Background& background);
 
     void setRenderDrawColor(const std::string& color_name);
     void setRenderDrawColor(uint8_t red, uint8_t green,
