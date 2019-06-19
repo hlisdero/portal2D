@@ -16,7 +16,7 @@ public:
 private:
     const std::string filename;
     const std::string command = "ffmpeg -loglevel quiet -video_size 1152x864 -framerate 25 -f x11grab -i :0.0+0,0 ";
-    FILE *process;
+    FILE *process = nullptr;
 
     void close();
 };
