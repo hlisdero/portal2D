@@ -62,7 +62,7 @@ public:
 
     void centerCamera();
     void createCamera(const DrawableBox2D& drawable);
-    const Camera& getCamera() const;
+    const Camera* getCamera() const;
     void destroyCamera();
     void makeRelativeToCamera(SDL_Rect& rect);
 

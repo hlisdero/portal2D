@@ -39,6 +39,7 @@ public:
     void update();
 
     void setVictory();
+    void setDefeat();
 
 private:
     EventManager event_manager;

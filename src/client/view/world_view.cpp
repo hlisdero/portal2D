@@ -115,7 +115,7 @@ void WorldView::updateState(size_t index, const State& state) {
 void WorldView::selectPlayer(size_t index) {
     Player* player = static_cast<Player*>(view_objects.at(index));
     camera_manager.select(index);
-    main_player = new MainPlayer(index, *player, screen.getCamera(), event_manager.getQueue());
+    main_player = new MainPlayer(index, *player, *screen.getCamera(), event_manager.getQueue());
     event_manager.addHandler((KeyboardHandler*) main_player);
     event_manager.addHandler((MouseHandler*) main_player);
 }
@@ -137,6 +137,10 @@ void WorldView::setVictory() {
     victory = true;
 }
 
+void WorldView::setDefeat() {
+    defeat = true;
+}
+
 void WorldView::renderObjects() {
     screen.centerCamera();
     for (const auto& object : view_objects) {
@@ -149,9 +153,13 @@ void WorldView::renderObjects() {
 
 void WorldView::renderTexture(const std::string& name) {
     const Texture& texture = settings.getTextureLoader()[name];
-    const Camera& camera = screen.getCamera();
-    int x = camera.position.x + camera.position.w/2;
-    int y = camera.position.y + camera.position.h/2;
+    const Camera* camera = screen.getCamera();
+    if (!camera) {
+        screen.render(texture, 0, 0, 0.5);
+        return;
+    }
+    int x = camera->position.x + camera->position.w/2;
+    int y = camera->position.y + camera->position.h/2;
     screen.render(texture, x, y, 0.5);
 }
 

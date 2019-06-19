@@ -13,7 +13,8 @@ enum WorldEventType {
     POSITION_UPDATE,
     STATE_UPDATE,
     SELECT_PLAYER,
-    END_GAME,
+    END_GAME_VICTORY,
+    END_GAME_DEFEAT,
 };
 
 class WorldEvent {

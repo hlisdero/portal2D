@@ -40,9 +40,10 @@ void Client::processEvent(const WorldEvent& event) {
         view.destroyEntity(event.id);
     } else if (event.type == SELECT_PLAYER) {
         view.selectPlayer(event.id);
-    } else if (event.type == END_GAME) {
+    } else if (event.type == END_GAME_VICTORY) {
         view.setVictory();
-        // quit = true;
+    } else if (event.type == END_GAME_DEFEAT) {
+        view.setDefeat();
     }
 }
 

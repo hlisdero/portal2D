@@ -131,8 +131,8 @@ void Screen::createCamera(const DrawableBox2D& drawable) {
     camera = new Camera(getWidth(), getHeight(), drawable);
 }
 
-const Camera& Screen::getCamera() const {
-    return *camera;
+const Camera* Screen::getCamera() const {
+    return camera;
 }
 
 void Screen::destroyCamera() {

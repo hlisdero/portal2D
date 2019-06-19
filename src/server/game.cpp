@@ -80,9 +80,8 @@ void Game::processGameEvents() {
 				}
 				break;
 			case GAME_STATUS_CHANGE:
-				// TODO use status
 				quit = true;
-				event_creator.addEndGame();
+				event_creator.addEndGame(event.status);
 				break;
 			case KILL_PLAYER:
 				event.entity->as<PlayerEntity>()->resetPortals(world.getb2World(), event_creator);
