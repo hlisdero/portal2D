@@ -9,12 +9,14 @@ int main(int argc, char *argv[]) {
     if (argc > 1) {
     	map_name = std::string(argv[1]);
     }
+
     try {
         Server server(map_name);
         server.run();
-        return 0;
-    } catch (std::runtime_error err) {
+    } catch (const std::runtime_error& err) {
         std::cerr << err.what() << std::endl;
         return 1;
     }
+
+    return 0;
 }
