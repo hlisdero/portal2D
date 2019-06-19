@@ -24,8 +24,6 @@ public:
      * Lanza una excepción si hubo error */
     void receive(char *buf, int size);
 
-    void receive(std::string& str, int size);
-
     /* Operadores sobrecargados para enviar y recibir ciertos tipos
      * Lanzan excepciones si hubo error */
     ActiveSocket& operator<<(double num);

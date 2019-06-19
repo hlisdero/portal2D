@@ -64,13 +64,6 @@ void ActiveSocket::receive(char *buf, int size) {
    }
 }
 
-void ActiveSocket::receive(std::string& str, int size) {
-    std::vector<char> buffer(size + 1, 0);   // '\0'
-    receive(&buffer[0], size);
-    buffer[size] = '\0';
-    str = std::string(&buffer[0]);
-}
-
 ActiveSocket& ActiveSocket::operator<<(double num) {
     send(reinterpret_cast<char*>(&num), sizeof(double));
     return *this;
