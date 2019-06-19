@@ -71,11 +71,11 @@ void SoundManager::handle(const KeyboardEvent& event) {
     if (!event.pressed) {
         return;
     }
-    if (event.key == SDLK_m) {
+    if (event.key == SDL_SCANCODE_M) {
         toggleMusic(0);
-    } else if (event.key == SDLK_COMMA) {
+    } else if (event.key == SDL_SCANCODE_COMMA) {
         setMusicVolume(getCurrentMusicVolume() - 20);
-    } else if (event.key == SDLK_PERIOD) {
+    } else if (event.key == SDL_SCANCODE_PERIOD) {
         setMusicVolume(getCurrentMusicVolume() + 20);
     }
 }

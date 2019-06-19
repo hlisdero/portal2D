@@ -3,8 +3,8 @@
 ScreenRecorder::ScreenRecorder(const std::string& filename) : filename(filename) {}
 
 ScreenRecorder::~ScreenRecorder() {
-    close();
     if (process) {
+        close();
         pclose(process);
     }
 }
