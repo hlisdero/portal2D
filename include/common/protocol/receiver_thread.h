@@ -24,7 +24,6 @@ public:
             }
         } catch (...) {}
         running = false;
-        return;
     }
 
     bool is_running() const {
