@@ -15,7 +15,6 @@ int main(int argc, char *argv[]) {
             screen_recorder.start();
         }
         client.run();
-        screen_recorder.join();
         return 0;
     } catch (std::runtime_error err) {
         std::cerr << err.what() << std::endl;

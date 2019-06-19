@@ -4,17 +4,21 @@
 #include <cstdio>
 #include <stdexcept>
 #include <cstdlib>
-#include "common/protocol/abstract_thread.h"
 
-class ScreenRecorder : public AbstractThread {
+class ScreenRecorder {
 public:
-    explicit ScreenRecorder() = default;
+    explicit ScreenRecorder(const std::string& filename = "output.mp4");
+
     ~ScreenRecorder();
 
-    virtual void run() override;
+    void start();
 
 private:
-    // FILE *process;
+    const std::string filename;
+    const std::string command = "ffmpeg -loglevel quiet -video_size 1152x864 -framerate 25 -f x11grab -i :0.0+0,0 ";
+    FILE *process;
+
+    void close();
 };
 
 #endif  // SCREEN_RECORDER_H
