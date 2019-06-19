@@ -63,5 +63,5 @@ GateLogicaPtr loadGateLogica(YAML::Node yaml) {
 		throw std::runtime_error("Unsupported gate logica type");
 	}
 
-	return GateLogicaPtr(logica);
+	return std::move(GateLogicaPtr(logica));
 }

@@ -20,8 +20,6 @@ enum EntityType {
 	// Dynamic
 	TYPE_ROCK,
 	TYPE_PLAYER,
-
-	// Kinematic
 	TYPE_ENERGY_BALL,
 
 	ENTITY_TYPES_LENGTH,

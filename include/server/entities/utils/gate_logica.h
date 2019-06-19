@@ -13,6 +13,8 @@ class GateLogica {
 public:
 	virtual bool value() const = 0;
 	virtual void attach(GateEntity * gate, subscribablesMap & subscribables) = 0;
+
+	virtual ~GateLogica() = default;
 };
 
 class Value_DL : public GateLogica {
