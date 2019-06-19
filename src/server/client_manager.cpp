@@ -21,31 +21,31 @@ void ClientManager::addClient(ActiveSocket skt) {
 
 void ClientManager::addSelectPlayer(int client_index, int player_index) {
     checkValidIndex(client_index);
-    WorldEvent event;
-    event.type = SELECT_PLAYER;
-    event.id = player_index;
+    WorldEvent event(SELECT_PLAYER, player_index);
+    players[client_index] = player_index;
     clients[client_index]->getSendQueue().push(event);
 }
 
 void ClientManager::joinInputQueues() {
-    bool delete_flag = false;
-    size_t index = clients.size();
+    std::vector<size_t> delete_indexes;
 
     for (size_t i = 0; i < clients.size(); ++i) {
         std::vector<ViewEvent> events = clients[i]->getReceiveQueue().popAll();
         for (const auto& event : events) {
             view_events.push(event);
             if (event.type == QUIT) {
-                delete_flag = true;
-                index = i;
+                delete_indexes.push_back(i);
                 break;  // Siguiente cliente
             }
         }
+
+        if (!(clients[i]->valid())) {
+            delete_indexes.push_back(i);
+            // Comunica al servidor que el cliente se desconectó
+            view_events.push(ViewEvent(players.at(i), QUIT));
+        }
     }
-    if (delete_flag) {
-        delete clients[index];
-        clients.erase(clients.begin() + index);
-    }
+    deleteClients(delete_indexes);
 }
 
 void ClientManager::broadcast() {
@@ -61,5 +61,13 @@ void ClientManager::broadcast() {
 void ClientManager::checkValidIndex(size_t index) {
     if (index >= clients.size()) {
         throw std::runtime_error("Error: Índice de cliente inválido");
+    }
+}
+
+void ClientManager::deleteClients(const std::vector<size_t>& delete_indexes) {
+    for (size_t index : delete_indexes) {
+        delete clients[index];
+        clients.erase(clients.begin() + index);
+        players.erase(index);
     }
 }

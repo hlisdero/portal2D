@@ -19,7 +19,7 @@ enum WorldEventType {
 class WorldEvent {
 public:
     explicit WorldEvent() = default;
-    explicit WorldEvent(WorldEventType type);
+    WorldEvent(WorldEventType type, int id = -1);
     WorldEvent(int id, EntityType type,
                const Position& position, State state = STATE_DEFAULT);
     explicit WorldEvent(int id);

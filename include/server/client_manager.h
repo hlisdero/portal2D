@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <queue>
+#include <unordered_map>
 #include "common/protocol/interface.h"
 #include "common/events/view_event.h"
 #include "common/events/world_event.h"
@@ -31,8 +32,11 @@ private:
     std::vector<Interface<WorldEvent,ViewEvent>*> clients;
     std::queue<WorldEvent> world_events;
     std::queue<ViewEvent> view_events;
+    // Guarda el índice de jugador asociado a cada cliente
+    std::unordered_map<size_t, size_t> players;
 
     void checkValidIndex(size_t index);
+    void deleteClients(const std::vector<size_t>& delete_indexes);
 };
 
 #endif  // CLIENT_MANAGER_H

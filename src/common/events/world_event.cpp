@@ -1,6 +1,6 @@
 #include "common/events/world_event.h"
 
-WorldEvent::WorldEvent(WorldEventType type) : type(type) {}
+WorldEvent::WorldEvent(WorldEventType type, int id) : type(type), id(id) {}
 
 WorldEvent::WorldEvent(int id, EntityType type,
                        const Position& position, State state) :
