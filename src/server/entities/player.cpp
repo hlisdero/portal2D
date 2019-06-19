@@ -67,7 +67,13 @@ void PlayerEntity::handleFloorContact(b2Contact * contact, bool newContact) {
 }
 
 void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool inContact) {
-	handleFloorContact(contact, inContact);
+	// If other is not a sensor
+	if(other->getType() != TYPE_ENERGY_BAR &&
+		other->getType() != TYPE_END_BARRIER &&
+		other->getType() != TYPE_ENERGY_BALL) {
+		handleFloorContact(contact, inContact);
+	}
+
 	TeleportableEntity::handleContactWith(other, contact, inContact);
 
 	switch(other->getType()) {
