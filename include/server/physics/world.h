@@ -31,6 +31,8 @@ public:
     PlayerEntity * createPlayer();
     PlayerEntity * getPlayerById(size_t id);
 
+    void setNewId(Entity * entity);
+
     void destroyEntity(BodyLinked * entity);
 
     void killPlayer(PlayerEntity* player);

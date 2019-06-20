@@ -22,6 +22,11 @@ void GameEventCreator::addBallDestruction(Entity * entity) {
 	queue.push(event);
 }
 
+void GameEventCreator::addRockRespawn(Entity * entity) {
+	GameEvent event(ROCK_RESPAWN, entity);
+	queue.push(event);
+}
+
 void GameEventCreator::addSetActiveEntity(Entity * entity, bool active) {
 	GameEvent event(entity, active);
 	queue.push(event);

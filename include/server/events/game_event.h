@@ -15,7 +15,8 @@ enum GameEventType {
     GAME_STATUS_CHANGE,
     KILL_PLAYER,
     ENERGY_BALL_DESTRUCTION,
-    POTENTIAL_VICTORY
+    POTENTIAL_VICTORY,
+    ROCK_RESPAWN
 };
 
 class GameEvent {

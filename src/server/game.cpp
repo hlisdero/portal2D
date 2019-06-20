@@ -92,8 +92,11 @@ void Game::processGameEvents() {
 					world.getPlayersCount() < map.getMinPlayers() - 1) {
 					gameEventCreator.addGameStateChange(DEFEAT);
 				}
-				// TODO notify client
-				// event_creator.addEntityDestruction(event.entity);
+				break;
+			case ROCK_RESPAWN:
+				event_creator.addEntityDestruction(event.entity);
+				world.setNewId(event.entity);
+				event_creator.addEntityCreation(event.entity);
 				break;
 			case ENERGY_BALL_DESTRUCTION:
 				event_creator.addEntityDestruction(event.entity);
