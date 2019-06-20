@@ -36,6 +36,9 @@ ServerSettings::ServerSettings(const char * filename) {
 
 	// rock
 	RELEASE_ROCK_DISTANCE = yaml["release_rock_distance"].as<float>();
+
+	// energyball
+	ENERGY_BALL_LIFE_LENGTH = yaml["energy_ball_life_length"].as<int>();
 }
 
 ServerSettings SETTINGS("/etc/portal2d/conf/server.conf");

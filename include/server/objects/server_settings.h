@@ -41,6 +41,10 @@ public:
 
 	// rock
 	float RELEASE_ROCK_DISTANCE;
+
+	// energy_ball
+	int ENERGY_BALL_LIFE_LENGTH;
+
 };
 
 #endif

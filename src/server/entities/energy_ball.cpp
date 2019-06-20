@@ -69,10 +69,13 @@ void EnergyBallEntity::handleContactWith(Entity * other, b2Contact * contact, bo
 			other->as<EnergyReceiverEntity>()->setState(STATE_ENABLED);
 		}
 
-		owner.setNoBall();
 		gameEventCreator.addBallDestruction(this);
 		destroy();
 	}
+}
+
+EnergyBallEntity::~EnergyBallEntity() {
+	owner.setNoBall();
 }
 
 void EnergyBallEntity::evaluateCollision(b2Contact * contact) {
@@ -80,4 +83,8 @@ void EnergyBallEntity::evaluateCollision(b2Contact * contact) {
 	const b2Transform & transformB = contact->GetFixtureB()->GetBody()->GetTransform();
 
 	contact->Evaluate(contact->GetManifold(), transformA, transformB);
+}
+
+std::chrono::system_clock::time_point * EnergyBallEntity::getDeathTP() {
+	return &deathTP;
 }
