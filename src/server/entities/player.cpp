@@ -77,10 +77,10 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 	TeleportableEntity::handleContactWith(other, contact, inContact);
 
 	switch(other->getType()) {
-		case TYPE_ENERGY_BAR:
 		case TYPE_END_BARRIER:
 			gameEventCreator.addPortalsReset(this);
-
+			/* fall through */
+		case TYPE_ENERGY_BAR:
 			if(carriedRock != nullptr) {
 				carriedRock->release(NONE);
 				carriedRock->respawn();
