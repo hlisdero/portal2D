@@ -52,9 +52,9 @@ private:
 
 	GameEventCreator& gameEventCreator;
 
-	void loadSettings(YAML::Node yaml);
-	void loadEntities(YAML::Node yaml);
-	Entity * createEntity(YAML::Node yaml);
+	void loadSettings(const YAML::Node & yaml);
+	void loadEntities(const YAML::Node & yaml);
+	Entity * createEntity(const YAML::Node & yaml);
 
     EntityType getEntityType(std::string str);
     void initMapDimensions(float x, float y);
