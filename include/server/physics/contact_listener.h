@@ -11,7 +11,7 @@ private:
     virtual void EndContact(b2Contact* contact) override;
     virtual void PreSolve(b2Contact * contact, const b2Manifold * oldManifold) override;
 
-	void handlePreSolve(b2Fixture * fixtureA, b2Fixture * fixtureB, b2Contact * contact, const b2Manifold * manifold);
+	void handlePreSolve(b2Fixture * fixtureA, b2Fixture * fixtureB, b2Contact * contact);
 
     void handleContact(b2Contact * contact, bool inContact);
     void broadcastContact(Entity * entityA, Entity * entityB, 

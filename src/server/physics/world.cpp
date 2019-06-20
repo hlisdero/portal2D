@@ -34,6 +34,10 @@ World::~World() {
 	for(auto& player : players) {
 		delete player.second;
 	}
+
+	for(auto& energyBall : energyBalls) {
+		delete energyBall;
+	}
 }
 
 PlayerEntity * World::createPlayer() {
@@ -59,6 +63,11 @@ void World::destroyEntity(BodyLinked * entity) {
 	b2Body * body = entity->getBody();
 	body->SetUserData(nullptr);
 	world.DestroyBody(body);
+
+	if(dynamic_cast<Entity*>(entity)->getType() == TYPE_ENERGY_BALL) {
+		energyBalls.erase(dynamic_cast<EnergyBallEntity*>(entity));
+	}
+
 	delete entity;
 }
 
@@ -137,9 +146,10 @@ void World::updatePhysics(EventCreator & eventCreator) {
 	if(nextEmit < now) {
 		for(auto & energyEmitter : energyEmitters) {
 			if(!energyEmitter->hasABall()) {
-				Entity * entity = energyEmitter->emit(gameEventCreator);
+				EnergyBallEntity * entity = energyEmitter->emit(gameEventCreator);
 				bodyFactory.createBody(entity);
 				eventCreator.addEntityCreation(entity);
+				energyBalls.insert(entity);
 			}
 		}
 		nextEmit = now + emitterInterval;

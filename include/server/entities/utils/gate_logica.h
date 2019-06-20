@@ -13,11 +13,13 @@ class GateLogica {
 public:
 	virtual bool value() const = 0;
 	virtual void attach(GateEntity * gate, subscribablesMap & subscribables) = 0;
+
+	virtual ~GateLogica() = default;
 };
 
 class Value_DL : public GateLogica {
 public:
-	explicit Value_DL(YAML::Node yaml);
+	explicit Value_DL(const YAML::Node & yaml);
 
 	virtual bool value() const override;
 	virtual void attach(GateEntity * gate, subscribablesMap & subscribables) override;
@@ -29,7 +31,7 @@ private:
 
 class Double_DL : public GateLogica {
 public:
-	Double_DL(YAML::Node yaml);
+	Double_DL(const YAML::Node & yaml);
 
 	virtual bool value() const = 0;
 	virtual void attach(GateEntity * gate, subscribablesMap & subscribables) override;
@@ -55,7 +57,7 @@ public:
 
 class Not_DL : public GateLogica {
 public:
-	explicit Not_DL(YAML::Node yaml );
+	explicit Not_DL(const YAML::Node & yaml );
 
 	virtual bool value() const override;
 	virtual void attach(GateEntity * gate, subscribablesMap & subscribables) override;
@@ -64,6 +66,6 @@ private:
 	GateLogicaPtr logica;
 };
 
-GateLogicaPtr loadGateLogica(YAML::Node yaml);
+GateLogicaPtr loadGateLogica(const YAML::Node & yaml);
 
 #endif  // GATE_LOGIC_H

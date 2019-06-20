@@ -61,6 +61,8 @@ private:
 
 	std::vector<EnergyEmitterEntity*> energyEmitters;
 
+	std::set<EnergyBallEntity*> energyBalls;
+
 	std::chrono::system_clock::time_point nextEmit = std::chrono::system_clock::now();
 	std::chrono::duration<int> emitterInterval;
 

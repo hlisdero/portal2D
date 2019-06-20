@@ -15,8 +15,7 @@ void EnergyBallEntity::handleContactWith(Entity * other, b2Contact * contact, bo
 
 	if(isGoingThroughPortal() ||
 		other->getType() >= DYNAMIC_ENTITY_START ||
-		other->getType() == TYPE_PORTAL ||
-		other->getType() == TYPE_ENERGY_BAR) {
+		other->getType() == TYPE_PORTAL) {
 		return;
 	}
 

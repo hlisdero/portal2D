@@ -38,4 +38,4 @@ ServerSettings::ServerSettings(const char * filename) {
 	RELEASE_ROCK_DISTANCE = yaml["release_rock_distance"].as<float>();
 }
 
-ServerSettings SETTINGS("../data/server_settings.yaml");
+ServerSettings SETTINGS("/etc/portal2d/conf/server.conf");
