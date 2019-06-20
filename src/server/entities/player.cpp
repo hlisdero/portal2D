@@ -63,6 +63,7 @@ void PlayerEntity::handleFloorContact(b2Contact * contact, bool newContact) {
 		}
 	} else {
 		floorsContacts.erase(contact);
+		inTheAir = (floorsContacts.size() == 0);
 	}
 }
 
