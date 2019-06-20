@@ -13,8 +13,8 @@ SoundManager::SoundManager() {
         throw std::runtime_error(error_message);
     }
 
-    addMusic("../data/sounds/soundtrack.mp3");
-    addSoundEffect("../data/sounds/portal_creation.wav");
+    addMusic("/var/portal2d/sounds/soundtrack.mp3");
+    addSoundEffect("/var/portal2d/sounds/portal_creation.wav");
     playMusic(0);
 }
 

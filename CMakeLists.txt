@@ -1,11 +1,15 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(portal2d)
+add_compile_options(-std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
 
-# Sources
-file(GLOB_RECURSE client_sources ${PROJECT_SOURCE_DIR}/src/client/*)
-file(GLOB_RECURSE server_sources ${PROJECT_SOURCE_DIR}/src/server/*)
-file(GLOB_RECURSE common_sources ${PROJECT_SOURCE_DIR}/src/common/*)
+##
+## Sources
+##
+
+file(GLOB_RECURSE client_sources src/client/*)
+file(GLOB_RECURSE server_sources src/server/*)
+file(GLOB_RECURSE common_sources src/common/*)
 
 set(test_sources
     test/test_button.cpp test/character.cpp test/key_detector.cpp
@@ -27,15 +31,19 @@ set(test_interface_server_sources
     src/common/events/world_event.cpp src/common/objects/position.cpp
     src/common/objects/click_direction.cpp)
 
-# Include packages
+##
+## Dependencies
+##
+
 include(FindPkgConfig)
+
 # SDL2
 pkg_search_module(SDL2 REQUIRED sdl2)
 pkg_search_module(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
 pkg_search_module(SDL2MIXER REQUIRED SDL2_mixer>=2.0.0)
 
 # QtWidgets
-find_package(Qt5Widgets)
+find_package(Qt5Widgets REQUIRED)
 
 # YAML
 pkg_search_module(YAML_CPP REQUIRED yaml-cpp)
@@ -43,44 +51,50 @@ pkg_search_module(YAML_CPP REQUIRED yaml-cpp)
 # Box2D
 pkg_search_module(BOX2D REQUIRED box2d)
 
-include_directories(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SDL2MIXER_INCLUDE_DIRS} ${YAML_CPP_INCLUDEDIR})
+include_directories(include/ ${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SDL2MIXER_INCLUDE_DIRS} ${YAML_CPP_INCLUDEDIR})
 
-# Executables
-# be sure there's exactly one main() function in the source files
+##
+## Executables
+##
 
 # Client
 add_executable(client src/client_main.cpp ${client_sources} ${common_sources})
-target_include_directories(client PRIVATE ${PROJECT_SOURCE_DIR}/include/)
-target_compile_options(client PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
 target_link_libraries(client "-pthread" ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} Qt5::Widgets)
+set_target_properties(client PROPERTIES OUTPUT_NAME portal2d)
 
 # Server
 add_executable(server src/server_main.cpp ${server_sources} ${common_sources})
-target_include_directories(server PRIVATE ${PROJECT_SOURCE_DIR}/include/)
-target_compile_options(server PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
 target_link_libraries(server "-pthread" ${BOX2D_LIBRARIES} ${YAML_CPP_LIBRARIES})
+set_target_properties(server PROPERTIES OUTPUT_NAME portal2d-server)
 
-# Game
-add_custom_target(game DEPENDS client server)
+##
+## Install
+## 
+
+install(TARGETS client RENAME portal2d DESTINATION /usr/bin) 
+install(DIRECTORY data/sounds data/sprites DESTINATION /var/portal2d)
+
+install(TARGETS server RENAME portal2d-server DESTINATION /usr/bin)
+install(DIRECTORY data/maps data/conf DESTINATION /etc/portal2d)
+
+##
+## Tests
+##
 
 # Interface-Test
 # Client
-add_executable(interface-test-client ${test_interface_client_sources})
-target_include_directories(interface-test-client PRIVATE ${PROJECT_SOURCE_DIR}/include/)
-target_compile_options(interface-test-client PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
+add_executable(interface-test-client EXCLUDE_FROM_ALL ${test_interface_client_sources})
 target_link_libraries(interface-test-client "-pthread")
 # Server
-add_executable(interface-test-server ${test_interface_server_sources})
-target_include_directories(interface-test-server PRIVATE ${PROJECT_SOURCE_DIR}/include/)
-target_compile_options(interface-test-server PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
+add_executable(interface-test-server EXCLUDE_FROM_ALL ${test_interface_server_sources})
 target_link_libraries(interface-test-server "-pthread")
 
 add_custom_target(interface-test DEPENDS interface-test-client interface-test-server)
 
 # View Test
-add_executable(view-test ${test_sources} ${client_sources} ${common_sources})
-target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/include/)
-target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/test/include)
-target_include_directories(view-test PRIVATE ${PROJECT_SOURCE_DIR}/lib/Catch2)
-target_compile_options(view-test PRIVATE -std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
+add_executable(view-test EXCLUDE_FROM_ALL ${test_sources} ${client_sources} ${common_sources})
+target_include_directories(view-test PRIVATE test/include)
+target_include_directories(view-test PRIVATE lib/Catch2)
 target_link_libraries(view-test "-pthread" ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} Qt5::Widgets)
+
+add_custom_target(tests DEPENDS interface-test view-test)

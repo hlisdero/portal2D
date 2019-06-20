@@ -5,7 +5,7 @@
 #include "server/server.h"
 
 int main(int argc, char *argv[]) {
-    std::string map_name = "../data/maps/map2.yaml";
+    std::string map_name = "/etc/portal2d/maps/map2.yaml";
     if (argc > 1) {
     	map_name = std::string(argv[1]);
     }
