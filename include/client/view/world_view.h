@@ -3,6 +3,7 @@
 
 #include <map>
 #include <stdexcept>
+#include "client/client_settings.h"
 #include "client/screen/screen.h"
 #include "client/sound/sound_manager.h"
 #include "client/view/camera_manager.h"
@@ -10,6 +11,8 @@
 #include "client/view/main_player.h"
 #include "client/view/view_object_creator.h"
 #include "client/view/world_view_settings.h"
+
+extern ClientSettings CLIENT_SETTINGS;
 
 class WorldView {
 public:

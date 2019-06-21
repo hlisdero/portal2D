@@ -2,7 +2,7 @@
 
 WorldView::WorldView(BlockingQueue<ViewEvent>& queue) :
     event_manager(queue),
-    screen(1152, 864),
+    screen(CLIENT_SETTINGS.INITIAL_SCREEN_WIDTH, CLIENT_SETTINGS.INITIAL_SCREEN_HEIGHT),
     camera_manager(screen),
     settings(screen.getWidth(), screen.getHeight(), screen.getTextureCreator()),
     background(settings.getScreenWidth(), settings.getScreenHeight(), settings.getTextureLoader()["Background"]),

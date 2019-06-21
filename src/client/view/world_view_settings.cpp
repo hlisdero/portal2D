@@ -3,7 +3,7 @@
 WorldViewSettings::WorldViewSettings(const size_t& screen_width, const size_t& screen_height,
                                      const TextureCreator& texture_creator) :
     screen_width(screen_width), screen_height(screen_height),
-    pixel_per_meter(80),
+    pixel_per_meter(CLIENT_SETTINGS.PIXEL_PER_METER),
     textures(texture_creator) {
 }
 

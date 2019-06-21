@@ -3,9 +3,10 @@
 #include <string>
 
 #include "server/server.h"
+#include "server/objects/server_settings.h"
 
 int main(int argc, char *argv[]) {
-    std::string map_name = "/etc/portal2d/maps/map2.yaml";
+    std::string map_name = SETTINGS.DEFAULT_MAP;
     if (argc > 1) {
     	map_name = std::string(argv[1]);
     }

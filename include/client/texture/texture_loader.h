@@ -3,8 +3,11 @@
 
 #include <unordered_map>
 #include <string>
+#include "client/client_settings.h"
 #include "client/texture/texture_creator.h"
 #include "client/texture/texture.h"
+
+extern ClientSettings CLIENT_SETTINGS;
 
 class TextureLoader {
 public:
@@ -18,6 +21,7 @@ public:
     const Texture& operator[](const std::string& key) const;
 
 private:
+    const std::string asset_dir_prefix;
     std::unordered_map<std::string, Texture> texture_map;
 };
 

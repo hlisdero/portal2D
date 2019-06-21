@@ -59,7 +59,7 @@ include_directories(include/ ${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SD
 
 # Client
 add_executable(client src/client_main.cpp ${client_sources} ${common_sources})
-target_link_libraries(client "-pthread" ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} Qt5::Widgets)
+target_link_libraries(client "-pthread" ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} Qt5::Widgets ${YAML_CPP_LIBRARIES})
 set_target_properties(client PROPERTIES OUTPUT_NAME portal2d)
 
 # Server
@@ -69,9 +69,9 @@ set_target_properties(server PROPERTIES OUTPUT_NAME portal2d-server)
 
 ##
 ## Install
-## 
+##
 
-install(TARGETS client RENAME portal2d DESTINATION /usr/bin) 
+install(TARGETS client RENAME portal2d DESTINATION /usr/bin)
 install(DIRECTORY data/sounds data/sprites DESTINATION /var/portal2d)
 
 install(TARGETS server RENAME portal2d-server DESTINATION /usr/bin)
@@ -95,6 +95,6 @@ add_custom_target(interface-test DEPENDS interface-test-client interface-test-se
 add_executable(view-test EXCLUDE_FROM_ALL ${test_sources} ${client_sources} ${common_sources})
 target_include_directories(view-test PRIVATE test/include)
 target_include_directories(view-test PRIVATE lib/Catch2)
-target_link_libraries(view-test "-pthread" ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} Qt5::Widgets)
+target_link_libraries(view-test "-pthread" ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} Qt5::Widgets ${YAML_CPP_LIBRARIES})
 
 add_custom_target(tests DEPENDS interface-test view-test)

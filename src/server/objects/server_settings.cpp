@@ -1,18 +1,31 @@
 #include "server/objects/server_settings.h"
 
-#include "yaml-cpp/yaml.h"
+ServerSettings SETTINGS;
 
-ServerSettings::ServerSettings(const char * filename) {
-	YAML::Node yaml = YAML::LoadFile(filename);
+ServerSettings::ServerSettings() {
+    std::ifstream conf_file;
+    conf_file.open("../data/conf_test/server.conf");
+    if (conf_file) {
+        conf_file.close();
+        std::cout << "Usando configuración de test" << std::endl;
+        loadConf("../data/conf_test/server.conf");
+    } else {
+        loadConf("/etc/portal2d/conf/server.conf");
+    }
+}
+
+void ServerSettings::loadConf(const std::string& filename) {
+    YAML::Node yaml = YAML::LoadFile(filename);
 
 	// server
 	PORT = yaml["port"].as<std::string>();
-	
+    DEFAULT_MAP = yaml["default_map"].as<std::string>();
+
 	// body_factory
 	ENERGY_BALL_SPEED = yaml["energy_ball_speed"].as<float>();
 	DYNAMIC_BODY_DENSITY = yaml["dynamic_body_density"].as<float>();
 
-	// contact_listener 
+	// contact_listener
 	CONTACT_THRESHOLD = yaml["contact_threshold"].as<double>();
 
 	// world
@@ -40,5 +53,3 @@ ServerSettings::ServerSettings(const char * filename) {
 	// energyball
 	ENERGY_BALL_LIFE_LENGTH = yaml["energy_ball_life_length"].as<int>();
 }
-
-ServerSettings SETTINGS("/etc/portal2d/conf/server.conf");
