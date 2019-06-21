@@ -76,19 +76,11 @@ bool EventHandler::isWindowEvent(SDL_Event event) const {
 }
 
 bool EventHandler::isKeyboardEvent(SDL_Event event) const {
-    if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {
-        return true;
-    } else {
-        return false;
-    }
+    return (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP);
 }
 
 bool EventHandler::isMouseEvent(SDL_Event event) const {
-    if (event.type == SDL_MOUSEMOTION ||
+    return (event.type == SDL_MOUSEMOTION ||
         event.type == SDL_MOUSEBUTTONDOWN ||
-        event.type == SDL_MOUSEBUTTONUP) {
-        return true;
-    } else {
-        return false;
-    }
+        event.type == SDL_MOUSEBUTTONUP);
 }

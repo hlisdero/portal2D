@@ -1,18 +1,19 @@
 #include "server/objects/server_settings.h"
 
-#include "yaml-cpp/yaml.h"
+ServerSettings SETTINGS;
 
-ServerSettings::ServerSettings(const char * filename) {
-	YAML::Node yaml = YAML::LoadFile(filename);
+ServerSettings::ServerSettings() {
+    YAML::Node yaml = YAML::LoadFile(SERVER_CONF_FILE);
 
 	// server
 	PORT = yaml["port"].as<std::string>();
-	
+    DEFAULT_MAP = yaml["default_map"].as<std::string>();
+
 	// body_factory
 	ENERGY_BALL_SPEED = yaml["energy_ball_speed"].as<float>();
 	DYNAMIC_BODY_DENSITY = yaml["dynamic_body_density"].as<float>();
 
-	// contact_listener 
+	// contact_listener
 	CONTACT_THRESHOLD = yaml["contact_threshold"].as<double>();
 
 	// world
@@ -36,6 +37,7 @@ ServerSettings::ServerSettings(const char * filename) {
 
 	// rock
 	RELEASE_ROCK_DISTANCE = yaml["release_rock_distance"].as<float>();
-}
 
-ServerSettings SETTINGS("../data/server_settings.yaml");
+	// energyball
+	ENERGY_BALL_LIFE_LENGTH = yaml["energy_ball_life_length"].as<int>();
+}

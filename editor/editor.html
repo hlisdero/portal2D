@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+		/* ########################################################*/
+
+		// Number of blocks
+		let height = 20;
+		let width = 30;
+
+		/* ########################################################*/
+	</script>
+	<title>Editor</title>
+	<meta charset="utf8">
+
+	<style>
+		.square {
+			height: 50px;
+			width: 50px;
+			display: inline-flex;
+			justify-content:center;
+			align-items: center;
+			border: 1px solid black;
+			margin: 2px;
+			overflow: hidden;
+			text-align: center;
+			font-size: 0.8em;
+			overflow-wrap: break-word;
+			cursor: pointer;
+			background-color: white;
+			flex-shrink: 0;
+
+			-webkit-touch-callout: none; /* iOS Safari */
+		    -webkit-user-select: none; /* Safari */
+		     -khtml-user-select: none; /* Konqueror HTML */
+		       -moz-user-select: none; /* Firefox */
+		        -ms-user-select: none; /* Internet Explorer/Edge */
+		            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+		}
+		.line {
+			display: flex;
+			-webkit-flex-direction: row; 
+			flex-direction: row;
+		}
+		.square:hover {
+			border: 2px solid blue;
+			margin: 1px;
+		}
+		body {
+			background-color: #dfdfdf;
+		}
+		button {
+			padding: 5px 10px;
+			margin: 5px;
+		}
+		.placeholder {
+			color: lightgrey;
+		}
+		#controls {
+			background-color: white;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 50px;
+			padding: 5px 10px;
+			text-align: center;
+			border-bottom: 2px solid black;
+		}
+		#buttons {
+			display: inline-block;
+		}
+		body {
+			height: 100%;
+		}
+		#map {
+			padding-top: 60px;
+		}
+		#current {
+			padding: 5px 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="controls">
+	Current : <span id="current"></span>
+	<button onclick="eraseAll()">ERASE ALL</button>
+	<div id="buttons"></div>
+	<button onclick="exportMap()">Export</button>
+	</div>
+
+	<div id="map" style="margin: auto"></div>
+
+	<script>
+		let map = document.getElementById("map");
+		let buttons = document.getElementById("buttons");
+		let currenthtml = document.getElementById("current");
+
+		let types = [
+					{abrev: "ERASE", color: "white"},
+					{name: "TYPE_STONE_BLOCK", color: "#95a5a6", abrev: "Stone"},
+					{name: "TYPE_METAL_BLOCK", color: "#d35400", abrev: "Metal"},
+					{name: "TYPE_METAL_DIAG_BLOCK", color: "#d35400", abrev: "M-Diag", rot: true},
+					{name: "TYPE_ACID", color: "#8BC34A", abrev: "Acid"},
+					{name: "TYPE_GATE", color: "#FFEE58", abrev: "Gate", rot: true},
+					{name: "TYPE_ENERGY_BAR", color: "#FF9800", abrev: "Bar", rot: true},
+					{name: "TYPE_ENERGY_EMITTER", color: "#CE93D8", abrev: "Emitter", rot: true},
+					{name: "TYPE_ENERGY_RECEIVER", color: "#B39DDB", abrev: "Recver"},
+					{name: "TYPE_BUTTON", color: "#ef5350", abrev: "Button", rot: true},
+					{name: "TYPE_END_BARRIER", color: "#B3E5FC", abrev: "End", rot: true},
+					{name: "TYPE_PLAYER", color: "#BCAAA4", abrev: "Player"},
+					{name: "TYPE_ROCK", color: "#CFD8DC", abrev: "Rock"}
+					];
+
+		let current;
+		let currentSpawn;
+		selectType(1)();
+
+		function setBlock() {
+			if(current == 0) {
+				delete this.dataset.type;
+				delete this.dataset.name;
+				this.innerHTML= this.dataset.placeholder;
+				this.style = ""
+			} else if(this.dataset.type != current) {
+				this.innerHTML = types[current].abrev + "<br>0";
+				this.dataset.type = current;
+				this.dataset.rotation = 0;
+				this.style = "background-color: "+types[current].color;
+
+				if(types[current].name == "TYPE_ENERGY_RECEIVER" 
+					|| types[current].name == "TYPE_BUTTON"
+					|| types[current].name == "TYPE_GATE") {
+					this.dataset.name = prompt("Name ?");
+				} else {
+					delete this.dataset.name;
+				}
+
+				if(types[current].name == "TYPE_PLAYER") {
+					if(currentSpawn != undefined) {
+						let save = current;
+						current = 0;
+						setBlock.apply(currentSpawn);
+						current = save;
+					}
+					currentSpawn = this;
+				}
+
+			} else if("rot" in types[this.dataset.type]) {
+				let newRot = (parseInt(this.dataset.rotation, 10) + 90) % 360;
+				this.dataset.rotation = newRot;
+				this.innerHTML = types[current].abrev + "<br>" +newRot;
+			}
+		}
+
+		function selectType(id) {
+			return () => {
+				current = id;
+				currenthtml.innerHTML = types[id].abrev;
+				currenthtml.style = "background-color: "+types[id].color;
+			}
+		}
+
+		function exportMap() {
+			let spawn = undefined;
+			let out = "entities:\n"
+			for(let invY = map.childNodes.length - 1; invY >= 0; invY--) {
+				for(let x = 0; x < map.childNodes[invY].childNodes.length; x++) {
+					let obj = map.childNodes[invY].childNodes[x];
+					
+					if(obj.dataset.type != undefined) {
+						let typeName = types[obj.dataset.type].name;
+						if(typeName == "TYPE_PLAYER") {
+							spawn = {x: x, y: height - invY};
+						} else {
+							out += "\t- type: " + typeName
+							out += "\n\t  x: " + (x+1);
+							out += "\n\t  y: " + (height - invY)
+							out += "\n\t  rotation: " + obj.dataset.rotation
+
+							if(typeName == "TYPE_GATE") {
+								out += "\n\t  logica: __TODO__"
+							} 
+							if(obj.dataset.name != undefined) {
+								out += '\n\t  name: "' + obj.dataset.name + '"'
+							}
+
+							out += "\n"
+						}
+					}
+				}
+			}
+			if(spawn != undefined) {
+				out = "spawn:\n\tx: " + (spawn.x+1) + "\n\ty: " + spawn.y + "\n" + out
+			}
+
+			out = "min-players: 1\n" + out
+			alert(out);
+		}
+
+		function eraseAll() {
+			if(confirm("Erase all ?")) {
+				map.innerHTML = "";
+				init();
+			}
+		}
+
+		function init() {
+			for(let invY = 1; invY <= height; invY++) {
+				let line = document.createElement("div");
+				line.className = "line";
+				for(let x = 0; x < width; x++) {
+					let square = document.createElement("div");
+					square.className = "square";
+					square.dataset.placeholder = "<div class='placeholder'>" + (x+1) + "," + (height - invY + 1) + "</div>"
+					square.innerHTML= square.dataset.placeholder;
+					square.onmousedown = setBlock;
+					square.onmouseover = function() {
+						if(mousedown) {
+							setBlock.apply(this);
+						}
+					};
+					line.appendChild(square); 
+				}
+				map.appendChild(line); 
+			}
+		}
+		init()
+
+		for(let i = 0; i < types.length; i++) {
+			let btn = document.createElement("button");
+			btn.innerHTML = types[i].abrev;
+			btn.style = "background-color: "+types[i].color;
+			btn.onclick = selectType(i)
+			buttons.appendChild(btn);
+		}
+
+		window.onbeforeunload = function() {
+	        return "Are you sure?"
+	    }
+
+	    let mousedown = false;
+	    document.onmousedown = function() {
+	    	mousedown = true;
+	    } 
+	    document.onmouseup = function() {
+	    	mousedown = false;
+	    }
+	</script>
+</body>
+</html>

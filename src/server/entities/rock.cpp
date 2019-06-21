@@ -61,4 +61,5 @@ void RockEntity::resetVelocity() {
 void RockEntity::respawn() {
 	resetVelocity();
 	teleportTo(initialPosition.x, initialPosition.y);
+	gameEventCreator.addRockRespawn(this);
 }

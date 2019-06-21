@@ -2,21 +2,23 @@
 #define SERVER_SETTINGS_H
 
 #include <string>
+#include "yaml-cpp/yaml.h"
 
 #define LOOPS_PER_SECOND 60
 
 class ServerSettings {
 public:
-	explicit ServerSettings(const char * filename);
+	explicit ServerSettings();
 
 	// server
 	std::string PORT;
-	
+    std::string DEFAULT_MAP;
+
 	// body factory
 	float ENERGY_BALL_SPEED;
 	float DYNAMIC_BODY_DENSITY;
 
-	// contact_listener 
+	// contact_listener
 	double CONTACT_THRESHOLD;
 
 	// world
@@ -41,6 +43,9 @@ public:
 
 	// rock
 	float RELEASE_ROCK_DISTANCE;
+
+	// energy_ball
+	int ENERGY_BALL_LIFE_LENGTH;
 };
 
 #endif

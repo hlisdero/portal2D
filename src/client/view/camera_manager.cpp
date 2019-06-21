@@ -6,17 +6,19 @@ void CameraManager::add(size_t index, DrawableBox2D* drawable) {
     drawables[index] = drawable;
 }
 
-void CameraManager::remove(size_t index) {
+void CameraManager::removeAndReplace(size_t index) {
     if (!drawables.count(index)) {
         return;
     }
     drawables.erase(index);
-    screen.destroyCamera();
-    if (drawables.empty()) {
-        return;
+
+    if (current_index == index) {
+        screen.destroyCamera();
+
+        if (!drawables.empty()) {
+           select((*drawables.begin()).first);
+        }
     }
-    DrawableBox2D* new_drawable = (*drawables.begin()).second;
-    screen.createCamera(*new_drawable);
 }
 
 void CameraManager::select(size_t index) {
@@ -24,4 +26,5 @@ void CameraManager::select(size_t index) {
         throw std::runtime_error("Error: el objeto para crear la cámara no existe");
     }
     screen.createCamera(*drawables[index]);
+    current_index = index;
 }

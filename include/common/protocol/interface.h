@@ -42,6 +42,10 @@ public:
         return receive_queue;
     }
 
+    bool valid() {
+        return sender_thread->is_running() && receiver_thread->is_running();
+    }
+
     void closeWait() {
         send_queue.closeWait();
         receive_queue.closeWait();

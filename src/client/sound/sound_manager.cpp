@@ -1,6 +1,7 @@
 #include "client/sound/sound_manager.h"
 
-SoundManager::SoundManager() {
+SoundManager::SoundManager() :
+    sounds_dir_prefix(ASSETS_DIRECTORY + std::string("sounds/")) {
     if (SDL_InitSubSystem(SDL_INIT_AUDIO) != 0) {
         std::string error_message("Error al inicializar audio de SDL: ");
         error_message += std::string(SDL_GetError());
@@ -13,7 +14,7 @@ SoundManager::SoundManager() {
         throw std::runtime_error(error_message);
     }
 
-    addMusic("../data/sounds/soundtrack.mp3");
+    addMusic("soundtrack.mp3");
     addSoundEffects();
 
     playMusic(0);
@@ -28,17 +29,17 @@ SoundManager::~SoundManager() {
 void SoundManager::addSoundEffects() {
     std::map<const char *, const char *> sounds;
 
-    sounds["portal_creation"] = "../data/sounds/portal_creation.wav";
-    sounds["button_on"] = "../data/sounds/button_on.wav";
-    sounds["button_off"] = "../data/sounds/button_off.wav";
-    sounds["gate"] = "../data/sounds/gate.wav";
-    sounds["player_run"] = "../data/sounds/player_run.wav";
-    sounds["player_land"] = "../data/sounds/player_land.wav";
-    sounds["player_jump"] = "../data/sounds/player_jump.wav";
+    sounds["portal_creation"] = "portal_creation.wav";
+    sounds["button_on"] = "button_on.wav";
+    sounds["button_off"] = "button_off.wav";
+    sounds["gate"] = "gate.wav";
+    sounds["player_run"] = "player_run.wav";
+    sounds["player_land"] = "player_land.wav";
+    sounds["player_jump"] = "player_jump.wav";
 
     int i = 0;
     for(auto it : sounds) {
-        sound_effects.emplace_back(it.second);
+        sound_effects.emplace_back(sounds_dir_prefix + it.second);
         sound_effects_names[std::string(it.first)] = i; 
         i++;
     }
@@ -47,7 +48,7 @@ void SoundManager::addSoundEffects() {
 }
 
 void SoundManager::addMusic(const std::string& path) {
-    soundtrack.emplace_back(path);
+    soundtrack.emplace_back(sounds_dir_prefix + path);
 }
 
 void SoundManager::playSoundEffect(const char * name) {
@@ -91,11 +92,11 @@ void SoundManager::handle(const KeyboardEvent& event) {
     if (!event.pressed) {
         return;
     }
-    if (event.key == SDLK_m) {
+    if (event.key == SDL_SCANCODE_M) {
         toggleMusic(0);
-    } else if (event.key == SDLK_COMMA) {
+    } else if (event.key == SDL_SCANCODE_COMMA) {
         setMusicVolume(getCurrentMusicVolume() - 20);
-    } else if (event.key == SDLK_PERIOD) {
+    } else if (event.key == SDL_SCANCODE_PERIOD) {
         setMusicVolume(getCurrentMusicVolume() + 20);
     }
 }

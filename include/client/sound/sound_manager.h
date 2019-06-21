@@ -5,10 +5,13 @@
 #include <vector>
 #include <map>
 #include <SDL2/SDL.h>
+#include "client/client_settings.h"
 #include "client/sound/sound_effect.h"
 #include "client/sound/music.h"
 #include "client/event/keyboard_handler.h"
 #include "client/event/mouse_handler.h"
+
+extern ClientSettings CLIENT_SETTINGS;
 
 class SoundManager : public KeyboardHandler, public MouseHandler {
 public:
@@ -35,6 +38,7 @@ public:
     virtual void handle(const MouseEvent& event) override;
 
 private:
+    const std::string sounds_dir_prefix;
     std::map<std::string, size_t> sound_effects_names;
     std::vector<SoundEffect> sound_effects;
     std::vector<Music> soundtrack;

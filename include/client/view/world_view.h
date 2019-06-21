@@ -3,6 +3,7 @@
 
 #include <map>
 #include <stdexcept>
+#include "client/client_settings.h"
 #include "client/screen/screen.h"
 #include "client/sound/sound_manager.h"
 #include "client/view/camera_manager.h"
@@ -10,6 +11,10 @@
 #include "client/view/main_player.h"
 #include "client/view/view_object_creator.h"
 #include "client/view/world_view_settings.h"
+
+extern ClientSettings CLIENT_SETTINGS;
+
+typedef std::pair<size_t, DrawableBox2D*> indexedDrawable;
 
 class WorldView {
 public:
@@ -28,9 +33,8 @@ public:
     const ViewObjectCreator& getObjectCreator() const;
     int getPlayerIndex() const;
 
-    void createPortal(size_t index, const Position& position, PortalColor color);
-
-    void createEntity(size_t index, EntityType type, const Position& initial);
+    void createEntity(size_t index, EntityType type,
+                      const Position& initial, const State& state);
     void destroyEntity(size_t index);
 
     void updatePosition(size_t index, const Position& position);
@@ -38,6 +42,9 @@ public:
     void selectPlayer(size_t index);
 
     void update();
+
+    void setVictory();
+    void setDefeat();
 
 private:
     EventManager event_manager;
@@ -47,10 +54,14 @@ private:
     WorldViewSettings settings;
     Background background;
     std::map<size_t, DrawableBox2D*> view_objects;
+    std::vector<indexedDrawable> dead_view_objects;
     ViewObjectCreator object_creator;
     MainPlayer * main_player = nullptr;
+    bool victory = false;
+    bool defeat = false;
 
     void renderObjects();
+    void renderTexture(const std::string& name);
 };
 
 #endif  // WORLD_VIEW_H

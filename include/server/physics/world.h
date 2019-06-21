@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <chrono>
+#include <list>
 
 #include "Box2D/Box2D.h"
 
@@ -61,6 +62,9 @@ private:
 
 	std::vector<EnergyEmitterEntity*> energyEmitters;
 
+	std::chrono::system_clock::time_point * nextDestroy = nullptr;
+	std::list<EnergyBallEntity*> energyBalls;
+
 	std::chrono::system_clock::time_point nextEmit = std::chrono::system_clock::now();
 	std::chrono::duration<int> emitterInterval;
 
@@ -68,6 +72,11 @@ private:
 
 	bool isPortalAllowed(PortalRayCastCallback & callback);
 	bool isPortalPositionAllowed(PortalRayCastCallback & raycast);
+
+	void deleteEntity(BodyLinked * entity);
+
+	void destroyEnergyBalls(EventCreator & eventCreator, std::chrono::system_clock::time_point & now);
+	void emitEnergyBalls(EventCreator & eventCreator, std::chrono::system_clock::time_point & now);
 };
 
 #endif  // WORLD_H

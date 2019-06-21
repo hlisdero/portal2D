@@ -37,15 +37,15 @@ void ContactListener::broadcastContact(Entity * entityA, Entity * entityB, b2Con
 	}
 }
 
-void ContactListener::PreSolve(b2Contact * contact, const b2Manifold * manifold) {
+void ContactListener::PreSolve(b2Contact * contact, const b2Manifold *) {
 	b2Fixture * fixtureA = contact->GetFixtureA();
 	b2Fixture * fixtureB = contact->GetFixtureB();
 
-	handlePreSolve(fixtureA, fixtureB, contact, manifold);
-	handlePreSolve(fixtureB, fixtureA, contact, manifold);
+	handlePreSolve(fixtureA, fixtureB, contact);
+	handlePreSolve(fixtureB, fixtureA, contact);
 }
 
-void ContactListener::handlePreSolve(b2Fixture * fixtureA, b2Fixture * fixtureB, b2Contact * contact, const b2Manifold * manifold) {
+void ContactListener::handlePreSolve(b2Fixture * fixtureA, b2Fixture * fixtureB, b2Contact * contact) {
 	Entity * entityA = static_cast<Entity*>(
 		fixtureA->GetBody()->GetUserData());
 
@@ -59,8 +59,8 @@ void ContactListener::handlePreSolve(b2Fixture * fixtureA, b2Fixture * fixtureB,
 		b2WorldManifold worldManifold;
 		contact->GetWorldManifold(&worldManifold);
 
-		// If it's horizontal direction and if the vertical distance is less than the threshold
-		if(manifold->localNormal.y == 0 && abs(fixtureA->GetAABB(0).lowerBound.y - fixtureB->GetAABB(0).upperBound.y) < SETTINGS.CONTACT_THRESHOLD) {
+		// // If it's horizontal direction and if the vertical distance is less than the threshold
+		if(worldManifold.normal.y == 0 && abs(fixtureA->GetAABB(0).lowerBound.y - fixtureB->GetAABB(0).upperBound.y) < SETTINGS.CONTACT_THRESHOLD) {
 			contact->SetEnabled(false);
 		}
 	}

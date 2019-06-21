@@ -1,7 +1,7 @@
 #include "client/sound/sound_effect.h"
 
-SoundEffect::SoundEffect(const char * path) {
-    sound_effect = Mix_LoadWAV(path);
+SoundEffect::SoundEffect(const std::string & path) {
+    sound_effect = Mix_LoadWAV(path.c_str());
     if (!sound_effect) {
         std::string error_message("Error al cargar efecto de sonido: ");
         error_message += std::string(Mix_GetError());

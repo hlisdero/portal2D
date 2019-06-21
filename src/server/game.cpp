@@ -59,7 +59,7 @@ void Game::update() {
 
 void Game::processGameEvents() {
 	std::vector<GameEvent> events = eventsQueue.popAll();
-	for(GameEvent event : events) {
+	for (const GameEvent& event : events) {
 		switch(event.type) {
 			case ENTITY_STATE_UPDATE:
 				event_creator.addStateUpdate(event.entity);
@@ -80,9 +80,8 @@ void Game::processGameEvents() {
 				}
 				break;
 			case GAME_STATUS_CHANGE:
-				// TODO use status
 				quit = true;
-				event_creator.addEndGame();
+				event_creator.addEndGame(event.status);
 				break;
 			case KILL_PLAYER:
 				event.entity->as<PlayerEntity>()->resetPortals(world.getb2World(), event_creator);
@@ -93,8 +92,10 @@ void Game::processGameEvents() {
 					world.getPlayersCount() < map.getMinPlayers() - 1) {
 					gameEventCreator.addGameStateChange(DEFEAT);
 				}
-				// TODO notify client
-				// event_creator.addEntityDestruction(event.entity);
+				break;
+			case ROCK_RESPAWN:
+				event_creator.addEntityDestruction(event.entity);
+				event_creator.addEntityCreation(event.entity);
 				break;
 			case ENERGY_BALL_DESTRUCTION:
 				event_creator.addEntityDestruction(event.entity);
@@ -113,32 +114,40 @@ void Game::processQueue() {
 
 		PlayerEntity * player = world.getPlayerById(event.player_id);
 
-		// If player is alive
-		if(player != nullptr) {
-			switch(event.type) {
-			case MOVE:
-				player->move(event.direction, event.pressed);
-				break;
-			case RESET_PORTALS:
-				player->resetPortals(world.getb2World(), event_creator);
-				break;
-			case GRAB_RELEASE_ROCK:
-				player->grabReleaseRock(world.getb2World());
-				break;
-			case PIN_TOOL:
-				// TODO pin tool
-				break;
-			case MOUSE:
-				world.createPortal(player, event.color,
-					event.click_direction, event_creator);
-				break;
-			case QUIT:
-				gameEventCreator.addKillPlayer(player);
-				break;
-			default:
-				throw std::runtime_error("Unsupported view event type");
-				break;
-			}
+        if (!player) {
+		    continue;
+        }
+		switch(event.type) {
+		case MOVE:
+			player->move(event.direction, event.pressed);
+			break;
+		case RESET_PORTALS:
+			player->resetPortals(world.getb2World(), event_creator);
+			break;
+		case GRAB_RELEASE_ROCK:
+			player->grabReleaseRock(world.getb2World());
+			break;
+		case PIN_TOOL:
+			// TODO pin tool
+			break;
+		case MOUSE:
+			world.createPortal(player, stateToPortalColor(event.state),
+                               event.click_direction, event_creator);
+			break;
+		case QUIT:
+			gameEventCreator.addKillPlayer(player);
+			break;
+		default:
+			throw std::runtime_error("Unsupported view event type");
+			break;
 		}
 	}
+}
+
+PortalColor Game::stateToPortalColor(const State& state) const {
+    if (state == PORTAL_COLOR_ORANGE) {
+        return COLOR_ORANGE;
+    } else {
+        return COLOR_BLUE;
+    }
 }

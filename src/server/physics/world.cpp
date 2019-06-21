@@ -34,6 +34,10 @@ World::~World() {
 	for(auto& player : players) {
 		delete player.second;
 	}
+
+	for(auto& energyBall : energyBalls) {
+		delete energyBall;
+	}
 }
 
 PlayerEntity * World::createPlayer() {
@@ -52,14 +56,23 @@ PlayerEntity * World::getPlayerById(size_t playerId) {
 
 void World::killPlayer(PlayerEntity * player) {
 	players.erase(player->getId());
-	destroyEntity(player);
+	deleteEntity(player);
 }
 
-void World::destroyEntity(BodyLinked * entity) {
+void World::deleteEntity(BodyLinked * entity) {
 	b2Body * body = entity->getBody();
 	body->SetUserData(nullptr);
 	world.DestroyBody(body);
+
 	delete entity;
+}
+
+void World::destroyEntity(BodyLinked * entity) {
+	if(dynamic_cast<Entity*>(entity)->getType() == TYPE_ENERGY_BALL) {
+		energyBalls.remove(dynamic_cast<EnergyBallEntity*>(entity));
+	}
+
+	deleteEntity(entity);
 }
 
 bool World::isPortalPositionAllowed(PortalRayCastCallback & raycast) {
@@ -87,7 +100,6 @@ bool World::isPortalAllowed(PortalRayCastCallback & raycast) {
 	}
 
 	if(!isPortalPositionAllowed(raycast)) {
-
 		// Try with assisted center
 		Math::toEdgeMiddle(raycast.m_point, raycast.m_normal);
 
@@ -128,22 +140,48 @@ void World::createPortal(PlayerEntity * player, PortalColor color,
 	}
 }
 
+void World::emitEnergyBalls(EventCreator & eventCreator, std::chrono::system_clock::time_point & now) {
+	if(nextEmit > now) {
+		return;
+	}
+
+	for(auto & energyEmitter : energyEmitters) {
+		if(!energyEmitter->hasABall()) {
+			EnergyBallEntity * entity = energyEmitter->emit(gameEventCreator);
+			bodyFactory.createBody(entity);
+			eventCreator.addEntityCreation(entity);
+			energyBalls.push_back(entity);
+
+			if(nextDestroy == nullptr) {
+				nextDestroy = entity->getDeathTP();
+			}
+		}
+	}
+	nextEmit = now + emitterInterval;
+}
+
+void World::destroyEnergyBalls(EventCreator & eventCreator, std::chrono::system_clock::time_point & now) {
+	if(nextDestroy == nullptr || *nextDestroy > now) {
+		return;
+	}
+
+	while(!energyBalls.empty() && *energyBalls.front()->getDeathTP() < now) {
+		eventCreator.addEntityDestruction(energyBalls.front());
+		deleteEntity(energyBalls.front());
+		energyBalls.pop_front();
+	}
+
+	nextDestroy = energyBalls.empty() ? nullptr : energyBalls.front()->getDeathTP();
+}
+
 void World::updatePhysics(EventCreator & eventCreator) {
 	for(auto& player : players) {
 		player.second->applyMovement();
 	}
 
 	auto now = std::chrono::system_clock::now();
-	if(nextEmit < now) {
-		for(auto & energyEmitter : energyEmitters) {
-			if(!energyEmitter->hasABall()) {
-				Entity * entity = energyEmitter->emit(gameEventCreator);
-				bodyFactory.createBody(entity);
-				eventCreator.addEntityCreation(entity);
-			}
-		}
-		nextEmit = now + emitterInterval;
-	}
+	emitEnergyBalls(eventCreator, now);
+	destroyEnergyBalls(eventCreator, now);
 
 	world.Step(SETTINGS.TIME_STEP, SETTINGS.VELOCITY_ITERATIONS, SETTINGS.POSITION_ITERATIONS);
 }

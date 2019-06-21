@@ -14,6 +14,7 @@ public:
 	void addSetActiveEntity(Entity * entity, bool active);
 	void addPortalsReset(Entity * entity);
 	void addBallDestruction(Entity * entity);
+	void addRockRespawn(Entity * entity);
 
 	void addGameStateChange(GameStatus status); 
 

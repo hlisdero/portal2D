@@ -8,7 +8,7 @@
 class SoundEffect {
 public:
     SoundEffect() = default;
-    explicit SoundEffect(const char * path);
+    explicit SoundEffect(const std::string & path);
 
     SoundEffect(const SoundEffect&) = delete;
     SoundEffect& operator=(const SoundEffect&) = delete;

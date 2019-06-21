@@ -3,13 +3,13 @@
 #include <string>
 
 // Constructors
-Value_DL::Value_DL(YAML::Node yaml) :
+Value_DL::Value_DL(const YAML::Node & yaml) :
 	subscribableName(yaml.as<std::string>()) {}
 
-Double_DL::Double_DL(YAML::Node yaml) : 
+Double_DL::Double_DL(const YAML::Node & yaml) : 
 	logicaA(loadGateLogica(yaml["a"])), logicaB(loadGateLogica(yaml["b"])) {}
 
-Not_DL::Not_DL(YAML::Node yaml) : logica(loadGateLogica(yaml)) {}
+Not_DL::Not_DL(const YAML::Node & yaml) : logica(loadGateLogica(yaml)) {}
 
 // Values
 bool Value_DL::value() const {
@@ -48,7 +48,7 @@ void Not_DL::attach(GateEntity * gate, subscribablesMap & subscribables) {
 }
 
 // Load
-GateLogicaPtr loadGateLogica(YAML::Node yaml) {
+GateLogicaPtr loadGateLogica(const YAML::Node & yaml) {
 	GateLogica * logica;
 
 	if(yaml["value"]) {
@@ -63,5 +63,5 @@ GateLogicaPtr loadGateLogica(YAML::Node yaml) {
 		throw std::runtime_error("Unsupported gate logica type");
 	}
 
-	return GateLogicaPtr(logica);
+	return std::move(GateLogicaPtr(logica));
 }

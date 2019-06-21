@@ -1,13 +1,19 @@
 #include "client/texture/texture_loader.h"
 
-TextureLoader::TextureLoader(const TextureCreator& textureCreator) {
-    texture_map.emplace("Background", textureCreator("../data/sprites/background.png"));
-    texture_map.emplace("Player", textureCreator("../data/sprites/character.png"));
-    texture_map.emplace("Block", textureCreator("../data/sprites/blocks.png"));
-    texture_map.emplace("Miscellaneous", textureCreator("../data/sprites/miscellaneous.png"));
-    texture_map.emplace("Gate", textureCreator("../data/sprites/gate.png"));
-    texture_map.emplace("FX", textureCreator("../data/sprites/fx.png"));
-    texture_map.emplace("Custom", textureCreator("../data/sprites/custom.png"));
+TextureLoader::TextureLoader(const TextureCreator& textureCreator) :
+	textureCreator(textureCreator),
+    sprites_dir_prefix(ASSETS_DIRECTORY + std::string("sprites/")) {
+    addTexture("Background", "background.png");
+    addTexture("Player", "character.png");
+    addTexture("Entities", "entities.png");
+    addTexture("Miscellaneous", "miscellaneous.png");
+    addTexture("FX", "fx.png");
+    addTexture("Victory", "victory.png");
+    addTexture("Defeat", "defeat.png");
+}
+
+void TextureLoader::addTexture(const char * name, const char * file) {
+    texture_map.emplace(name, textureCreator(sprites_dir_prefix + file));	
 }
 
 const Texture& TextureLoader::operator[](const std::string& key) const {

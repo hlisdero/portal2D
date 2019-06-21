@@ -13,25 +13,25 @@ enum WorldEventType {
     POSITION_UPDATE,
     STATE_UPDATE,
     SELECT_PLAYER,
-    END_GAME,
-    PORTAL_CREATION
+    END_GAME_VICTORY,
+    END_GAME_DEFEAT,
 };
 
 class WorldEvent {
 public:
     explicit WorldEvent() = default;
-    explicit WorldEvent(WorldEventType type);
-    WorldEvent(int id, EntityType type, const Position& position);
+    WorldEvent(WorldEventType type, int id = -1);
+    WorldEvent(int id, EntityType type,
+               const Position& position, State state = STATE_DEFAULT);
     explicit WorldEvent(int id);
 	WorldEvent(int id, const Position& position);
-    WorldEvent(int id, const Position& position, const State & state);
-    WorldEvent(int id, const State& state);
+    WorldEvent(int id, State state);
 
 	WorldEventType type = INVALID_WE;
     int id = -1;
     EntityType entity_type = TYPE_STONE_BLOCK;
     Position position = {0, 0, 0};
-    State state = STATE_DISABLED;
+    State state = STATE_DEFAULT;
 };
 
 #endif

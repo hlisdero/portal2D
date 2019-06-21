@@ -7,6 +7,9 @@ Client::Client(const std::string& hostname, const std::string& port) :
 void Client::run() {
     ClockLoop<60> clock;
     while (!quit) {
+        if (!interface.valid()) {
+            throw std::runtime_error("El servidor se ha desconectado inesperadamente");
+        }
         view.pollEvents();
         if (view.quit()) {
             break;
@@ -32,23 +35,20 @@ void Client::processEvent(const WorldEvent& event) {
     } else if (event.type == STATE_UPDATE) {
         view.updateState(event.id, event.state);
     } else if (event.type == ENTITY_CREATION) {
-        view.createEntity(event.id, event.entity_type, event.position);
-    } else if (event.type == PORTAL_CREATION) {
-        view.createPortal(event.id, event.position, 
-            event.state ? COLOR_BLUE : COLOR_ORANGE);
+        view.createEntity(event.id, event.entity_type, event.position, event.state);
     } else if (event.type == ENTITY_DESTRUCTION) {
         view.destroyEntity(event.id);
     } else if (event.type == SELECT_PLAYER) {
         view.selectPlayer(event.id);
-    } else if (event.type == END_GAME) {
-        quit = true;
+    } else if (event.type == END_GAME_VICTORY) {
+        view.setVictory();
+    } else if (event.type == END_GAME_DEFEAT) {
+        view.setDefeat();
     }
 }
 
 void Client::sendQuitSignal() {
     BlockingQueue<ViewEvent>& queue = interface.getSendQueue();
-    ViewEvent quit_event;
-    quit_event.type = QUIT;
-    quit_event.player_id = view.getPlayerIndex();
+    ViewEvent quit_event(view.getPlayerIndex(), QUIT);
     queue.push(quit_event);
 }

@@ -51,3 +51,11 @@ const char * DrawableBox2D::updateState(const State& new_state) {
     state = new_state;
     return nullptr;
 }
+
+bool DrawableBox2D::setDestroy() {
+    return true;
+}
+
+bool DrawableBox2D::isFinished() {
+    return false;
+}

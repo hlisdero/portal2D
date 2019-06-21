@@ -13,6 +13,8 @@ public:
 
 	b2AABB createPortalAABB(b2Vec2 & position, float rotation);
 
+	int getNewId();
+
 private:
 	b2World & world;
 	int nextDynamicEntityId = 0;

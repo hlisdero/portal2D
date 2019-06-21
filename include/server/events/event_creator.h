@@ -8,6 +8,7 @@
 #include "common/queue/blocking_queue.h"
 #include "server/entities/portal.h"
 #include "server/entities/button.h"
+#include "server/objects/game_status.h"
 
 class EventCreator {
 public:
@@ -18,7 +19,7 @@ public:
     void addEntityDestruction(Entity* entity);
     void addPositionUpdate(Entity* entity);
     void addStateUpdate(Entity* entity);
-    void addEndGame();
+    void addEndGame(GameStatus status);
 
     // Métodos para vectores
     void addEntityCreations(const std::vector<Entity*>& entities);
@@ -26,6 +27,8 @@ public:
 
 private:
 	std::queue<WorldEvent>& queue;
+
+    State portalColorToState(const PortalColor& color) const;
 };
 
 #endif

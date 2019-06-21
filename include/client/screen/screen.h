@@ -32,9 +32,9 @@ public:
 
     void clear();
 
-    void render(const Texture& texture, int x, int y, double scale_factor = 1);
+    void render(const Texture& texture, int x = 0, int y = 0, double scale_factor = 1.0);
     void render(Drawable& drawable);
-    void render(Background background);
+    void render(Background& background);
 
     void setRenderDrawColor(const std::string& color_name);
     void setRenderDrawColor(uint8_t red, uint8_t green,
@@ -60,8 +60,9 @@ public:
 
     const TextureCreator& getTextureCreator() const;
 
+    void centerCamera();
     void createCamera(const DrawableBox2D& drawable);
-    const Camera& getCamera() const;
+    const Camera* getCamera() const;
     void destroyCamera();
     void makeRelativeToCamera(SDL_Rect& rect);
 

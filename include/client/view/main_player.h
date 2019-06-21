@@ -10,6 +10,7 @@
 #include "common/events/view_event.h"
 #include "common/objects/move_direction.h"
 #include "common/objects/click_direction.h"
+#include "common/objects/state.h"
 
 class MainPlayer : public KeyboardHandler, public MouseHandler {
 public:
@@ -20,9 +21,6 @@ public:
     virtual void handle(const KeyboardEvent& event) override;
     virtual void handle(const MouseEvent& event) override;
 
-    void startDeathAnimation();
-    bool finishedDeathAnimation() const;
-
 private:
     size_t index;
     Player& player;
@@ -30,6 +28,7 @@ private:
     BlockingQueue<ViewEvent>& queue;
 
     MoveDirection processMoveDirection(const KeyboardEvent& event) const;
+    State pickPortalColor(uint8_t button) const;
 };
 
 #endif  // MAIN_PLAYER_H

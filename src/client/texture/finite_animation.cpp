@@ -12,11 +12,10 @@ SDL_Rect* FiniteAnimation::getClip() {
 }
 
 void FiniteAnimation::next() {
-    if (getClipNumber() == size()-1) {
-        return; // Keep last clip
-    } else {
+    if(getClipNumber() < size() - 1) {
         setClip(getClipNumber() + 1);   // Next
     }
+    // Else : Keep last clip
 }
 
 void FiniteAnimation::reset() {

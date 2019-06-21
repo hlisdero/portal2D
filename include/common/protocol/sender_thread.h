@@ -12,16 +12,25 @@ public:
         protocol(protocol), queue(queue) {}
 
     virtual void run() override {
-        while (true) {
-            T event = queue.pop();
-            protocol.send(event);
-            if (event.type == 0) {
-                return;
+        running = true;
+        try {
+            while (true) {
+                T event = queue.pop();
+                protocol.send(event);
+                if (event.type == 0) {
+                    return;
+                }
             }
-        }
+        } catch (...) {}
+        running = false;
+    }
+
+    bool is_running() const {
+        return running;
     }
 
 private:
+    bool running = false;
     Protocol& protocol;
     BlockingQueue<T>& queue;
 };

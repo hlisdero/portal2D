@@ -1,8 +1,11 @@
 #ifndef WORLD_VIEW_SETTINGS_H
 #define WORLD_VIEW_SETTINGS_H
 
+#include "client/client_settings.h"
 #include "client/texture/texture_creator.h"
 #include "client/texture/texture_loader.h"
+
+extern ClientSettings CLIENT_SETTINGS;
 
 class WorldViewSettings {
 public:

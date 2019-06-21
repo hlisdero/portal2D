@@ -9,10 +9,10 @@ void MainPlayer::handle(const KeyboardEvent& event) {
 
     if (direction != NONE) {
         queue.push(ViewEvent(index, direction, event.pressed, event.repeat));
-    } else if(event.pressed) {
-        if(event.key == SDLK_r) {
-        queue.push(ViewEvent(index, RESET_PORTALS));
-        } else if(event.key == SDLK_e) {
+    } else if (event.pressed) {
+        if (event.key == SDL_SCANCODE_R) {
+            queue.push(ViewEvent(index, RESET_PORTALS));
+        } else if(event.key == SDL_SCANCODE_E) {
             queue.push(ViewEvent(index, GRAB_RELEASE_ROCK));
         }
     }
@@ -28,9 +28,9 @@ void MainPlayer::handle(const MouseEvent& event) {
         return;
     }
 
-    if(event.button != SDL_BUTTON_LEFT && 
-        event.button != SDL_BUTTON_RIGHT &&
-        event.button != SDL_BUTTON_MIDDLE) {
+    if(event.button != SDL_BUTTON_LEFT &&
+       event.button != SDL_BUTTON_RIGHT &&
+       event.button != SDL_BUTTON_MIDDLE) {
         return;
     }
 
@@ -42,35 +42,33 @@ void MainPlayer::handle(const MouseEvent& event) {
     double y = event.y - player_y;
     ClickDirection click_direction(x/sqrt(x*x + y*y), -y/sqrt(x*x + y*y));
 
-    if(event.button == SDL_BUTTON_MIDDLE) {
+    if (event.button == SDL_BUTTON_MIDDLE) {
         queue.push(ViewEvent(index, click_direction));
     } else {
-        PortalColor color = 
-            (event.button == SDL_BUTTON_LEFT) ? COLOR_BLUE : COLOR_ORANGE;
-        queue.push(ViewEvent(index, click_direction, color));
+        queue.push(ViewEvent(index, click_direction, pickPortalColor(event.button)));
     }
-}
-
-void MainPlayer::startDeathAnimation() {
-    player.startDeathAnimation();
-}
-
-bool MainPlayer::finishedDeathAnimation() const {
-    return player.finishedDeathAnimation();
 }
 
 MoveDirection MainPlayer::processMoveDirection(const KeyboardEvent& event) const {
     MoveDirection direction = NONE;
     switch (event.key) {
-        case SDLK_w:
+        case SDL_SCANCODE_W:
             direction = UP;
             break;
-        case SDLK_a:
+        case SDL_SCANCODE_A:
             direction = LEFT;
             break;
-        case SDLK_d:
+        case SDL_SCANCODE_D:
             direction = RIGHT;
             break;
     }
     return direction;
+}
+
+State MainPlayer::pickPortalColor(uint8_t button) const {
+    if (button == SDL_BUTTON_LEFT) {
+        return PORTAL_COLOR_BLUE;
+    } else {
+        return PORTAL_COLOR_ORANGE;
+    }
 }

@@ -13,7 +13,7 @@ public:
     int y = 0;
     bool motion = false;
     bool pressed = false;
-    Uint8 button = SDL_BUTTON_LEFT;
+    uint8_t button = SDL_BUTTON_LEFT;
 };
 
 #endif  // MOUSE_EVENT_H

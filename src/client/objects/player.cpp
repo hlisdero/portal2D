@@ -56,14 +56,6 @@ const char * Player::updatePosition(const Position& new_position) {
     return sound;
 }
 
-void Player::startDeathAnimation() {
-    current = &death;
-}
-
-bool Player::finishedDeathAnimation() const {
-    return death.finished();
-}
-
 void Player::updateFlipState(const Position& new_position) {
     if (new_position.x > currentX()) {
         flip_state = SDL_FLIP_NONE;
@@ -83,7 +75,7 @@ const char * Player::updateAnimation(const Position& new_position) {
     } else if (current == &jump_fall && (new_position.y - currentY()) < 0.01) {
         current = &jump_land;
         return "player_land";
-    } else if (current == &idle && isMovingHorizontally(new_position)) {
+    } else if ((current == &idle || current == &run) && isMovingHorizontally(new_position)) {
         current = &run;
         return "player_run";
     } else {
@@ -94,4 +86,13 @@ const char * Player::updateAnimation(const Position& new_position) {
 
 bool Player::isMovingHorizontally(const Position& new_position) const {
     return abs(new_position.x - currentX()) > 0.0001;
+}
+
+bool Player::setDestroy() {
+    current = &death;
+    return false;
+}
+
+bool Player::isFinished() {
+    return current == &death && static_cast<FiniteAnimation*>(current)->finished();
 }

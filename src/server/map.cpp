@@ -2,7 +2,7 @@
 
 Map::Map(const std::string& map_name, GameEventCreator & gameEventCreator) :
 	endZone(gameEventCreator), gameEventCreator(gameEventCreator) {
-	YAML::Node file = YAML::LoadFile(map_name);
+	const YAML::Node file = YAML::LoadFile(map_name);
 
     loadSettings(file);
 	
@@ -33,18 +33,18 @@ const Size & Map::getSize() const {
 	return size;
 }
 
-void Map::loadSettings(YAML::Node yaml) {
+void Map::loadSettings(const YAML::Node & yaml) {
 	minPlayers = yaml["min-players"].as<size_t>();
 
-	YAML::Node spawn = yaml["spawn"];
+	const YAML::Node & spawn = yaml["spawn"];
 	this->spawn.x = spawn["x"].as<float>();
 	this->spawn.y = spawn["y"].as<float>();
 
 	initMapDimensions(this->spawn.x, this->spawn.y);
 }
 
-void Map::loadEntities(YAML::Node yaml) {
-	YAML::Node entities = yaml["entities"];
+void Map::loadEntities(const YAML::Node & yaml) {
+	const YAML::Node & entities = yaml["entities"];
 
 	std::map<std::string, WithSubscribableState*> subscribables;
 	std::vector<GateEntity*> gates;
@@ -79,7 +79,7 @@ void Map::loadEntities(YAML::Node yaml) {
 	}
 }
 
-Entity * Map::createEntity(YAML::Node yaml) {
+Entity * Map::createEntity(const YAML::Node & yaml) {
 	std::string type_string = yaml["type"].as<std::string>();
 
 	Entity* entity = nullptr;

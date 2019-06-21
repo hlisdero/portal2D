@@ -39,7 +39,7 @@ void Screen::handle(const SDL_Event& event) {
 }
 
 void Screen::handle(const KeyboardEvent& event) {
-    if (!event.pressed || event.key != SDLK_p) {
+    if (!event.pressed || event.key != SDL_SCANCODE_P) {
         return;
     }
     window.toggleFullscreen();
@@ -66,7 +66,7 @@ void Screen::render(Drawable& drawable) {
     renderer.render(texture.get(), src, &dst, drawable.getRotation(), drawable.getFlipState());
 }
 
-void Screen::render(Background background) {
+void Screen::render(Background& background) {
     SDL_Rect dst = {background.getX(), background.getY(), background.getWidth(), background.getHeight()};
     const Texture& texture = background.getTexture();
     SDL_Rect* src = background.getClip();
@@ -110,12 +110,15 @@ void Screen::resetViewport() {
     renderer.setViewport(0, 0, window.width, window.height);
 }
 
+void Screen::centerCamera() {
+    if (camera) {
+        camera->center();
+    }
+}
+
 void Screen::update() {
     if (window.minimized) {
         return;
-    }
-    if (camera) {
-        camera->center();
     }
     renderer.renderPresent();
 }
@@ -128,8 +131,8 @@ void Screen::createCamera(const DrawableBox2D& drawable) {
     camera = new Camera(getWidth(), getHeight(), drawable);
 }
 
-const Camera& Screen::getCamera() const {
-    return *camera;
+const Camera* Screen::getCamera() const {
+    return camera;
 }
 
 void Screen::destroyCamera() {
