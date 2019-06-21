@@ -5,6 +5,7 @@
 #include "client/objects/drawable_box2D.h"
 #include "client/objects/objects.h"
 #include "client/view/world_view_settings.h"
+#include "client/sound/sound_manager.h"
 #include "client/texture/texture_loader.h"
 #include "common/entities/entities_settings.h"
 #include "common/objects/position.h"
@@ -14,7 +15,8 @@
 class ViewObjectCreator {
 public:
     ViewObjectCreator(std::map<size_t, DrawableBox2D*>& view_objects,
-                      const WorldViewSettings& settings);
+                      const WorldViewSettings& settings,
+                      SoundManager& sound_manager);
 
     ViewObjectCreator(const ViewObjectCreator&) = delete;
     ViewObjectCreator& operator=(const ViewObjectCreator&) = delete;
@@ -39,6 +41,7 @@ public:
 private:
     std::map<size_t, DrawableBox2D*>& view_objects;
     const WorldViewSettings& settings;
+    SoundManager& sound_manager;
     const TextureLoader& textures;
 
     Size getSize(EntityType type) const;

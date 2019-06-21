@@ -1,13 +1,15 @@
 #include "client/objects/player.h"
 
 Player::Player(const Size& size, const Position& initial,
-               const WorldViewSettings& settings, const Texture& texture) :
+               const WorldViewSettings& settings, const Texture& texture,
+               SoundManager& sound_manager) :
     DrawableBox2D(size, initial, settings),
     idle(texture), run(texture),
     jump_rise(texture), jump_apex(texture),
     jump_fall(texture), jump_land(texture),
     death(texture),
-    current(&idle) {
+    current(&idle),
+    sound_manager(sound_manager) {
 
     for (int i = 0; i < 7; ++i) {
         idle.addClip(1 + 105*i, 2073, 104, 215);
@@ -48,12 +50,10 @@ SDL_RendererFlip Player::getFlipState() const {
     return flip_state;
 }
 
-const char * Player::updatePosition(const Position& new_position) {
+void Player::updatePosition(const Position& new_position) {
     updateFlipState(new_position);
-    const char * sound = updateAnimation(new_position);
+    updateAnimation(new_position);
     DrawableBox2D::updatePosition(new_position);
-
-    return sound;
 }
 
 void Player::updateFlipState(const Position& new_position) {
@@ -64,31 +64,27 @@ void Player::updateFlipState(const Position& new_position) {
     }
 }
 
-const char * Player::updateAnimation(const Position& new_position) {
+void Player::updateAnimation(const Position& new_position) {
     if (new_position.y > currentY()) {
         current = &jump_rise;
-        return "player_jump";
     } else if (current == &jump_rise && (new_position.y - currentY()) < 0.01) {
         current = &jump_apex;
     } else if (new_position.y < currentY()) {
         current = &jump_fall;
     } else if (current == &jump_fall && (new_position.y - currentY()) < 0.01) {
         current = &jump_land;
-        return "player_land";
     } else if ((current == &idle || current == &run) && isMovingHorizontally(new_position)) {
         current = &run;
-        return "player_run";
     } else {
         current = &idle;
     }
-    return nullptr;
 }
 
 bool Player::isMovingHorizontally(const Position& new_position) const {
     return abs(new_position.x - currentX()) > 0.0001;
 }
 
-bool Player::setDestroy() {
+bool Player::destroyNow() {
     current = &death;
     return false;
 }
@@ -97,6 +93,16 @@ bool Player::isFinished() {
     return current == &death && static_cast<FiniteAnimation*>(current)->finished();
 }
 
-const char * Player::getDestroySound() {
-    return "player_death";
+void Player::playSound() {
+    if (current == &run) {
+        // sound_manager.playSoundEffect("player_run");
+    } else if (current == &jump_rise) {
+        // sound_manager.playSoundEffect("player_jump");
+    } else if (current == &jump_land) {
+        // sound_manager.playSoundEffect("player_land");
+    }
+}
+
+void Player::playDestroySound() {
+    sound_manager.playSoundEffect("player_death");
 }

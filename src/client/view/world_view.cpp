@@ -6,7 +6,7 @@ WorldView::WorldView(BlockingQueue<ViewEvent>& queue) :
     camera_manager(screen),
     settings(screen.getWidth(), screen.getHeight(), screen.getTextureCreator()),
     background(settings.getScreenWidth(), settings.getScreenHeight(), settings.getTextureLoader()["Background"]),
-    object_creator(view_objects, settings) {
+    object_creator(view_objects, settings, sound_manager) {
     event_manager.addHandler((KeyboardHandler*) &sound_manager);
     event_manager.addHandler((WindowEventHandler*) &screen);
     event_manager.addHandler((KeyboardHandler*) &screen);
@@ -16,7 +16,7 @@ WorldView::~WorldView() {
     for (const auto& object : view_objects) {
         delete object.second;
     }
-    for (const auto& object : dead_view_objects) {
+    for (const auto& object : pending_destroy_view_objects) {
         delete object.second;
     }
     if (main_player) {
@@ -97,40 +97,26 @@ void WorldView::createEntity(size_t index, EntityType type,
 }
 
 void WorldView::destroyEntity(size_t index) {
-    if (index == main_player->getIndex()) {
-        event_manager.removeHandler((KeyboardHandler*) main_player);
-        event_manager.removeHandler((MouseHandler*) main_player);
-    }
+    checkDisableMainPlayer(index);
+    view_objects.at(index)->playDestroySound();
 
-    auto & drawable = view_objects.at(index);
-    const char * sound = drawable->getDestroySound();
-    if(sound != nullptr) {
-        sound_manager.playSoundEffect(sound);
-    }
-
-    bool destroyNow = drawable->setDestroy();
-    if (destroyNow) {
+    if (view_objects.at(index)->destroyNow()) {
         camera_manager.removeAndReplace(index);
-        delete drawable;
+        delete view_objects.at(index);
     } else {
-        dead_view_objects.push_back(indexedDrawable(index,drawable));
+        pending_destroy_view_objects.push_back(indexedDrawable(index, view_objects[index]));
     }
-
     view_objects.erase(index);
 }
 
 void WorldView::updatePosition(size_t index, const Position& position) {
-    const char * sound = view_objects.at(index)->updatePosition(position);
-    if(sound != nullptr) {
-        // sound_manager.playSoundEffect(sound);
-    }
+    view_objects.at(index)->updatePosition(position);
+    view_objects.at(index)->playSound();
 }
 
 void WorldView::updateState(size_t index, const State& state) {
-    const char * sound = view_objects.at(index)->updateState(state);
-    if(sound != nullptr) {
-        // sound_manager.playSoundEffect(sound);
-    }
+    view_objects.at(index)->updateState(state);
+    view_objects.at(index)->playSound();
 }
 
 void WorldView::selectPlayer(size_t index) {
@@ -146,6 +132,7 @@ void WorldView::update() {
     screen.clear();
     screen.render(background);
     renderObjects();
+    renderPendingObjects();
     if (victory) {
         renderTexture("Victory");
     } else if (defeat) {
@@ -155,13 +142,11 @@ void WorldView::update() {
 }
 
 void WorldView::setVictory() {
-    sound_manager.setMusicVolume(20);
     sound_manager.playSoundEffect("win");
     victory = true;
 }
 
 void WorldView::setDefeat() {
-    sound_manager.setMusicVolume(20);
     sound_manager.playSoundEffect("defeat");
     defeat = true;
 }
@@ -171,16 +156,17 @@ void WorldView::renderObjects() {
     for (const auto& object : view_objects) {
         screen.render(*object.second);
     }
+}
 
-    auto it = dead_view_objects.begin();
-
-    while(it != dead_view_objects.end()) {
+void WorldView::renderPendingObjects() {
+    auto it = pending_destroy_view_objects.begin();
+    while (it != pending_destroy_view_objects.end()) {
         screen.render(*it->second);
 
         if (it->second->isFinished()) {
             camera_manager.removeAndReplace(it->first);
             delete it->second;
-            it = dead_view_objects.erase(it);
+            it = pending_destroy_view_objects.erase(it);
         } else {
             it++;
         }
@@ -200,4 +186,11 @@ void WorldView::renderTexture(const std::string& name) {
         y = camera->position.y + camera->position.h/2;
     }
     screen.render(texture, x, y, 0.5);
+}
+
+void WorldView::checkDisableMainPlayer(size_t index) {
+    if (index == main_player->getIndex()) {
+        event_manager.removeHandler((KeyboardHandler*) main_player);
+        event_manager.removeHandler((MouseHandler*) main_player);
+    }
 }

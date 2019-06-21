@@ -15,19 +15,21 @@ SoundManager::SoundManager() :
     }
 
     addMusic("soundtrack.mp3");
+    playMusic(0);
 
-    addSoundEffect("portal_creation", "portal_creation.wav");
-    addSoundEffect("rock_destruction", "rock_destruction.wav");
     addSoundEffect("ball_creation", "ball_creation.wav");
     addSoundEffect("ball_destruction", "ball_destruction.wav");
-    addSoundEffect("player_death", "player_death.wav");
+    addSoundEffect("button_on", "button_on.wav");
+    addSoundEffect("button_off", "button_off.wav");
     addSoundEffect("defeat", "defeat.wav");
-    // addSoundEffect("button_on", "button_on.wav");
-    // addSoundEffect("button_off", "button_off.wav");
-    // addSoundEffect("gate", "gate.wav");
-    // addSoundEffect("player_run", "player_run.wav");
-    // addSoundEffect("player_land", "player_land.wav");
-    // addSoundEffect("player_jump", "player_jump.wav");
+    addSoundEffect("gate", "gate.wav");
+    addSoundEffect("player_death", "player_death.wav");
+    addSoundEffect("player_run", "player_run.wav");
+    addSoundEffect("player_jump", "player_jump.wav");
+    addSoundEffect("player_land", "player_land.wav");
+    addSoundEffect("portal_creation", "portal_creation.wav");
+    addSoundEffect("rock_destruction", "rock_destruction.wav");
+    addSoundEffect("win", "win.wav");
 }
 
 SoundManager::~SoundManager() {
@@ -37,7 +39,7 @@ SoundManager::~SoundManager() {
 }
 
 void SoundManager::addSoundEffect(const std::string& name, const std::string& path) {
-    sound_effects.emplace(name, path);
+    sound_effects.emplace(name, sounds_dir_prefix + path);
 }
 
 void SoundManager::addMusic(const std::string& path) {

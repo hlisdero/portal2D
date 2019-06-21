@@ -19,7 +19,6 @@ TEST_CASE("Player and Block Test", "[view]") {
 
     while (!event_handler.quit()) {
         event_handler.poll();
-
         view.update();
     }
     view.updatePosition(player_index, Position(5, 3, 0));
