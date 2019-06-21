@@ -15,10 +15,19 @@ SoundManager::SoundManager() :
     }
 
     addMusic("soundtrack.mp3");
-    addSoundEffects();
 
-    // Mute all sound
-    Mix_Volume(-1, 0);
+    addSoundEffect("portal_creation", "portal_creation.wav");
+    addSoundEffect("rock_destruction", "rock_destruction.wav");
+    addSoundEffect("ball_creation", "ball_creation.wav");
+    addSoundEffect("ball_destruction", "ball_destruction.wav");
+    addSoundEffect("player_death", "player_death.wav");
+    addSoundEffect("defeat", "defeat.wav");
+    // addSoundEffect("button_on", "button_on.wav");
+    // addSoundEffect("button_off", "button_off.wav");
+    // addSoundEffect("gate", "gate.wav");
+    // addSoundEffect("player_run", "player_run.wav");
+    // addSoundEffect("player_land", "player_land.wav");
+    // addSoundEffect("player_jump", "player_jump.wav");
 }
 
 SoundManager::~SoundManager() {
@@ -27,38 +36,16 @@ SoundManager::~SoundManager() {
     SDL_QuitSubSystem(SDL_INIT_AUDIO);
 }
 
-void SoundManager::addSoundEffects() {
-    std::map<const char *, const char *> sounds;
-
-    sounds["portal_creation"] = "portal_creation.wav";
-    sounds["rock_destruction"] = "rock_destruction.wav";
-    sounds["ball_creation"] = "ball_creation.wav";
-    sounds["ball_destruction"] = "ball_destruction.wav";
-    sounds["player_death"] = "player_death.wav";
-    sounds["defeat"] = "defeat.wav";
-    sounds["win"] = "win.wav";
-    // sounds["button_on"] = "button_on.wav";
-    // sounds["button_off"] = "button_off.wav";
-    // sounds["gate"] = "gate.wav";
-    // sounds["player_run"] = "player_run.wav";
-    // sounds["player_land"] = "player_land.wav";
-    // sounds["player_jump"] = "player_jump.wav";
-
-    int i = 0;
-    for(auto it : sounds) {
-        sound_effects.emplace_back(sounds_dir_prefix + it.second);
-        sound_effects_names[std::string(it.first)] = i; 
-        i++;
-    }
+void SoundManager::addSoundEffect(const std::string& name, const std::string& path) {
+    sound_effects.emplace(name, path);
 }
 
 void SoundManager::addMusic(const std::string& path) {
     soundtrack.emplace_back(sounds_dir_prefix + path);
 }
 
-void SoundManager::playSoundEffect(const char * name) {
-    size_t i = sound_effects_names[std::string(name)];
-    Mix_PlayChannel(-1, sound_effects[i].get(), 0);
+void SoundManager::playSoundEffect(const std::string& name) {
+    Mix_PlayChannel(-1, sound_effects.at(name).get(), 0);
 }
 
 void SoundManager::playMusic(size_t index) {
@@ -103,12 +90,6 @@ void SoundManager::handle(const KeyboardEvent& event) {
         setMusicVolume(getCurrentMusicVolume() - 20);
     } else if (event.key == SDL_SCANCODE_PERIOD) {
         setMusicVolume(getCurrentMusicVolume() + 20);
-    }
-}
-
-void SoundManager::checkValidIndexSoundEffect(size_t index) const {
-    if (index >= sound_effects.size()) {
-        throw std::runtime_error("Error: Número de efecto de sonido inválido");
     }
 }
 

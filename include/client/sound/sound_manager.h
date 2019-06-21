@@ -24,10 +24,10 @@ public:
 
     ~SoundManager();
 
-    void addSoundEffects();
+    void addSoundEffect(const std::string& name, const std::string& path);
     void addMusic(const std::string& path);
 
-    void playSoundEffect(const char * name);
+    void playSoundEffect(const std::string& name);
     void playMusic(size_t index);
     void toggleMusic(size_t index);
 
@@ -39,10 +39,9 @@ public:
 private:
     const std::string sounds_dir_prefix;
     std::map<std::string, size_t> sound_effects_names;
-    std::vector<SoundEffect> sound_effects;
+    std::map<std::string, SoundEffect> sound_effects;
     std::vector<Music> soundtrack;
 
-    void checkValidIndexSoundEffect(size_t index) const;
     void checkValidIndexMusic(size_t index) const;
 };
 
