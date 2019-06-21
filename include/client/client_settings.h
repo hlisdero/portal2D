@@ -8,9 +8,6 @@ class ClientSettings {
 public:
 	explicit ClientSettings();
 
-    // Controla dónde buscar los archivos de imágenes y sonidos
-    std::string ASSET_DIR_PREFIX;
-
     // Controla el tamaño del mundo que se ve
 	double PIXEL_PER_METER = 80;
 
