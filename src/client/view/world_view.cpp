@@ -154,12 +154,15 @@ void WorldView::renderObjects() {
 void WorldView::renderTexture(const std::string& name) {
     const Texture& texture = settings.getTextureLoader()[name];
     const Camera* camera = screen.getCamera();
+    int x = 0;
+    int y = 0;
     if (!camera) {
-        screen.render(texture, 0, 0, 0.5);
-        return;
+        x = settings.getScreenWidth()/2 - texture.width/4;
+        y = settings.getScreenHeight()/2 - texture.height/4;
+    } else {
+        x = camera->position.x + camera->position.w/2;
+        y = camera->position.y + camera->position.h/2;
     }
-    int x = camera->position.x + camera->position.w/2;
-    int y = camera->position.y + camera->position.h/2;
     screen.render(texture, x, y, 0.5);
 }
 
