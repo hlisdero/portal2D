@@ -95,7 +95,6 @@ void Game::processGameEvents() {
 				break;
 			case ROCK_RESPAWN:
 				event_creator.addEntityDestruction(event.entity);
-				world.setNewId(event.entity);
 				event_creator.addEntityCreation(event.entity);
 				break;
 			case ENERGY_BALL_DESTRUCTION:

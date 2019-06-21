@@ -17,6 +17,9 @@ WorldView::~WorldView() {
     for (const auto& object : view_objects) {
         delete object.second;
     }
+    for (const auto& object : dead_view_objects) {
+        delete object.second;
+    }
     if (main_player) {
         delete main_player;
     }
@@ -98,10 +101,16 @@ void WorldView::destroyEntity(size_t index) {
         event_manager.removeHandler((MouseHandler*) main_player);
     }
 
-    bool destroyNow = view_objects.at(index)->setDestroy();
+    auto & drawable = view_objects.at(index);
+    bool destroyNow = drawable->setDestroy();
     if (destroyNow) {
-        deleteEntity(index);
+        camera_manager.removeAndReplace(index);
+        delete drawable;
+    } else {
+        dead_view_objects.push_back(indexedDrawable(index,drawable));
     }
+
+    view_objects.erase(index);
 }
 
 void WorldView::updatePosition(size_t index, const Position& position) {
@@ -145,8 +154,19 @@ void WorldView::renderObjects() {
     screen.centerCamera();
     for (const auto& object : view_objects) {
         screen.render(*object.second);
-        if (object.second->isFinished()) {
-            deleteEntity(object.first);
+    }
+
+    auto it = dead_view_objects.begin();
+
+    while(it != dead_view_objects.end()) {
+        screen.render(*it->second);
+
+        if (it->second->isFinished()) {
+            camera_manager.removeAndReplace(it->first);
+            delete it->second;
+            it = dead_view_objects.erase(it);
+        } else {
+            it++;
         }
     }
 }
@@ -164,10 +184,4 @@ void WorldView::renderTexture(const std::string& name) {
         y = camera->position.y + camera->position.h/2;
     }
     screen.render(texture, x, y, 0.5);
-}
-
-void WorldView::deleteEntity(size_t index) {
-    camera_manager.removeAndReplace(index);
-    delete view_objects.at(index);
-    view_objects.erase(index);
 }

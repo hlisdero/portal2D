@@ -8,7 +8,7 @@ Rock::Rock(const Size& size, const Position& initial,
 
     idle.addClip(1450, 9, 198, 198);
 
-	for (int i = 0; i < 3; ++i) {
+	for (int i = 0; i < 7; ++i) {
         destruction.addClip(0 + 199*i, 1714, 198, 198);
     }
 }

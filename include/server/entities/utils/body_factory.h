@@ -13,7 +13,7 @@ public:
 
 	b2AABB createPortalAABB(b2Vec2 & position, float rotation);
 
-	void setNewId(Entity * entity);
+	int getNewId();
 
 private:
 	b2World & world;

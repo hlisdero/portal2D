@@ -40,10 +40,6 @@ World::~World() {
 	}
 }
 
-void World::setNewId(Entity * entity) {
-	bodyFactory.setNewId(entity);
-}
-
 PlayerEntity * World::createPlayer() {
 	PlayerEntity * newPlayer = new PlayerEntity(playerSpawn, gameEventCreator);
 	bodyFactory.createBody(newPlayer);

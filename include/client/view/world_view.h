@@ -14,6 +14,8 @@
 
 extern ClientSettings CLIENT_SETTINGS;
 
+typedef std::pair<size_t, DrawableBox2D*> indexedDrawable;
+
 class WorldView {
 public:
     WorldView(BlockingQueue<ViewEvent>& queue);
@@ -52,6 +54,7 @@ private:
     WorldViewSettings settings;
     Background background;
     std::map<size_t, DrawableBox2D*> view_objects;
+    std::vector<indexedDrawable> dead_view_objects;
     ViewObjectCreator object_creator;
     MainPlayer * main_player = nullptr;
     bool victory = false;
@@ -59,7 +62,6 @@ private:
 
     void renderObjects();
     void renderTexture(const std::string& name);
-    void deleteEntity(size_t index);
 };
 
 #endif  // WORLD_VIEW_H

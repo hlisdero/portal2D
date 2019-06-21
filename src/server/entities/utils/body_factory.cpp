@@ -148,7 +148,7 @@ b2FixtureDef BodyFactory::createFixtureDef(Entity * entity,
 }
 
 void BodyFactory::createBody(Entity * entity) {
-	setNewId(entity);
+	entity->setId(getNewId());
 
 	b2BodyDef bodyDef = createBodyDef(entity);
 	b2PolygonShape shape = createShape(entity);
@@ -174,8 +174,8 @@ void BodyFactory::createBody(Entity * entity) {
 	attachBody(entity, body);
 }
 
-void BodyFactory::setNewId(Entity * entity) {
-	entity->setId(this->nextDynamicEntityId++);
+int BodyFactory::getNewId() {
+	return this->nextDynamicEntityId++;
 }
 
 b2AABB BodyFactory::createPortalAABB(b2Vec2 & position, float rotation) {
