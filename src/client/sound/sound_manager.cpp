@@ -17,7 +17,8 @@ SoundManager::SoundManager() :
     addMusic("soundtrack.mp3");
     addSoundEffects();
 
-    playMusic(0);
+    // Mute all sound
+    Mix_Volume(-1, 0);
 }
 
 SoundManager::~SoundManager() {
@@ -96,6 +97,8 @@ void SoundManager::handle(const KeyboardEvent& event) {
     }
     if (event.key == SDL_SCANCODE_M) {
         toggleMusic(0);
+        // Toggle sound
+        Mix_Volume(-1, MIX_MAX_VOLUME);
     } else if (event.key == SDL_SCANCODE_COMMA) {
         setMusicVolume(getCurrentMusicVolume() - 20);
     } else if (event.key == SDL_SCANCODE_PERIOD) {
