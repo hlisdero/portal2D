@@ -95,11 +95,11 @@ bool Player::isFinished() {
 
 void Player::playSound() {
     if (current == &run) {
-        sound_manager.playSoundEffect("player_run");
+        // sound_manager.playSoundEffect("player_run");
     } else if (current == &jump_rise) {
-        sound_manager.playSoundEffect("player_jump");
+        // sound_manager.playSoundEffect("player_jump");
     } else if (current == &jump_land) {
-        sound_manager.playSoundEffect("player_land");
+        // sound_manager.playSoundEffect("player_land");
     }
 }
 
