@@ -1,8 +1,6 @@
 #ifndef CLIENT_SETTINGS_H
 #define CLIENT_SETTINGS_H
 
-#include <iostream>
-#include <fstream>
 #include <string>
 #include "yaml-cpp/yaml.h"
 
@@ -19,9 +17,6 @@ public:
     // Controla el tamaño inicial de la ventana
     size_t INITIAL_SCREEN_WIDTH = 640;
     size_t INITIAL_SCREEN_HEIGHT = 480;
-
-private:
-    void loadConf(const std::string& filename);
 };
 
 #endif  // CLIENT_SETTINGS_H

@@ -6,7 +6,7 @@
 #include "server/objects/server_settings.h"
 
 int main(int argc, char *argv[]) {
-    std::string map_name = SETTINGS.DEFAULT_MAP;
+    std::string map_name = MAPS_DIRECTORY + SETTINGS.DEFAULT_MAP;
     if (argc > 1) {
     	map_name = std::string(argv[1]);
     }

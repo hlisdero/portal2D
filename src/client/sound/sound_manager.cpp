@@ -1,7 +1,7 @@
 #include "client/sound/sound_manager.h"
 
 SoundManager::SoundManager() :
-    asset_dir_prefix(CLIENT_SETTINGS.ASSET_DIR_PREFIX) {
+    sounds_dir_prefix(ASSETS_DIRECTORY + std::string("sounds/")) {
     if (SDL_InitSubSystem(SDL_INIT_AUDIO) != 0) {
         std::string error_message("Error al inicializar audio de SDL: ");
         error_message += std::string(SDL_GetError());
@@ -14,8 +14,8 @@ SoundManager::SoundManager() :
         throw std::runtime_error(error_message);
     }
 
-    addMusic(asset_dir_prefix + "sounds/soundtrack.mp3");
-    addSoundEffect(asset_dir_prefix + "sounds/portal_creation.wav");
+    addMusic("soundtrack.mp3");
+    addSoundEffect("portal_creation.wav");
     playMusic(0);
 }
 
@@ -26,11 +26,11 @@ SoundManager::~SoundManager() {
 }
 
 void SoundManager::addSoundEffect(const std::string& path) {
-    sound_effects.emplace_back(path);
+    sound_effects.emplace_back(sounds_dir_prefix + path);
 }
 
 void SoundManager::addMusic(const std::string& path) {
-    soundtrack.emplace_back(path);
+    soundtrack.emplace_back(sounds_dir_prefix + path);
 }
 
 void SoundManager::playSoundEffect(size_t index) {
