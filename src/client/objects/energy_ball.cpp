@@ -29,3 +29,7 @@ bool EnergyBall::setDestroy() {
 bool EnergyBall::isFinished() {
     return current == &destruction && static_cast<FiniteAnimation*>(current)->finished();
 }
+
+const char * EnergyBall::getDestroySound() {
+    return "ball_destruction";
+}

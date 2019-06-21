@@ -32,6 +32,8 @@ public:
     virtual bool setDestroy();
     virtual bool isFinished();
 
+    virtual const char * getDestroySound();
+
     virtual ~DrawableBox2D() = default;
 
 private:

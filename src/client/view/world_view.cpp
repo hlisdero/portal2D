@@ -8,7 +8,6 @@ WorldView::WorldView(BlockingQueue<ViewEvent>& queue) :
     background(settings.getScreenWidth(), settings.getScreenHeight(), settings.getTextureLoader()["Background"]),
     object_creator(view_objects, settings) {
     event_manager.addHandler((KeyboardHandler*) &sound_manager);
-    event_manager.addHandler((MouseHandler*) &sound_manager);
     event_manager.addHandler((WindowEventHandler*) &screen);
     event_manager.addHandler((KeyboardHandler*) &screen);
 }
@@ -76,6 +75,7 @@ void WorldView::createEntity(size_t index, EntityType type,
             break;
         case TYPE_PORTAL:
             object_creator.createPortal(index, position, state);
+            sound_manager.playSoundEffect("portal_creation");
             break;
         case TYPE_END_BARRIER:
             object_creator.createEndBarrier(index, position);
@@ -89,6 +89,7 @@ void WorldView::createEntity(size_t index, EntityType type,
             break;
         case TYPE_ENERGY_BALL:
             object_creator.createEnergyBall(index, position);
+            sound_manager.playSoundEffect("ball_creation");
             break;
         default:
             throw std::runtime_error("Error: EntityType inválido");
@@ -102,6 +103,11 @@ void WorldView::destroyEntity(size_t index) {
     }
 
     auto & drawable = view_objects.at(index);
+    const char * sound = drawable->getDestroySound();
+    if(sound != nullptr) {
+        sound_manager.playSoundEffect(sound);
+    }
+
     bool destroyNow = drawable->setDestroy();
     if (destroyNow) {
         camera_manager.removeAndReplace(index);
@@ -116,14 +122,14 @@ void WorldView::destroyEntity(size_t index) {
 void WorldView::updatePosition(size_t index, const Position& position) {
     const char * sound = view_objects.at(index)->updatePosition(position);
     if(sound != nullptr) {
-        sound_manager.playSoundEffect(sound);
+        // sound_manager.playSoundEffect(sound);
     }
 }
 
 void WorldView::updateState(size_t index, const State& state) {
     const char * sound = view_objects.at(index)->updateState(state);
     if(sound != nullptr) {
-        sound_manager.playSoundEffect(sound);
+        // sound_manager.playSoundEffect(sound);
     }
 }
 
@@ -149,10 +155,14 @@ void WorldView::update() {
 }
 
 void WorldView::setVictory() {
+    sound_manager.setMusicVolume(20);
+    sound_manager.playSoundEffect("win");
     victory = true;
 }
 
 void WorldView::setDefeat() {
+    sound_manager.setMusicVolume(20);
+    sound_manager.playSoundEffect("defeat");
     defeat = true;
 }
 

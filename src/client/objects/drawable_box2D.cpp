@@ -59,3 +59,7 @@ bool DrawableBox2D::setDestroy() {
 bool DrawableBox2D::isFinished() {
     return false;
 }
+
+const char * DrawableBox2D::getDestroySound() {
+    return nullptr;
+}

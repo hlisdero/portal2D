@@ -18,6 +18,8 @@ public:
     virtual bool setDestroy() override;
     virtual bool isFinished() override;
 
+    virtual const char * getDestroySound() override;
+
 private:
     Animation idle;
     Animation run;

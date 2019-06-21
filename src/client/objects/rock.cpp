@@ -29,3 +29,7 @@ bool Rock::setDestroy() {
 bool Rock::isFinished() {
     return current == &destruction && static_cast<FiniteAnimation*>(current)->finished();
 }
+
+const char * Rock::getDestroySound() {
+    return "rock_destruction";
+}

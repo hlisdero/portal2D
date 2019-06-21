@@ -30,12 +30,18 @@ void SoundManager::addSoundEffects() {
     std::map<const char *, const char *> sounds;
 
     sounds["portal_creation"] = "portal_creation.wav";
-    sounds["button_on"] = "button_on.wav";
-    sounds["button_off"] = "button_off.wav";
-    sounds["gate"] = "gate.wav";
-    sounds["player_run"] = "player_run.wav";
-    sounds["player_land"] = "player_land.wav";
-    sounds["player_jump"] = "player_jump.wav";
+    sounds["rock_destruction"] = "rock_destruction.wav";
+    sounds["ball_creation"] = "ball_creation.wav";
+    sounds["ball_destruction"] = "ball_destruction.wav";
+    sounds["player_death"] = "player_death.wav";
+    sounds["defeat"] = "defeat.wav";
+    sounds["win"] = "win.wav";
+    // sounds["button_on"] = "button_on.wav";
+    // sounds["button_off"] = "button_off.wav";
+    // sounds["gate"] = "gate.wav";
+    // sounds["player_run"] = "player_run.wav";
+    // sounds["player_land"] = "player_land.wav";
+    // sounds["player_jump"] = "player_jump.wav";
 
     int i = 0;
     for(auto it : sounds) {
@@ -43,8 +49,6 @@ void SoundManager::addSoundEffects() {
         sound_effects_names[std::string(it.first)] = i; 
         i++;
     }
-
-    Mix_AllocateChannels(i+1);
 }
 
 void SoundManager::addMusic(const std::string& path) {
@@ -53,9 +57,7 @@ void SoundManager::addMusic(const std::string& path) {
 
 void SoundManager::playSoundEffect(const char * name) {
     size_t i = sound_effects_names[std::string(name)];
-    if(!Mix_Playing(i)) {
-        Mix_PlayChannel(i, sound_effects[i].get(), 0);
-    }
+    Mix_PlayChannel(-1, sound_effects[i].get(), 0);
 }
 
 void SoundManager::playMusic(size_t index) {
@@ -98,15 +100,6 @@ void SoundManager::handle(const KeyboardEvent& event) {
         setMusicVolume(getCurrentMusicVolume() - 20);
     } else if (event.key == SDL_SCANCODE_PERIOD) {
         setMusicVolume(getCurrentMusicVolume() + 20);
-    }
-}
-
-void SoundManager::handle(const MouseEvent& event) {
-    if (event.motion) {
-        return;
-    }
-    if (event.pressed) {
-        playSoundEffect("portal_creation");
     }
 }
 

@@ -13,7 +13,7 @@
 
 extern ClientSettings CLIENT_SETTINGS;
 
-class SoundManager : public KeyboardHandler, public MouseHandler {
+class SoundManager : public KeyboardHandler {
 public:
     explicit SoundManager();
 
@@ -35,7 +35,6 @@ public:
     int getCurrentMusicVolume() const;
 
     virtual void handle(const KeyboardEvent& event) override;
-    virtual void handle(const MouseEvent& event) override;
 
 private:
     const std::string sounds_dir_prefix;

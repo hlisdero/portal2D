@@ -96,3 +96,7 @@ bool Player::setDestroy() {
 bool Player::isFinished() {
     return current == &death && static_cast<FiniteAnimation*>(current)->finished();
 }
+
+const char * Player::getDestroySound() {
+    return "player_death";
+}
