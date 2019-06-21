@@ -19,7 +19,10 @@ void ScreenRecorder::start() {
     std::string ffmpeg_command = getCommand();
     std::string remove_command = std::string("rm -f ") + "\"" + filename + "\"";
 
-    std::system(remove_command.c_str());
+    if (std::system(remove_command.c_str()) != 0) {
+        throw std::runtime_error("Error al borrar el archivo antiguo");
+    }
+
     process = ::popen(ffmpeg_command.c_str(), "w");
     if (!process) {
         throw std::runtime_error("Error al llamar a ffmpeg");

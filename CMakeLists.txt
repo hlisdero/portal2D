@@ -10,26 +10,26 @@ set(RELEASE OFF)
 
 if(RELEASE)
     # Client
-    set(ASSETS_DIRECTORY /var/portal2d/)
-    set(CLIENT_CONF_DIRECTORY /etc/portal2d/conf/)
+    set(ASSETS_DIRECTORY /var/portal2d)
+    set(CLIENT_CONF_DIRECTORY /etc/portal2d/conf)
 
     # Server
-    set(SERVER_CONF_DIRECTORY /etc/portal2d/conf/)
-    set(MAPS_DIRECTORY /etc/portal2d/maps/)
+    set(SERVER_CONF_DIRECTORY /etc/portal2d/conf)
+    set(MAPS_DIRECTORY /etc/portal2d/maps)
 
     # Client & Server
-    set(BIN_DIRECTORY /usr/bin/)
+    set(BIN_DIRECTORY /usr/bin)
 
     # g++ flag: -O0 or -O3
     set(OPTIMIZE_BINARIES -O3)
 else()
     # Client
-    set(ASSETS_DIRECTORY ../data/)
-    set(CLIENT_CONF_DIRECTORY ../data/conf/)
+    set(ASSETS_DIRECTORY ../data)
+    set(CLIENT_CONF_DIRECTORY ../data/conf)
 
     # Server
-    set(SERVER_CONF_DIRECTORY ../data/conf/)
-    set(MAPS_DIRECTORY ../data/maps/)
+    set(SERVER_CONF_DIRECTORY ../data/conf)
+    set(MAPS_DIRECTORY ../data/maps)
 
     # g++ flag: -O0 or -O3
     set(OPTIMIZE_BINARIES -O0)
@@ -91,10 +91,10 @@ include_directories(include/ ${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SD
 
 add_compile_options(-std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors ${OPTIMIZE_BINARIES} -ggdb -DDEBUG -fno-inline)
 add_definitions(
-    -DCLIENT_CONF_FILE="${CLIENT_CONF_DIRECTORY}client.conf"
-    -DSERVER_CONF_FILE="${SERVER_CONF_DIRECTORY}server.conf"
-    -DASSETS_DIRECTORY="${ASSETS_DIRECTORY}"
-    -DMAPS_DIRECTORY="${MAPS_DIRECTORY}")
+    -DCLIENT_CONF_FILE="${CLIENT_CONF_DIRECTORY}/client.conf"
+    -DSERVER_CONF_FILE="${SERVER_CONF_DIRECTORY}/server.conf"
+    -DASSETS_DIRECTORY="${ASSETS_DIRECTORY}/"
+    -DMAPS_DIRECTORY="${MAPS_DIRECTORY}/")
 
 # Client
 add_executable(client src/client_main.cpp ${client_sources} ${common_sources})
