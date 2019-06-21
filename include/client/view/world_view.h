@@ -62,6 +62,8 @@ private:
 
     void renderObjects();
     void renderTexture(const std::string& name);
+    void checkDisableMainPlayer(size_t index);
+    void setDestroy(size_t index);
 };
 
 #endif  // WORLD_VIEW_H

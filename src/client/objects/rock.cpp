@@ -1,10 +1,12 @@
 #include "client/objects/rock.h"
 
 Rock::Rock(const Size& size, const Position& initial,
-           const WorldViewSettings& settings, const Texture& texture) :
+           const WorldViewSettings& settings, const Texture& texture,
+           SoundManager& sound_manager) :
     DrawableBox2D(size, initial, settings),
     idle(texture), destruction(texture),
-    current(&idle) {
+    current(&idle),
+    sound_manager(sound_manager) {
 
     idle.addClip(1450, 9, 198, 198);
 
@@ -30,6 +32,6 @@ bool Rock::isFinished() {
     return current == &destruction && static_cast<FiniteAnimation*>(current)->finished();
 }
 
-const char * Rock::getDestroySound() {
-    return "rock_destruction";
+void Rock::playDestroySound() {
+    sound_manager.playSoundEffect("rock_destruction");
 }

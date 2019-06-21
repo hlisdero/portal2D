@@ -42,14 +42,12 @@ const State& DrawableBox2D::getState() const {
     return state;
 }
 
-const char * DrawableBox2D::updatePosition(const Position& new_position) {
+void DrawableBox2D::updatePosition(const Position& new_position) {
     position = new_position;
-    return nullptr;
 }
 
-const char * DrawableBox2D::updateState(const State& new_state) {
+void DrawableBox2D::updateState(const State& new_state) {
     state = new_state;
-    return nullptr;
 }
 
 bool DrawableBox2D::setDestroy() {
@@ -60,6 +58,14 @@ bool DrawableBox2D::isFinished() {
     return false;
 }
 
-const char * DrawableBox2D::getDestroySound() {
-    return nullptr;
+void DrawableBox2D::playDestroySound() {
+    // Do nothing
+}
+
+void DrawableBox2D::playJumpSound() {
+    // Do nothing
+}
+
+void DrawableBox2D::playRunSound() {
+    // Do nothing
 }

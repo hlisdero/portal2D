@@ -26,13 +26,15 @@ public:
 
     const State& getState() const;
 
-    virtual const char * updatePosition(const Position& new_position);
-    virtual const char * updateState(const State& new_state);
+    virtual void updatePosition(const Position& new_position);
+    virtual void updateState(const State& new_state);
 
     virtual bool setDestroy();
     virtual bool isFinished();
 
-    virtual const char * getDestroySound();
+    virtual void playDestroySound();
+    virtual void playJumpSound();
+    virtual void playRunSound();
 
     virtual ~DrawableBox2D() = default;
 

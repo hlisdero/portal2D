@@ -6,7 +6,7 @@ WorldView::WorldView(BlockingQueue<ViewEvent>& queue) :
     camera_manager(screen),
     settings(screen.getWidth(), screen.getHeight(), screen.getTextureCreator()),
     background(settings.getScreenWidth(), settings.getScreenHeight(), settings.getTextureLoader()["Background"]),
-    object_creator(view_objects, settings) {
+    object_creator(view_objects, settings, sound_manager) {
     event_manager.addHandler((KeyboardHandler*) &sound_manager);
     event_manager.addHandler((WindowEventHandler*) &screen);
     event_manager.addHandler((KeyboardHandler*) &screen);
@@ -97,40 +97,18 @@ void WorldView::createEntity(size_t index, EntityType type,
 }
 
 void WorldView::destroyEntity(size_t index) {
-    if (index == main_player->getIndex()) {
-        event_manager.removeHandler((KeyboardHandler*) main_player);
-        event_manager.removeHandler((MouseHandler*) main_player);
-    }
-
-    auto & drawable = view_objects.at(index);
-    const char * sound = drawable->getDestroySound();
-    if(sound != nullptr) {
-        sound_manager.playSoundEffect(sound);
-    }
-
-    bool destroyNow = drawable->setDestroy();
-    if (destroyNow) {
-        camera_manager.removeAndReplace(index);
-        delete drawable;
-    } else {
-        dead_view_objects.push_back(indexedDrawable(index,drawable));
-    }
-
+    checkDisableMainPlayer(index);
+    view_objects.at(index)->playDestroySound();
+    setDestroy(index);
     view_objects.erase(index);
 }
 
 void WorldView::updatePosition(size_t index, const Position& position) {
-    const char * sound = view_objects.at(index)->updatePosition(position);
-    if(sound != nullptr) {
-        // sound_manager.playSoundEffect(sound);
-    }
+    view_objects.at(index)->updatePosition(position);
 }
 
 void WorldView::updateState(size_t index, const State& state) {
-    const char * sound = view_objects.at(index)->updateState(state);
-    if(sound != nullptr) {
-        // sound_manager.playSoundEffect(sound);
-    }
+    view_objects.at(index)->updateState(state);
 }
 
 void WorldView::selectPlayer(size_t index) {
@@ -155,13 +133,11 @@ void WorldView::update() {
 }
 
 void WorldView::setVictory() {
-    sound_manager.setMusicVolume(20);
     sound_manager.playSoundEffect("win");
     victory = true;
 }
 
 void WorldView::setDefeat() {
-    sound_manager.setMusicVolume(20);
     sound_manager.playSoundEffect("defeat");
     defeat = true;
 }
@@ -200,4 +176,21 @@ void WorldView::renderTexture(const std::string& name) {
         y = camera->position.y + camera->position.h/2;
     }
     screen.render(texture, x, y, 0.5);
+}
+
+void WorldView::checkDisableMainPlayer(size_t index) {
+    if (index == main_player->getIndex()) {
+        event_manager.removeHandler((KeyboardHandler*) main_player);
+        event_manager.removeHandler((MouseHandler*) main_player);
+    }
+}
+
+void WorldView::setDestroy(size_t index) {
+    bool destroyNow = view_objects.at(index)->setDestroy();
+    if (destroyNow) {
+        camera_manager.removeAndReplace(index);
+        delete view_objects.at(index);
+    } else {
+        dead_view_objects.push_back(indexedDrawable(index, view_objects[index]));
+    }
 }

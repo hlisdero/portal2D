@@ -1,13 +1,15 @@
 #include "client/view/view_object_creator.h"
 
 ViewObjectCreator::ViewObjectCreator(std::map<size_t, DrawableBox2D*>& view_objects,
-                                     const WorldViewSettings& settings) :
+                                     const WorldViewSettings& settings,
+                                     SoundManager& sound_manager) :
     view_objects(view_objects),
     settings(settings),
+    sound_manager(sound_manager),
     textures(settings.getTextureLoader()) {}
 
 const Player& ViewObjectCreator::createPlayer(size_t index, const Position& initial) const {
-    Player* player = new Player(getSize(TYPE_PLAYER), initial, settings, textures["Player"]);
+    Player* player = new Player(getSize(TYPE_PLAYER), initial, settings, textures["Player"], sound_manager);
     view_objects[index] = player;
     return *player;
 }
@@ -43,7 +45,7 @@ void ViewObjectCreator::createButton(size_t index, const Position& initial) cons
 }
 
 void ViewObjectCreator::createEnergyBall(size_t index, const Position& initial) const {
-    EnergyBall* energy_ball = new EnergyBall(getSize(TYPE_ENERGY_BALL), initial, settings, textures["FX"]);
+    EnergyBall* energy_ball = new EnergyBall(getSize(TYPE_ENERGY_BALL), initial, settings, textures["FX"], sound_manager);
     view_objects[index] = energy_ball;
 }
 
@@ -68,7 +70,7 @@ void ViewObjectCreator::createEnergyReceiver(size_t index, const Position& initi
 }
 
 void ViewObjectCreator::createRock(size_t index, const Position& initial) const {
-    Rock* rock = new Rock(getSize(TYPE_ROCK), initial, settings, textures["Entities"]);
+    Rock* rock = new Rock(getSize(TYPE_ROCK), initial, settings, textures["Entities"], sound_manager);
     view_objects[index] = rock;
 }
 
