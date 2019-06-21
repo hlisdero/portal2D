@@ -23,7 +23,7 @@ SDL_Rect* Rock::getClip() {
     return current->getClip();
 }
 
-bool Rock::setDestroy() {
+bool Rock::destroyNow() {
     current = &destruction;
     return false;
 }

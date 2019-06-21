@@ -16,7 +16,7 @@ WorldView::~WorldView() {
     for (const auto& object : view_objects) {
         delete object.second;
     }
-    for (const auto& object : dead_view_objects) {
+    for (const auto& object : pending_destroy_view_objects) {
         delete object.second;
     }
     if (main_player) {
@@ -99,7 +99,13 @@ void WorldView::createEntity(size_t index, EntityType type,
 void WorldView::destroyEntity(size_t index) {
     checkDisableMainPlayer(index);
     view_objects.at(index)->playDestroySound();
-    setDestroy(index);
+
+    if (view_objects.at(index)->destroyNow()) {
+        camera_manager.removeAndReplace(index);
+        delete view_objects.at(index);
+    } else {
+        pending_destroy_view_objects.push_back(indexedDrawable(index, view_objects[index]));
+    }
     view_objects.erase(index);
 }
 
@@ -126,6 +132,7 @@ void WorldView::update() {
     screen.clear();
     screen.render(background);
     renderObjects();
+    renderPendingObjects();
     if (victory) {
         renderTexture("Victory");
     } else if (defeat) {
@@ -149,18 +156,17 @@ void WorldView::renderObjects() {
     for (const auto& object : view_objects) {
         screen.render(*object.second);
     }
-    renderDeadViewObjects();
 }
 
-void WorldView::renderDeadViewObjects() {
-    auto it = dead_view_objects.begin();
-    while (it != dead_view_objects.end()) {
+void WorldView::renderPendingObjects() {
+    auto it = pending_destroy_view_objects.begin();
+    while (it != pending_destroy_view_objects.end()) {
         screen.render(*it->second);
 
         if (it->second->isFinished()) {
             camera_manager.removeAndReplace(it->first);
             delete it->second;
-            it = dead_view_objects.erase(it);
+            it = pending_destroy_view_objects.erase(it);
         } else {
             it++;
         }
@@ -186,15 +192,5 @@ void WorldView::checkDisableMainPlayer(size_t index) {
     if (index == main_player->getIndex()) {
         event_manager.removeHandler((KeyboardHandler*) main_player);
         event_manager.removeHandler((MouseHandler*) main_player);
-    }
-}
-
-void WorldView::setDestroy(size_t index) {
-    bool destroyNow = view_objects.at(index)->setDestroy();
-    if (destroyNow) {
-        camera_manager.removeAndReplace(index);
-        delete view_objects.at(index);
-    } else {
-        dead_view_objects.push_back(indexedDrawable(index, view_objects[index]));
     }
 }

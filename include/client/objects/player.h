@@ -18,7 +18,7 @@ public:
 
     virtual void updatePosition(const Position& new_position) override;
 
-    virtual bool setDestroy() override;
+    virtual bool destroyNow() override;
     virtual bool isFinished() override;
 
     virtual void playSound() override;

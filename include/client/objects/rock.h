@@ -15,7 +15,7 @@ public:
 	virtual const Texture& getTexture() override;
 	virtual SDL_Rect* getClip() override;
 
-    virtual bool setDestroy() override;
+    virtual bool destroyNow() override;
     virtual bool isFinished() override;
 
     virtual void playDestroySound() override;

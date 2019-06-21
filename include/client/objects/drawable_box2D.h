@@ -31,7 +31,7 @@ public:
     virtual void updatePosition(const Position& new_position);
     virtual void updateState(const State& new_state);
 
-    virtual bool setDestroy();
+    virtual bool destroyNow();
     virtual bool isFinished();
 
     virtual void playSound();

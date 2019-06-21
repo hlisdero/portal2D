@@ -23,7 +23,7 @@ SDL_Rect* EnergyBall::getClip() {
     return current->getClip();
 }
 
-bool EnergyBall::setDestroy() {
+bool EnergyBall::destroyNow() {
     current = &destruction;
     return false;
 }

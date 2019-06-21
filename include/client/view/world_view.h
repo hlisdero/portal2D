@@ -54,17 +54,16 @@ private:
     WorldViewSettings settings;
     Background background;
     std::map<size_t, DrawableBox2D*> view_objects;
-    std::vector<indexedDrawable> dead_view_objects;
+    std::vector<indexedDrawable> pending_destroy_view_objects;
     ViewObjectCreator object_creator;
     MainPlayer * main_player = nullptr;
     bool victory = false;
     bool defeat = false;
 
     void renderObjects();
-    void renderDeadViewObjects();
+    void renderPendingObjects();
     void renderTexture(const std::string& name);
     void checkDisableMainPlayer(size_t index);
-    void setDestroy(size_t index);
 };
 
 #endif  // WORLD_VIEW_H

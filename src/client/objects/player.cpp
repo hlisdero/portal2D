@@ -84,7 +84,7 @@ bool Player::isMovingHorizontally(const Position& new_position) const {
     return abs(new_position.x - currentX()) > 0.0001;
 }
 
-bool Player::setDestroy() {
+bool Player::destroyNow() {
     current = &death;
     return false;
 }

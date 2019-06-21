@@ -50,7 +50,7 @@ void DrawableBox2D::updateState(const State& new_state) {
     state = new_state;
 }
 
-bool DrawableBox2D::setDestroy() {
+bool DrawableBox2D::destroyNow() {
     return true;
 }
 
