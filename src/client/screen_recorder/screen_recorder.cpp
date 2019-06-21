@@ -1,6 +1,12 @@
 #include "client/screen_recorder/screen_recorder.h"
 
-ScreenRecorder::ScreenRecorder(const std::string& filename) : filename(filename) {}
+ScreenRecorder::ScreenRecorder() :
+    screen_width(std::to_string(CLIENT_SETTINGS.INITIAL_SCREEN_WIDTH)),
+    screen_height(std::to_string(CLIENT_SETTINGS.INITIAL_SCREEN_HEIGHT)),
+    filename(CLIENT_SETTINGS.FILENAME),
+    framerate(CLIENT_SETTINGS.FRAMERATE),
+    offset_x(CLIENT_SETTINGS.OFFSET_X),
+    offset_y(CLIENT_SETTINGS.OFFSET_Y) {}
 
 ScreenRecorder::~ScreenRecorder() {
     if (process) {
@@ -10,11 +16,11 @@ ScreenRecorder::~ScreenRecorder() {
 }
 
 void ScreenRecorder::start() {
-    std::string called_command = command + filename;
-    std::string remove_command = std::string("rm -f ") + filename;
+    std::string ffmpeg_command = getCommand();
+    std::string remove_command = std::string("rm -f ") + "\"" + filename + "\"";
 
     std::system(remove_command.c_str());
-    process = ::popen(called_command.c_str(), "w");
+    process = ::popen(ffmpeg_command.c_str(), "w");
     if (!process) {
         throw std::runtime_error("Error al llamar a ffmpeg");
     }
@@ -23,4 +29,14 @@ void ScreenRecorder::start() {
 void ScreenRecorder::close() {
     char close_signal[] = "q";
     ::fwrite(close_signal, 1, 1, process);
+}
+
+std::string ScreenRecorder::getCommand() const {
+    std::string command = "ffmpeg -loglevel quiet";
+    std::string video_size = " -video_size " + screen_width + "x" + screen_height;
+    std::string framerate_c = " -framerate " + framerate;
+    std::string device = " -f x11grab";
+    std::string offset = " -i :0.0+" + offset_x + "," + offset_y;
+
+    return command + video_size + framerate_c + device + offset + " \"" + filename + "\"";
 }

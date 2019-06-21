@@ -20,6 +20,12 @@ public:
     size_t INITIAL_SCREEN_WIDTH = 640;
     size_t INITIAL_SCREEN_HEIGHT = 480;
 
+    // Configuración para grabar la pantalla;
+    std::string FILENAME;
+    std::string FRAMERATE;
+    std::string OFFSET_X;
+    std::string OFFSET_Y;
+
 private:
     void loadConf(const std::string& filename);
 };
