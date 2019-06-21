@@ -15,6 +15,8 @@ SoundManager::SoundManager() :
     }
 
     addMusic("soundtrack.mp3");
+    playMusic(0);
+    setMusicVolume(20);
 
     addSoundEffect("portal_creation", "portal_creation.wav");
     addSoundEffect("rock_destruction", "rock_destruction.wav");
