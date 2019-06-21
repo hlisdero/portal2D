@@ -1,8 +1,6 @@
 #ifndef SERVER_SETTINGS_H
 #define SERVER_SETTINGS_H
 
-#include <iostream>
-#include <fstream>
 #include <string>
 #include "yaml-cpp/yaml.h"
 
@@ -48,9 +46,6 @@ public:
 
 	// energy_ball
 	int ENERGY_BALL_LIFE_LENGTH;
-
-private:
-    void loadConf(const std::string& filename);
 };
 
 #endif

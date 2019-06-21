@@ -1,8 +1,6 @@
 #ifndef CLIENT_SETTINGS_H
 #define CLIENT_SETTINGS_H
 
-#include <iostream>
-#include <fstream>
 #include <string>
 #include "yaml-cpp/yaml.h"
 
@@ -25,9 +23,6 @@ public:
     std::string FRAMERATE;
     std::string OFFSET_X;
     std::string OFFSET_Y;
-
-private:
-    void loadConf(const std::string& filename);
 };
 
 #endif  // CLIENT_SETTINGS_H

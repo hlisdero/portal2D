@@ -3,19 +3,7 @@
 ServerSettings SETTINGS;
 
 ServerSettings::ServerSettings() {
-    std::ifstream conf_file;
-    conf_file.open("../data/conf_test/server.conf");
-    if (conf_file) {
-        conf_file.close();
-        std::cout << "Usando configuración de test" << std::endl;
-        loadConf("../data/conf_test/server.conf");
-    } else {
-        loadConf("/etc/portal2d/conf/server.conf");
-    }
-}
-
-void ServerSettings::loadConf(const std::string& filename) {
-    YAML::Node yaml = YAML::LoadFile(filename);
+    YAML::Node yaml = YAML::LoadFile(SERVER_CONF_FILE);
 
 	// server
 	PORT = yaml["port"].as<std::string>();

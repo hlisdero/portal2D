@@ -21,8 +21,11 @@ public:
     const Texture& operator[](const std::string& key) const;
 
 private:
-    const std::string asset_dir_prefix;
+	const TextureCreator & textureCreator;
+    const std::string sprites_dir_prefix;
     std::unordered_map<std::string, Texture> texture_map;
+
+    void addTexture(const char * name, const char * file);
 };
 
 #endif  // TEXTURE_LOADER_H

@@ -37,7 +37,7 @@ public:
     virtual void handle(const MouseEvent& event) override;
 
 private:
-    const std::string asset_dir_prefix;
+    const std::string sounds_dir_prefix;
     std::vector<SoundEffect> sound_effects;
     std::vector<Music> soundtrack;
 

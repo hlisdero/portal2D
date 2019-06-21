@@ -1,7 +1,39 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(portal2d)
-add_compile_options(-std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline)
+
+##
+## Config
+##
+
+set(RELEASE OFF)
+
+if(RELEASE)
+    # Client
+    set(ASSETS_DIRECTORY /var/portal2d/)
+    set(CLIENT_CONF_DIRECTORY /etc/portal2d/conf/)
+
+    # Server
+    set(SERVER_CONF_DIRECTORY /etc/portal2d/conf/)
+    set(MAPS_DIRECTORY /etc/portal2d/maps/)
+
+    # Client & Server
+    set(BIN_DIRECTORY /usr/bin/)
+
+    # g++ flag: -O0 or -O3
+    set(OPTIMIZE_BINARIES -O3)
+else()
+    # Client
+    set(ASSETS_DIRECTORY ../data/)
+    set(CLIENT_CONF_DIRECTORY ../data/conf/)
+
+    # Server
+    set(SERVER_CONF_DIRECTORY ../data/conf/)
+    set(MAPS_DIRECTORY ../data/maps/)
+
+    # g++ flag: -O0 or -O3
+    set(OPTIMIZE_BINARIES -O0)
+endif()
 
 ##
 ## Sources
@@ -57,6 +89,13 @@ include_directories(include/ ${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SD
 ## Executables
 ##
 
+add_compile_options(-std=c++11 -Wall -Wextra -Werror -pedantic -pedantic-errors ${OPTIMIZE_BINARIES} -ggdb -DDEBUG -fno-inline)
+add_definitions(
+    -DCLIENT_CONF_FILE="${CLIENT_CONF_DIRECTORY}client.conf"
+    -DSERVER_CONF_FILE="${SERVER_CONF_DIRECTORY}server.conf"
+    -DASSETS_DIRECTORY="${ASSETS_DIRECTORY}"
+    -DMAPS_DIRECTORY="${MAPS_DIRECTORY}")
+
 # Client
 add_executable(client src/client_main.cpp ${client_sources} ${common_sources})
 target_link_libraries(client "-pthread" ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2MIXER_LIBRARIES} Qt5::Widgets ${YAML_CPP_LIBRARIES})
@@ -71,11 +110,15 @@ set_target_properties(server PROPERTIES OUTPUT_NAME portal2d-server)
 ## Install
 ##
 
-install(TARGETS client RENAME portal2d DESTINATION /usr/bin)
-install(DIRECTORY data/sounds data/sprites DESTINATION /var/portal2d)
+if(RELEASE)
+    install(TARGETS client DESTINATION ${BIN_DIRECTORY})
+    install(DIRECTORY data/sounds data/sprites DESTINATION ${ASSETS_DIRECTORY})
+    install(FILES data/conf/client.conf DESTINATION ${CLIENT_CONF_DIRECTORY})
 
-install(TARGETS server RENAME portal2d-server DESTINATION /usr/bin)
-install(DIRECTORY data/maps data/conf DESTINATION /etc/portal2d)
+    install(TARGETS server DESTINATION ${BIN_DIRECTORY})
+    install(DIRECTORY data/maps DESTINATION ${MAPS_DIRECTORY} PATTERN data/maps/*)
+    install(FILES data/conf/server.conf DESTINATION ${SERVER_CONF_DIRECTORY})
+endif()
 
 ##
 ## Tests
