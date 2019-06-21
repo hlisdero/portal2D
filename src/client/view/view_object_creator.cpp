@@ -35,12 +35,12 @@ void ViewObjectCreator::createAcid(size_t index, const Position& initial) const 
 }
 
 void ViewObjectCreator::createGate(size_t index, const Position& initial) const {
-    Gate* gate = new Gate(getSize(TYPE_GATE), initial, settings, textures["Entities"]);
+    Gate* gate = new Gate(getSize(TYPE_GATE), initial, settings, textures["Entities"], sound_manager);
     view_objects[index] = gate;
 }
 
 void ViewObjectCreator::createButton(size_t index, const Position& initial) const {
-    Button* button = new Button(getSize(TYPE_BUTTON), initial, settings, textures["Miscellaneous"]);
+    Button* button = new Button(getSize(TYPE_BUTTON), initial, settings, textures["Miscellaneous"], sound_manager);
     view_objects[index] = button;
 }
 

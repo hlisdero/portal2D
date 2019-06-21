@@ -93,14 +93,16 @@ bool Player::isFinished() {
     return current == &death && static_cast<FiniteAnimation*>(current)->finished();
 }
 
+void Player::playSound() {
+    if (current == &run) {
+        sound_manager.playSoundEffect("player_run");
+    } else if (current == &jump_rise) {
+        sound_manager.playSoundEffect("player_jump");
+    } else if (current == &jump_land) {
+        sound_manager.playSoundEffect("player_land");
+    }
+}
+
 void Player::playDestroySound() {
     sound_manager.playSoundEffect("player_death");
-}
-
-void Player::playJumpSound() {
-    sound_manager.playSoundEffect("player_jump");
-}
-
-void Player::playRunSound() {
-    sound_manager.playSoundEffect("player_run");
 }

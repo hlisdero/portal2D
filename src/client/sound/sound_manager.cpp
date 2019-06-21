@@ -22,9 +22,9 @@ SoundManager::SoundManager() :
     addSoundEffect("ball_destruction", "ball_destruction.wav");
     addSoundEffect("player_death", "player_death.wav");
     addSoundEffect("defeat", "defeat.wav");
-    // addSoundEffect("button_on", "button_on.wav");
-    // addSoundEffect("button_off", "button_off.wav");
-    // addSoundEffect("gate", "gate.wav");
+    addSoundEffect("button_on", "button_on.wav");
+    addSoundEffect("button_off", "button_off.wav");
+    addSoundEffect("gate", "gate.wav");
     addSoundEffect("player_run", "player_run.wav");
     addSoundEffect("player_land", "player_land.wav");
     addSoundEffect("player_jump", "player_jump.wav");

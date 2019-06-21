@@ -105,10 +105,12 @@ void WorldView::destroyEntity(size_t index) {
 
 void WorldView::updatePosition(size_t index, const Position& position) {
     view_objects.at(index)->updatePosition(position);
+    view_objects.at(index)->playSound();
 }
 
 void WorldView::updateState(size_t index, const State& state) {
     view_objects.at(index)->updateState(state);
+    view_objects.at(index)->playSound();
 }
 
 void WorldView::selectPlayer(size_t index) {
@@ -147,10 +149,12 @@ void WorldView::renderObjects() {
     for (const auto& object : view_objects) {
         screen.render(*object.second);
     }
+    renderDeadViewObjects();
+}
 
+void WorldView::renderDeadViewObjects() {
     auto it = dead_view_objects.begin();
-
-    while(it != dead_view_objects.end()) {
+    while (it != dead_view_objects.end()) {
         screen.render(*it->second);
 
         if (it->second->isFinished()) {

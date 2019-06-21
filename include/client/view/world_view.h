@@ -61,6 +61,7 @@ private:
     bool defeat = false;
 
     void renderObjects();
+    void renderDeadViewObjects();
     void renderTexture(const std::string& name);
     void checkDisableMainPlayer(size_t index);
     void setDestroy(size_t index);

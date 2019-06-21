@@ -12,6 +12,8 @@ public:
     explicit DrawableBox2D(const Size& size, const Position& initial,
                            const WorldViewSettings& settings);
 
+    virtual ~DrawableBox2D() = default;
+
     virtual const Texture& getTexture() = 0;
 
     virtual int getX() const override;
@@ -32,11 +34,8 @@ public:
     virtual bool setDestroy();
     virtual bool isFinished();
 
+    virtual void playSound();
     virtual void playDestroySound();
-    virtual void playJumpSound();
-    virtual void playRunSound();
-
-    virtual ~DrawableBox2D() = default;
 
 private:
     const Size size;

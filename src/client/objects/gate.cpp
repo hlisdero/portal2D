@@ -1,8 +1,10 @@
 #include "client/objects/gate.h"
 
 Gate::Gate(const Size& size, const Position& initial,
-           const WorldViewSettings& settings, const Texture& texture) :
-    DrawableBox2D(size, initial, settings), sprite(texture), animation(texture) {
+           const WorldViewSettings& settings, const Texture& texture,
+           SoundManager& sound_manager) :
+    DrawableBox2D(size, initial, settings), sprite(texture), animation(texture),
+    sound_manager(sound_manager) {
     updateState(STATE_CLOSED);
     sprite.addClip(2, 216, 192, 384);
     for (int i = 0; i < 10; ++i) {
@@ -30,7 +32,10 @@ SDL_Rect* Gate::getClip() {
     }
 }
 
-const char * Gate::updateState(const State& new_state) {
+void Gate::updateState(const State& new_state) {
     DrawableBox2D::updateState(new_state);
-    return "gate";
+}
+
+void Gate::playSound() {
+    sound_manager.playSoundEffect("gate");
 }

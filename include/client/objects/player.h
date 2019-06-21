@@ -21,9 +21,8 @@ public:
     virtual bool setDestroy() override;
     virtual bool isFinished() override;
 
+    virtual void playSound() override;
     virtual void playDestroySound() override;
-    virtual void playJumpSound() override;
-    virtual void playRunSound() override;
 
 private:
     Animation idle;

@@ -58,14 +58,10 @@ bool DrawableBox2D::isFinished() {
     return false;
 }
 
+void DrawableBox2D::playSound() {
+    // Do nothing
+}
+
 void DrawableBox2D::playDestroySound() {
-    // Do nothing
-}
-
-void DrawableBox2D::playJumpSound() {
-    // Do nothing
-}
-
-void DrawableBox2D::playRunSound() {
     // Do nothing
 }
