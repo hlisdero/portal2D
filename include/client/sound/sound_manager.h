@@ -38,7 +38,6 @@ public:
 
 private:
     const std::string sounds_dir_prefix;
-    std::map<std::string, size_t> sound_effects_names;
     std::map<std::string, SoundEffect> sound_effects;
     std::vector<Music> soundtrack;
 

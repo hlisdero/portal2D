@@ -37,7 +37,7 @@ SoundManager::~SoundManager() {
 }
 
 void SoundManager::addSoundEffect(const std::string& name, const std::string& path) {
-    sound_effects.emplace(name, path);
+    sound_effects.emplace(name, sounds_dir_prefix + path);
 }
 
 void SoundManager::addMusic(const std::string& path) {
