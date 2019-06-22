@@ -34,6 +34,7 @@ private:
     FiniteAnimation death;
     Animation* current;
     SoundManager& sound_manager;
+    int sound = 0;
 
     SDL_RendererFlip flip_state = SDL_FLIP_NONE;
 

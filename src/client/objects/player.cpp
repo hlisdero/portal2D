@@ -94,12 +94,15 @@ bool Player::isFinished() {
 }
 
 void Player::playSound() {
-    if (current == &run) {
+    if (current == &run && sound != 0) {
+        sound = 0;
         // sound_manager.playSoundEffect("player_run");
-    } else if (current == &jump_rise) {
-        // sound_manager.playSoundEffect("player_jump");
-    } else if (current == &jump_land) {
-        // sound_manager.playSoundEffect("player_land");
+    } else if (current == &jump_rise && sound != 1) {
+        sound = 1;
+        sound_manager.playSoundEffect("player_jump");
+    } else if (current == &jump_land && sound != 2) {
+        sound = 2;
+        sound_manager.playSoundEffect("player_land");
     }
 }
 
