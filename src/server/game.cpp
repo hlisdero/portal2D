@@ -128,7 +128,7 @@ void Game::processQueue() {
 			player->grabReleaseRock(world.getb2World());
 			break;
 		case PIN_TOOL:
-			// TODO pin tool
+			world.createPinTool(player, event.click_direction, event_creator);
 			break;
 		case MOUSE:
 			world.createPortal(player, stateToPortalColor(event.state),

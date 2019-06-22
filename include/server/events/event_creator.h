@@ -25,6 +25,8 @@ public:
     void addEntityCreations(const std::vector<Entity*>& entities);
     void addPositionUpdates(const std::vector<Entity*>& entities);
 
+    void addPinToolCreation(b2Vec2 & position, float rotationDeg);
+
 private:
 	std::queue<WorldEvent>& queue;
 

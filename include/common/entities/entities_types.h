@@ -16,6 +16,7 @@ enum EntityType {
 	TYPE_BUTTON,
 	TYPE_PORTAL,
 	TYPE_END_BARRIER,
+	TYPE_PIN_TOOL,
 
 	// Dynamic
 	TYPE_ROCK,

@@ -1,8 +1,9 @@
 #include "client/view/view_object_creator.h"
 
 ViewObjectCreator::ViewObjectCreator(std::map<size_t, DrawableBox2D*>& view_objects,
-                                     const WorldViewSettings& settings) :
+    std::vector<indexedDrawable>& dead_view_objects, const WorldViewSettings& settings) :
     view_objects(view_objects),
+    dead_view_objects(dead_view_objects),
     settings(settings),
     textures(settings.getTextureLoader()) {}
 
@@ -75,6 +76,11 @@ void ViewObjectCreator::createRock(size_t index, const Position& initial) const 
 void ViewObjectCreator::createPortal(size_t index, const Position& initial, const State& state) const {
     Portal* portal = new Portal(getSize(TYPE_PORTAL), initial, settings, textures["Entities"], state);
     view_objects[index] = portal;
+}
+
+void ViewObjectCreator::createPinTool(const Position& initial) const {
+    PinTool * pinTool = new PinTool(getSize(TYPE_PIN_TOOL), initial, settings, textures["Entities"]);
+    dead_view_objects.emplace_back(0,pinTool);
 }
 
 Size ViewObjectCreator::getSize(EntityType type) const {

@@ -6,7 +6,7 @@ WorldView::WorldView(BlockingQueue<ViewEvent>& queue) :
     camera_manager(screen),
     settings(screen.getWidth(), screen.getHeight(), screen.getTextureCreator()),
     background(settings.getScreenWidth(), settings.getScreenHeight(), settings.getTextureLoader()["Background"]),
-    object_creator(view_objects, settings) {
+    object_creator(view_objects, dead_view_objects, settings) {
     event_manager.addHandler((KeyboardHandler*) &sound_manager);
     event_manager.addHandler((WindowEventHandler*) &screen);
     event_manager.addHandler((KeyboardHandler*) &screen);
@@ -77,6 +77,9 @@ void WorldView::createEntity(size_t index, EntityType type,
             object_creator.createPortal(index, position, state);
             sound_manager.playSoundEffect("portal_creation");
             break;
+        case TYPE_PIN_TOOL:
+            object_creator.createPinTool(position);
+            break;
         case TYPE_END_BARRIER:
             object_creator.createEndBarrier(index, position);
             break;
@@ -113,7 +116,7 @@ void WorldView::destroyEntity(size_t index) {
         camera_manager.removeAndReplace(index);
         delete drawable;
     } else {
-        dead_view_objects.push_back(indexedDrawable(index,drawable));
+        dead_view_objects.emplace_back(index,drawable);
     }
 
     view_objects.erase(index);

@@ -14,8 +14,6 @@
 
 extern ClientSettings CLIENT_SETTINGS;
 
-typedef std::pair<size_t, DrawableBox2D*> indexedDrawable;
-
 class WorldView {
 public:
     WorldView(BlockingQueue<ViewEvent>& queue);
