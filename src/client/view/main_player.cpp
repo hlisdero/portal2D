@@ -10,9 +10,9 @@ void MainPlayer::handle(const KeyboardEvent& event) {
     if (direction != NONE) {
         queue.push(ViewEvent(index, direction, event.pressed, event.repeat));
     } else if (event.pressed) {
-        if (event.key == SDL_SCANCODE_R) {
+        if (event.key == CLIENT_SETTINGS.RESET_PORTALS) {
             queue.push(ViewEvent(index, RESET_PORTALS));
-        } else if(event.key == SDL_SCANCODE_E) {
+        } else if(event.key == CLIENT_SETTINGS.GRAB_RELEASE_ROCK) {
             queue.push(ViewEvent(index, GRAB_RELEASE_ROCK));
         }
     }
@@ -51,17 +51,15 @@ void MainPlayer::handle(const MouseEvent& event) {
 
 MoveDirection MainPlayer::processMoveDirection(const KeyboardEvent& event) const {
     MoveDirection direction = NONE;
-    switch (event.key) {
-        case SDL_SCANCODE_W:
-            direction = UP;
-            break;
-        case SDL_SCANCODE_A:
-            direction = LEFT;
-            break;
-        case SDL_SCANCODE_D:
-            direction = RIGHT;
-            break;
+
+    if(event.key == CLIENT_SETTINGS.JUMP) {
+        direction = UP;
+    } else if(event.key == CLIENT_SETTINGS.MOVE_LEFT) {
+        direction = LEFT;
+    } else if(event.key == CLIENT_SETTINGS.MOVE_RIGHT) {
+        direction = RIGHT;
     }
+
     return direction;
 }
 

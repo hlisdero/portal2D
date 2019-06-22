@@ -84,13 +84,13 @@ void SoundManager::handle(const KeyboardEvent& event) {
     if (!event.pressed) {
         return;
     }
-    if (event.key == SDL_SCANCODE_M) {
+    if (event.key == CLIENT_SETTINGS.MUTE_MUSIC) {
         toggleMusic(0);
         // Toggle sound
         Mix_Volume(-1, MIX_MAX_VOLUME);
-    } else if (event.key == SDL_SCANCODE_COMMA) {
+    } else if (event.key == CLIENT_SETTINGS.DECREASE_MUSIC_VOLUME) {
         setMusicVolume(getCurrentMusicVolume() - 20);
-    } else if (event.key == SDL_SCANCODE_PERIOD) {
+    } else if (event.key == CLIENT_SETTINGS.INCREASE_MUSIC_VOLUME) {
         setMusicVolume(getCurrentMusicVolume() + 20);
     }
 }

@@ -12,6 +12,9 @@
 #include "common/objects/click_direction.h"
 #include "common/objects/state.h"
 
+#include "client/client_settings.h"
+extern ClientSettings CLIENT_SETTINGS;
+
 class MainPlayer : public KeyboardHandler, public MouseHandler {
 public:
     MainPlayer(size_t index, Player& player, const Camera& camera, BlockingQueue<ViewEvent>& queue);

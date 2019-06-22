@@ -7,7 +7,7 @@ class KeyboardEvent {
 public:
     KeyboardEvent(const SDL_Event& event);
 
-    uint32_t key = 0;
+    SDL_Keycode key = 0;
     bool pressed = false;
     bool repeat = false;
 };
