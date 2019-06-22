@@ -11,12 +11,10 @@
 #include "common/objects/size.h"
 #include "common/objects/state.h"
 
-typedef std::pair<size_t, DrawableBox2D*> indexedDrawable;
-
 class ViewObjectCreator {
 public:
     ViewObjectCreator(std::map<size_t, DrawableBox2D*>& view_objects,
-        std::vector<indexedDrawable>& dead_view_objects,
+        std::vector<DrawableBox2D*>& dead_view_objects,
                       const WorldViewSettings& settings);
 
     ViewObjectCreator(const ViewObjectCreator&) = delete;
@@ -42,7 +40,7 @@ public:
 
 private:
     std::map<size_t, DrawableBox2D*>& view_objects;
-    std::vector<indexedDrawable>& dead_view_objects;
+    std::vector<DrawableBox2D*>& dead_view_objects;
     const WorldViewSettings& settings;
     const TextureLoader& textures;
 

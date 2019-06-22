@@ -16,8 +16,8 @@ WorldView::~WorldView() {
     for (const auto& object : view_objects) {
         delete object.second;
     }
-    for (const auto& object : dead_view_objects) {
-        delete object.second;
+    for (DrawableBox2D* object : dead_view_objects) {
+        delete object;
     }
     if (main_player) {
         delete main_player;
@@ -88,7 +88,7 @@ void WorldView::createEntity(size_t index, EntityType type,
             break;
         case TYPE_PLAYER:
             object_creator.createPlayer(index, position);
-            camera_manager.add(index, view_objects[index]);
+            camera_manager.add(view_objects[index]);
             break;
         case TYPE_ENERGY_BALL:
             object_creator.createEnergyBall(index, position);
@@ -113,10 +113,10 @@ void WorldView::destroyEntity(size_t index) {
 
     bool destroyNow = drawable->setDestroy();
     if (destroyNow) {
-        camera_manager.removeAndReplace(index);
+        camera_manager.removeAndReplace(drawable);
         delete drawable;
     } else {
-        dead_view_objects.emplace_back(index,drawable);
+        dead_view_objects.push_back(drawable);
     }
 
     view_objects.erase(index);
@@ -138,7 +138,7 @@ void WorldView::updateState(size_t index, const State& state) {
 
 void WorldView::selectPlayer(size_t index) {
     Player* player = static_cast<Player*>(view_objects.at(index));
-    camera_manager.select(index);
+    camera_manager.select(player);
     main_player = new MainPlayer(index, *player, *screen.getCamera(), event_manager.getQueue());
     event_manager.addHandler((KeyboardHandler*) main_player);
     event_manager.addHandler((MouseHandler*) main_player);
@@ -171,21 +171,25 @@ void WorldView::setDefeat() {
 
 void WorldView::renderObjects() {
     screen.centerCamera();
+
+    // Render object
     for (const auto& object : view_objects) {
         screen.render(*object.second);
     }
 
-    auto it = dead_view_objects.begin();
+    // Render "dead" objects and delete them if finished
+    auto itDrawable = dead_view_objects.begin();
 
-    while(it != dead_view_objects.end()) {
-        screen.render(*it->second);
+    while(itDrawable != dead_view_objects.end()) {
+        DrawableBox2D* drawable = *itDrawable;
+        screen.render(*drawable);
 
-        if (it->second->isFinished()) {
-            camera_manager.removeAndReplace(it->first);
-            delete it->second;
-            it = dead_view_objects.erase(it);
+        if (drawable->isFinished()) {
+            camera_manager.removeAndReplace(drawable);
+            delete drawable;
+            itDrawable = dead_view_objects.erase(itDrawable);
         } else {
-            it++;
+            itDrawable++;
         }
     }
 }
