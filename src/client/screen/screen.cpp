@@ -54,7 +54,7 @@ void Screen::render(const Texture& texture, int x, int y, double scale_factor) {
     int w = texture.width * scale_factor;
     int h = texture.height * scale_factor;
     SDL_Rect rect = {x, y, w, h};
-    makeRelativeToCamera(rect);
+
     renderer.render(texture.get(), nullptr, &rect);
 }
 

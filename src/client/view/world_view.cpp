@@ -146,6 +146,8 @@ void WorldView::update() {
         renderTexture("Victory");
     } else if (defeat) {
         renderTexture("Defeat");
+    } else if(view_objects.empty()) {
+        renderTexture("WaitingForPlayers");
     }
 
     screen.update();
@@ -188,17 +190,13 @@ void WorldView::renderPendingObjects() {
 
 void WorldView::renderTexture(const std::string& name) {
     const Texture& texture = settings.getTextureLoader()[name];
-    const Camera* camera = screen.getCamera();
-    int x = 0;
-    int y = 0;
-    if (!camera) {
-        x = settings.getScreenWidth()/2 - texture.width/4;
-        y = settings.getScreenHeight()/2 - texture.height/4;
-    } else {
-        x = camera->position.x + camera->position.w/2;
-        y = camera->position.y + camera->position.h/2;
-    }
-    screen.render(texture, x, y, 0.5);
+
+    float zoomFactor = (float) settings.getScreenWidth() / (float) texture.width;
+
+    int x = settings.getScreenWidth()/2 - texture.width/2*zoomFactor;
+    int y = settings.getScreenHeight()/2 - texture.height/2*zoomFactor;
+
+    screen.render(texture, x, y, zoomFactor);
 }
 
 void WorldView::checkDisableMainPlayer(size_t index) {

@@ -10,6 +10,7 @@ TextureLoader::TextureLoader(const TextureCreator& textureCreator) :
     addTexture("FX", "fx.png");
     addTexture("Victory", "victory.png");
     addTexture("Defeat", "defeat.png");
+    addTexture("WaitingForPlayers", "waiting-for-players.png");
 }
 
 void TextureLoader::addTexture(const char * name, const char * file) {
