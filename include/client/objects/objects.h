@@ -15,5 +15,6 @@
 #include "client/objects/rock.h"
 #include "client/objects/portal.h"
 #include "client/objects/end_barrier.h"
+#include "client/objects/pin_tool.h"
 
 #endif  // OBJECTS_H

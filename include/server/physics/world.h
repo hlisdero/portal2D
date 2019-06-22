@@ -37,6 +37,8 @@ public:
     void killPlayer(PlayerEntity* player);
     void createPortal(PlayerEntity* player, PortalColor color,
     	ClickDirection& direction, EventCreator& eventCreator);
+	void createPinTool(PlayerEntity * player, ClickDirection& direction, 
+		EventCreator & eventCreator);
 
     void updatePhysics(EventCreator & eventCreator);
     void updateDynamics();

@@ -141,6 +141,21 @@ void World::createPortal(PlayerEntity * player, PortalColor color,
 	}
 }
 
+void World::createPinTool(PlayerEntity * player, ClickDirection& direction, EventCreator & eventCreator) {
+    b2Vec2 dir_vec(direction.x, direction.y);
+	const b2Vec2 & origin = player->getBody()->GetPosition();
+	b2Vec2 end = origin + (SETTINGS.PORTAL_REACH * dir_vec);
+
+	PortalRayCastCallback callback;
+
+	world.RayCast(&callback, origin, end);
+
+	if(callback.hit) {
+		callback.m_point -= entitiesSettings[TYPE_PIN_TOOL][X_OFFSET]*callback.m_normal;
+		eventCreator.addPinToolCreation(callback.m_point, Math::getRotationDegFromNormal(callback.m_normal));
+	}
+}
+
 void World::emitEnergyBalls(EventCreator & eventCreator, std::chrono::system_clock::time_point & now) {
 	if(nextEmit > now) {
 		return;

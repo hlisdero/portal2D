@@ -2,6 +2,7 @@
 #define CAMERA_MANAGER_H
 
 #include <map>
+#include <unordered_set>
 #include <stdexcept>
 #include <algorithm>
 #include "client/screen/screen.h"
@@ -10,15 +11,15 @@ class CameraManager {
 public:
     explicit CameraManager(Screen& screen);
 
-    void add(size_t index, DrawableBox2D* drawable);
-    void removeAndReplace(size_t index);
+    void add(DrawableBox2D* drawable);
+    void removeAndReplace(DrawableBox2D* oldCamera);
 
-    void select(size_t index);
+    void select(DrawableBox2D* newCamera);
 
 private:
     Screen& screen;
-    std::map<size_t, DrawableBox2D*> drawables;
-    size_t current_index;
+    std::unordered_set<DrawableBox2D*> drawables;
+    DrawableBox2D* current;
 };
 
 #endif  // CAMERA_MANAGER_H

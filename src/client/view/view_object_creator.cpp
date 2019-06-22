@@ -1,9 +1,11 @@
 #include "client/view/view_object_creator.h"
 
 ViewObjectCreator::ViewObjectCreator(std::map<size_t, DrawableBox2D*>& view_objects,
-                                     const WorldViewSettings& settings,
-                                     SoundManager& sound_manager) :
+                     std::vector<DrawableBox2D*>& pending_destroy_view_objects,
+                     const WorldViewSettings& settings,
+                     SoundManager& sound_manager) :
     view_objects(view_objects),
+    pending_destroy_view_objects(pending_destroy_view_objects),
     settings(settings),
     sound_manager(sound_manager),
     textures(settings.getTextureLoader()) {}
@@ -77,6 +79,11 @@ void ViewObjectCreator::createRock(size_t index, const Position& initial) const 
 void ViewObjectCreator::createPortal(size_t index, const Position& initial, const State& state) const {
     Portal* portal = new Portal(getSize(TYPE_PORTAL), initial, settings, textures["Entities"], state);
     view_objects[index] = portal;
+}
+
+void ViewObjectCreator::createPinTool(const Position& initial) const {
+    PinTool * pinTool = new PinTool(getSize(TYPE_PIN_TOOL), initial, settings, textures["Entities"]);
+    pending_destroy_view_objects.push_back(pinTool);
 }
 
 Size ViewObjectCreator::getSize(EntityType type) const {

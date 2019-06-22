@@ -54,3 +54,9 @@ State EventCreator::portalColorToState(const PortalColor& color) const {
         return PORTAL_COLOR_BLUE;
     }
 }
+
+void EventCreator::addPinToolCreation(b2Vec2 & pos, float rotationDeg) {
+    Position position(pos.x, pos.y, rotationDeg);
+    WorldEvent event(0, TYPE_PIN_TOOL, position);
+    queue.push(event);
+}

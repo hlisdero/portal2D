@@ -6,7 +6,7 @@ WorldView::WorldView(BlockingQueue<ViewEvent>& queue) :
     camera_manager(screen),
     settings(screen.getWidth(), screen.getHeight(), screen.getTextureCreator()),
     background(settings.getScreenWidth(), settings.getScreenHeight(), settings.getTextureLoader()["Background"]),
-    object_creator(view_objects, settings, sound_manager) {
+    object_creator(view_objects, pending_destroy_view_objects, settings, sound_manager) {
     event_manager.addHandler((KeyboardHandler*) &sound_manager);
     event_manager.addHandler((WindowEventHandler*) &screen);
     event_manager.addHandler((KeyboardHandler*) &screen);
@@ -16,9 +16,11 @@ WorldView::~WorldView() {
     for (const auto& object : view_objects) {
         delete object.second;
     }
-    for (const auto& object : pending_destroy_view_objects) {
-        delete object.second;
+
+    for (DrawableBox2D* object : pending_destroy_view_objects) {
+        delete object;
     }
+
     if (main_player) {
         delete main_player;
     }
@@ -77,6 +79,9 @@ void WorldView::createEntity(size_t index, EntityType type,
             object_creator.createPortal(index, position, state);
             sound_manager.playSoundEffect("portal_creation");
             break;
+        case TYPE_PIN_TOOL:
+            object_creator.createPinTool(position);
+            break;
         case TYPE_END_BARRIER:
             object_creator.createEndBarrier(index, position);
             break;
@@ -85,7 +90,7 @@ void WorldView::createEntity(size_t index, EntityType type,
             break;
         case TYPE_PLAYER:
             object_creator.createPlayer(index, position);
-            camera_manager.add(index, view_objects[index]);
+            camera_manager.add(view_objects[index]);
             break;
         case TYPE_ENERGY_BALL:
             object_creator.createEnergyBall(index, position);
@@ -98,13 +103,15 @@ void WorldView::createEntity(size_t index, EntityType type,
 
 void WorldView::destroyEntity(size_t index) {
     checkDisableMainPlayer(index);
-    view_objects.at(index)->playDestroySound();
+    auto & object = view_objects.at(index);
 
-    if (view_objects.at(index)->destroyNow()) {
-        camera_manager.removeAndReplace(index);
-        delete view_objects.at(index);
+    object->playDestroySound();
+
+    if (object->destroyNow()) {
+        camera_manager.removeAndReplace(object);
+        delete object;
     } else {
-        pending_destroy_view_objects.push_back(indexedDrawable(index, view_objects[index]));
+        pending_destroy_view_objects.push_back(object);
     }
     view_objects.erase(index);
 }
@@ -121,7 +128,7 @@ void WorldView::updateState(size_t index, const State& state) {
 
 void WorldView::selectPlayer(size_t index) {
     Player* player = static_cast<Player*>(view_objects.at(index));
-    camera_manager.select(index);
+    camera_manager.select(player);
     main_player = new MainPlayer(index, *player, *screen.getCamera(), event_manager.getQueue());
     event_manager.addHandler((KeyboardHandler*) main_player);
     event_manager.addHandler((MouseHandler*) main_player);
@@ -130,14 +137,17 @@ void WorldView::selectPlayer(size_t index) {
 void WorldView::update() {
     screen.setRenderDrawColor("white");
     screen.clear();
+
     screen.render(background);
     renderObjects();
     renderPendingObjects();
+
     if (victory) {
         renderTexture("Victory");
     } else if (defeat) {
         renderTexture("Defeat");
     }
+
     screen.update();
 }
 
@@ -153,22 +163,25 @@ void WorldView::setDefeat() {
 
 void WorldView::renderObjects() {
     screen.centerCamera();
+
     for (const auto& object : view_objects) {
         screen.render(*object.second);
     }
 }
 
 void WorldView::renderPendingObjects() {
-    auto it = pending_destroy_view_objects.begin();
-    while (it != pending_destroy_view_objects.end()) {
-        screen.render(*it->second);
+    auto itObject = pending_destroy_view_objects.begin();
 
-        if (it->second->isFinished()) {
-            camera_manager.removeAndReplace(it->first);
-            delete it->second;
-            it = pending_destroy_view_objects.erase(it);
+    while(itObject != pending_destroy_view_objects.end()) {
+        DrawableBox2D* object = *itObject;
+        screen.render(*object);
+
+        if (object->isFinished()) {
+            camera_manager.removeAndReplace(object);
+            delete object;
+            itObject = pending_destroy_view_objects.erase(itObject);
         } else {
-            it++;
+            itObject++;
         }
     }
 }
