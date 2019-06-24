@@ -116,7 +116,7 @@ if(RELEASE)
     install(FILES data/conf/client.conf DESTINATION ${CLIENT_CONF_DIRECTORY})
 
     install(TARGETS server DESTINATION ${BIN_DIRECTORY})
-    install(DIRECTORY data/maps DESTINATION ${MAPS_DIRECTORY} PATTERN data/maps/*)
+    install(DIRECTORY data/maps/ DESTINATION ${MAPS_DIRECTORY})
     install(FILES data/conf/server.conf DESTINATION ${SERVER_CONF_DIRECTORY})
 endif()
 

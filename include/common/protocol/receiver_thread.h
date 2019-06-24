@@ -12,7 +12,6 @@ public:
         protocol(protocol), queue(queue) {}
 
     virtual void run() override {
-        running = true;
         try {
             while (true) {
                 T event;
@@ -31,7 +30,7 @@ public:
     }
 
 private:
-    bool running = false;
+    bool running = true;
     Protocol& protocol;
     BlockingQueue<T>& queue;
 };
