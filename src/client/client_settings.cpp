@@ -16,6 +16,8 @@ ClientSettings::ClientSettings() {
     INCREASE_MUSIC_VOLUME = getSDLKey(yaml, "increase_music_volume");
     DECREASE_MUSIC_VOLUME = getSDLKey(yaml, "decrease_music_volume");
 
+    TOGGLE_FULLSCREEN = getSDLKey(yaml, "toggle_fullscreen");
+
     PIXEL_PER_METER = yaml["pixel_per_meter"].as<double>();
     INITIAL_SCREEN_WIDTH = yaml["screen_width"].as<size_t>();
     INITIAL_SCREEN_HEIGHT = yaml["screen_height"].as<size_t>();

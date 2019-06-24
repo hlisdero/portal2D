@@ -2,6 +2,7 @@
 #define SCREEN_H
 
 #include <string>
+#include "client/client_settings.h"
 #include "client/objects/drawable.h"
 #include "client/objects/background.h"
 #include "client/screen/window.h"
@@ -11,6 +12,8 @@
 #include "client/texture/color.h"
 #include "client/event/window_event_handler.h"
 #include "client/event/keyboard_handler.h"
+
+extern ClientSettings CLIENT_SETTINGS;
 
 class Screen : public WindowEventHandler, public KeyboardHandler {
 public:

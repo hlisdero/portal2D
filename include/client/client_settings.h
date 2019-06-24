@@ -21,6 +21,8 @@ public:
     SDL_Keycode INCREASE_MUSIC_VOLUME;
     SDL_Keycode DECREASE_MUSIC_VOLUME;
 
+    SDL_Keycode TOGGLE_FULLSCREEN;
+
     // Controla el tamaño del mundo que se ve
 	double PIXEL_PER_METER = 80;
 

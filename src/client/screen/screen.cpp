@@ -39,7 +39,7 @@ void Screen::handle(const SDL_Event& event) {
 }
 
 void Screen::handle(const KeyboardEvent& event) {
-    if (!event.pressed || event.key != SDL_SCANCODE_P) {
+    if (!event.pressed || event.key != CLIENT_SETTINGS.TOGGLE_FULLSCREEN) {
         return;
     }
     window.toggleFullscreen();
