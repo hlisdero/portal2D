@@ -24,7 +24,7 @@ public:
 
 	virtual void handleContactWith(Entity * other, b2Contact * contact, bool inContact) override;
 
-	std::chrono::system_clock::time_point * getDeathTP();
+	std::chrono::system_clock::time_point & getDeathTP();
 
 	virtual ~EnergyBallEntity() override;
 

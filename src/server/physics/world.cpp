@@ -167,27 +167,17 @@ void World::emitEnergyBalls(EventCreator & eventCreator, std::chrono::system_clo
 			bodyFactory.createBody(entity);
 			eventCreator.addEntityCreation(entity);
 			energyBalls.push_back(entity);
-
-			if(nextDestroy == nullptr) {
-				nextDestroy = entity->getDeathTP();
-			}
 		}
 	}
 	nextEmit = now + emitterInterval;
 }
 
 void World::destroyEnergyBalls(EventCreator & eventCreator, std::chrono::system_clock::time_point & now) {
-	if(nextDestroy == nullptr || *nextDestroy > now) {
-		return;
-	}
-
-	while(!energyBalls.empty() && *energyBalls.front()->getDeathTP() < now) {
+	while(!energyBalls.empty() && energyBalls.front()->getDeathTP() < now) {
 		eventCreator.addEntityDestruction(energyBalls.front());
 		deleteEntity(energyBalls.front());
 		energyBalls.pop_front();
 	}
-
-	nextDestroy = energyBalls.empty() ? nullptr : energyBalls.front()->getDeathTP();
 }
 
 void World::updatePhysics(EventCreator & eventCreator) {

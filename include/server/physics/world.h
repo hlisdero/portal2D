@@ -64,7 +64,6 @@ private:
 
 	std::vector<EnergyEmitterEntity*> energyEmitters;
 
-	std::chrono::system_clock::time_point * nextDestroy = nullptr;
 	std::list<EnergyBallEntity*> energyBalls;
 
 	std::chrono::system_clock::time_point nextEmit = std::chrono::system_clock::now();

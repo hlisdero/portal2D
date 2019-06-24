@@ -103,6 +103,6 @@ void EnergyBallEntity::evaluateCollision(b2Contact * contact) {
 	contact->Evaluate(contact->GetManifold(), transformA, transformB);
 }
 
-std::chrono::system_clock::time_point * EnergyBallEntity::getDeathTP() {
-	return &deathTP;
+std::chrono::system_clock::time_point & EnergyBallEntity::getDeathTP() {
+	return deathTP;
 }
