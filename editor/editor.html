@@ -101,30 +101,42 @@
 					{abrev: "ERASE", color: "white"},
 					{name: "TYPE_STONE_BLOCK", color: "#95a5a6", abrev: "Stone"},
 					{name: "TYPE_METAL_BLOCK", color: "#d35400", abrev: "Metal"},
-					{name: "TYPE_METAL_DIAG_BLOCK", color: "#d35400", abrev: "M-Diag", rot: true},
+					{name: "TYPE_METAL_DIAG_BLOCK", color: "#d35400", abrev: "M-Diag", 
+						rot: {0: "|\\", 90: "/|", 180: "\\|", 270: "|/"}},
 					{name: "TYPE_ACID", color: "#8BC34A", abrev: "Acid"},
-					{name: "TYPE_GATE", color: "#FFEE58", abrev: "Gate", rot: true},
-					{name: "TYPE_ENERGY_BAR", color: "#FF9800", abrev: "Bar", rot: true},
-					{name: "TYPE_ENERGY_EMITTER", color: "#CE93D8", abrev: "Emitter", rot: true},
+					{name: "TYPE_GATE", color: "#FFEE58", abrev: "Gate", 
+						rot: {0: "v", 90: ">", 180: "^", 270: "<"}},
+					{name: "TYPE_ENERGY_BAR", color: "#FF9800", abrev: "Bar", 
+						rot: {0: "|", 90: "--", 180: "|", 270: "--"}},
+					{name: "TYPE_ENERGY_EMITTER", color: "#CE93D8", abrev: "Emitter", 
+						rot: {0: ">", 90: "^", 180: "<", 270: "v"}},
 					{name: "TYPE_ENERGY_RECEIVER", color: "#B39DDB", abrev: "Recver"},
-					{name: "TYPE_BUTTON", color: "#ef5350", abrev: "Button", rot: true},
-					{name: "TYPE_END_BARRIER", color: "#B3E5FC", abrev: "End", rot: true},
+					{name: "TYPE_BUTTON", color: "#ef5350", abrev: "Button", 
+						rot: {0: "^", 90: "<", 180: "v", 270: ">"}},
+					{name: "TYPE_END_BARRIER", color: "#B3E5FC", abrev: "End", 
+						rot: {0: "|", 90: "--", 180: "er 180", 270: "er 270"}},
 					{name: "TYPE_PLAYER", color: "#BCAAA4", abrev: "Player"},
 					{name: "TYPE_ROCK", color: "#CFD8DC", abrev: "Rock"}
 					];
 
 		let current;
 		let currentSpawn;
+		let recentSets;
 		selectType(1)();
 
 		function setBlock() {
+			recentSets.push(this.dataset.id);
+			
 			if(current == 0) {
 				delete this.dataset.type;
 				delete this.dataset.name;
 				this.innerHTML= this.dataset.placeholder;
 				this.style = ""
 			} else if(this.dataset.type != current) {
-				this.innerHTML = types[current].abrev + "<br>0";
+				this.innerHTML = types[current].abrev + "<br>";
+				if('rot' in types[current]) {
+					this.innerHTML += types[current].rot[0];
+				}
 				this.dataset.type = current;
 				this.dataset.rotation = 0;
 				this.style = "background-color: "+types[current].color;
@@ -147,10 +159,10 @@
 					currentSpawn = this;
 				}
 
-			} else if("rot" in types[this.dataset.type]) {
+			} else if("rot" in types[current]) {
 				let newRot = (parseInt(this.dataset.rotation, 10) + 90) % 360;
 				this.dataset.rotation = newRot;
-				this.innerHTML = types[current].abrev + "<br>" +newRot;
+				this.innerHTML = types[current].abrev + "<br>" + types[current].rot[newRot];
 			}
 		}
 
@@ -214,14 +226,15 @@
 					let square = document.createElement("div");
 					square.className = "square";
 					square.dataset.placeholder = "<div class='placeholder'>" + (x+1) + "," + (height - invY + 1) + "</div>"
+					square.dataset.id = x + height*invY;
 					square.innerHTML= square.dataset.placeholder;
 					square.onmousedown = setBlock;
 					square.onmouseover = function() {
-						if(mousedown) {
+						if(mousedown && recentSets.indexOf(this.dataset.id) == -1) {
 							setBlock.apply(this);
 						}
 					};
-					line.appendChild(square); 
+					line.appendChild(square);
 				}
 				map.appendChild(line); 
 			}
@@ -246,6 +259,7 @@
 	    } 
 	    document.onmouseup = function() {
 	    	mousedown = false;
+	    	recentSets = [];
 	    }
 	</script>
 </body>
