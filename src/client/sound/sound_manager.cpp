@@ -16,6 +16,7 @@ SoundManager::SoundManager() :
 
     addMusic("soundtrack.mp3");
     playMusic(0);
+    setMusicVolume(35);
 
     addSoundEffect("ball_creation", "ball_creation.wav");
     addSoundEffect("ball_destruction", "ball_destruction.wav");
