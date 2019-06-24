@@ -30,6 +30,6 @@ const float entitiesSettings[ENTITY_TYPES_LENGTH][4] = {
 	{0.0f, 0.0f, 0.30f, 0.30f},    // TYPE_ENERGY_BALL
 };
 
-#define BUTTON_TOP_SIZE_PERCENTAGE 0.6
+#define BUTTON_TOP_SIZE_PERCENTAGE 0.5
 
 #endif

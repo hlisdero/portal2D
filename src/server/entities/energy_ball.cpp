@@ -25,11 +25,22 @@ void EnergyBallEntity::handleContactWith(Entity * other, b2Contact * contact, bo
 	}
 
 	if(!newContact) {
+		contacts.erase(contact);
+		if(contacts.empty()) {
+			bouncing = false;
+		}
+		return;
+	} else {
+		contacts.insert(contact);
+	}
+
+	if(bouncing) {
 		return;
 	}
 
 	if(other->getType() == TYPE_METAL_BLOCK ||
 		other->getType() == TYPE_METAL_DIAG_BLOCK) {
+		bouncing = true;
 
 		evaluateCollision(contact);
 
@@ -44,7 +55,7 @@ void EnergyBallEntity::handleContactWith(Entity * other, b2Contact * contact, bo
 		int blockRotation = Math::getRotationDegFromNormal(worldManifold.normal);
 
 		// strait bounce
-		if(abs(blockRotation - getRotationDeg()) == 180) {
+		if(abs(abs(blockRotation - getRotationDeg()) - 180) < ERROR_MARGIN) {
 			getBody()->SetLinearVelocity(-1 * getBody()->GetLinearVelocity());
 			setRotationDeg((getRotationDeg() + 180) % 360);
 		// diag bounce

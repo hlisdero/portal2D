@@ -2,6 +2,7 @@
 #define ENERGY_BALL_ENTITY_H
 
 #include <chrono>
+#include <unordered_set>
 
 #include "server/entities/entity.h"
 #include "server/entities/attributes/teleportable_entity.h"
@@ -13,6 +14,8 @@ extern ServerSettings SETTINGS;
 class EnergyBallEntity;
 
 #include "server/entities/energy_emitter.h"
+
+#define ERROR_MARGIN 2
 
 class EnergyBallEntity :  public TeleportableEntity {
 public:
@@ -26,6 +29,9 @@ public:
 	virtual ~EnergyBallEntity() override;
 
 private: 
+	std::unordered_set<b2Contact *> contacts;
+	bool bouncing = false;
+
 	EnergyEmitterEntity & owner;
 	bool justEmitted = true;
 	std::chrono::system_clock::time_point deathTP =
