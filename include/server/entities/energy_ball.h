@@ -39,6 +39,8 @@ private:
 		+ std::chrono::duration<int>(SETTINGS.ENERGY_BALL_LIFE_LENGTH);
 
 	void evaluateCollision(b2Contact * contact);
+	void bounce(b2Contact * contact);
+	void registerContacts(b2Contact * contact, bool newContact);
 };
 
 #endif  // ENERGY_BALL_ENTITY_H

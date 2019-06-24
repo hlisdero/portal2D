@@ -10,6 +10,54 @@ EnergyBallEntity::EnergyBallEntity(const float intialX, const float intialY,
 	TeleportableEntity(TYPE_ENERGY_BALL, intialX, intialY, 
 		angle, gameEventCreator), owner(owner) {}
 
+void EnergyBallEntity::registerContacts(b2Contact * contact, bool newContact) {
+	if(!newContact) {
+		contacts.erase(contact);
+		if(contacts.empty()) {
+			bouncing = false;
+		}
+	} else {
+		contacts.insert(contact);
+	}
+}
+
+void EnergyBallEntity::bounce(b2Contact * contact) {
+	bouncing = true;
+
+	evaluateCollision(contact);
+
+	b2WorldManifold worldManifold;
+	contact->GetWorldManifold(&worldManifold);
+	worldManifold.normal.Normalize();
+
+	if(contact->GetFixtureA()->GetBody()->GetUserData() == (Entity*)this) {
+		worldManifold.normal *= -1;
+	}
+
+	int blockRotation = Math::getRotationDegFromNormal(worldManifold.normal);
+
+	// strait bounce
+	if(abs(abs(blockRotation - getRotationDeg()) - 180) < ERROR_MARGIN) {
+		getBody()->SetLinearVelocity(-1 * getBody()->GetLinearVelocity());
+		setRotationDeg((getRotationDeg() + 180) % 360);
+	// diag bounce
+	} else {
+		if((blockRotation - getRotationDeg() + 360) % 360 < 180) {
+			setRotationDeg((getRotationDeg() + 90) % 360);
+		} else {
+			setRotationDeg((getRotationDeg() + 270) % 360);
+		}
+
+		b2Vec2 direction = Math::vectorFromRotation(getRotationRad());
+		direction *= SETTINGS.ENERGY_BALL_SPEED;
+		getBody()->SetLinearVelocity(direction);
+
+		b2Vec2 & contactPoint = worldManifold.points[0];
+		Math::toEdgeMiddle(contactPoint, worldManifold.normal);
+		teleportTo(contactPoint.x, contactPoint.y);
+	}
+}
+
 void EnergyBallEntity::handleContactWith(Entity * other, b2Contact * contact, bool newContact) {
 	TeleportableEntity::handleContactWith(other, contact, newContact);
 
@@ -24,56 +72,15 @@ void EnergyBallEntity::handleContactWith(Entity * other, b2Contact * contact, bo
 		return;
 	}
 
-	if(!newContact) {
-		contacts.erase(contact);
-		if(contacts.empty()) {
-			bouncing = false;
-		}
-		return;
-	} else {
-		contacts.insert(contact);
-	}
+	registerContacts(contact, newContact);
 
-	if(bouncing) {
+	if(!newContact || bouncing) {
 		return;
 	}
 
 	if(other->getType() == TYPE_METAL_BLOCK ||
 		other->getType() == TYPE_METAL_DIAG_BLOCK) {
-		bouncing = true;
-
-		evaluateCollision(contact);
-
-		b2WorldManifold worldManifold;
-		contact->GetWorldManifold(&worldManifold);
-		worldManifold.normal.Normalize();
-
-		if(contact->GetFixtureA()->GetBody()->GetUserData() == (Entity*)this) {
-			worldManifold.normal *= -1;
-		}
-
-		int blockRotation = Math::getRotationDegFromNormal(worldManifold.normal);
-
-		// strait bounce
-		if(abs(abs(blockRotation - getRotationDeg()) - 180) < ERROR_MARGIN) {
-			getBody()->SetLinearVelocity(-1 * getBody()->GetLinearVelocity());
-			setRotationDeg((getRotationDeg() + 180) % 360);
-		// diag bounce
-		} else {
-			if((Math::getRotationDegFromNormal(worldManifold.normal) - getRotationDeg() + 360) % 360 < 180) {
-				setRotationDeg((getRotationDeg() + 90) % 360);
-			} else {
-				setRotationDeg((getRotationDeg() + 270) % 360);
-			}
-			b2Vec2 direction = Math::vectorFromRotation(getRotationRad());
-			direction *= SETTINGS.ENERGY_BALL_SPEED;
-			getBody()->SetLinearVelocity(direction);
-
-			b2Vec2 & contactPoint = worldManifold.points[0];
-			Math::toEdgeMiddle(contactPoint, worldManifold.normal);
-			teleportTo(contactPoint.x, contactPoint.y);
-		}
-
+		bounce(contact);
 	} else {
 
 		if(other->getType() == TYPE_ENERGY_RECEIVER) {
