@@ -126,7 +126,7 @@ void World::createPortal(PlayerEntity * player, PortalColor color,
 		if(portal != nullptr) {
 			eventCreator.addEntityDestruction(portal);
 			portal->move(callback.m_point.x, callback.m_point.y, callback.m_normal);
-			eventCreator.addEntityCreation(portal);
+			eventCreator.addPortalCreation(portal);
 		} else {
 			portal = new PortalEntity(callback.m_point.x, callback.m_point.y, callback.m_normal, color);
 
