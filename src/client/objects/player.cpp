@@ -67,11 +67,11 @@ void Player::updateFlipState(const Position& new_position) {
 void Player::updateAnimation(const Position& new_position) {
     if (new_position.y > currentY()) {
         current = &jump_rise;
-    } else if (current == &jump_rise && (new_position.y - currentY()) < 0.01) {
+    } else if (current == &jump_rise && (new_position.y - currentY()) < 0.001) {
         current = &jump_apex;
     } else if (new_position.y < currentY()) {
         current = &jump_fall;
-    } else if (current == &jump_fall && (new_position.y - currentY()) < 0.01) {
+    } else if (current == &jump_fall && (new_position.y - currentY()) < 0.001) {
         current = &jump_land;
     } else if ((current == &idle || current == &run) && isMovingHorizontally(new_position)) {
         current = &run;
