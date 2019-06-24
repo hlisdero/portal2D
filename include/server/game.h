@@ -23,6 +23,7 @@ public:
 
     void init();
     void run();
+    void stop();
 	void update();
 
 private:

@@ -2,6 +2,10 @@
 
 Protocol::Protocol(ActiveSocket skt) : skt(std::move(skt)) {}
 
+void Protocol::shutdown() {
+    skt.shutdown();
+}
+
 void Protocol::send(const ViewEvent& event) {
     sendInteger<ViewEventType>(event.type);
     sendInteger<int>(event.player_id);

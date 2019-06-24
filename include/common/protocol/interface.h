@@ -26,6 +26,7 @@ public:
     Interface& operator=(Interface&& other) = delete;
 
     ~Interface() {
+        protocol.shutdown();
         send_queue.close();
         sender_thread->join();
         delete sender_thread;

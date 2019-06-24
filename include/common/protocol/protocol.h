@@ -14,6 +14,8 @@ public:
     Protocol(Protocol&& other) = delete;
     Protocol& operator=(Protocol&& other) = delete;
 
+    void shutdown();
+
     void send(const ViewEvent& event);
     void send(const WorldEvent& event);
     void receive(ViewEvent& event);

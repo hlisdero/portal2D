@@ -45,6 +45,10 @@ void Game::run() {
 	}
 }
 
+void Game::stop() {
+    quit = true;
+}
+
 void Game::update() {
 	// Update contacts => generate events
 	world.updatePhysics(event_creator);
