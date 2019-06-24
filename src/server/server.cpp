@@ -38,5 +38,6 @@ void Server::runGame() {
     }
     game.init();
     game.run();
+    std::cout << "El juego ha finalizado" << std::endl;
     quit = true;
 }
