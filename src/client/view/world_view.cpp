@@ -143,8 +143,10 @@ void WorldView::update() {
     renderPendingObjects();
 
     if (victory) {
+        sound_manager.pauseMusic();
         renderTexture("Victory");
     } else if (defeat) {
+        sound_manager.pauseMusic();
         renderTexture("Defeat");
     } else if(view_objects.empty()) {
         renderTexture("WaitingForPlayers");

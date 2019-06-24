@@ -61,6 +61,10 @@ void SoundManager::playMusic(size_t index) {
     }
 }
 
+void SoundManager::pauseMusic() {
+    Mix_PauseMusic();
+}
+
 void SoundManager::toggleMusic(size_t index) {
     if (!Mix_PlayingMusic()) {
         playMusic(index);

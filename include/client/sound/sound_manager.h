@@ -29,6 +29,7 @@ public:
 
     void playSoundEffect(const std::string& name);
     void playMusic(size_t index);
+    void pauseMusic();
     void toggleMusic(size_t index);
 
     int setMusicVolume(int volume);
