@@ -7,8 +7,6 @@ Map::Map(const std::string& map_name, GameEventCreator & gameEventCreator) :
     loadSettings(file);
 	
 	loadEntities(file);
-	size.x = maxX - minX + 2;
-	size.y = maxY - minY + 2;
 
 	endZone.setNumberOfPlayersForVictory(minPlayers - 1);
 }
@@ -29,18 +27,12 @@ size_t Map::getMinPlayers() const {
 	return minPlayers;
 }
 
-const Size & Map::getSize() const {
-	return size;
-}
-
 void Map::loadSettings(const YAML::Node & yaml) {
 	minPlayers = yaml["min-players"].as<size_t>();
 
 	const YAML::Node & spawn = yaml["spawn"];
 	this->spawn.x = spawn["x"].as<float>();
 	this->spawn.y = spawn["y"].as<float>();
-
-	initMapDimensions(this->spawn.x, this->spawn.y);
 }
 
 void Map::loadEntities(const YAML::Node & yaml) {
@@ -86,8 +78,6 @@ Entity * Map::createEntity(const YAML::Node & yaml) {
     EntityType type = getEntityType(type_string);
     float x = yaml["x"].as<float>();
     float y = yaml["y"].as<float>();
-
-    updateMapDimensions(x, y);
 
     float rotation = yaml["rotation"].as<float>();
 	switch (type) {
@@ -177,18 +167,4 @@ EntityType Map::getEntityType(std::string str) {
         return TYPE_PLAYER;
     }
     throw std::runtime_error("Error: string mal formado en el archivo del mapa");
-}
-
-void Map::initMapDimensions(float x, float y) {
-	minX = x;
-	maxX = x;
-	minY = y;
-	maxY = y;
-}
-
-void Map::updateMapDimensions(float x, float y) {
-	minX = std::min(minX, x);
-	minY = std::min(minY, y);
-	maxX = std::max(maxX, x);
-	maxY = std::max(maxY, y);
 }

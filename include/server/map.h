@@ -30,8 +30,6 @@ public:
 	b2Vec2 & getSpawn();
 	size_t getMinPlayers() const;
 
-	const Size & getSize() const;
-
 	~Map();
 
 private:
@@ -43,11 +41,6 @@ private:
 
 	EndZone endZone;
 
-	float minX = -1;
-	float minY;
-	float maxX;
-	float maxY;
-
 	Size size = {0,0};
 
 	GameEventCreator& gameEventCreator;
@@ -57,8 +50,6 @@ private:
 	Entity * createEntity(const YAML::Node & yaml);
 
     EntityType getEntityType(std::string str);
-    void initMapDimensions(float x, float y);
-    void updateMapDimensions(float x, float y);
 };
 
 #endif  // MAP_H
