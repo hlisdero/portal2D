@@ -154,10 +154,9 @@ void PlayerEntity::applyMovement() {
 		getBody()->SetLinearVelocity(velocity);
 	}
 
-
 	float speed = SETTINGS.PLAYER_SPEED;
 
-	if(inTheAir) {
+	if(inTheAir || isGoingThroughPortal()) {
 		if(moveDirection == NONE) {
 			return;
 		}
