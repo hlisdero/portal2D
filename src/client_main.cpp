@@ -8,7 +8,7 @@
 int main(int argc, char *argv[]) {
     Login login;
     ScreenRecorder screen_recorder;
-    // login.run(argc, argv);
+    login.run(argc, argv);
 
     try {
         Client client(login.getHostname(), login.getPort());
