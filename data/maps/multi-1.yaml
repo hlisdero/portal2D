@@ -1,7 +1,7 @@
 min-players: 2
 spawn:
-  x: 88
-  y: 30
+  x: 4
+  y: 21
 entities:
   - type: TYPE_STONE_BLOCK
     x: 43
