@@ -6,7 +6,7 @@ project(portal2d)
 ## Config
 ##
 
-set(RELEASE OFF)
+set(RELEASE ON)
 
 if(RELEASE)
     # Client
