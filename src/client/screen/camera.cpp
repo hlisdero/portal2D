@@ -1,12 +1,11 @@
 #include "client/screen/camera.h"
 
-Camera::Camera(int width, int height,
+Camera::Camera(const size_t& width, const size_t& height,
                const DrawableBox2D& drawable) :
-    drawable(drawable) {
-    position = {0, 0, width, height};
+    width(width), height(height), drawable(drawable) {
 }
 
 void Camera::center() {
-    position.x = drawable.getX() + drawable.getWidth()/2 - position.w / 2;
-    position.y = drawable.getY() + drawable.getHeight()/2 - position.h / 2;
+    x = drawable.getX() + drawable.getWidth()/2 - width / 2;
+    y = drawable.getY() + drawable.getHeight()/2 - height / 2;
 }

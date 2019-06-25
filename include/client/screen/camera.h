@@ -5,14 +5,17 @@
 
 class Camera {
 public:
-    Camera(int width, int height,
+    Camera(const size_t& width, const size_t& height,
            const DrawableBox2D& drawable);
 
     void center();
 
-    SDL_Rect position = {0, 0, 0, 0};
+    int x;
+    int y;
 
 private:
+    const size_t& width;
+    const size_t& height;
     const DrawableBox2D& drawable;
 };
 

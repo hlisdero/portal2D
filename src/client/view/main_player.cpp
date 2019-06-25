@@ -34,8 +34,8 @@ void MainPlayer::handle(const MouseEvent& event) {
         return;
     }
 
-    int player_x = player.getX() + player.getWidth()/2 - camera.position.x;
-    int player_y = player.getY() + player.getHeight()/2 - camera.position.y;
+    int player_x = player.getX() + player.getWidth()/2 - camera.x;
+    int player_y = player.getY() + player.getHeight()/2 - camera.y;
 
     // Calculo un vector de norma 1 con la dirección desde el jugador hacia el clic
     double x = event.x - player_x;

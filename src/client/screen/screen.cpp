@@ -144,6 +144,6 @@ void Screen::makeRelativeToCamera(SDL_Rect& rect) {
     if (!camera) {
         return;
     }
-    rect.x = rect.x - camera->position.x;
-    rect.y = rect.y - camera->position.y;
+    rect.x = rect.x - camera->x;
+    rect.y = rect.y - camera->y;
 }
