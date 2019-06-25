@@ -91,6 +91,7 @@ void PlayerEntity::handleContactWith(Entity * other, b2Contact * contact, bool i
 		case TYPE_ENERGY_BALL:
 		case TYPE_ACID:
 			gameEventCreator.addKillPlayer(this);
+			destroy();
 			break;
 		default:
 			break;
