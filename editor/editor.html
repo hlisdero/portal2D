@@ -80,6 +80,11 @@
 		#current {
 			padding: 5px 10px;
 		}
+		#exportBox {
+		  resize: none;
+		  display: inline-block;
+		  height: 30px;
+		}
 	</style>
 </head>
 <body>
@@ -88,6 +93,7 @@
 	<button onclick="eraseAll()">ERASE ALL</button>
 	<div id="buttons"></div>
 	<button onclick="exportMap()">Export</button>
+	<textarea id="exportBox" readonly=""></textarea>
 	</div>
 
 	<div id="map" style="margin: auto"></div>
@@ -96,6 +102,7 @@
 		let map = document.getElementById("map");
 		let buttons = document.getElementById("buttons");
 		let currenthtml = document.getElementById("current");
+		let exportBox = document.getElementById("exportBox");
 
 		let types = [
 					{abrev: "ERASE", color: "white"},
@@ -208,7 +215,7 @@
 			}
 
 			out = "min-players: 1\n" + out
-			alert(out);
+			exportBox.innerHTML = out;
 		}
 
 		function eraseAll() {
