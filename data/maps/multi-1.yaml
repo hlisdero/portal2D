@@ -1,0 +1,2248 @@
+min-players: 2
+spawn:
+  x: 88
+  y: 30
+entities:
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 3
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 44
+    y: 3
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 45
+    y: 3
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 3
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 47
+    y: 3
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 48
+    y: 3
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 49
+    y: 3
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 50
+    y: 3
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 51
+    y: 3
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 52
+    y: 3
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 53
+    y: 3
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 54
+    y: 3
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 55
+    y: 3
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 56
+    y: 3
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 57
+    y: 3
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 58
+    y: 3
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 4
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 51
+    y: 4
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 54
+    y: 4
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 57
+    y: 4
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 58
+    y: 4
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 59
+    y: 4
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 5
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 59
+    y: 5
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 60
+    y: 5
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 61
+    y: 5
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 62
+    y: 5
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 6
+    rotation: 0
+  - type: TYPE_ENERGY_EMITTER
+    x: 46
+    y: 6
+    rotation: 270
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 61
+    y: 6
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 62
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 63
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 64
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 65
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 66
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 67
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 68
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 70
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 71
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 72
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 73
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 74
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 75
+    y: 6
+    rotation: 0
+  - type: TYPE_ENERGY_RECEIVER
+    x: 76
+    y: 6
+    rotation: 0
+    name: "recvlaby"
+  - type: TYPE_STONE_BLOCK
+    x: 77
+    y: 6
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 78
+    y: 6
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 79
+    y: 6
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 80
+    y: 6
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 7
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 7
+    rotation: 0
+  - type: TYPE_ENERGY_EMITTER
+    x: 47
+    y: 7
+    rotation: 270
+  - type: TYPE_GATE
+    x: 60
+    y: 7
+    rotation: 0
+    logica: 
+      value: "recvr5"
+    name: "gater5"
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 62
+    y: 7
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 63
+    y: 7
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 7
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 80
+    y: 7
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 81
+    y: 7
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 8
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 8
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 47
+    y: 8
+    rotation: 0
+  - type: TYPE_ENERGY_EMITTER
+    x: 48
+    y: 8
+    rotation: 270
+  - type: TYPE_STONE_BLOCK
+    x: 60
+    y: 8
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 63
+    y: 8
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 8
+    rotation: 0
+  - type: TYPE_GATE
+    x: 77
+    y: 8
+    rotation: 0
+    logica: 
+      and:
+        a:
+          value: "recvlaby"
+        b:
+          value: "btnlaby"
+    name: "endlaby"
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 81
+    y: 8
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 82
+    y: 8
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 9
+    rotation: 0
+  - type: TYPE_ENERGY_BAR
+    x: 44
+    y: 9
+    rotation: 90
+  - type: TYPE_ENERGY_BAR
+    x: 45
+    y: 9
+    rotation: 90
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 9
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 47
+    y: 9
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 48
+    y: 9
+    rotation: 0
+  - type: TYPE_ENERGY_EMITTER
+    x: 49
+    y: 9
+    rotation: 270
+  - type: TYPE_STONE_BLOCK
+    x: 50
+    y: 9
+    rotation: 0
+  - type: TYPE_ENERGY_EMITTER
+    x: 51
+    y: 9
+    rotation: 270
+  - type: TYPE_STONE_BLOCK
+    x: 52
+    y: 9
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 53
+    y: 9
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 54
+    y: 9
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 55
+    y: 9
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 56
+    y: 9
+    rotation: 0
+  - type: TYPE_ENERGY_RECEIVER
+    x: 57
+    y: 9
+    rotation: 0
+    name: "recvr5"
+  - type: TYPE_STONE_BLOCK
+    x: 58
+    y: 9
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 59
+    y: 9
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 60
+    y: 9
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 66
+    y: 9
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 72
+    y: 9
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 73
+    y: 9
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 74
+    y: 9
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 77
+    y: 9
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 82
+    y: 9
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 83
+    y: 9
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 10
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 10
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 60
+    y: 10
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 66
+    y: 10
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 72
+    y: 10
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 77
+    y: 10
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 83
+    y: 10
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 84
+    y: 10
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 20
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 21
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 22
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 23
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 24
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 25
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 26
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 32
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 33
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 34
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 35
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 36
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 11
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 60
+    y: 11
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 63
+    y: 11
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 64
+    y: 11
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 65
+    y: 11
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 66
+    y: 11
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 11
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 72
+    y: 11
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 77
+    y: 11
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 84
+    y: 11
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 85
+    y: 11
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 15
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 16
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 17
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 18
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 19
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 20
+    y: 12
+    rotation: 0
+  - type: TYPE_ACID
+    x: 21
+    y: 12
+    rotation: 0
+  - type: TYPE_ACID
+    x: 22
+    y: 12
+    rotation: 0
+  - type: TYPE_ACID
+    x: 23
+    y: 12
+    rotation: 0
+  - type: TYPE_ACID
+    x: 24
+    y: 12
+    rotation: 0
+  - type: TYPE_ACID
+    x: 25
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 26
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 27
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 28
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 29
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 30
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 31
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 32
+    y: 12
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 33
+    y: 12
+    rotation: 0
+    name: "r3bend"
+  - type: TYPE_STONE_BLOCK
+    x: 36
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 37
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 38
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 39
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 40
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 41
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 42
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 12
+    rotation: 0
+  - type: TYPE_GATE
+    x: 44
+    y: 12
+    rotation: 90
+    logica: 
+      value: "lock3"
+    name: "gatedown2"
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 60
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 66
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 72
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 75
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 76
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 77
+    y: 12
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 85
+    y: 12
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 86
+    y: 12
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 2
+    y: 13
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 3
+    y: 13
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 4
+    y: 13
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 5
+    y: 13
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 6
+    y: 13
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 7
+    y: 13
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 8
+    y: 13
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 9
+    y: 13
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 10
+    y: 13
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 11
+    y: 13
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 12
+    y: 13
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 13
+    y: 13
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 14
+    y: 13
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 15
+    y: 13
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 16
+    y: 13
+    rotation: 0
+    name: "b2r2"
+  - type: TYPE_ENERGY_BAR
+    x: 23
+    y: 13
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 29
+    y: 13
+    rotation: 0
+    name: "br3"
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 33
+    y: 13
+    rotation: 180
+  - type: TYPE_STONE_BLOCK
+    x: 34
+    y: 13
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 45
+    y: 13
+    rotation: 90
+    name: "btndown2"
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 13
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 60
+    y: 13
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 66
+    y: 13
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 13
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 70
+    y: 13
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 71
+    y: 13
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 72
+    y: 13
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 77
+    y: 13
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 86
+    y: 13
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 87
+    y: 13
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 2
+    y: 14
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 6
+    y: 14
+    rotation: 0
+    name: "b1r1"
+  - type: TYPE_BUTTON
+    x: 8
+    y: 14
+    rotation: 0
+    name: "b2r1"
+  - type: TYPE_ENERGY_BAR
+    x: 23
+    y: 14
+    rotation: 0
+  - type: TYPE_ENERGY_BAR
+    x: 34
+    y: 14
+    rotation: 0
+  - type: TYPE_GATE
+    x: 43
+    y: 14
+    rotation: 0
+    logica: 
+      value: "lock2"
+    name: "gate2r4"
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 58
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 59
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 60
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 61
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 62
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 63
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 66
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 67
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 68
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 72
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 77
+    y: 14
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 87
+    y: 14
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 88
+    y: 14
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 2
+    y: 15
+    rotation: 0
+  - type: TYPE_GATE
+    x: 10
+    y: 15
+    rotation: 0
+    logica: 
+      value: "lock1"
+    name: "gate1"
+  - type: TYPE_GATE
+    x: 14
+    y: 15
+    rotation: 0
+    logica: 
+      value: "b1r2"
+    name: "gate2p1"
+  - type: TYPE_ENERGY_BAR
+    x: 23
+    y: 15
+    rotation: 0
+  - type: TYPE_GATE
+    x: 33
+    y: 15
+    rotation: 0
+    logica: 
+      value: "r3bend"
+    name: "gate2end3"
+  - type: TYPE_ENERGY_BAR
+    x: 34
+    y: 15
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 15
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 15
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 58
+    y: 15
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 59
+    y: 15
+    rotation: 0
+    name: "btnlaby"
+  - type: TYPE_ROCK
+    x: 60
+    y: 15
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 63
+    y: 15
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 15
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 72
+    y: 15
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 73
+    y: 15
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 74
+    y: 15
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 77
+    y: 15
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 88
+    y: 15
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 89
+    y: 15
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 2
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 10
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 14
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 15
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 16
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 17
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 18
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 19
+    y: 16
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 20
+    y: 16
+    rotation: 270
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 21
+    y: 16
+    rotation: 90
+  - type: TYPE_STONE_BLOCK
+    x: 22
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 23
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 24
+    y: 16
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 25
+    y: 16
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 26
+    y: 16
+    rotation: 180
+  - type: TYPE_STONE_BLOCK
+    x: 27
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 28
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 29
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 30
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 31
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 32
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 33
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 34
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 35
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 36
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 37
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 38
+    y: 16
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 39
+    y: 16
+    rotation: 270
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 40
+    y: 16
+    rotation: 90
+  - type: TYPE_STONE_BLOCK
+    x: 41
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 42
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 16
+    rotation: 0
+  - type: TYPE_GATE
+    x: 44
+    y: 16
+    rotation: 90
+    logica: 
+      value: "lock3"
+    name: "gatedown1"
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 16
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 58
+    y: 16
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 59
+    y: 16
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 60
+    y: 16
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 63
+    y: 16
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 16
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 77
+    y: 16
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 89
+    y: 16
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 90
+    y: 16
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 2
+    y: 17
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 10
+    y: 17
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 15
+    y: 17
+    rotation: 0
+    name: "b1r2"
+  - type: TYPE_ENERGY_BAR
+    x: 33
+    y: 17
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 35
+    y: 17
+    rotation: 0
+    name: "r4b1"
+  - type: TYPE_BUTTON
+    x: 37
+    y: 17
+    rotation: 0
+    name: "r4b2"
+  - type: TYPE_BUTTON
+    x: 45
+    y: 17
+    rotation: 90
+    name: "btndown1"
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 17
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 58
+    y: 17
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 63
+    y: 17
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 64
+    y: 17
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 65
+    y: 17
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 66
+    y: 17
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 17
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 77
+    y: 17
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 90
+    y: 17
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 91
+    y: 17
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 2
+    y: 18
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 6
+    y: 18
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 7
+    y: 18
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 8
+    y: 18
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 9
+    y: 18
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 10
+    y: 18
+    rotation: 0
+  - type: TYPE_GATE
+    x: 17
+    y: 18
+    rotation: 0
+    logica: 
+      value: "b2r2"
+    name: "gate2p2"
+  - type: TYPE_GATE
+    x: 29
+    y: 18
+    rotation: 0
+    logica: 
+      value: "br3"
+    name: "gate3"
+  - type: TYPE_ROCK
+    x: 30
+    y: 18
+    rotation: 0
+  - type: TYPE_GATE
+    x: 32
+    y: 18
+    rotation: 0
+    logica: 
+      value: "r3bend"
+    name: "gateend3"
+  - type: TYPE_ENERGY_BAR
+    x: 33
+    y: 18
+    rotation: 0
+  - type: TYPE_GATE
+    x: 43
+    y: 18
+    rotation: 0
+    logica: 
+      value: "lock2"
+    name: "gate1r4"
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 18
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 58
+    y: 18
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 63
+    y: 18
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 18
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 72
+    y: 18
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 73
+    y: 18
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 74
+    y: 18
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 75
+    y: 18
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 76
+    y: 18
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 77
+    y: 18
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 91
+    y: 18
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 92
+    y: 18
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 2
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 6
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 10
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 11
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 12
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 13
+    y: 19
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 14
+    y: 19
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 15
+    y: 19
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 16
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 17
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 18
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 19
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 20
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 21
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 22
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 23
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 24
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 25
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 26
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 27
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 28
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 29
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 30
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 31
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 32
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 33
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 43
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 19
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 58
+    y: 19
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 61
+    y: 19
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 62
+    y: 19
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 63
+    y: 19
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 73
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 74
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 75
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 76
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 77
+    y: 19
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 92
+    y: 19
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 93
+    y: 19
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 2
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 6
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 33
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 34
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 35
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 36
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 37
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 38
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 39
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 40
+    y: 20
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 41
+    y: 20
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 42
+    y: 20
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 43
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 44
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 45
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 46
+    y: 20
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 58
+    y: 20
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 66
+    y: 20
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 67
+    y: 20
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 68
+    y: 20
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 20
+    rotation: 0
+  - type: TYPE_ENERGY_EMITTER
+    x: 77
+    y: 20
+    rotation: 180
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 93
+    y: 20
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 94
+    y: 20
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 2
+    y: 21
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 6
+    y: 21
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 58
+    y: 21
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 66
+    y: 21
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 21
+    rotation: 0
+  - type: TYPE_GATE
+    x: 74
+    y: 21
+    rotation: 0
+    logica: 
+      value: "btnlaby"
+    name: "emitterlaby"
+  - type: TYPE_STONE_BLOCK
+    x: 77
+    y: 21
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 94
+    y: 21
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 95
+    y: 21
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 2
+    y: 22
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 6
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 58
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 59
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 60
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 61
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 62
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 63
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 64
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 65
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 66
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 69
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 70
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 71
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 72
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 73
+    y: 22
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 74
+    y: 22
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 75
+    y: 22
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 76
+    y: 22
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 77
+    y: 22
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 95
+    y: 22
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 96
+    y: 22
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 2
+    y: 23
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 3
+    y: 23
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 4
+    y: 23
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 5
+    y: 23
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 6
+    y: 23
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 85
+    y: 23
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 86
+    y: 23
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 87
+    y: 23
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 96
+    y: 23
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 97
+    y: 23
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 83
+    y: 24
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 84
+    y: 24
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 85
+    y: 24
+    rotation: 0
+    name: "btn2end"
+  - type: TYPE_BUTTON
+    x: 87
+    y: 24
+    rotation: 0
+    name: "btn3end"
+  - type: TYPE_METAL_BLOCK
+    x: 88
+    y: 24
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 89
+    y: 24
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 97
+    y: 24
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 98
+    y: 24
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 82
+    y: 25
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 83
+    y: 25
+    rotation: 0
+    name: "btn1end"
+  - type: TYPE_BUTTON
+    x: 89
+    y: 25
+    rotation: 0
+    name: "btn4end"
+  - type: TYPE_METAL_BLOCK
+    x: 90
+    y: 25
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 98
+    y: 25
+    rotation: 90
+  - type: TYPE_METAL_BLOCK
+    x: 99
+    y: 25
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 100
+    y: 25
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 11
+    y: 26
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 12
+    y: 26
+    rotation: 0
+    name: "lock1"
+  - type: TYPE_STONE_BLOCK
+    x: 13
+    y: 26
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 15
+    y: 26
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 16
+    y: 26
+    rotation: 0
+    name: "lock2"
+  - type: TYPE_STONE_BLOCK
+    x: 17
+    y: 26
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 19
+    y: 26
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 20
+    y: 26
+    rotation: 0
+    name: "lock3"
+  - type: TYPE_STONE_BLOCK
+    x: 21
+    y: 26
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 81
+    y: 26
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 91
+    y: 26
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 93
+    y: 26
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 94
+    y: 26
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 95
+    y: 26
+    rotation: 0
+  - type: TYPE_METAL_DIAG_BLOCK
+    x: 99
+    y: 26
+    rotation: 90
+  - type: TYPE_STONE_BLOCK
+    x: 100
+    y: 26
+    rotation: 0
+  - type: TYPE_GATE
+    x: 11
+    y: 27
+    rotation: 90
+    logica: 
+      and:
+        a:
+          value: "b1r1"
+        b:
+          value: "b2r1"
+    name: "gatelock1"
+  - type: TYPE_STONE_BLOCK
+    x: 13
+    y: 27
+    rotation: 0
+  - type: TYPE_GATE
+    x: 15
+    y: 27
+    rotation: 90
+    logica: 
+      and:
+        a: 
+          value: "r4b1"
+        b: 
+          value: "r4b2"
+    name: "gatelock2"
+  - type: TYPE_STONE_BLOCK
+    x: 17
+    y: 27
+    rotation: 0
+  - type: TYPE_GATE
+    x: 19
+    y: 27
+    rotation: 90
+    logica: 
+      and:
+        a: 
+          value: "btndown1"
+        b:
+          value: "btndown2"
+    name: "gatelock3"
+  - type: TYPE_STONE_BLOCK
+    x: 21
+    y: 27
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 74
+    y: 27
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 75
+    y: 27
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 76
+    y: 27
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 77
+    y: 27
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 78
+    y: 27
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 79
+    y: 27
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 80
+    y: 27
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 81
+    y: 27
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 91
+    y: 27
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 92
+    y: 27
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 93
+    y: 27
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 100
+    y: 27
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 11
+    y: 28
+    rotation: 0
+  - type: TYPE_ROCK
+    x: 12
+    y: 28
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 13
+    y: 28
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 15
+    y: 28
+    rotation: 0
+  - type: TYPE_ROCK
+    x: 16
+    y: 28
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 17
+    y: 28
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 19
+    y: 28
+    rotation: 0
+  - type: TYPE_ROCK
+    x: 20
+    y: 28
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 21
+    y: 28
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 74
+    y: 28
+    rotation: 0
+  - type: TYPE_END_BARRIER
+    x: 77
+    y: 28
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 86
+    y: 28
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 88
+    y: 28
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 89
+    y: 28
+    rotation: 0
+  - type: TYPE_ENERGY_BAR
+    x: 92
+    y: 28
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 100
+    y: 28
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 74
+    y: 29
+    rotation: 0
+  - type: TYPE_END_BARRIER
+    x: 77
+    y: 29
+    rotation: 0
+  - type: TYPE_GATE
+    x: 80
+    y: 29
+    rotation: 0
+    logica: 
+      value: "lock4"
+    name: "endgate"
+  - type: TYPE_ROCK
+    x: 86
+    y: 29
+    rotation: 0
+  - type: TYPE_ENERGY_BAR
+    x: 92
+    y: 29
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 100
+    y: 29
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 74
+    y: 30
+    rotation: 0
+  - type: TYPE_END_BARRIER
+    x: 77
+    y: 30
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 80
+    y: 30
+    rotation: 0
+  - type: TYPE_ROCK
+    x: 86
+    y: 30
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 92
+    y: 30
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 95
+    y: 30
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 96
+    y: 30
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 97
+    y: 30
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 98
+    y: 30
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 99
+    y: 30
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 100
+    y: 30
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 74
+    y: 31
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 75
+    y: 31
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 76
+    y: 31
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 77
+    y: 31
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 78
+    y: 31
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 79
+    y: 31
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 80
+    y: 31
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 81
+    y: 31
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 91
+    y: 31
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 92
+    y: 31
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 93
+    y: 31
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 94
+    y: 31
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 95
+    y: 31
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 81
+    y: 32
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 91
+    y: 32
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 82
+    y: 33
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 90
+    y: 33
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 83
+    y: 34
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 84
+    y: 34
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 88
+    y: 34
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 89
+    y: 34
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 85
+    y: 35
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 86
+    y: 35
+    rotation: 0
+  - type: TYPE_METAL_BLOCK
+    x: 87
+    y: 35
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 23
+    y: 26
+    rotation: 0
+  - type: TYPE_BUTTON
+    x: 24
+    y: 26
+    rotation: 0
+    name: "lock4"
+  - type: TYPE_STONE_BLOCK
+    x: 25
+    y: 26
+    rotation: 0
+  - type: TYPE_GATE
+    x: 23
+    y: 27
+    rotation: 90
+    logica: 
+      and:
+        a:
+          and:
+            a:
+              value: "btn1end"
+            b:
+              value: "btn2end"
+        b:
+          and:
+            a:
+              value: "btn3end"
+            b:
+              value: "btn4end"
+    name: "gatelock4"
+  - type: TYPE_STONE_BLOCK
+    x: 25
+    y: 27
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 23
+    y: 28
+    rotation: 0
+  - type: TYPE_ROCK
+    x: 24
+    y: 28
+    rotation: 0
+  - type: TYPE_STONE_BLOCK
+    x: 25
+    y: 28
+    rotation: 0
